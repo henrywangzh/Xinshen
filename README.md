@@ -29,13 +29,17 @@ It's because of this that we recommend using GitHub Desktop
 
 ## Guide for GitHub Desktop
 
-To start, please download GitHub Desktop and log in with your GitHub account.
+To start, please download GitHub Desktop and log in with your GitHub account.  
+
 https://desktop.github.com/
 
-Add the repository and use the UI elements to push, pull, and view changes.
-<img width="391" alt="image" src="https://user-images.githubusercontent.com/43794047/214461290-08efb280-4fb1-4e17-95fb-32cc42748c2d.png">
-<img width="478" alt="image" src="https://user-images.githubusercontent.com/43794047/214461322-bcb2e823-8732-419e-a9ca-8caefc709cb4.png">
-Use the Git repo url found under:
+Add the repository and use the UI elements to push, pull, and view changes.  
+
+<img width="391" alt="image" src="https://user-images.githubusercontent.com/43794047/214461290-08efb280-4fb1-4e17-95fb-32cc42748c2d.png">  
+
+<img width="478" alt="image" src="https://user-images.githubusercontent.com/43794047/214461322-bcb2e823-8732-419e-a9ca-8caefc709cb4.png">  
+
+Use the Git repo url found under:  
 <img width="920" alt="image" src="https://user-images.githubusercontent.com/43794047/214461419-cb9aad4c-ce6d-45ca-9e69-d12a209492da.png">
 
 
