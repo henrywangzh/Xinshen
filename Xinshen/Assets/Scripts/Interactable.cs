@@ -20,22 +20,27 @@ public class Interactable : MonoBehaviour
         // If can be interacted with and player presses 'F'
         if (isInteractable && Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("Interacted with " + gameObject.tag);
+            // Debug.Log("Interacted with " + gameObject.tag);
 
             if (gameObject.tag == "Campfire")
             {
-                Debug.Log(collider.tag + " healed at a campfire");
+                // .Log(collider.tag + " healed at a campfire");
                 GlobalVariableManager.Heal(9999);
+                // Play campfire animations? Do campfire things
                 
             } else if (gameObject.tag == "NPC")
             {
-                Debug.Log(collider.tag + " interacted with " + gameObject.tag);
-                // Interact with NPC
+                // Debug.Log(collider.tag + " interacted with " + gameObject.tag);
+                // Interact with NPC 
                 
             } else if (gameObject.tag == "Sign")
             {
-                Debug.Log(collider.tag + " interacted with " + gameObject.tag);
+                // Debug.Log(collider.tag + " interacted with " + gameObject.tag);
                 // Interact with a sign
+            } else if (gameObject.tag == "Pickup")
+            {
+                // Debug.Log(collider.tag + " interacted with " + gameObject.tag);
+                // Pickup thing
             }
         }
     }
