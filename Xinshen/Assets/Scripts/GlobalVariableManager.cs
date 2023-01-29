@@ -6,81 +6,32 @@ using UnityEngine;
 public class GlobalVariableManager : MonoBehaviour
 {
     // Health Stats
-    private int _health;
-    private int _maxHealth;
-    private bool _adrenaline;
+    public int health;
+    public int maxHealth;
+    public bool adrenaline;
 
     // Movement Stats
-    private float _walkingSpeed;
-    private float _runningSpeed;
-    private float _jumpHeight;
+    public float walkingSpeed;
+    public float runningSpeed;
+    public float jumpHeight;
 
     // Combat Stats
-    private int _damage;
-    private int _armor;
+    public int damage;
+    public int armor;
     
     // Inventory
-    // private List<Item> items = new List<Item>();
-    // Requires the creation of an Item class and will store objects of that class in a List
-    
-    //Accessors
-    public int GetHealth()
-    {
-        return _health;
-    }
-
-    public int GetMaxHealth()
-    {
-        return _maxHealth;
-    }
-
-    public bool GetAdrenaline()
-    {
-        return _adrenaline;
-    }
-
-    public float GetWalkingSpeed()
-    {
-        return _walkingSpeed;
-    }
-
-    public float GetRunningSpeed()
-    {
-        return _runningSpeed;
-    }
-
-    public float GetJumpHeight()
-    {
-        return _jumpHeight;
-    }
-
-    public int GetDamage()
-    {
-        return _damage;
-    }
-
-    public int GetArmor()
-    {
-        return _armor;
-    }
-
-    /*
-    public List GetInventory()
-    {
-        return items;
-    }
-    */
+    public List<Item> items = new List<Item>();
 
     // TakeDamage is called whenever damage is taken, subtracting dmg from health
     public void TakeDamage(int dmg)
     {
-        _health = _health - dmg;
+        health = health - dmg;
     }
 
     // Heal is called whenever the character is healed, adding amt to health
     public void Heal(int amt)
     {
-        _health = _health + amt;
+        health = health + amt;
     }
 
     // Start is called before the first frame update
