@@ -3,95 +3,40 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GlobalVariableManager : MonoBehaviour
+public static class GlobalVariableManager
 {
     // Health Stats
-    private int _health;
-    private int _maxHealth;
-    private bool _adrenaline;
+    public static int Health;
+    public static int MaxHealth;
+    public static bool Adrenaline;
 
     // Movement Stats
-    private float _walkingSpeed;
-    private float _runningSpeed;
-    private float _jumpHeight;
+    public static float WalkingSpeed;
+    public static float RunningSpeed;
+    public static float JumpHeight;
 
     // Combat Stats
-    private int _damage;
-    private int _armor;
+    public static int Damage;
+    public static int Armor;
+    public static string Stance;
     
     // Inventory
-    // private List<Item> items = new List<Item>();
-    // Requires the creation of an Item class and will store objects of that class in a List
-    
-    //Accessors
-    public int GetHealth()
-    {
-        return _health;
-    }
-
-    public int GetMaxHealth()
-    {
-        return _maxHealth;
-    }
-
-    public bool GetAdrenaline()
-    {
-        return _adrenaline;
-    }
-
-    public float GetWalkingSpeed()
-    {
-        return _walkingSpeed;
-    }
-
-    public float GetRunningSpeed()
-    {
-        return _runningSpeed;
-    }
-
-    public float GetJumpHeight()
-    {
-        return _jumpHeight;
-    }
-
-    public int GetDamage()
-    {
-        return _damage;
-    }
-
-    public int GetArmor()
-    {
-        return _armor;
-    }
-
-    /*
-    public List GetInventory()
-    {
-        return items;
-    }
-    */
+    public static List<Item> Items = new List<Item>();
 
     // TakeDamage is called whenever damage is taken, subtracting dmg from health
-    public void TakeDamage(int dmg)
+    public static void TakeDamage(int dmg)
     {
-        _health = _health - dmg;
+        Health = Health - dmg;
     }
 
-    // Heal is called whenever the character is healed, adding amt to health
-    public void Heal(int amt)
+    // Heal is called whenever the character is healed, adding amt to health such that it doesn't go over MaxHealth
+    public static void Heal(int amt)
     {
-        _health = _health + amt;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        Health = Health + amt;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
     }
 }
