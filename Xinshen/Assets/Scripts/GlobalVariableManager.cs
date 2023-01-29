@@ -3,46 +3,40 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GlobalVariableManager : MonoBehaviour
+public static class GlobalVariableManager
 {
     // Health Stats
-    public int health;
-    public int maxHealth;
-    public bool adrenaline;
+    public static int Health;
+    public static int MaxHealth;
+    public static bool Adrenaline;
 
     // Movement Stats
-    public float walkingSpeed;
-    public float runningSpeed;
-    public float jumpHeight;
+    public static float WalkingSpeed;
+    public static float RunningSpeed;
+    public static float JumpHeight;
 
     // Combat Stats
-    public int damage;
-    public int armor;
+    public static int Damage;
+    public static int Armor;
+    public static string Stance;
     
     // Inventory
-    public List<Item> items = new List<Item>();
+    public static List<Item> Items = new List<Item>();
 
     // TakeDamage is called whenever damage is taken, subtracting dmg from health
-    public void TakeDamage(int dmg)
+    public static void TakeDamage(int dmg)
     {
-        health = health - dmg;
+        Health = Health - dmg;
     }
 
-    // Heal is called whenever the character is healed, adding amt to health
-    public void Heal(int amt)
+    // Heal is called whenever the character is healed, adding amt to health such that it doesn't go over MaxHealth
+    public static void Heal(int amt)
     {
-        health = health + amt;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        Health = Health + amt;
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Health > MaxHealth)
+        {
+            Health = MaxHealth;
+        }
     }
 }
