@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="48a4050c-cc08-4a4c-a15e-4c7569816918" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Xinshen/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Xinshen/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,22 +20,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Discover.Launch.Via.Unity": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
-  },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\mythi\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\mythi\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\mythi\\AppData\\Local\\Symbols\\src"
-    ]
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="rider.run.widget.enabled.cache" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.16f1\Editor\Unity.exe" />
@@ -82,12 +79,14 @@
       <option name="presentableId" value="Default" />
       <updated>1674633300808</updated>
       <workItem from="1674633304253" duration="1650000" />
+      <workItem from="1674957097427" duration="2457000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
