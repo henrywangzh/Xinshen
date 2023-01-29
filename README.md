@@ -14,9 +14,12 @@ git clone [git url of repo]
 
 #### To push changes:
 
-git add .
-git commit -m "my message"
-git push
+git add .  
+
+git commit -m "my message"  
+
+git push 
+
 
 #### to pull changes:
 
