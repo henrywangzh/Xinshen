@@ -42,8 +42,8 @@ public class ScriptController : MonoBehaviour
         {
             Debug.LogError($"state \"{s}\" not in allowed states");
         }
-        nextState.enableScript();
         currentState.disableScript();
+        nextState.enableScript();
         currentState = nextState;
     }
 

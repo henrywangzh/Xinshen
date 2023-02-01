@@ -21,7 +21,7 @@ public class FlowEvade : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            controller.switchState.Invoke("jump");
+            // controller.switchState.Invoke("jump");
         }
     }
 }
