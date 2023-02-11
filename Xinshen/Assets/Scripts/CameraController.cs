@@ -141,7 +141,7 @@ public class CameraController : MonoBehaviour
         cameraTrfm.localEulerAngles += rotation;
     }
     
-    private void OnTriggerStay(Collider2D collision)
+    private void OnTriggerStay(Collider collision)
     {
         //adjustMode = FORWARD;
     }

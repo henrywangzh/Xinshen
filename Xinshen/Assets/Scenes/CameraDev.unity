@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4964,7 +4964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d8611b31fc6284aa435a9bc629eae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 0
+  dashSpeed: 20
+  totalDashTime: 0.25
 --- !u!114 &1026348915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4979,6 +4980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1503176896}
   targLocked: 0
+  moveSpeed: 3
 --- !u!114 &1026348916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5054,7 +5056,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026348911}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c94cca71cb694b4e8fb5c0be7a29955, type: 3}
   m_Name: 
