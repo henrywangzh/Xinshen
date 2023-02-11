@@ -4980,7 +4980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1503176896}
   targLocked: 0
-  moveSpeed: 3
+  moveSpeed: 4
 --- !u!114 &1026348916
 MonoBehaviour:
   m_ObjectHideFlags: 0
