@@ -51,48 +51,23 @@ public class CameraController : MonoBehaviour
         pitchTrfm.Rotate(pitchVect3);
         yawTrfm.Rotate(yawVect3);
     }
-    [SerializeField] bool camBackBlocked;
-    [SerializeField] int adjustMode, inWall;
-    const int NEUTRAL = 0, FORWARD = 1, BACKWARDS = 2;
+
+    RaycastHit hit;
+    [SerializeField] float move;
     void AdjustDistance()
     {
-        Debug.DrawLine(cameraTrfm.position, focusPos() + -cameraTrfm.forward, Color.red);
-        //camFrontBlocked = Physics.Linecast(cameraTrfm.position, focusPos() + -cameraTrfm.forward);
-        //camBackBlocked = Physics.Linecast(cameraTrfm.position, cameraTrfm.position + cameraTrfm.forward);
+        Debug.DrawRay(focusPos() - cameraTrfm.forward, -cameraTrfm.forward, Color.red);
 
-        if (adjustMode == FORWARD || inWall > 0)
+        if (Physics.Raycast(focusPos() - cameraTrfm.forward, -cameraTrfm.forward, out hit, -targetDistance))
         {
-            AdjustForward();
-        }
-        else if (adjustMode == BACKWARDS)
-        {
-            cameraTrfm.position += cameraTrfm.forward * -.01f;
-        }
-
-        if (Physics.Linecast(cameraTrfm.position, focusPos() + -cameraTrfm.forward))
-        {
-            adjustMode = FORWARD;
-        } else if (cameraTrfm.localPosition.z > targetDistance && !camBackBlocked)
-        {
-            adjustMode = BACKWARDS;
+            move = (-hit.distance - cameraTrfm.localPosition.z);
+            cameraTrfm.localPosition += new Vector3(0,0,move * .1f);
         }
         else
         {
-            adjustMode = NEUTRAL;
+            move = (targetDistance - cameraTrfm.localPosition.z);
+            cameraTrfm.localPosition += new Vector3(0, 0, move * .1f);
         }
-    }
-
-    void AdjustForward()
-    {
-        if (cameraTrfm.localPosition.z < -2)
-        {
-            cameraTrfm.position += cameraTrfm.forward * .02f;
-        }
-    }
-
-    public void SetBackBlocked(bool state)
-    {
-        camBackBlocked = state;
     }
 
     Vector3 focusPos()
@@ -102,26 +77,34 @@ public class CameraController : MonoBehaviour
 
     public void AddTrauma(int pTrauma, int max = int.MaxValue)
     {
-        pTrauma *= traumaSharpness;
+        pTrauma = Mathf.RoundToInt(pTrauma * traumaSharpness);
         trauma += pTrauma;
         if (trauma > max) { trauma = max; }
     }
 
     public void SetTrauma(int pTrauma)
     {
-        pTrauma *= traumaSharpness; 
+        pTrauma = Mathf.RoundToInt(pTrauma * traumaSharpness);
         if (trauma < pTrauma) { trauma = pTrauma; }
     }
 
     [SerializeField] float recalibrationRate;
     [SerializeField] Vector3 rotationVector;
     [SerializeField] Vector3 rotation;
-    [SerializeField] int traumaSharpness;
+    [SerializeField] float traumaSharpness, traumaShakeCap;
     void ProcessTrauma()
     {
         if (trauma > 0)
         {
-            float processedTrauma = Mathf.Pow(trauma/traumaSharpness, 2) * screenShakeStrength;
+            float processedTrauma;
+            if (trauma > traumaShakeCap)
+            {
+                processedTrauma = Mathf.Pow(traumaShakeCap / traumaSharpness, 2) * screenShakeStrength;
+            }
+            else
+            {
+                processedTrauma = Mathf.Pow(trauma / traumaSharpness, 2) * screenShakeStrength;
+            }
             rotationVector.x = Random.Range(-1f,1f) * processedTrauma;
             rotationVector.y = Random.Range(-1f,1f) * processedTrauma;
             rotationVector.z = Random.Range(-1f,1f) * processedTrauma;
@@ -139,20 +122,5 @@ public class CameraController : MonoBehaviour
         else { rotation.z = cameraTrfm.localEulerAngles.z * -recalibrationRate; }
 
         cameraTrfm.localEulerAngles += rotation;
-    }
-    
-    private void OnTriggerStay(Collider collision)
-    {
-        //adjustMode = FORWARD;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        inWall++;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        inWall--;
     }
 }
