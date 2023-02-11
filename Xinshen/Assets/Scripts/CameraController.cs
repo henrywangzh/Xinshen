@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] bool allowScrollWheelZooming;
     [SerializeField] float targetDistance, targetHeight;
     [SerializeField] int collisionMask;
     
@@ -33,6 +34,12 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2)) { AddTrauma(20); }
         if (Input.GetKeyDown(KeyCode.Alpha3)) { AddTrauma(30); }
         if (Input.GetKeyDown(KeyCode.Alpha4)) { AddTrauma(40); }
+
+        if (allowScrollWheelZooming)
+        {
+            targetDistance += Input.mouseScrollDelta.y;
+            if (targetDistance > -3) { targetDistance = -3; }
+        }
     }
 
     private void FixedUpdate()
