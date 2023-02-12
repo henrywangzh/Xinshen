@@ -25,7 +25,20 @@ public class FlowEvade : MonoBehaviour
     {
         if(rb)
         {
-            rb.velocity = transform.forward * dashSpeed;
+            float xinput = Input.GetAxis("Horizontal");
+            float yinput = Input.GetAxis("Vertical");
+
+            Vector3 inputDir = new Vector3(xinput, 0, yinput).normalized;
+
+            if (inputDir.magnitude > 0)
+            {
+                rb.velocity = inputDir * dashSpeed;
+                transform.forward = inputDir;
+            }
+            else
+            {
+                rb.velocity = transform.forward * dashSpeed;
+            }
         }
 
         // Now we've totally evaded

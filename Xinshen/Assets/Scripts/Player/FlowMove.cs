@@ -12,6 +12,7 @@ public class FlowMove : MonoBehaviour
 
     // TODO: use global variable manager instead of local variable
     [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float turnSpeed = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,8 +42,9 @@ public class FlowMove : MonoBehaviour
         else
         {
             anim.SetFloat("xInput", 0);
-            anim.SetFloat("yInput", Mathf.Abs(yinput));
-            transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
+            anim.SetFloat("yInput", Mathf.Sqrt(yinput*yinput + xinput*xinput));
+            transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), turnSpeed * Time.deltaTime, 0f);
+            // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
         }
         
         
