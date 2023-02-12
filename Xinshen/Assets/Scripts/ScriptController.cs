@@ -42,14 +42,15 @@ public class ScriptController : MonoBehaviour
         {
             Debug.LogError($"state \"{s}\" not in allowed states");
         }
-        nextState.enableScript();
         currentState.disableScript();
+        nextState.enableScript();
         currentState = nextState;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        // Debug.Log(currentState.getStateName());
         foreach (var node in currentState.getNextAvailableStates())
         {
            if(Input.GetKey(node.getKeyCode()))
@@ -91,11 +92,14 @@ public class ScriptController : MonoBehaviour
 public class Node
 {
     ScriptKeyPair state;
-    bool locked = false;
+    //bool locked = false;
     List<Node> nextAvailableStates;
     List<MonoBehaviour> requiredStates;
     List<MonoBehaviour> canBeInterruptedByTheseStates;
-
+    public string getStateName()
+    {
+        return state.getScriptName();
+    }
     public KeyCode getKeyCode()
     {
         return state.getKeyCode();
@@ -138,6 +142,10 @@ public class ScriptKeyPair
     MonoBehaviour script;
     KeyCode key;
 
+    public string getScriptName()
+    {
+        return script.ToString();
+    }
     public ScriptKeyPair(MonoBehaviour state, KeyCode key)
     {
         this.script = state;
