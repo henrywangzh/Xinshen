@@ -6,12 +6,14 @@ public class FlowAttack : MonoBehaviour
 {
     Animator anim;
     FlowScriptController controller;
+    Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
@@ -33,6 +35,11 @@ public class FlowAttack : MonoBehaviour
     public void SetCombo(int combo)
     {
         anim.SetBool("Combo", combo >= 1);
+    }
+
+    public void SetFwdVelocity(float vel)
+    {
+        rb.velocity = transform.forward * vel;
     }
 
     public void EndAttack()
