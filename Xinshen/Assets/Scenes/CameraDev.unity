@@ -1985,6 +1985,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1503176896}
+    - target: {fileID: 1622452027422676413, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1503176896}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
 --- !u!1 &248439668
@@ -4963,6 +4967,7 @@ MonoBehaviour:
   mesh: {fileID: 0}
   weapon: {fileID: 0}
   trail: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!114 &1026348915
 MonoBehaviour:
   m_ObjectHideFlags: 0

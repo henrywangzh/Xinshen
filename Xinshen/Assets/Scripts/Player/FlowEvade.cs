@@ -18,6 +18,8 @@ public class FlowEvade : MonoBehaviour
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject trail;
 
+    [SerializeField] Transform cam;
+
     float currentDashTime = 0f;
     
     // Start is called before the first frame update
@@ -34,7 +36,7 @@ public class FlowEvade : MonoBehaviour
             float xinput = Input.GetAxis("Horizontal");
             float yinput = Input.GetAxis("Vertical");
 
-            Vector3 inputDir = new Vector3(xinput, 0, yinput).normalized;
+            Vector3 inputDir = (new Vector3(cam.forward.x, 0, cam.forward.z) * yinput + new Vector3(cam.right.x, 0, cam.right.z) * xinput).normalized;
 
             if (inputDir.magnitude > 0)
             {
