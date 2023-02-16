@@ -1483,6 +1483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1622452027422676409}
   - component: {fileID: 1622452027422676410}
+  - component: {fileID: 5175598723358480446}
   - component: {fileID: 1622452027422676411}
   - component: {fileID: 1622452027422676412}
   - component: {fileID: 1622452027422676413}
@@ -1492,7 +1493,7 @@ GameObject:
   - component: {fileID: 1622452027422676406}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1516,7 +1517,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1622452027422676410
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1533,7 +1534,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &5175598723358480446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3f4ac2b3652e24f916792997c35933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1622452027422676411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1564,6 +1577,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   targLocked: 0
   moveSpeed: 4
+  turnSpeed: 5
 --- !u!114 &1622452027422676413
 MonoBehaviour:
   m_ObjectHideFlags: 0
