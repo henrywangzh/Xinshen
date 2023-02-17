@@ -17,10 +17,10 @@ public class ArcherBehavior : MonoBehaviour
     [SerializeField] GameObject arrow; // Prefab of an arrow to be shot
     GameObject shotArrow; // The arrow actually shot
     [SerializeField] Vector3 arrowSpawnOffset = new Vector3(0, 1, 0); // offset arrow spawn so it spawns where it's shot
-    [SerializeField] Quaternion arrowRotation; // rotation of the arrow so it's facing the right way
+    [SerializeField] Quaternion arrowRotation = Quaternion.identity; // rotation of the arrow so it's facing the right way
     [SerializeField] float sphereCastRadius = 0.1f; // a sphere roughly the size of the arrow itself
     
-    [SerializeField] float moveSpeed = 5f; // patrol speed of archer
+    [SerializeField] float moveSpeed = 2f; // patrol speed of archer
     [SerializeField] float shootingSpeed = 5f; // frequency of shooting arrows
     [SerializeField] float combatRange = 1f; // range of shooting arrows
 
@@ -36,8 +36,7 @@ public class ArcherBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
-        patrolling = true;
-        StartCoroutine(Patrol());
+        curTarg = pathCheckpoints[curCheckpoint];
     }
 
     // Update is called once per frame
@@ -50,15 +49,30 @@ public class ArcherBehavior : MonoBehaviour
         enemyDetected = Detection();
         // Debug.Log("Enemy Detected: " + enemyDetected);
 
-        //If enemy detected and not already attacking, stop patrolling and attack, else patrol if not already
-        if (enemyDetected && !attacking) {
-            StopCoroutine(Patrol());
-            patrolling = false;
-            rb.velocity = Vector3.zero;
+        // If no enemy detected, patrol, else 
+        if (!enemyDetected) {
+            transform.position = Vector3.MoveTowards(transform.position,
+                new Vector3(curTarg.position.x, transform.position.y, curTarg.position.z), moveSpeed * Time.deltaTime);
+            
+            if (Vector3.Distance(transform.position, new Vector3(curTarg.position.x, transform.position.y, curTarg.position.z)) < 0.1f) {
+                SwitchCheckpoints();
+            }
+            
+        } else if (enemyDetected && !attacking) {
+            attacking = true;
             StartCoroutine(Attack());
-        } else if (!patrolling) {
-            StartCoroutine(Patrol());
         }
+
+        //If enemy detected and not already attacking, stop patrolling and attack, else patrol if not already
+        // if (enemyDetected && !attacking) {
+        //     // StopCoroutine(Patrol());
+        //     patrolling = false;
+        //     rb.velocity = Vector3.zero;
+        //     // StartCoroutine(Attack());
+        // } else if (!patrolling) {
+        //     patrolling = true;
+        //     // StartCoroutine(Patrol());
+        // }
     }
 
     // Check in range and spherecast to check for LoS, ArrowSpawnOffset may create weird edge cases unsure yet
@@ -90,28 +104,20 @@ public class ArcherBehavior : MonoBehaviour
         arrowRb.velocity = Vector3.Normalize(vectorTowardsPlayer);
     }
 
-    IEnumerator Patrol() {
-
-        patrolling = true;
-        Debug.Log("Patrolling");
-
-        if (curTarg == null) {
-            curTarg = pathCheckpoints[0];
-        }
-        
-        while (patrolling) {
-            
-            if (Vector3.Distance(transform.position, curTarg.position) < 0.1f) {
-                SwitchCheckpoints();
-            }
-            
-            transform.position = Vector3.MoveTowards(transform.position,
-                new Vector3(curTarg.position.x, curTarg.position.y, transform.position.z), moveSpeed * Time.deltaTime);
-        }
-
-        // Patrolling should be automatically stopped when an enemy is detected so theoretically this is never run
-        yield return null;
-    }
+    // IEnumerator Patrol() {
+    //
+    //     patrolling = true;
+    //     Debug.Log("Patrolling");
+    //
+    //     transform.position = Vector3.MoveTowards(transform.position,
+    //             new Vector3(curTarg.position.x, transform.position.y, curTarg.position.z), moveSpeed * Time.deltaTime);
+    //         
+    //     if (Vector3.Distance(transform.position, curTarg.position) < 0.1f) {
+    //         SwitchCheckpoints();
+    //     }
+    //
+    //     yield return StartCoroutine(Patrol());
+    // }
 
     // Switch checkpoints to go to the next one
     void SwitchCheckpoints() {
