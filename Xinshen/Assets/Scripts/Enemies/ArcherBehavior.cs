@@ -3,32 +3,39 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 // https://www.youtube.com/watch?v=QzitQSLhfG0
+// Following a path code taken from Studio Intro Tutorials for Tower Defense 
 
 public class ArcherBehavior : MonoBehaviour
 {
-    [SerializeField] Transform player; //location of player
-    Rigidbody rb; //Rigidbody of enemy
+    [SerializeField] Transform player; // location of player
+    Rigidbody rb; // rigidbody of enemy
     
-    [SerializeField] GameObject Arrow; // Prefab of an arrow to be shot
-    private GameObject ShotArrow; // The arrow actually shot
-    [SerializeField] public Vector3 ArrowSpawnOffset = new Vector3(0, 1, 0); // offset arrow spawn so it spawns where it's shot
-    [SerializeField] public Quaternion ArrowRotation;
-    [SerializeField] public float SphereCastRadius = 1f; // a sphere roughly the size of the arrow itself
+    [SerializeField] List<Transform> pathCheckpoints;
+    int curCheckpoint = 0;
+    Transform curTarg;
+
+    [SerializeField] GameObject arrow; // Prefab of an arrow to be shot
+    GameObject shotArrow; // The arrow actually shot
+    [SerializeField] Vector3 arrowSpawnOffset = new Vector3(0, 1, 0); // offset arrow spawn so it spawns where it's shot
+    [SerializeField] Quaternion arrowRotation; // rotation of the arrow so it's facing the right way
+    [SerializeField] float sphereCastRadius = 0.1f; // a sphere roughly the size of the arrow itself
     
-    [SerializeField] float speed = 5f; //Patrol speed of archer
-    [SerializeField] float shootingSpeed = 5f; //Frequency of shooting arrows
-    [SerializeField] float combatRange = 400f; // range of shooting arrows
+    [SerializeField] float moveSpeed = 5f; // patrol speed of archer
+    [SerializeField] float shootingSpeed = 5f; // frequency of shooting arrows
+    [SerializeField] float combatRange = 1f; // range of shooting arrows
 
-    private RaycastHit hit;
+    RaycastHit hit;
 
-    private float dist;
-    private Vector3 vectorTowardsPlayer;
-    private bool enemyDetected = false;
-    private bool attacking = false;
-    private bool patrolling = false;
+    float dist;
+    Vector3 vectorTowardsPlayer;
+    
+    bool enemyDetected = false;
+    bool attacking = false;
+    bool patrolling = false;
 
     // Start is called before the first frame update
     void Start() {
+        rb = GetComponent<Rigidbody>();
         patrolling = true;
         StartCoroutine(Patrol());
     }
@@ -47,6 +54,7 @@ public class ArcherBehavior : MonoBehaviour
         if (enemyDetected && !attacking) {
             StopCoroutine(Patrol());
             patrolling = false;
+            rb.velocity = Vector3.zero;
             StartCoroutine(Attack());
         } else if (!patrolling) {
             StartCoroutine(Patrol());
@@ -55,8 +63,8 @@ public class ArcherBehavior : MonoBehaviour
 
     // Check in range and spherecast to check for LoS, ArrowSpawnOffset may create weird edge cases unsure yet
     private bool Detection() {
-        Ray ray = new Ray(transform.position + ArrowSpawnOffset, vectorTowardsPlayer);
-        return dist <= combatRange && Physics.SphereCast(ray, SphereCastRadius, out hit, dist);
+        Ray ray = new Ray(transform.position + arrowSpawnOffset, vectorTowardsPlayer);
+        return dist <= combatRange && Physics.SphereCast(ray, sphereCastRadius, out hit, dist);
     }
 
     // Attack at a regular interval
@@ -77,23 +85,45 @@ public class ArcherBehavior : MonoBehaviour
     
     // Shoot an arrow at the player at a regular interval
     void Shoot() {
-        ShotArrow = Instantiate(Arrow, transform.position + ArrowSpawnOffset, ArrowRotation);
-        
+        shotArrow = Instantiate(arrow, transform.position + arrowSpawnOffset, arrowRotation);
+        Rigidbody arrowRb = shotArrow.GetComponent<Rigidbody>();
+        arrowRb.velocity = Vector3.Normalize(vectorTowardsPlayer);
     }
 
     IEnumerator Patrol() {
+
+        patrolling = true;
+        Debug.Log("Patrolling");
+
+        if (curTarg == null) {
+            curTarg = pathCheckpoints[0];
+        }
         
         while (patrolling) {
-            // patrol
+            
+            if (Vector3.Distance(transform.position, curTarg.position) < 0.1f) {
+                SwitchCheckpoints();
+            }
+            
+            transform.position = Vector3.MoveTowards(transform.position,
+                new Vector3(curTarg.position.x, curTarg.position.y, transform.position.z), moveSpeed * Time.deltaTime);
         }
 
-        // Patrolling should be automatically stopped when an enemy is detected. 
+        // Patrolling should be automatically stopped when an enemy is detected so theoretically this is never run
         yield return null;
-
     }
 
-    // Patrol an area
-    void MakeAPatrolLoop() {
+    // Switch checkpoints to go to the next one
+    void SwitchCheckpoints() {
+        curCheckpoint++; // Go to next checkpoint
         
+        Debug.Log(curCheckpoint);
+        
+        if (curCheckpoint >= pathCheckpoints.Count) { // if reached end of checkpoint
+            curCheckpoint = 0;  // loop back to the first checkpoint
+            curTarg = pathCheckpoints[curCheckpoint];
+        } else {
+            curTarg = pathCheckpoints[curCheckpoint]; // else go to next checkpoint
+        }
     }
 }
