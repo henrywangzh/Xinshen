@@ -8,6 +8,7 @@ using UnityEngine;
 public class ArcherBehavior : MonoBehaviour
 {
     [SerializeField] Transform player; // location of player
+    [SerializeField] Vector3 chestOffset = new Vector3(0, 1.84f, 0); // currently defaulted to roughly at the chest
     Rigidbody rb; // rigidbody of enemy
     
     [SerializeField] List<Transform> pathCheckpoints;
@@ -16,11 +17,13 @@ public class ArcherBehavior : MonoBehaviour
 
     [SerializeField] GameObject arrow; // Prefab of an arrow to be shot
     GameObject shotArrow; // The arrow actually shot
-    [SerializeField] Vector3 arrowSpawnOffset = new Vector3(0, 1, 0); // offset arrow spawn so it spawns where it's shot
-    [SerializeField] float sphereCastRadius = 0.6f; // a sphere roughly the size of the arrow itself
+    [SerializeField] float arrowOffsetMultiple = 1.7f; // how far the arrow spawns from the archer in the direction the archer is facing
+    [SerializeField] float arrowVerticalOffset = 1.5f; // vertical offset of the arrow
+    Vector3 arrowSpawnOffset;
+    // [SerializeField] float sphereCastRadius = 0.6f; // a sphere roughly the size of the arrow itself
 
     [SerializeField] float moveSpeed = 2f; // patrol speed of archer
-    [SerializeField] float shootingSpeed = 5f; // frequency of shooting arrows
+    [SerializeField] float shootingSpeed = 2f; // frequency of shooting arrows
     [SerializeField] float combatRange = 50f; // range of shooting arrows
     [SerializeField] public float arrowMoveSpeed = 2f; // speed of arrow
     
@@ -29,11 +32,11 @@ public class ArcherBehavior : MonoBehaviour
     RaycastHit hit;
 
     float dist;
-    Vector3 vectorTowardsPlayer;
+    Vector3 vectorTowardsPlayer; // calculated as vector from arrow's vertical spawn offset to player's chest
     
     bool enemyDetected = false;
     bool attacking = false;
-    bool patrolling = false;
+    // bool patrolling = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -44,53 +47,66 @@ public class ArcherBehavior : MonoBehaviour
     // Update is called once per frame
     void Update() {
         
-        //Distance and vector from player
-        dist = Vector3.Distance(transform.position, player.position);
-        vectorTowardsPlayer = player.position - transform.position;
+        Quaternion targetRotation;
+        Vector3 lookingDirection;
 
-        enemyDetected = Detection();
-        Debug.Log(hit.collider);
-        
-        if (enemyDetected) {
-            Debug.Log("Enemy Detected: " + enemyDetected);
+        if (!attacking) {
+            // Rotate archer to look in direction it's moving
+            lookingDirection = curTarg.position - transform.position;
+            lookingDirection.Normalize();
+            lookingDirection.y = 0;
+            targetRotation = Quaternion.LookRotation(lookingDirection);
+            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360 * Time.deltaTime);
+            rb.MoveRotation(targetRotation);
+        } else {
+            lookingDirection = vectorTowardsPlayer;
+            lookingDirection.Normalize();
+            lookingDirection.y = 0;
+            targetRotation = Quaternion.LookRotation(lookingDirection);
+            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360 * Time.deltaTime);
+            rb.MoveRotation(targetRotation);
         }
 
-        // If no enemy detected, patrol, else 
-        if (!enemyDetected) {
+        // Set arrowSpawnOffset in the direction the archer is facing
+        Vector3 facing = transform.forward;
+        facing.Normalize();
+        arrowSpawnOffset = new Vector3(facing.x * arrowOffsetMultiple, arrowVerticalOffset, facing.z * arrowOffsetMultiple);
+
+        //Distance and vector from player
+        dist = Vector3.Distance((transform.position + arrowSpawnOffset), (player.position + chestOffset));
+        vectorTowardsPlayer = (player.position + chestOffset) - (transform.position + arrowSpawnOffset);
+
+        enemyDetected = Detection();
+        // Debug.Log(hit.collider)
+
+        // If no enemy detected and not attacking, patrol, and if not attacking but enemy is detected, attack
+        if (!enemyDetected && !attacking) {
+
             transform.position = Vector3.MoveTowards(transform.position,
                 new Vector3(curTarg.position.x, transform.position.y, curTarg.position.z), moveSpeed * Time.deltaTime);
-            
+
             if (Vector3.Distance(transform.position, new Vector3(curTarg.position.x, transform.position.y, curTarg.position.z)) < 0.1f) {
                 SwitchCheckpoints();
             }
-            
+
         } else if (enemyDetected && !attacking) {
             attacking = true;
             StartCoroutine(Attack());
         }
-
-        //If enemy detected and not already attacking, stop patrolling and attack, else patrol if not already
-        // if (enemyDetected && !attacking) {
-        //     // StopCoroutine(Patrol());
-        //     patrolling = false;
-        //     rb.velocity = Vector3.zero;
-        //     // StartCoroutine(Attack());
-        // } else if (!patrolling) {
-        //     patrolling = true;
-        //     // StartCoroutine(Patrol());
-        // }
     }
 
-    // Check in range and spherecast to check for LoS, ArrowSpawnOffset may create weird edge cases unsure yet
+    // Check in range and raycast to check for LoS
     private bool Detection() {
 
         if (dist > combatRange) {
             return false;
         }
 
-        Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer, out hit, dist + 1);
-
-        if (hit.collider.tag == "Player") {
+        bool hitSomething = Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer, out hit, dist + 1);
+        // Debug.Log("Hit something: " + hitSomething);
+        // Debug.Log("Hit: " + hit);
+        
+        if (hitSomething && hit.collider.tag == "Player") {
             return true;
         }
 
@@ -103,9 +119,9 @@ public class ArcherBehavior : MonoBehaviour
         attacking = true;
 
         while (enemyDetected) {
-            Shoot();
             WaitForSeconds wait = new WaitForSeconds(shootingSpeed);
             yield return wait;
+            Shoot();
         }
         
         // enemy is no longer detected
@@ -137,6 +153,7 @@ public class ArcherBehavior : MonoBehaviour
 
     // Switch checkpoints to go to the next one
     void SwitchCheckpoints() {
+
         curCheckpoint++; // Go to next checkpoint
         
         Debug.Log(curCheckpoint);
