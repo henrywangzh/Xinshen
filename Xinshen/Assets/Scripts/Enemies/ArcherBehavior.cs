@@ -17,12 +17,14 @@ public class ArcherBehavior : MonoBehaviour
     [SerializeField] GameObject arrow; // Prefab of an arrow to be shot
     GameObject shotArrow; // The arrow actually shot
     [SerializeField] Vector3 arrowSpawnOffset = new Vector3(0, 1, 0); // offset arrow spawn so it spawns where it's shot
-    [SerializeField] Quaternion arrowRotation = Quaternion.identity; // rotation of the arrow so it's facing the right way
-    [SerializeField] float sphereCastRadius = 0.1f; // a sphere roughly the size of the arrow itself
-    
+    [SerializeField] float sphereCastRadius = 0.6f; // a sphere roughly the size of the arrow itself
+
     [SerializeField] float moveSpeed = 2f; // patrol speed of archer
     [SerializeField] float shootingSpeed = 5f; // frequency of shooting arrows
-    [SerializeField] float combatRange = 1f; // range of shooting arrows
+    [SerializeField] float combatRange = 50f; // range of shooting arrows
+    [SerializeField] public float arrowMoveSpeed = 2f; // speed of arrow
+    
+    [SerializeField] Quaternion arrowRotation = Quaternion.identity; // rotation of the arrow so it's facing the right way
 
     RaycastHit hit;
 
@@ -47,7 +49,11 @@ public class ArcherBehavior : MonoBehaviour
         vectorTowardsPlayer = player.position - transform.position;
 
         enemyDetected = Detection();
-        // Debug.Log("Enemy Detected: " + enemyDetected);
+        Debug.Log(hit.collider);
+        
+        if (enemyDetected) {
+            Debug.Log("Enemy Detected: " + enemyDetected);
+        }
 
         // If no enemy detected, patrol, else 
         if (!enemyDetected) {
@@ -77,8 +83,18 @@ public class ArcherBehavior : MonoBehaviour
 
     // Check in range and spherecast to check for LoS, ArrowSpawnOffset may create weird edge cases unsure yet
     private bool Detection() {
-        Ray ray = new Ray(transform.position + arrowSpawnOffset, vectorTowardsPlayer);
-        return dist <= combatRange && Physics.SphereCast(ray, sphereCastRadius, out hit, dist);
+
+        if (dist > combatRange) {
+            return false;
+        }
+
+        Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer, out hit, dist + 1);
+
+        if (hit.collider.tag == "Player") {
+            return true;
+        }
+
+        return false;
     }
 
     // Attack at a regular interval
@@ -101,7 +117,7 @@ public class ArcherBehavior : MonoBehaviour
     void Shoot() {
         shotArrow = Instantiate(arrow, transform.position + arrowSpawnOffset, arrowRotation);
         Rigidbody arrowRb = shotArrow.GetComponent<Rigidbody>();
-        arrowRb.velocity = Vector3.Normalize(vectorTowardsPlayer);
+        arrowRb.velocity = Vector3.Normalize(vectorTowardsPlayer) * arrowMoveSpeed;
     }
 
     // IEnumerator Patrol() {

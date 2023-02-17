@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &30797608 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+  m_PrefabInstance: {fileID: 1026070879}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &43249328
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +455,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1026070879
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1622452027422676384, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_Name
+      value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1622452027422676412, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1594200141}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
 --- !u!1 &1212192876
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,7 +624,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212192876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.57, y: 1.57, z: -4.21}
+  m_LocalPosition: {x: -0.02, y: 1.57, z: 9.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -614,19 +680,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e0c689f0bfc3f4aba4246baf57a310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1212192881}
+  player: {fileID: 30797608}
   pathCheckpoints:
   - {fileID: 2034591014}
   - {fileID: 43249329}
   - {fileID: 89357921}
   - {fileID: 2079107600}
   arrow: {fileID: 6211184936914338219, guid: 8275a90f9f7454a49bf43a372a282b0f, type: 3}
-  arrowSpawnOffset: {x: 0, y: 1, z: 0}
-  arrowRotation: {x: 0, y: 0, z: 0, w: 0}
+  arrowSpawnOffset: {x: 0, y: 1.5, z: 0}
   sphereCastRadius: 0.1
   moveSpeed: 2
   shootingSpeed: 5
-  combatRange: 1
+  combatRange: 5
+  arrowMoveSpeed: 15
+  arrowRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &1413887285
 BoxCollider:
   m_ObjectHideFlags: 0
