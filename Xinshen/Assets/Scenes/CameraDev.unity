@@ -76257,7 +76257,7 @@ MonoBehaviour:
   playerTrfm: {fileID: 1026348918}
   screenShakeStrength: 0.003
   trauma: 0
-  move: 0
+  move: 5
   recalibrationRate: 0.1
   rotationVector: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}

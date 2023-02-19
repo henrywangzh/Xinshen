@@ -7,6 +7,8 @@ public class FlowAttack : MonoBehaviour
     Animator anim;
     FlowScriptController controller;
     Rigidbody rb;
+    [SerializeField] Collider weaponCollider;
+
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +16,7 @@ public class FlowAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
         rb = GetComponent<Rigidbody>();
+        GlobalVariableManager.Damage = 25;
     }
 
     private void OnEnable()
@@ -21,6 +24,8 @@ public class FlowAttack : MonoBehaviour
         if (anim == null)
             anim = GetComponent<Animator>();
         SetCombo(1);
+        if (rb != null)
+            rb.velocity = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -30,6 +35,16 @@ public class FlowAttack : MonoBehaviour
         {
             SetCombo(1);
         }
+    }
+
+    public void StartSwing()
+    {
+        weaponCollider.enabled = true;
+    }
+
+    public void EndSwing()
+    {
+        weaponCollider.enabled = false;
     }
 
     public void SetCombo(int combo)

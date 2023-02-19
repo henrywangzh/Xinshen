@@ -26,6 +26,7 @@ public class GlobalVariableManager : MonoBehaviour {
     // TakeDamage is called whenever damage is taken, subtracting dmg from health
     public static void TakeDamage(int dmg)
     {
+        Debug.Log("Taking damage");
         Health = Health - dmg;
     }
 
