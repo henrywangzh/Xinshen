@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public static class GlobalVariableManager
-{
+public class GlobalVariableManager : MonoBehaviour {
+
     // Health Stats
     public static int Health;
     public static int MaxHealth;

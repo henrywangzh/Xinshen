@@ -12,6 +12,14 @@ public class FlowEvade : MonoBehaviour
     [SerializeField] float dashSpeed = 5;
     [SerializeField] float totalDashTime = 0.5f;
 
+    [SerializeField] GameObject disappearFX;
+    [SerializeField] GameObject appearFX;
+    [SerializeField] GameObject mesh;
+    [SerializeField] GameObject weapon;
+    [SerializeField] GameObject trail;
+
+    [SerializeField] Transform cam;
+
     float currentDashTime = 0f;
     
     // Start is called before the first frame update
@@ -25,7 +33,26 @@ public class FlowEvade : MonoBehaviour
     {
         if(rb)
         {
-            rb.velocity = transform.forward * dashSpeed;
+            float xinput = Input.GetAxis("Horizontal");
+            float yinput = Input.GetAxis("Vertical");
+
+            Vector3 inputDir = (new Vector3(cam.forward.x, 0, cam.forward.z) * yinput + new Vector3(cam.right.x, 0, cam.right.z) * xinput).normalized;
+
+            if (inputDir.magnitude > 0)
+            {
+                rb.velocity = inputDir * dashSpeed;
+                // transform.forward = inputDir;
+            }
+            else
+            {
+                rb.velocity = -1 * transform.forward * dashSpeed;
+            }
+
+            disappearFX.SetActive(true);
+            appearFX.SetActive(false);
+            mesh.SetActive(false);
+            weapon.SetActive(false);
+            trail.SetActive(true);
         }
 
         // Now we've totally evaded
@@ -34,6 +61,11 @@ public class FlowEvade : MonoBehaviour
     {
         // reset dash timer when done
         currentDashTime = 0f;
+        disappearFX.SetActive(false);
+        appearFX.SetActive(true);
+        mesh.SetActive(true);
+        weapon.SetActive(true);
+        // trail.SetActive(false);
     }
     // Update is called once per frame
     void Update()
@@ -42,10 +74,11 @@ public class FlowEvade : MonoBehaviour
         if(currentDashTime >= totalDashTime)
         {
             controller.switchState.Invoke("move");
+            
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            controller.switchState.Invoke("move");
+            // controller.switchState.Invoke("move");
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
