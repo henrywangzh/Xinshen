@@ -6469,6 +6469,7 @@ MonoBehaviour:
   mesh: {fileID: 1622452026158532303}
   weapon: {fileID: 1622452027217402245}
   trail: {fileID: 381832290641286127}
+  cam: {fileID: 0}
 --- !u!114 &1622452027422676414
 MonoBehaviour:
   m_ObjectHideFlags: 0
