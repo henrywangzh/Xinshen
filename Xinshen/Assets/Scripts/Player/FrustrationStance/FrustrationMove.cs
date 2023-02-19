@@ -54,8 +54,6 @@ public class FrustrationMove : GlobalVariableManager
             // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
         }
         
-
-        
     }
     
 }
