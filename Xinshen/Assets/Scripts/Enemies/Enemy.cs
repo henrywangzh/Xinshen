@@ -5,18 +5,23 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] int maxHP = 100;
-    int hp;
+    [SerializeField] int hp;
     [SerializeField] public int damage = 20;
 
+    private void Start()
+    {
+        hp = maxHP;
+    }
+
     // Can assign negative number to heal
-    public void TakeDamage(int dmg)
+    public virtual void TakeDamage(int dmg)
     {
         hp -= dmg;
         if (hp > maxHP)
         {
             hp = maxHP;
         }
-        if (hp < 0)
+        if (hp <= 0)
         {
             hp = 0;
             try

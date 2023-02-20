@@ -5,12 +5,7 @@ using UnityEngine;
 public class DummyBehavior : Enemy
 {
     [SerializeField] Collider sword;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] ParticleSystem ps;
 
     // Update is called once per frame
     void Update()
@@ -26,6 +21,12 @@ public class DummyBehavior : Enemy
     public void EndAttack()
     {
         sword.enabled = false;
+    }
+
+    public override void TakeDamage(int dmg)
+    {
+        base.TakeDamage(dmg);
+        ps.Play();
     }
 
     public override void Die()

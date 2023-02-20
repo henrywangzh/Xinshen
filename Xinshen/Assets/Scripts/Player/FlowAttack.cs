@@ -16,7 +16,6 @@ public class FlowAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
         rb = GetComponent<Rigidbody>();
-        GlobalVariableManager.Damage = 25;
     }
 
     private void OnEnable()
@@ -26,6 +25,7 @@ public class FlowAttack : MonoBehaviour
         SetCombo(1);
         if (rb != null)
             rb.velocity = Vector3.zero;
+        GlobalVariableManager.Damage = 25;
     }
 
     // Update is called once per frame
