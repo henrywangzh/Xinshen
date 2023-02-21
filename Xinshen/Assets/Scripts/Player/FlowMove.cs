@@ -30,7 +30,7 @@ public class FlowMove : MonoBehaviour
         float xinput = Input.GetAxis("Horizontal");
         float yinput = Input.GetAxis("Vertical");
 
-        Vector3 moveDirection = (new Vector3(cam.forward.x, 0, cam.forward.z) * yinput + new Vector3(cam.right.x, 0, cam.right.z) * xinput) * speed;
+        Vector3 moveDirection = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * yinput + new Vector3(cam.right.x, 0, cam.right.z).normalized * xinput) * speed;
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
         rb.velocity = moveDirection;

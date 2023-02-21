@@ -6,7 +6,7 @@ public class FrustrationScriptController : ScriptController
 {
     FrustrationMove move;
     // FlowEvade evade;
-    // FlowAttack attack;
+    FrustrationAttack attack;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class FrustrationScriptController : ScriptController
         // Get references to sub-scripts
         move = GetComponent<FrustrationMove>();
         // evade = GetComponent<FlowEvade>();
-        // attack = GetComponent<FlowAttack>();
+        attack = GetComponent<FrustrationAttack>();
 
         // Setting up move node
         string stateName = "move";
@@ -32,17 +32,17 @@ public class FrustrationScriptController : ScriptController
         // canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         // Node evadeNode = addNode(name, state, null, requiredStates, canBeInterruptedByTheseStates);
         //
-        // string atkname = "attack";
-        // state = new ScriptKeyPair(attack, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
-        // requiredStates = new List<MonoBehaviour>();
-        // canBeInterruptedByTheseStates = new List<MonoBehaviour>();
-        // Node attackNode = addNode(atkname, state, null, requiredStates, canBeInterruptedByTheseStates);
+        string atkname = "attack";
+        state = new ScriptKeyPair(attack, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
+        requiredStates = new List<MonoBehaviour>();
+        canBeInterruptedByTheseStates = new List<MonoBehaviour>();
+        Node attackNode = addNode(atkname, state, null, requiredStates, canBeInterruptedByTheseStates);
 
         // moveNode.addNextAvailableStates(evadeNode);
-        // moveNode.addNextAvailableStates(attackNode);
+        moveNode.addNextAvailableStates(attackNode);
         moveNode.addNextAvailableStates(moveNode);
         // evadeNode.addNextAvailableStates(moveNode);
-        // attackNode.addNextAvailableStates(moveNode);
+        attackNode.addNextAvailableStates(moveNode);
 
         setDefaultState(moveNode);
     }
