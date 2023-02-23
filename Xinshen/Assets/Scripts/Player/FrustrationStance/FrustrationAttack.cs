@@ -40,7 +40,7 @@ public class FrustrationAttack : MonoBehaviour
             if (comboCount <= maxCombo)
             {
                 anim.Play("FrustrationAtk" + comboCount);
-                afterimages[comboCount - 1].SetActive(true);
+                    afterimages[comboCount - 1].SetActive(true);
             }
             comboReady = false;
         }
@@ -63,6 +63,7 @@ public class FrustrationAttack : MonoBehaviour
 
     public void SetFwdVelocityFrust(float vel)
     {
+        Debug.Log("Setting velocity");
         rb.velocity = transform.forward * vel;
     }
 

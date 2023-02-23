@@ -6,6 +6,7 @@ public class Afterimage : MonoBehaviour
 {
     Animator anim;
     [SerializeField] int comboNum;
+    [SerializeField] Transform player;
     Vector3 position;
 
     void Awake()
@@ -16,7 +17,7 @@ public class Afterimage : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(Fade());
-        position = transform.position;
+        position = player.position;
     }
 
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class Afterimage : MonoBehaviour
 
     IEnumerator Fade()
     {
+        yield return new WaitForSeconds(0.1f);
         anim.Play("FrustrationAtk" + comboNum);
         yield return new WaitForSeconds(1.2f);
         gameObject.SetActive(false);

@@ -13,7 +13,7 @@ public class FrustrationMove : GlobalVariableManager
 
     // TODO: use global variable manager instead of local variable
     
-    [SerializeField] float moveSpeed =RunningSpeed;
+    [SerializeField] float moveSpeed = RunningSpeed;
     
     [SerializeField] float turnSpeed = 5f;
     float speed;
@@ -53,7 +53,12 @@ public class FrustrationMove : GlobalVariableManager
             transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), turnSpeed * Time.deltaTime, 0f);
             // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
         }
-        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            controller.switchState.Invoke("attack");
+        }
+
     }
     
 }

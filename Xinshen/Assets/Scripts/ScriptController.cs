@@ -28,7 +28,8 @@ public class ScriptController : MonoBehaviour
         {
             n.disableScript();
         }
-        defaultState.enableScript();
+        if (this.isActiveAndEnabled)
+            defaultState.enableScript();
 
         switchState = new UnityEvent<string>();
         switchState.AddListener(switchStateTriggered);
@@ -85,7 +86,7 @@ public class ScriptController : MonoBehaviour
     {
         defaultState = n;
         currentState = n;
-        n.enableScript();
+        // n.enableScript();
     }
 }
 

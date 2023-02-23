@@ -482,7 +482,7 @@ BlendTree:
   m_Name: FrustrationBlend
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: ff260cc404050ad48aae869798df2c52, type: 2}
+    m_Motion: {fileID: 7400000, guid: 9c979bfb82f7f4249b1a974a1e7e864f, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -490,14 +490,14 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 4728e30ff4936e540b533418a4b0fc46, type: 2}
+    m_Motion: {fileID: 7400000, guid: eac90b0ee894a5a40bd479d76eac25b3, type: 2}
     m_Threshold: 0.4269629
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
-  m_BlendParameter: xInput
+  m_BlendParameter: yInput
   m_BlendParameterY: yInput
   m_MinThreshold: 0
   m_MaxThreshold: 0.4269629
