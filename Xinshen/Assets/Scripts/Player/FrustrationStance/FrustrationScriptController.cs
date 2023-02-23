@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class FrustrationScriptController : ScriptController
 {
+    StancesScriptController masterController;
+    Animator anim;
+
     FrustrationMove move;
     // FlowEvade evade;
     FrustrationAttack attack;
 
     private void Awake()
     {
+        masterController = GetComponent<StancesScriptController>();
+        anim = GetComponent<Animator>();
+
         // Initialize the state machine
         createStates();
 
@@ -45,5 +51,18 @@ public class FrustrationScriptController : ScriptController
         attackNode.addNextAvailableStates(moveNode);
 
         setDefaultState(moveNode);
+    }
+
+    private void OnEnable()
+    {
+        anim.Play("Unsheathe");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            masterController.switchState.Invoke("flow");
+        }
     }
 }

@@ -7,7 +7,7 @@ public class FrustrationAttack : MonoBehaviour
     Animator anim;
     FrustrationScriptController controller;
     Rigidbody rb;
-    [SerializeField] Collider weaponCollider;
+    // [SerializeField] Collider weaponCollider;
     [SerializeField] GameObject[] afterimages;
     int comboCount = 1;  // Corresponds with animation state name
     int maxCombo = 8;  // Highest animation number we have 
@@ -50,7 +50,7 @@ public class FrustrationAttack : MonoBehaviour
     {
         comboReady = true;
     }
-
+    /*
     public void StartSwing()
     {
         weaponCollider.enabled = true;
@@ -60,7 +60,7 @@ public class FrustrationAttack : MonoBehaviour
     {
         weaponCollider.enabled = false;
     }
-
+    */
     public void SetFwdVelocityFrust(float vel)
     {
         Debug.Log("Setting velocity");

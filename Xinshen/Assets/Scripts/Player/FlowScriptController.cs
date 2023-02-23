@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FlowScriptController : ScriptController
 {
+    StancesScriptController masterController;
+    Animator anim;
+
     // Define sub-script references
     FlowMove move;
     FlowEvade evade;
@@ -11,6 +14,9 @@ public class FlowScriptController : ScriptController
 
     private void Awake()
     {
+        masterController = GetComponent<StancesScriptController>();
+        anim = GetComponent<Animator>();
+
         // Initialize the state machine
         createStates();
 
@@ -46,5 +52,18 @@ public class FlowScriptController : ScriptController
         attackNode.addNextAvailableStates(moveNode);
 
         setDefaultState(moveNode);
+    }
+
+    private void OnEnable()
+    {
+        anim.Play("FlowTransitionIn");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            masterController.switchState.Invoke("frustration");
+        }
     }
 }
