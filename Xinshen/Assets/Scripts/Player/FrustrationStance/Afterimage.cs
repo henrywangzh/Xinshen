@@ -28,7 +28,7 @@ public class Afterimage : MonoBehaviour
 
     IEnumerator Fade()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.06f);
         anim.Play("FrustrationAtk" + comboNum);
         yield return new WaitForSeconds(1.2f);
         gameObject.SetActive(false);
