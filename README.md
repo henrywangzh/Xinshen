@@ -10,24 +10,30 @@ Hi everyone this is Studio Xinshen's GitHub Repository.
 If you have experience using Git or would like to use the command line:
 
 In your preferred directory, run:
+```
 git clone [git url of repo]
-
-#### To push changes:
-
-git add .  
-
-git commit -m "my message"  
-
-git push 
+```
 
 
-#### to pull changes:
 
+#### To push/pull changes:
+**BEFORE YOU PUSH YOUR CHANGES, MAKE SURE TO PULL BY RUNNING**
+```
 git pull
-
+```
 you may have issues with merge conflicts that you can resolve with git merge and choosing main/origin.
 
 It's because of this that we recommend using GitHub Desktop
+
+```
+git add .  
+```
+```
+git commit -m "my message"  
+```
+```
+git push 
+```
 
 
 ## Guide for GitHub Desktop
