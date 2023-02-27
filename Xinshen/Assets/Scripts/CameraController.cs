@@ -17,7 +17,13 @@ public class CameraController : MonoBehaviour
 
     Vector3 pitchVect3, yawVect3; //cached vector3's to avoid declaring 'new'
 
-    // Start is called before the first frame update
+    public static Transform s_cameraTrfm;
+
+    private void Awake()
+    {
+        s_cameraTrfm = cameraTrfm;
+    }
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

@@ -8,14 +8,30 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] int hp;
     [SerializeField] public int damage = 20;
 
+    static GameObject slashFXObj;
+
+    Transform trfm;
+
     private void Start()
     {
+        trfm = transform;
+
         hp = maxHP;
     }
 
     // Can assign negative number to heal
     public virtual void TakeDamage(int dmg)
     {
+        TakeDamage(dmg, true);
+    }
+
+    public virtual void TakeDamage(int dmg, bool doSlashFX = true)
+    {
+        if (doSlashFX)
+        {
+            Instantiate(slashFXObj, transform.position + Vector3.up * 1, transform.rotation);
+        }
+
         hp -= dmg;
         if (hp > maxHP)
         {
@@ -36,4 +52,10 @@ public abstract class Enemy : MonoBehaviour
     }
 
     public abstract void Die();
+
+
+    public static void AssignSlashFXObj(GameObject obj)
+    {
+        slashFXObj = obj;
+    }
 }
