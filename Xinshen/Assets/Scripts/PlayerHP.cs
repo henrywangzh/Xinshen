@@ -6,14 +6,14 @@ public class PlayerHP : MonoBehaviour
 {
     [SerializeField] int m_HP, m_maxHP;
     [SerializeField] GameObject bloodFX;
-    [SerializeField] Transform torsoTrfm;
+    [SerializeField] Transform m_torsoTrfm;
     [SerializeField] CapsuleCollider hitboxCollider;
 
     static int HP, maxHP, invulnerability;
 
     static PlayerHP self;
 
-    static Transform trfm;
+    public static Transform torsoTrfm;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class PlayerHP : MonoBehaviour
         HP = m_maxHP;
 
         self = GetComponent<PlayerHP>();
-        trfm = transform;
+        torsoTrfm = m_torsoTrfm;
     }
 
     // Update is called once per frame
@@ -54,7 +54,7 @@ public class PlayerHP : MonoBehaviour
 
         if (playBloodFX)
         {
-            Instantiate(self.bloodFX, self.torsoTrfm.position, trfm.rotation);
+            Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation);
         }
         
         if (HP <= 0)

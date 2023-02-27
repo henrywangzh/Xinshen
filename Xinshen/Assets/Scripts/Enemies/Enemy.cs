@@ -17,6 +17,8 @@ public abstract class Enemy : MonoBehaviour
         trfm = transform;
 
         hp = maxHP;
+
+        InvokeRepeating("InvokedFixedUpdate", .02f, .02f);
     }
 
     // Can assign negative number to heal
@@ -53,9 +55,29 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void Die();
 
+    int stunned;
+    protected bool IsStunned()
+    {
+        return stunned > 0;
+    }
 
     public static void AssignSlashFXObj(GameObject obj)
     {
         slashFXObj = obj;
+    }
+
+    public void TakeKnockback(Vector3 source, float power)
+    {
+        GetComponent<Rigidbody>().velocity = (trfm.position - source).normalized * power;
+        Debug.Log((trfm.position - source).normalized);
+        stunned = (int)(power * 10);
+    }
+
+    public void InvokedFixedUpdate()
+    {
+        if (stunned > 0)
+        {
+            stunned--;
+        }
     }
 }

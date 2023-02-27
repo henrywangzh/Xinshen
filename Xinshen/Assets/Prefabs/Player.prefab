@@ -11153,6 +11153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackPower: 20
 --- !u!1 &1622452027231566635
 GameObject:
   m_ObjectHideFlags: 0
@@ -11464,7 +11465,7 @@ MonoBehaviour:
   m_HP: 0
   m_maxHP: 100
   bloodFX: {fileID: 7475258681696905396, guid: 6aa622b609202eb409c6d0bb1de7e3eb, type: 3}
-  torsoTrfm: {fileID: 3572478479524031552}
+  m_torsoTrfm: {fileID: 3572478479524031552}
   hitboxCollider: {fileID: 1622452027422676406}
 --- !u!1 &1622452027453068107
 GameObject:
