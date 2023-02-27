@@ -55,6 +55,7 @@ public class FlowMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             controller.switchState.Invoke("evade");
+            PlayerHP.SetInvulnerable(16);
         }
         if (Input.GetMouseButtonDown(0))
         {
