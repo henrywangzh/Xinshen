@@ -66,11 +66,11 @@ public abstract class Enemy : MonoBehaviour
         slashFXObj = obj;
     }
 
+    //source: where the knockback is coming from (flies away from source); power: how much to knockback
     public void TakeKnockback(Vector3 source, float power)
     {
         GetComponent<Rigidbody>().velocity = (trfm.position - source).normalized * power;
-        Debug.Log((trfm.position - source).normalized);
-        stunned = (int)(power * 10);
+        stunned = (int)(power * 2);
     }
 
     public void InvokedFixedUpdate()
