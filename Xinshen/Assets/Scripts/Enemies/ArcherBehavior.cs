@@ -41,6 +41,10 @@ public class ArcherBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
+        if(player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
         curTarg = pathCheckpoints[curCheckpoint];
     }
 
@@ -77,7 +81,7 @@ public class ArcherBehavior : MonoBehaviour
         vectorTowardsPlayer = (player.position + chestOffset) - (transform.position + arrowSpawnOffset);
 
         enemyDetected = Detection();
-        // Debug.Log(hit.collider)
+        //Debug.Log(hit.collider.name);
 
         // If no enemy detected and not attacking, patrol, and if not attacking but enemy is detected, attack
         if (!enemyDetected && !attacking) {
@@ -117,7 +121,6 @@ public class ArcherBehavior : MonoBehaviour
     IEnumerator Attack() {
 
         attacking = true;
-
         while (enemyDetected) {
             WaitForSeconds wait = new WaitForSeconds(shootingSpeed);
             yield return wait;
