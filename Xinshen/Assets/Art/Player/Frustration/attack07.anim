@@ -125487,6 +125487,13 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.26666668
+    functionName: StartSwing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.26666668
     functionName: SetFwdVelocityFrust
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -125500,8 +125507,29 @@ AnimationClip:
     floatParameter: 4
     intParameter: 0
     messageOptions: 0
+  - time: 0.36666667
+    functionName: EndSwing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.4
+    functionName: StartSwing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5
     functionName: SetFwdVelocityFrust
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.53333336
+    functionName: EndSwing
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
