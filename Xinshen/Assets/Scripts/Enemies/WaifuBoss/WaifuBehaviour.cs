@@ -68,13 +68,13 @@ public class WaifuBehaviour : MonoBehaviour
 
     public void SpawnStars()
     {
-        GameObject obj = Instantiate(star, transform.position + transform.up, transform.rotation);
+        GameObject obj = Instantiate(star, transform.position + transform.up * 1.5f, transform.rotation);
         obj.GetComponent<SplitterStar>().AssignTarget(player);
     }
 
     public void BasicAttack()
     {
-        GameObject obj = Instantiate(shard, transform.position, transform.rotation);
+        GameObject obj = Instantiate(shard, transform.position + transform.up, transform.rotation);
         obj.GetComponent<CometShard>().AssignTargetTrfm(player);
     }
 

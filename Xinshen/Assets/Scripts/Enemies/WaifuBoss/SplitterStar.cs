@@ -56,6 +56,14 @@ public class SplitterStar : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(3f);
+        GameObject obj5 = Instantiate(star, transform.position, Random.rotation);
+        obj5.GetComponent<CometShard>().AssignTargetTrfm(target);
+        GameObject obj6 = Instantiate(star, transform.position, Random.rotation);
+        obj6.GetComponent<CometShard>().AssignTargetTrfm(target);
+        GameObject obj3 = Instantiate(star, transform.position, Random.rotation);
+        obj3.GetComponent<CometShard>().AssignTargetTrfm(target);
+        GameObject obj4 = Instantiate(star, transform.position, Random.rotation);
+        obj4.GetComponent<CometShard>().AssignTargetTrfm(target);
         Destroy(gameObject);
     }
 }
