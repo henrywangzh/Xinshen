@@ -147,7 +147,7 @@ MonoBehaviour:
   player: {fileID: 0}
   star: {fileID: 6657874353716601097, guid: b492943754414194b9bcaa20df77809e, type: 3}
   shard: {fileID: 4870593887953239918, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
-  delays: 020000000300000001000000
+  delays: 02000000030000000100000005000000
 --- !u!136 &366500968746317988
 CapsuleCollider:
   m_ObjectHideFlags: 0

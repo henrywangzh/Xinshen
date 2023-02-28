@@ -54,6 +54,13 @@ public class WaifuBehaviour : MonoBehaviour
                     SpawnStars();
                     return;
                 }
+
+                if (counter[3] == 0)
+                {
+                    counter[3] = delays[3];
+                    StartCoroutine(RushAssault());
+                    return;
+                }
             }
             if (counter[2] == 0)
             {
@@ -119,6 +126,20 @@ public class WaifuBehaviour : MonoBehaviour
             duration -= 0.1f;
         }
         BasicAttack();
+    }
+
+    // Dash through the player, leaving bombs in the trail (Does not account for falling off edges)
+    IEnumerator RushAssault()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        Vector3 destPoint = transform.position + direction * strafeRadius * 2;
+        rb.velocity = direction * dashSpeed * 3;
+        float duration = 4f;
+        while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.3f)
+        {
+            yield return new WaitForSeconds(0.2f);
+            duration -= 0.2f;
+        }
     }
     
 }
