@@ -14,11 +14,13 @@ public class WaifuBehaviour : MonoBehaviour
     List<int> counter;
     float startTime;
     Rigidbody rb;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         startTime = Time.timeSinceLevelLoad;
         counter = new List<int>(delays);
         Debug.Log(counter[0]);
@@ -51,7 +53,7 @@ public class WaifuBehaviour : MonoBehaviour
                 if (counter[1] == 0)
                 {
                     counter[1] = delays[1];
-                    SpawnStars();
+                    StartCoroutine(SplitterStars());
                     return;
                 }
 
@@ -85,8 +87,17 @@ public class WaifuBehaviour : MonoBehaviour
         obj.GetComponent<CometShard>().AssignTargetTrfm(player);
     }
 
+    IEnumerator SplitterStars()
+    {
+        anim.Play("WaifuStar");
+        yield return new WaitForSeconds(0.8f);
+        SpawnStars();
+    }
+
     IEnumerator Attack()
     {
+        anim.Play("WaifuAttack");
+        yield return new WaitForSeconds(.5f);
         for (int i = 0; i < 3; i++)
         {
             BasicAttack();
@@ -112,7 +123,7 @@ public class WaifuBehaviour : MonoBehaviour
         }
         float distSide = strafeRadius - distBack;
         */
-
+        anim.Play("WaifuEvade");
         float duration = 1f;
         // The dodge should curve, from fully perpendicular to fully tangential from the perimeter around the player
         if (Random.Range(0f, 1f) > 0.5f)  // Choose a random direction to dodge
@@ -134,6 +145,7 @@ public class WaifuBehaviour : MonoBehaviour
         Vector3 direction = (player.position - transform.position).normalized;
         Vector3 destPoint = transform.position + direction * strafeRadius * 2;
         rb.velocity = direction * dashSpeed * 3;
+        anim.Play("WaifuRush");
         float duration = 4f;
         while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.3f)
         {
