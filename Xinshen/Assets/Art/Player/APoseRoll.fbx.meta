@@ -2,7 +2,112 @@ fileFormatVersion: 2
 guid: e7516e0a949a64f43b7b6fa3774cf0f7
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -7676670256691439927
+    second: Bip001|Bip001.001|Bip001|Bip001.001|Take 001|BaseLayer|Bip001|Bip001.0
+  - first:
+      74: 7407900155116359100
+    second: Bip001|Bip001.001|Bip001|Bip001|Take 001|BaseLayer.001|Bip001|Bip001|T
+  - first:
+      74: 7484006484603261693
+    second: 'Bip001|Bip001.001|Bip001|Bip001|Take 001|BaseLayer|Bip001|Bip001|Take '
+  - first:
+      74: 5165576845499751082
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001 Footsteps|combo_02_03|Ba
+  - first:
+      74: 10172196589477853
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001 Footsteps|combo_02|BaseL
+  - first:
+      74: -7552034219604235491
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001.001|combo_02|BaseLayer|T
+  - first:
+      74: 7602755331464983412
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLay
+  - first:
+      74: -2560417938625883601
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLay.001
+  - first:
+      74: -1693828290509851994
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLayer.0
+  - first:
+      74: -3061995942119112185
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLayer|T
+  - first:
+      74: -9058106249302463101
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001.002|combo_02_03|BaseLaye
+  - first:
+      74: -7338516804512249273
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001|Take 001|BaseLayer.001|T
+  - first:
+      74: -8981123569922514474
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|Bip001|Take 001|BaseLayer|T-Mes
+  - first:
+      74: 5260742732428684939
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose
+  - first:
+      74: -1618009363005448674
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose.001
+  - first:
+      74: -8647240856876908056
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose.002
+  - first:
+      74: 1182488078917169895
+    second: Bip001|Bip001.001|Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose|Act
+  - first:
+      74: -8586928374993576156
+    second: Bip001|Bip001.001|Take 001|BaseLayer
+  - first:
+      74: -4947933341621506187
+    second: Bip001|Bip001.002|Take 001|BaseLayer
+  - first:
+      74: -4449781122294624311
+    second: Bip001|Bip001|Take 001|BaseLayer
+  - first:
+      74: -9129430066443040822
+    second: Bip001|Bip001|Take 001|BaseLayer.001
+  - first:
+      74: 8216452502114596355
+    second: Bip001|T-Mesh|T-Mesh|Bip001 Footsteps|combo_02_03|BaseLayer|T-Mesh|Bip
+  - first:
+      74: 6281788055877691849
+    second: Bip001|T-Mesh|T-Mesh|Bip001 Footsteps|combo_02|BaseLayer|T-Mesh|Bip001
+  - first:
+      74: -3139680295235291187
+    second: Bip001|T-Mesh|T-Mesh|Bip001.001|combo_02|BaseLayer|T-Mesh|Bip001.001|c
+  - first:
+      74: 3965454522068814416
+    second: Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLayer.001|T-Mesh|Bip001.0
+  - first:
+      74: -2007804084480123113
+    second: Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLayer.002|T-Mesh|Bip001.0
+  - first:
+      74: 6195662435576724394
+    second: Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLayer.003|T-Mesh|Bip001.0
+  - first:
+      74: -1466667857360351445
+    second: Bip001|T-Mesh|T-Mesh|Bip001.001|Take 001|BaseLayer|T-Mesh|Bip001.001|T
+  - first:
+      74: -4392244747784052559
+    second: Bip001|T-Mesh|T-Mesh|Bip001.002|combo_02_03|BaseLayer|T-Mesh|Bip001.00
+  - first:
+      74: -7841522425160885462
+    second: 'Bip001|T-Mesh|T-Mesh|Bip001|Take 001|BaseLayer.001|T-Mesh|Bip001|Take '
+  - first:
+      74: -1193273552193453534
+    second: Bip001|T-Mesh|T-Mesh|Bip001|Take 001|BaseLayer|T-Mesh|Bip001|Take 001|
+  - first:
+      74: 1980986712955283155
+    second: Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose|Action Retarget.001|T
+  - first:
+      74: -1264145125368492656
+    second: Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose|Action Retarget.002|T
+  - first:
+      74: 8473707848156328471
+    second: Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose|Action Retarget.003|T
+  - first:
+      74: -4287643799436119464
+    second: Bip001|T-Mesh|T-Mesh|t-pose|t-pose|Action|t-pose|Action Retarget|T-Mes
   externalObjects: {}
   materials:
     materialImportMode: 2
