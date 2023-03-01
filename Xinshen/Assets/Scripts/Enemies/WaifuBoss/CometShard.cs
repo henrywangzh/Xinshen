@@ -7,6 +7,7 @@ public class CometShard : MonoBehaviour
     [SerializeField] Transform targetTrfm;
     [SerializeField] float travelSpd, turnSpd;
     [SerializeField] int damage;
+    [SerializeField] float maxLifespan = 15f;
     [SerializeField] GameObject destroyFX;
 
     Transform trfm;
@@ -15,7 +16,7 @@ public class CometShard : MonoBehaviour
     void Start()
     {
         trfm = transform;
-
+        StartCoroutine(DelayedSelfDestruct());
         // trfm.forward = targetTrfm.position - trfm.position;
         // trfm.Rotate(new Vector3(Random.Range(160, 201), Random.Range(-20, 21), 0));
     }
@@ -49,5 +50,11 @@ public class CometShard : MonoBehaviour
     {
         Destroy(Instantiate(destroyFX, trfm.position, trfm.rotation), 1);
         Destroy(gameObject);
+    }
+
+    IEnumerator DelayedSelfDestruct()
+    {
+        yield return new WaitForSeconds(maxLifespan);
+        DestroySelf();
     }
 }

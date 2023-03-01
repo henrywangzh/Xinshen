@@ -196,7 +196,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cf8782c0e31da9b489b65b2ff8b5c5e1, type: 2}
+  - {fileID: 2100000, guid: d876b496f5c6c8e4289891bd4e4ae2f2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   travelSpd: 0.3
   turnSpd: 0.001
   damage: 0
+  maxLifespan: 6
   destroyFX: {fileID: 641210502215411198, guid: 8a0dd3a909232cb4a8426030c0ca05b7, type: 3}
 --- !u!54 &3517072733024915515
 Rigidbody:

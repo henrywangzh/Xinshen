@@ -10,10 +10,13 @@ public class WaifuBehaviour : MonoBehaviour
     [SerializeField] Transform player;
     [SerializeField] GameObject star;
     [SerializeField] GameObject shard;
-    [SerializeField] [Tooltip("Element 0 - evade, element 1 - splitter star, element 2 - basic attack")] List<int> delays;
+    [SerializeField] GameObject bomb;
+    [SerializeField] TrailRenderer trail;
+    [SerializeField] [Tooltip("Element 0 - evade, element 1 - splitter star, element 2 - basic attack, element 3 - rush attack")] List<int> delays;
     List<int> counter;
     float startTime;
     Rigidbody rb;
+    Collider col;
     Animator anim;
 
     // Start is called before the first frame update
@@ -23,7 +26,9 @@ public class WaifuBehaviour : MonoBehaviour
         anim = GetComponent<Animator>();
         startTime = Time.timeSinceLevelLoad;
         counter = new List<int>(delays);
-        Debug.Log(counter[0]);
+        // Debug.Log(counter[0]);
+        col = GetComponent<CapsuleCollider>();
+        trail.emitting = false;
     }
 
     // Update is called once per frame
@@ -145,13 +150,25 @@ public class WaifuBehaviour : MonoBehaviour
         Vector3 direction = (player.position - transform.position).normalized;
         Vector3 destPoint = transform.position + direction * strafeRadius * 2;
         rb.velocity = direction * dashSpeed * 3;
+        rb.useGravity = false;
+        col.enabled = false;
+        trail.emitting = true;
         anim.Play("WaifuRush");
-        float duration = 4f;
-        while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.3f)
+        float duration = 3f;
+        while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.4f)
         {
-            yield return new WaitForSeconds(0.2f);
-            duration -= 0.2f;
+            yield return new WaitForSeconds(0.05f);
+            duration -= 0.05f;
+            if (duration % 0.2f <= Time.deltaTime)
+            {
+                Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
+            }
         }
+        Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
+        trail.emitting = false;
+        rb.velocity = Vector3.zero;
+        rb.useGravity = true;
+        col.enabled = true;
     }
     
 }

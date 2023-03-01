@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: travelSpd
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 434418217430350969, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
+      propertyPath: maxLifespan
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1250208035506255407, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -58,6 +62,10 @@ PrefabInstance:
     - target: {fileID: 1250208035506255407, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971072214183136279, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4870593887953239918, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
       propertyPath: m_Name
