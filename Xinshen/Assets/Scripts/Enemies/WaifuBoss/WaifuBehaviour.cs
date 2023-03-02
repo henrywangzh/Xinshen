@@ -15,6 +15,7 @@ public class WaifuBehaviour : MonoBehaviour
     [SerializeField] [Tooltip("Element 0 - evade, element 1 - splitter star, element 2 - basic attack, element 3 - rush attack")] List<int> delays;
     List<int> counter;
     float startTime;
+    bool attacking = false;
     Rigidbody rb;
     Collider col;
     Animator anim;
@@ -38,7 +39,8 @@ public class WaifuBehaviour : MonoBehaviour
         if ((Time.timeSinceLevelLoad - startTime) % decisionPeriod <= Time.deltaTime)  // Make a decision every few seconds
         {
             // Debug.Log("Making decision");
-            
+            if (attacking) return;
+
             for (int i = 0; i < counter.Count; i++)
             {
                 if (counter[i] > 0)
@@ -112,6 +114,7 @@ public class WaifuBehaviour : MonoBehaviour
 
     IEnumerator Evade()
     {
+        attacking = true;
         // point that lies on the strafe radius
         // Vector3 pointOnCircle = player.position + (transform.position - player.position).normalized * strafeRadius;
         Vector3 backVector = (transform.position - player.position).normalized;
@@ -142,33 +145,41 @@ public class WaifuBehaviour : MonoBehaviour
             duration -= 0.1f;
         }
         BasicAttack();
+        attacking = false;
     }
 
     // Dash through the player, leaving bombs in the trail (Does not account for falling off edges)
     IEnumerator RushAssault()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        Vector3 destPoint = transform.position + direction * strafeRadius * 2;
-        rb.velocity = direction * dashSpeed * 3;
-        rb.useGravity = false;
-        col.enabled = false;
-        trail.emitting = true;
-        anim.Play("WaifuRush");
-        float duration = 3f;
-        while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.4f)
+        attacking = true;
+        for (int i = 0; i < 3; i++)
         {
-            yield return new WaitForSeconds(0.05f);
-            duration -= 0.05f;
-            if (duration % 0.2f <= Time.deltaTime)
+            Vector3 direction = (player.position - transform.position);
+            direction = (direction - new Vector3(0, direction.y, 0)).normalized;
+            Vector3 destPoint = transform.position + direction * strafeRadius * 2;
+            rb.velocity = direction * dashSpeed * 3;
+            rb.useGravity = false;
+            col.enabled = false;
+            trail.emitting = true;
+            anim.Play("WaifuRush");
+            float duration = 3f;
+            while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.4f)
             {
-                Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
+                yield return new WaitForSeconds(0.05f);
+                duration -= 0.05f;
+                if (duration % 0.2f <= Time.deltaTime)
+                {
+                    Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
+                }
             }
+            Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
+            trail.emitting = false;
+            rb.velocity = Vector3.zero;
+            rb.useGravity = true;
+            col.enabled = true;
+            yield return new WaitForSeconds(0.5f);
         }
-        Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
-        trail.emitting = false;
-        rb.velocity = Vector3.zero;
-        rb.useGravity = true;
-        col.enabled = true;
+        attacking = false;
     }
     
 }

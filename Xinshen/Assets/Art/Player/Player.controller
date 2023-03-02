@@ -163,6 +163,18 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-4984981370132380563
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc95c6a73ff2a8743a2c8ff81b064c87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4616134859627196070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -703,11 +715,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Unsheathe
-  m_Speed: 1.6
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -9161934617993698492}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -4984981370132380563}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -874,7 +887,7 @@ AnimatorStateMachine:
     m_Position: {x: 370, y: 890, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1438684931775477381}
-    m_Position: {x: 690, y: 610, z: 0}
+    m_Position: {x: 670, y: 510, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8504068881792866242}
     m_Position: {x: 490, y: 180, z: 0}

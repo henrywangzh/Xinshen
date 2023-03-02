@@ -123,6 +123,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &144016782 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3572478479524031552, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+  m_PrefabInstance: {fileID: 1079020340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &152123468 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 366500968746318010, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
+  m_PrefabInstance: {fileID: 366500968540418133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &703635963
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 729537433746458183, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: debugTarget
+      value: 
+      objectReference: {fileID: 152123468}
     - target: {fileID: 1526374468572174153, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -992,6 +1006,10 @@ PrefabInstance:
     - target: {fileID: 1622452028091101064, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 5.1583037
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677707444087698955, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: dashSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8285932694880627806, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_IsActive
@@ -15766,7 +15784,7 @@ GameObject:
   - component: {fileID: 1674232921}
   - component: {fileID: 1674232920}
   - component: {fileID: 1674232919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16151,10 +16169,10 @@ PrefabInstance:
     - target: {fileID: 366500968746318011, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 947616510}
+      objectReference: {fileID: 144016782}
     - target: {fileID: 366500968746318011, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
       propertyPath: decisionPeriod
-      value: 2.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 366500968746318011, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
       propertyPath: delays.Array.data[0]

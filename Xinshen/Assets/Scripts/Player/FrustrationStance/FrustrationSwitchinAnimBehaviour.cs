@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrustrationMoveAnimManager : StateMachineBehaviour
+public class FrustrationSwitchinAnimBehaviour : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.gameObject.GetComponent<FrustrationScriptController>().switchState.Invoke("move");
+        animator.gameObject.GetComponent<FrustrationScriptController>().switchState.Invoke("dashstrike");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -19,7 +19,7 @@ public class FrustrationMoveAnimManager : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
-    //    animator.gameObject.GetComponent<FrustrationScriptController>().switchState.Invoke("move");
+    //    
     //}
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

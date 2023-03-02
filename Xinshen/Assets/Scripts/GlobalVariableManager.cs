@@ -19,6 +19,7 @@ public class GlobalVariableManager : MonoBehaviour {
     public static int Damage;
     public static int Armor;
     public static string Stance;
+    public static Transform LockedTarget = null;
     
     // Inventory
     public static List<Item> Items = new List<Item>();

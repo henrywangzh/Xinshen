@@ -10,6 +10,7 @@ public class FrustrationScriptController : ScriptController
     FrustrationMove move;
     // FlowEvade evade;
     FrustrationAttack attack;
+    FrustrationDashStrike dashstrike;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class FrustrationScriptController : ScriptController
         move = GetComponent<FrustrationMove>();
         // evade = GetComponent<FlowEvade>();
         attack = GetComponent<FrustrationAttack>();
+        dashstrike = GetComponent<FrustrationDashStrike>();
 
         // Setting up move node
         string stateName = "move";
@@ -44,13 +46,22 @@ public class FrustrationScriptController : ScriptController
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node attackNode = addNode(atkname, state, null, requiredStates, canBeInterruptedByTheseStates);
 
+        stateName = "dashstrike";
+        state = new ScriptKeyPair(dashstrike, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
+        requiredStates = new List<MonoBehaviour>();
+        canBeInterruptedByTheseStates = new List<MonoBehaviour>();
+        Node dashStrikeNode = addNode(stateName, state, null, requiredStates, canBeInterruptedByTheseStates);
+
         // moveNode.addNextAvailableStates(evadeNode);
         moveNode.addNextAvailableStates(attackNode);
         moveNode.addNextAvailableStates(moveNode);
+        moveNode.addNextAvailableStates(dashStrikeNode);
         // evadeNode.addNextAvailableStates(moveNode);
         attackNode.addNextAvailableStates(moveNode);
+        dashStrikeNode.addNextAvailableStates(moveNode);
+        dashStrikeNode.addNextAvailableStates(dashStrikeNode);
 
-        setDefaultState(moveNode);
+        setDefaultState(dashStrikeNode);
     }
 
     private void OnEnable()

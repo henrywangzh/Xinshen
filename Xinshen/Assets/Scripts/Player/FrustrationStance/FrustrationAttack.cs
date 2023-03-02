@@ -7,8 +7,10 @@ public class FrustrationAttack : MonoBehaviour
     Animator anim;
     FrustrationScriptController controller;
     Rigidbody rb;
-    // [SerializeField] Collider weaponCollider;
+    [SerializeField] [Tooltip("For debugging purposes only! Sets the locked target to this.")] Transform debugTarget;
+    //[SerializeField] Collider weaponCollider;
     [SerializeField] GameObject[] afterimages;
+
     int comboCount = 1;  // Corresponds with animation state name
     int maxCombo = 8;  // Highest animation number we have 
     bool comboReady = false;
@@ -19,6 +21,7 @@ public class FrustrationAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<FrustrationScriptController>();
         rb = GetComponent<Rigidbody>();
+        GlobalVariableManager.LockedTarget = debugTarget;
     }
     private void OnEnable()
     {
@@ -29,6 +32,17 @@ public class FrustrationAttack : MonoBehaviour
         if (rb != null)
             rb.velocity = Vector3.zero;
         GlobalVariableManager.Damage = 10;
+        AlignToTarget();
+    }
+
+    void AlignToTarget()
+    {
+        if (GlobalVariableManager.LockedTarget != null)
+        {
+            Vector3 fwd = GlobalVariableManager.LockedTarget.position - transform.position;
+            fwd = (fwd - new Vector3(0, fwd.y, 0)).normalized;
+            transform.forward = fwd;
+        }
     }
 
     // Update is called once per frame
@@ -39,8 +53,9 @@ public class FrustrationAttack : MonoBehaviour
             comboCount++;
             if (comboCount <= maxCombo)
             {
+                AlignToTarget();
                 anim.Play("FrustrationAtk" + comboCount);
-                    afterimages[comboCount - 1].SetActive(true);
+                afterimages[comboCount - 1].SetActive(true);
             }
             comboReady = false;
         }
