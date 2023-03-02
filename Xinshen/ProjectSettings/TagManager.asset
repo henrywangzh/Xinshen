@@ -21,7 +21,7 @@ TagManager:
   - PlayerHurtbox
   - EnemyHitbox
   - EnemyHurtbox
-  - 
+  - TerrainHitbox
   - 
   - 
   - 
