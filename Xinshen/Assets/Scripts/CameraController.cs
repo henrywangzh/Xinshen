@@ -18,10 +18,12 @@ public class CameraController : MonoBehaviour
     Vector3 pitchVect3, yawVect3; //cached vector3's to avoid declaring 'new'
 
     public static Transform s_cameraTrfm;
+    public static CameraController self;
 
     private void Awake()
     {
         s_cameraTrfm = cameraTrfm;
+        self = GetComponent<CameraController>();
     }
 
     void Start()
@@ -88,17 +90,17 @@ public class CameraController : MonoBehaviour
         return playerTrfm.position + Vector3.up * targetHeight;
     }
 
-    public void AddTrauma(int pTrauma, int max = int.MaxValue)
+    public static void AddTrauma(int pTrauma, int max = int.MaxValue)
     {
-        pTrauma = Mathf.RoundToInt(pTrauma * traumaSharpness);
-        trauma += pTrauma;
-        if (trauma > max) { trauma = max; }
+        pTrauma = Mathf.RoundToInt(pTrauma * self.traumaSharpness);
+        self.trauma += pTrauma;
+        if (self.trauma > max) { self.trauma = max; }
     }
 
-    public void SetTrauma(int pTrauma)
+    public static void SetTrauma(int pTrauma)
     {
-        pTrauma = Mathf.RoundToInt(pTrauma * traumaSharpness);
-        if (trauma < pTrauma) { trauma = pTrauma; }
+        pTrauma = Mathf.RoundToInt(pTrauma * self.traumaSharpness);
+        if (self.trauma < pTrauma) { self.trauma = pTrauma; }
     }
 
     [SerializeField] float recalibrationRate;

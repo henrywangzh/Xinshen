@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] int maxHP = 100;
-    [SerializeField] int hp;
+    [SerializeField] int maxHP = 100, hp;
+    [SerializeField] float centerYOffset; //used to instantiate on-hit effects at object's center
     [SerializeField] public int damage = 20;
 
     static GameObject slashFXObj;
@@ -24,15 +24,13 @@ public abstract class Enemy : MonoBehaviour
     // Can assign negative number to heal
     public virtual void TakeDamage(int dmg)
     {
-        TakeDamage(dmg, true);
+        TakeDamage(dmg, true, true);
     }
 
-    public virtual void TakeDamage(int dmg, bool doSlashFX = true)
+    public virtual void TakeDamage(int dmg, bool doSlashFX = true, bool doDamageNumber = true)
     {
-        if (doSlashFX)
-        {
-            Instantiate(slashFXObj, transform.position + Vector3.up * 1, transform.rotation);
-        }
+        if (doSlashFX) { Instantiate(slashFXObj, transform.position + Vector3.up * centerYOffset, transform.rotation); }
+        if (doDamageNumber) { GameManager.InstantiateDamageNumber(transform.position + Vector3.up * centerYOffset, dmg); }
 
         hp -= dmg;
         if (hp > maxHP)
