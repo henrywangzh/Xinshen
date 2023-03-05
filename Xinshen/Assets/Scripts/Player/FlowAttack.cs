@@ -8,6 +8,7 @@ public class FlowAttack : MonoBehaviour
     FlowScriptController controller;
     Rigidbody rb;
     [SerializeField] Collider weaponCollider;
+    bool canCancel = false;
 
 
     // Start is called before the first frame update
@@ -35,6 +36,12 @@ public class FlowAttack : MonoBehaviour
         {
             SetCombo(1);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Debug.Log("Dodging");
+            DodgeCancel();
+        }
     }
 
     public void StartSwing()
@@ -61,5 +68,13 @@ public class FlowAttack : MonoBehaviour
     {
         if (this.isActiveAndEnabled)
             controller.switchState.Invoke("move"); 
+    }
+
+    void DodgeCancel()
+    {
+        EndSwing();
+        SetFwdVelocity(0);
+        anim.Play("FlowEvade");
+        controller.switchState.Invoke("evade");
     }
 }

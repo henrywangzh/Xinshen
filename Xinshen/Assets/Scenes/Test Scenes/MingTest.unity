@@ -16186,6 +16186,10 @@ PrefabInstance:
       propertyPath: delays.Array.data[2]
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 366500968746318011, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
+      propertyPath: delays.Array.data[3]
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
 --- !u!1 &432300593347579557
