@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeterminationInput : MonoBehaviour
 {
+	private float startTime;
+
 	public Vector2 getInputVectorNorm()
 	{
 		Vector2 inputVector = new Vector2(0, 0);
@@ -18,4 +20,18 @@ public class DeterminationInput : MonoBehaviour
 
 		return inputVector;
 	}
+
+	// Return time duration that player has been moving forward
+	public float getForwardDuration()
+	{
+		if (Input.GetKeyDown(KeyCode.W))
+			startTime = Time.time;
+
+		if (Input.GetKey("w"))
+			return Time.time - startTime;
+		else
+			return 0f;
+	}
+
+
 }

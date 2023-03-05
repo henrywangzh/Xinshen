@@ -271,6 +271,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1466291873}
     - target: {fileID: 4563010473810539702, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: rotSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563010473810539702, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: runSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563010473810539702, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: walkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563010473810539702, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: inputHandler
       value: 
       objectReference: {fileID: 1376690974}

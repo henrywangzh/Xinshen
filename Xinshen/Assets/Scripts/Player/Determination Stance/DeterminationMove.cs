@@ -9,8 +9,9 @@ public class DeterminationMove : MonoBehaviour
   private Rigidbody rb;
 
 	[SerializeField] private Transform cam;
-	[SerializeField] private float moveSpeed = 4f; // movement speed
-	[SerializeField] private float rotSpeed = 5f; // rotation speed
+	[SerializeField] private float walkSpeed = 2f; // walk movement speed
+	[SerializeField] private float runSpeed = 8f; // run movement speed
+	[SerializeField] private float rotSpeed = 10f; // rotation speed
 
 	private float currSpeed; // current speed
 
@@ -21,26 +22,34 @@ public class DeterminationMove : MonoBehaviour
     rb = GetComponent<Rigidbody>();
 	}
 
+		// Start is called before the first frame update
+	void Start()
+	{
+		currSpeed = walkSpeed;
+	}
 
 	private void Update()
 	{
 		Vector2 inputVec = inputHandler.getInputVectorNorm();
+		float forwardDuration = inputHandler.getForwardDuration();
 
-		Vector3 moveDirection = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * inputVec.y + new Vector3(cam.right.x, 0, cam.right.z).normalized * inputVec.x) * currSpeed;
-		moveDirection.y = 0;
-		moveDirection += new Vector3(0, rb.velocity.y, 0);
-		rb.velocity = moveDirection;
+		// Start running after 0.5 sec
+		currSpeed = forwardDuration > 0.5f ? runSpeed : walkSpeed;
 
-		currSpeed = moveSpeed * 1.5f;
+		// Update rigidbody velocity
+		Vector3 moveDir = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * inputVec.y + new Vector3(cam.right.x, 0, cam.right.z).normalized * inputVec.x);
+		moveDir.y = 0;
+		
+		Vector3 moveVelocity = moveDir * currSpeed;
+		rb.velocity = moveVelocity + new Vector3(0, rb.velocity.y, 0);;
+
+		// Update speed
+		// currSpeed = moveSpeed * 1.5f;
 		// anim.SetFloat("xInput", 0);
 		// anim.SetFloat("yInput", Mathf.Sqrt(yinput*yinput + xinput*xinput) * 2f);
-		transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), rotSpeed * Time.deltaTime, 0f);
 
-		
-		// // Keep input vector separate from the move vector
-		// Vector3 moveDir = new Vector3(inputVec.x, 0f, inputVec.y);
-		// float moveDistance = moveSpeed * Time.deltaTime;
-
-		// transform.forward = Vector3.Slerp(transform.forward, moveDir, rotSpeed * Time.deltaTime);
+		// Update player rotation
+		Vector3 forwardDir = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), rotSpeed * Time.deltaTime, 0f);
+		transform.forward = forwardDir;
 	}
 }
