@@ -9,7 +9,8 @@ public class FlowAttack : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Collider weaponCollider;
     bool canCancel = false;
-
+    Transform cam;
+    Vector3 targOrientation;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,8 @@ public class FlowAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
         rb = GetComponent<Rigidbody>();
+        cam = GetComponent<FlowMove>().cam;
+        targOrientation = Vector3.zero;
     }
 
     private void OnEnable()
@@ -26,6 +29,7 @@ public class FlowAttack : MonoBehaviour
         SetCombo(1);
         if (rb != null)
             rb.velocity = Vector3.zero;
+        targOrientation = Vector3.zero;
         GlobalVariableManager.Damage = 25;
     }
 
@@ -41,6 +45,11 @@ public class FlowAttack : MonoBehaviour
         {
             Debug.Log("Dodging");
             DodgeCancel();
+        }
+
+        if (targOrientation != Vector3.zero)
+        {
+            transform.forward = Vector3.Lerp(transform.forward, targOrientation, 0.2f);
         }
     }
 
@@ -76,5 +85,13 @@ public class FlowAttack : MonoBehaviour
         SetFwdVelocity(0);
         anim.Play("FlowEvade");
         controller.switchState.Invoke("evade");
+    }
+
+    public void OrientTowardsInput()
+    {
+        float inputX = Input.GetAxis("Horizontal");
+        float inputY = Input.GetAxis("Vertical");
+
+        targOrientation = (cam.forward * inputY + cam.right * inputX).normalized;
     }
 }
