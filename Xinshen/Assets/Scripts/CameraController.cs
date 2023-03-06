@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] int trauma;
     [SerializeField] Canvas canvas;
 
-    Vector3 pitchVect3, yawVect3; //cached vector3's to avoid declaring 'new'
+    Vector3 pitchVect3, yawVect3, lockedTargetVect3; //cached vector3's to avoid declaring 'new'
 
     public static Transform s_cameraTrfm;
     public static CameraController self;
@@ -63,7 +63,13 @@ public class CameraController : MonoBehaviour
     {
         if (GlobalVariableManager.LockedTarget)
         {
-            mountTrfm.forward = GlobalVariableManager.LockedTarget.position - mountTrfm.position;
+            lockedTargetVect3 = GlobalVariableManager.LockedTarget.position - mountTrfm.position;
+            lockedTargetVect3.y = 0;
+
+            if (lockedTargetVect3.sqrMagnitude > 1)
+            {
+                mountTrfm.forward += (lockedTargetVect3 - mountTrfm.forward) * .1f;
+            }
         }
         else
         {
