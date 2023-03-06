@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float targetDistance, targetHeight;
     [SerializeField] int collisionMask;
     
-    [SerializeField] Transform yawTrfm, pitchTrfm, cameraTrfm;
+    [SerializeField] Transform yawTrfm, pitchTrfm, mountTrfm, cameraTrfm;
     [SerializeField] float xMouse, yMouse, xSensitivity, ySensitivity;
     [SerializeField] Transform playerTrfm;
 
@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        yawTrfm.position = focusPos();
+        yawTrfm.position = GetFocusPosition();
         HandleRotation();
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) { AddTrauma(10); }
@@ -54,10 +54,30 @@ public class CameraController : MonoBehaviour
     {
         AdjustDistance();
         ProcessTrauma();
+        FocusLockedTarget();
+    }
+
+    void FocusLockedTarget()
+    {
+        if (GlobalVariableManager.LockedTarget)
+        {
+            mountTrfm.forward = GlobalVariableManager.LockedTarget.position - mountTrfm.position;
+        }
+        else
+        {
+            mountTrfm.localEulerAngles = Vector3.zero;
+        }
+    }
+
+    public static void FacePlayer()
+    {
+
     }
 
     void HandleRotation()
     {
+        if (GlobalVariableManager.LockedTarget) { return; }
+
         yMouse = Input.GetAxis("Mouse Y");      //right now camera is flipped, and rotates indefintley, so fix that and set to max 90 degrees
         xMouse = Input.GetAxis("Mouse X");
 
@@ -71,9 +91,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] float move;
     void AdjustDistance()
     {
-        Debug.DrawRay(focusPos() - cameraTrfm.forward, -cameraTrfm.forward, Color.red);
+        Debug.DrawRay(GetFocusPosition() - cameraTrfm.forward, -cameraTrfm.forward, Color.red);
 
-        if (Physics.Raycast(focusPos() - cameraTrfm.forward, -cameraTrfm.forward, out hit, -targetDistance))
+        if (Physics.Raycast(GetFocusPosition() - cameraTrfm.forward, -cameraTrfm.forward, out hit, -targetDistance))
         {
             move = (-hit.distance - cameraTrfm.localPosition.z);
             cameraTrfm.localPosition += new Vector3(0,0,move * .1f);
@@ -85,7 +105,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    Vector3 focusPos()
+    Vector3 GetFocusPosition()
     {
         return playerTrfm.position + Vector3.up * targetHeight;
     }

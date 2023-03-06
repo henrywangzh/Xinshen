@@ -41,4 +41,9 @@ public class GlobalVariableManager : MonoBehaviour {
             Health = MaxHealth;
         }
     }
+
+    public static void SetLockedTarget(Transform targetTrfm) //call SetLockedTarget(null) to clear target lock
+    {
+        LockedTarget = targetTrfm;
+    }
 }
