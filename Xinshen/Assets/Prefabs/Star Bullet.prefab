@@ -95,8 +95,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.971797, b: 0, a: 1}
-      key1: {r: 1, g: 0.35487103, b: 0, a: 0}
+      key0: {r: 0.32256433, g: 0.7830189, b: 0.7655566, a: 1}
+      key1: {r: 0.3150587, g: 0.4245283, b: 0.41472283, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -249,6 +249,7 @@ MonoBehaviour:
   damage: 0
   maxLifespan: 6
   destroyFX: {fileID: 641210502215411198, guid: 8a0dd3a909232cb4a8426030c0ca05b7, type: 3}
+  acceleration: 0
 --- !u!54 &3517072733024915515
 Rigidbody:
   m_ObjectHideFlags: 0

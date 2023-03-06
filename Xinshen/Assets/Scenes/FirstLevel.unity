@@ -3759,7 +3759,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1248599356301574206, guid: d5c8a0d7723ab7947bc90ecc2750b0d0, type: 3}
       propertyPath: hp
-      value: 100
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248599356301574206, guid: d5c8a0d7723ab7947bc90ecc2750b0d0, type: 3}
+      propertyPath: maxHP
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 1880317523708304003, guid: d5c8a0d7723ab7947bc90ecc2750b0d0, type: 3}
       propertyPath: m_Name
@@ -6629,6 +6633,14 @@ PrefabInstance:
     - target: {fileID: 5096054253207069689, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_Center.y
       value: -0.14377594
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677707444087698955, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: dashRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677707444087698955, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: dashSpeed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6041723837054187487, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_RootOrder

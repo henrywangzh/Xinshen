@@ -162,14 +162,16 @@ public class WaifuBehaviour : MonoBehaviour
             col.enabled = false;
             trail.emitting = true;
             anim.Play("WaifuRush");
-            float duration = 3f;
+            float duration = 2f;
+            float horiOffset = 0.25f;
             while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.4f)
             {
-                yield return new WaitForSeconds(0.05f);
-                duration -= 0.05f;
-                if (duration % 0.2f <= Time.deltaTime)
+                yield return new WaitForSeconds(0.025f);
+                duration -= 0.025f;
+                if (duration % 0.1f <= Time.deltaTime)
                 {
-                    Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
+                    Instantiate(bomb, transform.position + transform.up * 1.5f + transform.right * horiOffset, Quaternion.identity);
+                    horiOffset *= -1;
                 }
             }
             Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
