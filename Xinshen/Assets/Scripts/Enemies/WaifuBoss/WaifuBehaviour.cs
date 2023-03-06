@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaifuBehaviour : MonoBehaviour
+public class WaifuBehaviour : Enemy
 {
     [SerializeField] [Tooltip("Beyond this distance, the enemy will not evade backwards")] float strafeRadius = 5f;
     [SerializeField] [Tooltip("Time interval for which the boss will do something")] float decisionPeriod = 3f;
@@ -21,8 +21,10 @@ public class WaifuBehaviour : MonoBehaviour
     Animator anim;
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
+        base.Start();
+
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         startTime = Time.timeSinceLevelLoad;
@@ -183,5 +185,10 @@ public class WaifuBehaviour : MonoBehaviour
         }
         attacking = false;
     }
-    
+
+    public override void Die()
+    {
+        Debug.Log("GG NO RE");
+        Destroy(gameObject);
+    }
 }

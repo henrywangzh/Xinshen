@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 366500968746317988}
   - component: {fileID: 366500968746317989}
   - component: {fileID: 6933403031408703410}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WaifuBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366500968746318008}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1.8970386

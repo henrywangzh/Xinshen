@@ -14,6 +14,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] float screenShakeStrength;
     [SerializeField] int trauma;
+    [SerializeField] Canvas canvas;
 
     Vector3 pitchVect3, yawVect3; //cached vector3's to avoid declaring 'new'
 
@@ -22,6 +23,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
+        canvas.transform.parent = null;
         s_cameraTrfm = cameraTrfm;
         self = GetComponent<CameraController>();
     }

@@ -12,7 +12,7 @@ public abstract class Enemy : MonoBehaviour
 
     Transform trfm;
 
-    private void Start()
+    protected void Start()
     {
         trfm = transform;
 
