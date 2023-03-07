@@ -15,11 +15,6 @@ public class Ravage :  Enemy
     public bool isAngered;
     public NavMeshAgent _agent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public override void Die()
     {
@@ -27,10 +22,24 @@ public class Ravage :  Enemy
         Destroy(gameObject);
     }
 
-    public void Lunge()
+    
+    private void double_swipe_attack()
     {
+        // meed to be implemented 
+    }
+    private void Lunge()
+    {
+        int cooldown = 20;
+        float timer = 0f;
+        timer -= Time.deltaTime;
+        if(timer <= 0)
+        {
+            double_swipe_attack();
+            timer = cooldown;
+        } 
 
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -39,7 +48,9 @@ public class Ravage :  Enemy
         if (distance <= combat_range)
         {
             isAngered = true; //switch on the enemy moving mode
-        } else
+        } 
+
+        if(distance > detection_range)
         {
             isAngered = false; //The enemy stop chasing after the player
         }
