@@ -12,6 +12,8 @@ public abstract class Enemy : MonoBehaviour
 
     Transform trfm;
 
+    EnemyCamp enemyCamp;
+
     protected void Start()
     {
         trfm = transform;
@@ -76,6 +78,19 @@ public abstract class Enemy : MonoBehaviour
         if (stunned > 0)
         {
             stunned--;
+        }
+    }
+
+    public void AssignToCamp(EnemyCamp enemyCamp)
+    {
+        this.enemyCamp = enemyCamp;
+    }
+
+    public void OnDestroy()
+    {
+        if(enemyCamp != null)
+        {
+            enemyCamp.removeEnemy(this);
         }
     }
 }
