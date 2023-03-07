@@ -11,7 +11,7 @@ public class SoulsmithKaisa : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GlobalVariableManager.SetLockedTarget(transform);
+        //GlobalVariableManager.SetLockedTarget(transform);
     }
 
     // Update is called once per frame
