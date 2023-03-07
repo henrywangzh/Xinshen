@@ -47,15 +47,15 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
-    public static void TakeDamage(int damage, bool playBloodFX = true)
+    public static void TakeDamage(int damage, bool playBloodFX = true, bool doDamageNumbers = true)
     {
         HP -= damage;
         self.m_HP = HP;
 
-        if (playBloodFX)
-        {
-            Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation);
-        }
+        if (playBloodFX) { Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation); }
+        if (doDamageNumbers) { GameManager.InstantiateDamageNumber(torsoTrfm.position, damage); }
+
+        CameraController.SetTrauma(damage);
         
         if (HP <= 0)
         {

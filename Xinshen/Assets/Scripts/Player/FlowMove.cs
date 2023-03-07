@@ -6,7 +6,7 @@ public class FlowMove : MonoBehaviour
 {
     FlowScriptController controller;
     Rigidbody rb;
-    [SerializeField] Transform cam;
+    [SerializeField] public Transform cam;
     Animator anim;
     [SerializeField] bool targLocked = false;
 
@@ -46,7 +46,7 @@ public class FlowMove : MonoBehaviour
             speed = moveSpeed * 1.5f;
             anim.SetFloat("xInput", 0);
             anim.SetFloat("yInput", Mathf.Sqrt(yinput*yinput + xinput*xinput) * 2f);
-            transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), turnSpeed * Time.deltaTime, 0f);
+            transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(moveDirection.x, 0, moveDirection.z), turnSpeed * Time.deltaTime, 0f);
             // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
         }
         
@@ -55,11 +55,14 @@ public class FlowMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             controller.switchState.Invoke("evade");
+            anim.Play("FlowEvade");
             PlayerHP.SetInvulnerable(16);
         }
         if (Input.GetMouseButtonDown(0))
         {
             controller.switchState.Invoke("attack");
+            anim.Play("SlashCombo1_1");
+            rb.velocity = Vector3.zero;
         }
     }
 }

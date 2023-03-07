@@ -9,7 +9,9 @@ public class CometShard : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] float maxLifespan = 15f;
     [SerializeField] GameObject destroyFX;
+    [SerializeField] float acceleration = 1f;
 
+    float curTravelSpeed;
     Transform trfm;
 
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class CometShard : MonoBehaviour
         StartCoroutine(DelayedSelfDestruct());
         // trfm.forward = targetTrfm.position - trfm.position;
         // trfm.Rotate(new Vector3(Random.Range(160, 201), Random.Range(-20, 21), 0));
+        curTravelSpeed = travelSpd;
     }
 
     public void AssignTargetTrfm(Transform p_TargetTrfm)
@@ -30,7 +33,10 @@ public class CometShard : MonoBehaviour
     void FixedUpdate()
     {
         trfm.forward += ((targetTrfm.position - trfm.position) - trfm.forward) * turnSpd;
-        trfm.position += trfm.forward * travelSpd;
+        trfm.position += trfm.forward * curTravelSpeed;
+
+        if (curTravelSpeed < travelSpd * 4f)
+            curTravelSpeed += acceleration * Time.fixedDeltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
