@@ -335,8 +335,8 @@ MonoBehaviour:
   recalibrationRate: 0.1
   rotationVector: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
-  traumaSharpness: 0
-  traumaShakeCap: 0
+  traumaSharpness: 1
+  traumaShakeCap: 60
 --- !u!114 &5879977747600877511
 MonoBehaviour:
   m_ObjectHideFlags: 0
