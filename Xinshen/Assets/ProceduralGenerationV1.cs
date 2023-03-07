@@ -9,10 +9,12 @@ public class ProceduralGenerationV1 : MonoBehaviour
     [SerializeField] GameObject[] wallObjs;
     [SerializeField] GameObject[] doorwayObjs;
     [SerializeField] int targetRoomCount; //NOT IMPLEMENTED
-    [SerializeField] float spawnChance, spawnChanceDecrRate, yElevation;
+    [SerializeField] float spawnChance, spawnChanceDecrRate, linearity, yElevation;
+    //linearity: 0 - 1.0 denoting how linear the dungeon will be
     [SerializeField] int gridSpaceSize;
 
     List<Room> rooms = new List<Room>();
+    List<Room> ungeneratedRooms = new List<Room>();
 
     const int ROOM_8x8 = 0, ROOM__16x16 = 1, ROOM__24x24 = 2;
     const int HALLWAY_2 = 0, HALLWAY_10 = 1, HALLWAY_18 = 2;
@@ -88,40 +90,59 @@ public class ProceduralGenerationV1 : MonoBehaviour
     {
         newRooms.Clear();
         Room newRoom;
+        int randomIndex = Random.Range(0,4);
 
         for (int i = 0; i < 4; i++)
         {
-            if (room.nodeStatus[i] == AVAILABLE)
+            if (room.nodeStatus[randomIndex] == AVAILABLE)
             {
                 if (Random.Range(0f, 1f) < spawnChance)
                 {
-                    room.nodeStatus[i] = SELECTED;
+                    spawnChance -= spawnChanceDecrRate;
+
+                    room.nodeStatus[randomIndex] = SELECTED;
 
                     //InstantiateHallway(room, i);
 
-                    newRoom = GetRoomAtPosition(room.gridPosition + DirectionToGridVector(i));
+                    newRoom = GetRoomAtPosition(room.gridPosition + DirectionToGridVector(randomIndex));
 
                     if (newRoom == null)
                     {
-                        newRoom = new Room(Random.Range(0,3), room.gridPosition + DirectionToGridVector(i));
+                        newRoom = new Room(Random.Range(0,3), room.gridPosition + DirectionToGridVector(randomIndex));
                         newRooms.Add(newRoom);
-                        newRoom.nodeStatus[GetOppositeNode(i)] = OPENED;
+                        newRoom.nodeStatus[GetOppositeNode(randomIndex)] = OPENED;
                         //InstantiateRoomObject(newRoom);
                     }
                     else
                     {
-                        newRoom.nodeStatus[GetOppositeNode(i)] = OPENED;
+                        newRoom.nodeStatus[GetOppositeNode(randomIndex)] = OPENED;
                     }
                 }
             }
+            randomIndex = (randomIndex + 1) % 4;
         }
 
         rooms.AddRange(newRooms);
+        ungeneratedRooms.Remove(room);
+        ungeneratedRooms.AddRange(newRooms);
 
-        spawnChance -= spawnChanceDecrRate;
-        for (int i = 0; i < newRooms.Count; i++)
+        if (Random.Range(0,1) < linearity && newRooms.Count > 0)
         {
-            GenerateRoomsFromRoom(newRooms[i]);
+            randomIndex = Random.Range(0, newRooms.Count);
+            for (int i = 0; i < newRooms.Count; i++)
+            {
+                randomIndex = (randomIndex + 1) % newRooms.Count;
+                GenerateRoomsFromRoom(newRooms[randomIndex]);
+            }
+        }
+        else
+        {
+            randomIndex = Random.Range(0, ungeneratedRooms.Count);
+            for (int i = 0; i < ungeneratedRooms.Count; i++)
+            {
+                randomIndex = (randomIndex + 1) % ungeneratedRooms.Count;
+                GenerateRoomsFromRoom(ungeneratedRooms[randomIndex]);
+            }
         }
     }
 

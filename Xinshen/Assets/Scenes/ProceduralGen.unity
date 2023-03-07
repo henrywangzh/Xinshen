@@ -241,7 +241,8 @@ MonoBehaviour:
   - {fileID: 8555192757271917523, guid: 24ba83c81d79d9b44a30ad5159b71ec7, type: 3}
   targetRoomCount: 0
   spawnChance: 1
-  spawnChanceDecrRate: 0.05
+  spawnChanceDecrRate: 0.04
+  linearity: 0.5
   yElevation: 0
   gridSpaceSize: 26
 --- !u!4 &1081300062
