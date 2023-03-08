@@ -5268,6 +5268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   hp: 0
+  centerYOffset: 1
   damage: 20
   sword: {fileID: 4040836386622724067}
   ps: {fileID: 7221388757569812905}

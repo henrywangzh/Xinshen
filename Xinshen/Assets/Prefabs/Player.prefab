@@ -9695,7 +9695,7 @@ GameObject:
   - component: {fileID: 6299937363928105161}
   - component: {fileID: 5096054253207069689}
   - component: {fileID: 621580694564329897}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9726,7 +9726,7 @@ BoxCollider:
   m_GameObject: {fileID: 1384334540189856441}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.5298004, y: 2, z: 1.0422833}
   m_Center: {x: 0.16145274, y: 0, z: -0.28589845}
@@ -11379,7 +11379,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   targLocked: 0
   moveSpeed: 4
-  turnSpeed: 5
+  turnSpeed: 15
 --- !u!114 &1622452027422676413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11443,6 +11443,7 @@ MonoBehaviour:
   weaponCollider: {fileID: 5096054253207069689}
   dashRange: 10
   dashSpeed: 5
+  maxDashDuration: 2
 --- !u!114 &9061349209974271388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11458,7 +11459,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   targLocked: 0
   moveSpeed: 6
-  turnSpeed: 5
+  turnSpeed: 15
 --- !u!114 &729537433746458183
 MonoBehaviour:
   m_ObjectHideFlags: 0

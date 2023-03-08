@@ -8,20 +8,24 @@ public class CameraController : MonoBehaviour
     [SerializeField] float targetDistance, targetHeight;
     [SerializeField] int collisionMask;
     
-    [SerializeField] Transform yawTrfm, pitchTrfm, cameraTrfm;
+    [SerializeField] Transform yawTrfm, pitchTrfm, mountTrfm, cameraTrfm;
     [SerializeField] float xMouse, yMouse, xSensitivity, ySensitivity;
     [SerializeField] Transform playerTrfm;
 
     [SerializeField] float screenShakeStrength;
     [SerializeField] int trauma;
+    [SerializeField] Canvas canvas;
 
-    Vector3 pitchVect3, yawVect3; //cached vector3's to avoid declaring 'new'
+    Vector3 pitchVect3, yawVect3, lockedTargetVect3; //cached vector3's to avoid declaring 'new'
 
     public static Transform s_cameraTrfm;
+    public static CameraController self;
 
     private void Awake()
     {
+        canvas.transform.parent = null;
         s_cameraTrfm = cameraTrfm;
+        self = GetComponent<CameraController>();
     }
 
     void Start()
@@ -33,7 +37,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        yawTrfm.position = focusPos();
+        yawTrfm.position = GetFocusPosition();
         HandleRotation();
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) { AddTrauma(10); }
@@ -52,10 +56,36 @@ public class CameraController : MonoBehaviour
     {
         AdjustDistance();
         ProcessTrauma();
+        FocusLockedTarget();
+    }
+
+    void FocusLockedTarget()
+    {
+        if (GlobalVariableManager.LockedTarget)
+        {
+            lockedTargetVect3 = GlobalVariableManager.LockedTarget.position - mountTrfm.position;
+            lockedTargetVect3.y = 0;
+
+            if (lockedTargetVect3.sqrMagnitude > 1)
+            {
+                mountTrfm.forward += (lockedTargetVect3 - mountTrfm.forward) * .1f;
+            }
+        }
+        else
+        {
+            mountTrfm.localEulerAngles = Vector3.zero;
+        }
+    }
+
+    public static void FacePlayer()
+    {
+
     }
 
     void HandleRotation()
     {
+        if (GlobalVariableManager.LockedTarget) { return; }
+
         yMouse = Input.GetAxis("Mouse Y");      //right now camera is flipped, and rotates indefintley, so fix that and set to max 90 degrees
         xMouse = Input.GetAxis("Mouse X");
 
@@ -69,9 +99,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] float move;
     void AdjustDistance()
     {
-        Debug.DrawRay(focusPos() - cameraTrfm.forward, -cameraTrfm.forward, Color.red);
+        Debug.DrawRay(GetFocusPosition() - cameraTrfm.forward, -cameraTrfm.forward, Color.red);
 
-        if (Physics.Raycast(focusPos() - cameraTrfm.forward, -cameraTrfm.forward, out hit, -targetDistance))
+        if (Physics.Raycast(GetFocusPosition() - cameraTrfm.forward, -cameraTrfm.forward, out hit, -targetDistance))
         {
             move = (-hit.distance - cameraTrfm.localPosition.z);
             cameraTrfm.localPosition += new Vector3(0,0,move * .1f);
@@ -83,22 +113,22 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    Vector3 focusPos()
+    Vector3 GetFocusPosition()
     {
         return playerTrfm.position + Vector3.up * targetHeight;
     }
 
-    public void AddTrauma(int pTrauma, int max = int.MaxValue)
+    public static void AddTrauma(int pTrauma, int max = int.MaxValue)
     {
-        pTrauma = Mathf.RoundToInt(pTrauma * traumaSharpness);
-        trauma += pTrauma;
-        if (trauma > max) { trauma = max; }
+        pTrauma = Mathf.RoundToInt(pTrauma * self.traumaSharpness);
+        self.trauma += pTrauma;
+        if (self.trauma > max) { self.trauma = max; }
     }
 
-    public void SetTrauma(int pTrauma)
+    public static void SetTrauma(int pTrauma)
     {
-        pTrauma = Mathf.RoundToInt(pTrauma * traumaSharpness);
-        if (trauma < pTrauma) { trauma = pTrauma; }
+        pTrauma = Mathf.RoundToInt(pTrauma * self.traumaSharpness);
+        if (self.trauma < pTrauma) { self.trauma = pTrauma; }
     }
 
     [SerializeField] float recalibrationRate;

@@ -50,6 +50,7 @@ public class FlowScriptController : ScriptController
         moveNode.addNextAvailableStates(moveNode);
         evadeNode.addNextAvailableStates(moveNode);
         attackNode.addNextAvailableStates(moveNode);
+        attackNode.addNextAvailableStates(evadeNode);
 
         setDefaultState(moveNode);
     }
