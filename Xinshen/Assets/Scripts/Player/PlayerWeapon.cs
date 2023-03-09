@@ -5,16 +5,33 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] int knockbackPower;
+    [SerializeField] ParticleSystem ps;
+    ParticleSystem.EmissionModule emitter;
     // Start is called before the first frame update
     void Start()
     {
-        
+        emitter = ps.emission;
+        SetPSEmission(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetPSEmission(bool start)
+    {
+        if (start)
+            emitter.enabled = true;
+        // ps.Play(true);
+        else
+        {
+            emitter.enabled = false;
+            // ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            Debug.Log("Attempting stop");
+        }
+            
     }
 
     private void OnTriggerEnter(Collider other)

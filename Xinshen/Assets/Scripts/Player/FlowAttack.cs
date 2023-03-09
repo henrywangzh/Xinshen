@@ -8,6 +8,7 @@ public class FlowAttack : MonoBehaviour
     FlowScriptController controller;
     Rigidbody rb;
     [SerializeField] Collider weaponCollider;
+    PlayerWeapon weapon;
     bool canCancel = false;
     Transform cam;
     Vector3 targOrientation;
@@ -19,6 +20,7 @@ public class FlowAttack : MonoBehaviour
         controller = GetComponent<FlowScriptController>();
         rb = GetComponent<Rigidbody>();
         cam = GetComponent<FlowMove>().cam;
+        weapon = weaponCollider.gameObject.GetComponent<PlayerWeapon>();
         targOrientation = Vector3.zero;
     }
 
@@ -56,11 +58,13 @@ public class FlowAttack : MonoBehaviour
     public void StartSwing()
     {
         weaponCollider.enabled = true;
+        weapon.SetPSEmission(true);
     }
 
     public void EndSwing()
     {
         weaponCollider.enabled = false;
+        weapon.SetPSEmission(false);
     }
 
     public void SetCombo(int combo)

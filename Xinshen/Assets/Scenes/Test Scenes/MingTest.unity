@@ -179,6 +179,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 459258552729201074, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: TrailModule.textureMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 459258552729201074, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: TrailModule.dieWithParticles
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459258552729201074, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 729537433746458183, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_Enabled
       value: 0
