@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8709529243523014654}
   - component: {fileID: 5724546984231030875}
   - component: {fileID: 7536028984749794449}
+  - component: {fileID: 6653351138129845892}
   m_Layer: 0
   m_Name: RockFInalLOD0
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6653351138129845892
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8328745738697737540}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4932244982783973358, guid: 1ac1792976ef5b44abf9f774fb4bacbf, type: 3}
