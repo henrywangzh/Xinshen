@@ -57,6 +57,7 @@ public class FlowEvade : MonoBehaviour
             mesh.SetActive(false);
             weapon.SetActive(false);
             trail.SetActive(true);
+            anim.SetBool("Combo", false);
         }
 
         // Now we've totally evaded
