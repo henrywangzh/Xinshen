@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaifuBehaviour : MonoBehaviour
+public class WaifuBehaviour : Enemy
 {
     [SerializeField] [Tooltip("Beyond this distance, the enemy will not evade backwards")] float strafeRadius = 5f;
     [SerializeField] [Tooltip("Time interval for which the boss will do something")] float decisionPeriod = 3f;
@@ -21,8 +21,10 @@ public class WaifuBehaviour : MonoBehaviour
     Animator anim;
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
+        base.Start();
+
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         startTime = Time.timeSinceLevelLoad;
@@ -162,14 +164,16 @@ public class WaifuBehaviour : MonoBehaviour
             col.enabled = false;
             trail.emitting = true;
             anim.Play("WaifuRush");
-            float duration = 3f;
+            float duration = 2f;
+            float horiOffset = 0.25f;
             while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.4f)
             {
-                yield return new WaitForSeconds(0.05f);
-                duration -= 0.05f;
-                if (duration % 0.2f <= Time.deltaTime)
+                yield return new WaitForSeconds(0.025f);
+                duration -= 0.025f;
+                if (duration % 0.1f <= Time.deltaTime)
                 {
-                    Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
+                    Instantiate(bomb, transform.position + transform.up * 1.5f + transform.right * horiOffset, Quaternion.identity);
+                    horiOffset *= -1;
                 }
             }
             Instantiate(bomb, transform.position + transform.up * 1.5f, Quaternion.identity);
@@ -181,5 +185,10 @@ public class WaifuBehaviour : MonoBehaviour
         }
         attacking = false;
     }
-    
+
+    public override void Die()
+    {
+        Debug.Log("GG NO RE");
+        Destroy(gameObject);
+    }
 }

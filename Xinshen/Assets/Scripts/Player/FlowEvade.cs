@@ -7,6 +7,7 @@ public class FlowEvade : MonoBehaviour
 {
     FlowScriptController controller;
     Rigidbody rb;
+    Animator anim;
     Vector3 destination;
     
     [SerializeField] float dashSpeed = 5;
@@ -27,11 +28,14 @@ public class FlowEvade : MonoBehaviour
     {
         controller = GetComponent<FlowScriptController>();
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
-        if(rb)
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+        if (rb)
         {
             float xinput = Input.GetAxis("Horizontal");
             float yinput = Input.GetAxis("Vertical");
@@ -74,7 +78,7 @@ public class FlowEvade : MonoBehaviour
         if(currentDashTime >= totalDashTime)
         {
             controller.switchState.Invoke("move");
-            
+            anim.Play("FlowMove");
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {

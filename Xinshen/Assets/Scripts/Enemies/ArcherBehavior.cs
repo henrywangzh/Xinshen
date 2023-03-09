@@ -5,7 +5,7 @@ using UnityEngine;
 // https://www.youtube.com/watch?v=QzitQSLhfG0
 // Following a path code taken from Studio Intro Tutorials for Tower Defense 
 
-public class ArcherBehavior : MonoBehaviour
+public class ArcherBehavior : Enemy
 {
     [SerializeField] Transform player; // location of player
     [SerializeField] Vector3 chestOffset = new Vector3(0, 1.84f, 0); // currently defaulted to roughly at the chest
@@ -167,5 +167,11 @@ public class ArcherBehavior : MonoBehaviour
         } else {
             curTarg = pathCheckpoints[curCheckpoint]; // else go to next checkpoint
         }
+    }
+
+    public override void Die()
+    {
+        Debug.Log("ahhhh im dying");
+        Destroy(gameObject);
     }
 }
