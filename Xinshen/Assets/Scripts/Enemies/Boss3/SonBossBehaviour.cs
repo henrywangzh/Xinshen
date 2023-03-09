@@ -13,6 +13,7 @@ public class SonBossBehaviour : MonoBehaviour
     private Coroutine LookCoroutine;
     private Rigidbody rb;
     private float startTime;
+    private float elapsed;
     Collider col;
     Animator anim;
     // Start is called before the first frame update
@@ -30,8 +31,8 @@ public class SonBossBehaviour : MonoBehaviour
     {
         // face player
         transform.forward += ((player.position - transform.position) - transform.forward) * LookAtSpeed;
-        elapsed = (Time.timeSinceLevelLoad - startTime) % decisionPeriod
-        if (elapsed >= decisionTime)
+        elapsed = (Time.timeSinceLevelLoad - startTime) % decisionTime;
+        if (elapsed >= 1)
         {
             AttackPlayer();
         }
