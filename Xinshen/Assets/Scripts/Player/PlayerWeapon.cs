@@ -25,6 +25,7 @@ public class PlayerWeapon : MonoBehaviour
         if (start)
         {
             // emitter.enabled = true;
+            ps.Emit(1);
         }
         else
         {
