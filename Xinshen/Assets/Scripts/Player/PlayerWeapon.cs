@@ -23,13 +23,14 @@ public class PlayerWeapon : MonoBehaviour
     public void SetPSEmission(bool start)
     {
         if (start)
-            emitter.enabled = true;
-        // ps.Play(true);
+        {
+            // emitter.enabled = true;
+        }
         else
         {
-            emitter.enabled = false;
+            // emitter.enabled = false;
             // ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            Debug.Log("Attempting stop");
+            // Debug.Log("Attempting stop");
         }
             
     }
