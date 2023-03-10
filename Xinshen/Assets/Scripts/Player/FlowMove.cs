@@ -13,7 +13,7 @@ public class FlowMove : MonoBehaviour
     // TODO: use global variable manager instead of local variable
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float turnSpeed = 5f;
-    [SerializeField] float dashCD = 0.5f;
+
     float speed;
     float dashTimer = 0;
 
@@ -27,7 +27,7 @@ public class FlowMove : MonoBehaviour
         dashTimer = 0;
     }
 
-    private void OnEnable()
+    public void SetDashCD(float dashCD)
     {
         dashTimer = dashCD;
     }

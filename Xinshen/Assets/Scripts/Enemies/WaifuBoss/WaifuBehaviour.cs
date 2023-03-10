@@ -192,6 +192,7 @@ public class WaifuBehaviour : Enemy
             float horiOffset = 0.25f;
             while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.4f)
             {
+                rb.velocity = direction * dashSpeed * 3;
                 yield return new WaitForSeconds(0.025f);
                 duration -= 0.025f;
                 if (duration % 0.1f <= Time.deltaTime)

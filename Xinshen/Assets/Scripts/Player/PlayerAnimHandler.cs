@@ -61,7 +61,7 @@ public class PlayerAnimHandler : MonoBehaviour
     {
         if (GlobalVariableManager.LockedTarget != null)
         {
-            targOrientation = transform.position - GlobalVariableManager.LockedTarget.position;
+            targOrientation = GlobalVariableManager.LockedTarget.position - transform.position;
         }
         else
         {
