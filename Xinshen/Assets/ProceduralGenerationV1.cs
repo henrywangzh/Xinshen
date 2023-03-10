@@ -5,13 +5,17 @@ using UnityEngine;
 public class ProceduralGenerationV1 : MonoBehaviour
 {
     [SerializeField] GameObject[] roomObjs;
-    [SerializeField] GameObject[] hallwayObjs;
+    [SerializeField] GameObject hallwayObj;
     [SerializeField] GameObject[] wallObjs;
     [SerializeField] GameObject[] doorwayObjs;
-    [SerializeField] int targetRoomCount; //NOT IMPLEMENTED
+    //[SerializeField] int targetRoomCount; //NOT IMPLEMENTED
     [SerializeField] float spawnChance, spawnChanceDecrRate, linearity, yElevation;
+    enum algorithm {DFS, BFS };
+    algorithm currentAlgorithm;
     //linearity: 0 - 1.0 denoting how linear the dungeon will be
     [SerializeField] int gridSpaceSize;
+    [SerializeField] int linearityPersistence = 5;
+    int currentLinearityPersistence;
 
     List<Room> rooms = new List<Room>();
     List<Room> ungeneratedRooms = new List<Room>();
@@ -47,6 +51,8 @@ public class ProceduralGenerationV1 : MonoBehaviour
 
     void Start()
     {
+        currentAlgorithm = algorithm.DFS;
+        currentLinearityPersistence = linearityPersistence;
         Room newRoom = new Room(ROOM__16x16, Vector2.zero);
         for (int i = 0; i < 4; i++)
         {
@@ -83,12 +89,11 @@ public class ProceduralGenerationV1 : MonoBehaviour
         }
     }
 
-    List<Room> newRooms = new List<Room>();
-    int roomHeads;
+    //int roomHeads;
 
     void GenerateRoomsFromRoom(Room room)
     {
-        newRooms.Clear();
+        List<Room> newRooms = new List<Room>();
         Room newRoom;
         int randomIndex = Random.Range(0,4);
 
@@ -122,12 +127,22 @@ public class ProceduralGenerationV1 : MonoBehaviour
             randomIndex = (randomIndex + 1) % 4;
         }
 
-        rooms.AddRange(newRooms);
+        //rooms.AddRange(newRooms);
         ungeneratedRooms.Remove(room);
         ungeneratedRooms.AddRange(newRooms);
-
-        if (Random.Range(0,1) < linearity && newRooms.Count > 0)
+        currentLinearityPersistence--;
+        rooms.Add(room);
+        if (currentLinearityPersistence <= 0)
         {
+            currentAlgorithm = Random.Range(0f, 1f) < linearity ? algorithm.DFS : algorithm.BFS;
+            currentLinearityPersistence = linearityPersistence;
+        }
+        if (currentAlgorithm == algorithm.DFS)
+        {
+            if(newRooms.Count <= 0)
+            {
+                return;
+            }
             randomIndex = Random.Range(0, newRooms.Count);
             for (int i = 0; i < newRooms.Count; i++)
             {
@@ -209,16 +224,16 @@ public class ProceduralGenerationV1 : MonoBehaviour
     {
         if (direction == POS_Y || direction == NEG_Y)
         {
-            Instantiate(hallwayObjs[HALLWAY_18], GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction)), Quaternion.identity).transform.Rotate(Vector3.up * 90);
+            Instantiate(hallwayObj, GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction)), Quaternion.identity).transform.Rotate(Vector3.up * 90);
         }
         else
         {
-            Instantiate(hallwayObjs[HALLWAY_18], GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction)), Quaternion.identity);
+            Instantiate(hallwayObj, GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction)), Quaternion.identity);
         }
     }
     void InstantiateHallway(Room room1, Room room2)
     {
-        Transform hallwayTrfm = Instantiate(hallwayObjs[HALLWAY_18], Vector3.zero, Quaternion.identity).transform;
+        Transform hallwayTrfm = Instantiate(hallwayObj, Vector3.zero, Quaternion.identity).transform;
 
         if (Mathf.Abs(room2.gridPosition.x - room1.gridPosition.x) < .001)
         {

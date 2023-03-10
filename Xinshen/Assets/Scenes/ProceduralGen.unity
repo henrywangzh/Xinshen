@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -227,10 +227,7 @@ MonoBehaviour:
   - {fileID: 41361139798052555, guid: 1887a7a85ec88674e847ad71e89c4e6b, type: 3}
   - {fileID: 41361139798052555, guid: ed56aaade6f17e942aafaa33dbb2510f, type: 3}
   - {fileID: 41361139798052555, guid: b658ac40ee2f1f94b8502a34ce6aba91, type: 3}
-  hallwayObjs:
-  - {fileID: 41361139798052555, guid: bd154eebba8d8fc4eab572dcc7d9d02a, type: 3}
-  - {fileID: 41361139798052555, guid: 4dc15d8e06361974c935d9a49e3025c0, type: 3}
-  - {fileID: 41361139798052555, guid: 89264d00b7eae4349b7024f975ec1375, type: 3}
+  hallwayObj: {fileID: 41361139798052555, guid: 89264d00b7eae4349b7024f975ec1375, type: 3}
   wallObjs:
   - {fileID: 2688606511700711922, guid: 5a1699d497cfbeb4b92e1b55098b1dc0, type: 3}
   - {fileID: 2688606511700711922, guid: 4f05b4b353ad9834d8f0e6c9badf83ea, type: 3}
@@ -239,12 +236,12 @@ MonoBehaviour:
   - {fileID: 8660027075199547113, guid: 057892f2d85c65a4fbaca37705e65d8a, type: 3}
   - {fileID: 8555192757271917523, guid: a486018243c35e74297f261b11fb89bb, type: 3}
   - {fileID: 8555192757271917523, guid: 24ba83c81d79d9b44a30ad5159b71ec7, type: 3}
-  targetRoomCount: 0
   spawnChance: 1
-  spawnChanceDecrRate: 0.04
-  linearity: 0
+  spawnChanceDecrRate: 0.005
+  linearity: 0.5
   yElevation: 0
   gridSpaceSize: 26
+  linearityPersistence: 200
 --- !u!4 &1081300062
 Transform:
   m_ObjectHideFlags: 0
