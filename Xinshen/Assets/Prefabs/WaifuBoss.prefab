@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e30f865496f686f41ac8a707b24833d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 400
+  maxHP: 500
   hp: 0
   centerYOffset: 1
   damage: 20
