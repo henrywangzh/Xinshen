@@ -49,19 +49,18 @@ public class FlowAttack : MonoBehaviour
             DodgeCancel();
         }
 
-        if (targOrientation != Vector3.zero)
-        {
-            transform.forward = Vector3.Lerp(transform.forward, targOrientation, 0.2f);
-        }
+        //if (targOrientation != Vector3.zero)
+        //{
+        //    transform.forward = Vector3.Lerp(transform.forward, targOrientation, 0.2f);
+        //}
     }
 
-    public void StartSwing()
+    void StartSwing()
     {
         weaponCollider.enabled = true;
         weapon.SetPSEmission(true);
     }
-
-    public void EndSwing()
+    void EndSwing()
     {
         weaponCollider.enabled = false;
         weapon.SetPSEmission(false);
@@ -72,15 +71,15 @@ public class FlowAttack : MonoBehaviour
         anim.SetBool("Combo", combo >= 1);
     }
 
-    public void SetFwdVelocity(float vel)
-    {
-        rb.velocity = transform.forward * vel;
-    }
-
     public void EndAttack()
     {
         if (this.isActiveAndEnabled)
             controller.switchState.Invoke("move"); 
+    }
+
+    void SetFwdVelocity(float vel)
+    {
+        rb.velocity = transform.forward * vel;
     }
 
     void DodgeCancel()
@@ -91,11 +90,19 @@ public class FlowAttack : MonoBehaviour
         controller.switchState.Invoke("evade");
     }
 
-    public void OrientTowardsInput()
-    {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
+    //public void OrientTowardsInput()
+    //{
+    //    if (GlobalVariableManager.LockedTarget != null)
+    //    {
+    //        targOrientation = transform.position - GlobalVariableManager.LockedTarget.position;
+    //    }
+    //    else
+    //    {
+    //        float inputX = Input.GetAxis("Horizontal");
+    //        float inputY = Input.GetAxis("Vertical");
 
-        targOrientation = (cam.forward * inputY + cam.right * inputX).normalized;
-    }
+    //        targOrientation = (cam.forward * inputY + cam.right * inputX);
+    //    }
+    //    targOrientation = (targOrientation - new Vector3(0, targOrientation.y, 0)).normalized;
+    //}
 }

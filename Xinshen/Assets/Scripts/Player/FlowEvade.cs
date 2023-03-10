@@ -8,10 +8,12 @@ public class FlowEvade : MonoBehaviour
     FlowScriptController controller;
     Rigidbody rb;
     Animator anim;
+    FlowMove move;
     Vector3 destination;
     
     [SerializeField] float dashSpeed = 5;
     [SerializeField] float totalDashTime = 0.5f;
+    [SerializeField] float dashCD = 0.5f;
 
     [SerializeField] GameObject disappearFX;
     [SerializeField] GameObject appearFX;
@@ -29,14 +31,16 @@ public class FlowEvade : MonoBehaviour
         controller = GetComponent<FlowScriptController>();
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        move = GetComponent<FlowMove>();
     }
 
     private void OnEnable()
     {
         if (rb == null)
+        {
             rb = GetComponent<Rigidbody>();
-        if (anim == null)
             anim = GetComponent<Animator>();
+        }
         if (rb)
         {
             float xinput = Input.GetAxis("Horizontal");
@@ -78,8 +82,9 @@ public class FlowEvade : MonoBehaviour
     void Update()
     {
         currentDashTime += Time.deltaTime;
-        if(currentDashTime >= totalDashTime)
+        if(currentDashTime >= totalDashTime || Input.GetKeyUp(KeyCode.LeftShift))
         {
+            move.SetDashCD(dashCD);
             controller.switchState.Invoke("move");
             anim.Play("FlowMove");
         }

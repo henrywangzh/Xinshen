@@ -11274,6 +11274,7 @@ GameObject:
   - component: {fileID: 1418846340601218321}
   - component: {fileID: 7534844710386178684}
   - component: {fileID: 4563010473810539702}
+  - component: {fileID: 128105626493686340}
   - component: {fileID: 1622452027422676407}
   - component: {fileID: 1622452027422676408}
   - component: {fileID: 1622452027422676406}
@@ -11386,6 +11387,7 @@ MonoBehaviour:
   targLocked: 0
   moveSpeed: 4
   turnSpeed: 15
+  dashCD: 0.5
 --- !u!114 &1622452027422676413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11532,6 +11534,19 @@ MonoBehaviour:
   runSpeed: 8
   rotSpeed: 10
   targLocked: 0
+--- !u!114 &128105626493686340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c1e4a2245c3bd4ea3b80afc6ffaed1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponCollider: {fileID: 5096054253207069689}
 --- !u!114 &1622452027422676407
 MonoBehaviour:
   m_ObjectHideFlags: 0
