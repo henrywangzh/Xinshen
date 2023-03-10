@@ -40,10 +40,17 @@ public class CameraController : MonoBehaviour
         yawTrfm.position = GetFocusPosition();
         HandleRotation();
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) { AddTrauma(10); }
-        if (Input.GetKeyDown(KeyCode.Alpha2)) { AddTrauma(20); }
-        if (Input.GetKeyDown(KeyCode.Alpha3)) { AddTrauma(30); }
-        if (Input.GetKeyDown(KeyCode.Alpha4)) { AddTrauma(40); }
+        if (Input.GetMouseButtonDown(2))
+        {
+            if (GlobalVariableManager.LockedTarget)
+            {
+                GlobalVariableManager.SetLockedTarget(null);
+            }
+            else
+            {
+                GlobalVariableManager.SetLockedTarget(GetTarget());
+            }
+        }
 
         if (allowScrollWheelZooming)
         {
@@ -59,6 +66,12 @@ public class CameraController : MonoBehaviour
         FocusLockedTarget();
     }
 
+    [SerializeField] Transform lockTarget;
+    Transform GetTarget()
+    {
+        return lockTarget;
+    }
+
     void FocusLockedTarget()
     {
         if (GlobalVariableManager.LockedTarget)
@@ -66,7 +79,7 @@ public class CameraController : MonoBehaviour
             lockedTargetVect3 = GlobalVariableManager.LockedTarget.position - mountTrfm.position;
             lockedTargetVect3.y = 0;
 
-            if (lockedTargetVect3.sqrMagnitude > 1)
+            if (lockedTargetVect3.sqrMagnitude > .5f)
             {
                 mountTrfm.forward += (lockedTargetVect3 - mountTrfm.forward) * .1f;
             }
