@@ -24,9 +24,10 @@ public class ProceduralGenerationV1 : MonoBehaviour
     List<List<Room>> allRooms = new List<List<Room>>();
     List<Room> ungeneratedRooms = new List<Room>();
     List<Room> rooms;
+    bool doneGenerating = false;
 
     const int ROOM_8x8 = 0, ROOM__16x16 = 1, ROOM__24x24 = 2, ROOM__16x16__STAIR = 3;
-    const int HALLWAY_2 = 0, HALLWAY_10 = 1, HALLWAY_18 = 2;
+    //const int HALLWAY_2 = 0, HALLWAY_10 = 1, HALLWAY_18 = 2;
     const int POS_X = 0, NEG_X = 1, POS_Y = 2, NEG_Y = 3;
     const int UNAVAILABLE = 1, AVAILABLE = 0, SELECTED = 2, OPENED = 3;
 
@@ -64,15 +65,16 @@ public class ProceduralGenerationV1 : MonoBehaviour
             rooms = allRooms[i];
             currentLinearityPersistence = linearityPersistence;
             Room startingRoom;
-            if(i == 0)
+            if (i == 0)
             {
                 startingRoom = new Room(ROOM__16x16, Vector2.zero, yElevation);
 
-            } else
+            }
+            else
             {
                 List<Room> potentialStairRooms = allRooms[i - 1].FindAll(room => room.roomSize == ROOM__16x16);
                 Room stairRoom = potentialStairRooms[Random.Range(0, potentialStairRooms.Count)];
-                
+
                 Vector2 startingPoint = stairRoom.gridPosition;
                 startingRoom = new Room(ROOM__16x16__STAIR, startingPoint, yElevation);
 
@@ -88,7 +90,8 @@ public class ProceduralGenerationV1 : MonoBehaviour
             yElevation += 10;
             spawnChance = startingSpawnChance;
         }
-       
+        doneGenerating = true;
+        rooms = allRooms.SelectMany(x => x).ToList();
     }
 
     int roomIndex;
@@ -117,8 +120,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
 
         //    }
         //}
-        rooms = allRooms.SelectMany(x => x).ToList();
-
+        if (!doneGenerating) return;
         if (roomIndex < rooms.Count)
         {
             InstantiateRoomObject(rooms[roomIndex]);
@@ -128,7 +130,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
             {
                 if (rooms[roomIndex].nodeStatus[i] == SELECTED)
                 {
-                    InstantiateHallway(rooms[roomIndex], GetRoomAtPosition(rooms[roomIndex].gridPosition + DirectionToGridVector(i)));
+                    InstantiateHallway(rooms[roomIndex], GetRoomAtPosition(rooms[roomIndex].gridPosition + DirectionToGridVector(i), rooms[roomIndex].yPosition));
                     //InstantiateHallway(rooms[roomIndex], i);
                 }
             }
@@ -156,7 +158,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
 
                     //InstantiateHallway(room, i);
 
-                    newRoom = GetRoomAtPosition(room.gridPosition + DirectionToGridVector(randomIndex));
+                    newRoom = GetRoomAtPosition(room.gridPosition + DirectionToGridVector(randomIndex), room.yPosition);
 
                     if (newRoom == null)
                     {
@@ -264,19 +266,23 @@ public class ProceduralGenerationV1 : MonoBehaviour
     void InstantiateRoomObject(Room room)
     {
         Instantiate(roomObjs[room.roomSize], GridToWorldCoordinates(room.gridPosition, room.yPosition), Quaternion.identity);
+        if (room.roomSize == ROOM__16x16__STAIR)
+        {
+            Instantiate(windTunnel, GridToWorldCoordinates(room.gridPosition, room.yPosition - 10), Quaternion.identity);
+        }
     }
 
-    void InstantiateHallway(Room room, int direction)
-    {
-        if (direction == POS_Y || direction == NEG_Y)
-        {
-            Instantiate(hallwayObj, GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction), room.yPosition), Quaternion.identity).transform.Rotate(Vector3.up * 90);
-        }
-        else
-        {
-            Instantiate(hallwayObj, GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction), room.yPosition), Quaternion.identity);
-        }
-    }
+    //void InstantiateHallway(Room room, int direction)
+    //{
+    //    if (direction == POS_Y || direction == NEG_Y)
+    //    {
+    //        Instantiate(hallwayObj, GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction), room.yPosition), Quaternion.identity).transform.Rotate(Vector3.up * 90);
+    //    }
+    //    else
+    //    {
+    //        Instantiate(hallwayObj, GridToWorldCoordinates(GetHallwayPositionInDirection(room.gridPosition, direction), room.yPosition), Quaternion.identity);
+    //    }
+    //}
     void InstantiateHallway(Room room1, Room room2)
     {
         Transform hallwayTrfm = Instantiate(hallwayObj, Vector3.zero, Quaternion.identity).transform;
@@ -325,7 +331,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
         {
             return room.gridPosition + DirectionToGridVector(direction) * 4f / gridSpaceSize;
         }
-        else if (room.roomSize == ROOM__16x16)
+        else if (room.roomSize == ROOM__16x16 || room.roomSize == ROOM__16x16__STAIR)
         {
             return room.gridPosition + DirectionToGridVector(direction) * 8f / gridSpaceSize;
         }
@@ -342,30 +348,24 @@ public class ProceduralGenerationV1 : MonoBehaviour
         Transform wallTrfm;
         for (int i = 0; i < 4; i++)
         {
-            int roomSize = room.roomSize;
-            if (doorwayObjs.Count() < room.roomSize)
-            {
-                roomSize = room.roomSize - 1;
-            }
             if (room.nodeStatus[i] == SELECTED || room.nodeStatus[i] == OPENED)
             {
-                
-                wallTrfm = Instantiate(doorwayObjs[roomSize], GridToWorldCoordinates(GetRoomEdge(room, i), room.yPosition) + Vector3.up * 2, Quaternion.identity).transform;
+                wallTrfm = Instantiate(doorwayObjs[room.roomSize], GridToWorldCoordinates(GetRoomEdge(room, i), room.yPosition) + Vector3.up * 2, Quaternion.identity).transform;
                 if (i == POS_Y || i == NEG_Y) { wallTrfm.Rotate(Vector3.up * 90); }
             }
             else
             {
-                wallTrfm = Instantiate(wallObjs[roomSize], GridToWorldCoordinates(GetRoomEdge(room, i), room.yPosition) + Vector3.up * 2, Quaternion.identity).transform;
+                wallTrfm = Instantiate(wallObjs[room.roomSize], GridToWorldCoordinates(GetRoomEdge(room, i), room.yPosition) + Vector3.up * 2, Quaternion.identity).transform;
                 if (i == POS_Y || i == NEG_Y) { wallTrfm.Rotate(Vector3.up * 90); }
             }
         }
     }
 
-    Room GetRoomAtPosition(Vector2 position)
+    Room GetRoomAtPosition(Vector2 position, float yPosition)
     {
         for (int i = 0; i < rooms.Count; i++)
         {
-            if (Mathf.Abs(rooms[i].gridPosition.x - position.x) < .01f && Mathf.Abs(rooms[i].gridPosition.y - position.y) < .01f)
+            if (Mathf.Abs(rooms[i].gridPosition.x - position.x) < .01f && Mathf.Abs(rooms[i].gridPosition.y - position.y) < .01f && Mathf.Abs(rooms[i].yPosition - yPosition) < .01f)
             {
                 return rooms[i];
             }
