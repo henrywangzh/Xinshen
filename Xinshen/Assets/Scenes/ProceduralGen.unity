@@ -240,8 +240,9 @@ MonoBehaviour:
   spawnChanceDecrRate: 0.005
   linearity: 0.5
   yElevation: 0
+  currentAlgorithm: 0
   gridSpaceSize: 26
-  linearityPersistence: 200
+  linearityPersistence: 10
 --- !u!4 &1081300062
 Transform:
   m_ObjectHideFlags: 0

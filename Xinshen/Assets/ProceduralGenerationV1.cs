@@ -11,7 +11,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
     //[SerializeField] int targetRoomCount; //NOT IMPLEMENTED
     [SerializeField] float spawnChance, spawnChanceDecrRate, linearity, yElevation;
     enum algorithm {DFS, BFS };
-    algorithm currentAlgorithm;
+    [SerializeField] algorithm currentAlgorithm;
     //linearity: 0 - 1.0 denoting how linear the dungeon will be
     [SerializeField] int gridSpaceSize;
     [SerializeField] int linearityPersistence = 5;
@@ -51,7 +51,6 @@ public class ProceduralGenerationV1 : MonoBehaviour
 
     void Start()
     {
-        currentAlgorithm = algorithm.DFS;
         currentLinearityPersistence = linearityPersistence;
         Room newRoom = new Room(ROOM__16x16, Vector2.zero);
         for (int i = 0; i < 4; i++)
