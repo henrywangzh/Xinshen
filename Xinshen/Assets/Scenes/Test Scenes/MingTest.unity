@@ -17374,7 +17374,8 @@ GameObject:
   - component: {fileID: 5303580286714732575}
   - component: {fileID: 259513179687794578}
   - component: {fileID: 966864452510401430}
-  m_Layer: 0
+  - component: {fileID: 5303580286714732576}
+  m_Layer: 6
   m_Name: Lanterns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17964,7 +17965,7 @@ GameObject:
   - component: {fileID: 1352028599766524872}
   - component: {fileID: 3649700572970025591}
   - component: {fileID: 5598064551339293167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18198,6 +18199,20 @@ Transform:
   m_Father: {fileID: 6619541712738196754}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5303580286714732576
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3388590613312553264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4963518600423465438, guid: 0a765c4c95c8d6348b31474cb29b57a1, type: 3}
 --- !u!4 &5433368520076306186
 Transform:
   m_ObjectHideFlags: 0
@@ -18424,7 +18439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6619541712738196754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: arenafixednormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19811,7 +19826,7 @@ GameObject:
   - component: {fileID: 9141368748451893057}
   - component: {fileID: 3245386353659344420}
   - component: {fileID: 3323986758938035229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
