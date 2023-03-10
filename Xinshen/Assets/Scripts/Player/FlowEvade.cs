@@ -35,6 +35,8 @@ public class FlowEvade : MonoBehaviour
     {
         if (rb == null)
             rb = GetComponent<Rigidbody>();
+        if (anim == null)
+            anim = GetComponent<Animator>();
         if (rb)
         {
             float xinput = Input.GetAxis("Horizontal");

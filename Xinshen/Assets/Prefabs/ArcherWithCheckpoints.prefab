@@ -111,6 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e0c689f0bfc3f4aba4246baf57a310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 100
+  hp: 0
+  centerYOffset: 0
+  damage: 20
   player: {fileID: 0}
   chestOffset: {x: 0, y: 1.85, z: 0}
   pathCheckpoints:
@@ -122,8 +126,8 @@ MonoBehaviour:
   arrowOffsetMultiple: 1.7
   arrowVerticalOffset: 1.5
   moveSpeed: 2
-  shootingSpeed: 5
-  combatRange: 5
+  shootingSpeed: 0.2
+  combatRange: 20
   arrowMoveSpeed: 15
   arrowRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!54 &5207392650191744276
