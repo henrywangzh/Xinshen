@@ -236,12 +236,14 @@ MonoBehaviour:
   - {fileID: 8660027075199547113, guid: 057892f2d85c65a4fbaca37705e65d8a, type: 3}
   - {fileID: 8555192757271917523, guid: a486018243c35e74297f261b11fb89bb, type: 3}
   - {fileID: 8555192757271917523, guid: 24ba83c81d79d9b44a30ad5159b71ec7, type: 3}
+  windTunnel: {fileID: 0}
   spawnChance: 1
-  spawnChanceDecrRate: 0.005
+  spawnChanceDecrRate: 0.1
   linearity: 0.5
   yElevation: 0
   currentAlgorithm: 1
   gridSpaceSize: 26
+  floors: 4
   linearityPersistence: 10
 --- !u!4 &1081300062
 Transform:
@@ -258,6 +260,65 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1207418930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1207418933}
+  - component: {fileID: 1207418932}
+  - component: {fileID: 1207418934}
+  m_Layer: 0
+  m_Name: WindTunnel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1207418932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207418930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 10, z: 4}
+  m_Center: {x: 0, y: 5, z: 0}
+--- !u!4 &1207418933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207418930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1207418934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207418930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8e730b358924bbb9f653babf0782a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windStrength: 20
 --- !u!1 &1781436312
 GameObject:
   m_ObjectHideFlags: 0
