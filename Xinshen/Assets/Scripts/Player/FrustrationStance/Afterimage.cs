@@ -45,4 +45,6 @@ public class Afterimage : MonoBehaviour
     public void SetFwdVelocityFrust(float vel) {}
 
     public void EndAttack() {}
+
+    public void OrientTowardsInput() {}
 }

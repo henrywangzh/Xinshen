@@ -13,7 +13,9 @@ public class FlowMove : MonoBehaviour
     // TODO: use global variable manager instead of local variable
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float turnSpeed = 5f;
+    [SerializeField] float dashCD = 0.5f;
     float speed;
+    float dashTimer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,12 @@ public class FlowMove : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
         speed = moveSpeed;
+        dashTimer = 0;
+    }
+
+    private void OnEnable()
+    {
+        dashTimer = dashCD;
     }
 
     // Update is called once per frame
@@ -50,9 +58,12 @@ public class FlowMove : MonoBehaviour
             // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
         }
         
-        
+        if (dashTimer > 0)
+        {
+            dashTimer -= Time.deltaTime;
+        }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashTimer <= 0)
         {
             controller.switchState.Invoke("evade");
             anim.Play("FlowEvade");

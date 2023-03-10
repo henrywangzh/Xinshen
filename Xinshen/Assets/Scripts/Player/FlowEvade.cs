@@ -34,7 +34,10 @@ public class FlowEvade : MonoBehaviour
     private void OnEnable()
     {
         if (rb == null)
+        {
             rb = GetComponent<Rigidbody>();
+            anim = GetComponent<Animator>();
+        }
         if (rb)
         {
             float xinput = Input.GetAxis("Horizontal");
@@ -76,7 +79,7 @@ public class FlowEvade : MonoBehaviour
     void Update()
     {
         currentDashTime += Time.deltaTime;
-        if(currentDashTime >= totalDashTime)
+        if(currentDashTime >= totalDashTime || Input.GetKeyUp(KeyCode.LeftShift))
         {
             controller.switchState.Invoke("move");
             anim.Play("FlowMove");
