@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 434418217430350969, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
       propertyPath: maxLifespan
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 434418217430350969, guid: 9d9fd43148e983e42b7ae1453096232b, type: 3}
       propertyPath: acceleration

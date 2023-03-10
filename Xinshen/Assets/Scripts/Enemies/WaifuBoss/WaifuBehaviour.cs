@@ -39,7 +39,7 @@ public class WaifuBehaviour : Enemy
     // Update is called once per frame
     void Update()
     {
-        transform.forward = Vector3.Lerp(transform.forward, new Vector3(player.position.x, 0, player.position.z) - new Vector3(transform.position.x, 0, transform.position.z), 0.2f);
+        transform.forward = Vector3.Lerp(transform.forward, new Vector3(player.position.x, 0, player.position.z) - new Vector3(transform.position.x, 0, transform.position.z), 0.1f);
         if ((Time.timeSinceLevelLoad - startTime) % decisionPeriod <= Time.deltaTime)  // Make a decision every few seconds
         {
             // Debug.Log("Making decision");

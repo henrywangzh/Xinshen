@@ -247,7 +247,7 @@ MonoBehaviour:
   travelSpd: 0.3
   turnSpd: 0.001
   damage: 15
-  maxLifespan: 6
+  maxLifespan: 4
   destroyFX: {fileID: 641210502215411198, guid: 8a0dd3a909232cb4a8426030c0ca05b7, type: 3}
   acceleration: 0
 --- !u!54 &3517072733024915515
