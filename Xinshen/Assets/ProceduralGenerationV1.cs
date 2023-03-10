@@ -12,7 +12,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
     [SerializeField] float spawnChance, spawnChanceDecrRate, linearity, yElevation;
     enum algorithm {DFS, BFS };
     [SerializeField] algorithm currentAlgorithm;
-    //linearity: 0 - 1.0 denoting how linear the dungeon will be
+    //linearity: 0 - 1.0 denoting how linear the dungeon will be (e.g. proportion of BFS to DFS. 0.4 = 40% DFS)
     [SerializeField] int gridSpaceSize;
     [SerializeField] int linearityPersistence = 5;
     int currentLinearityPersistence;
@@ -126,11 +126,10 @@ public class ProceduralGenerationV1 : MonoBehaviour
             randomIndex = (randomIndex + 1) % 4;
         }
 
-        //rooms.AddRange(newRooms);
+        rooms.AddRange(newRooms);
         ungeneratedRooms.Remove(room);
         ungeneratedRooms.AddRange(newRooms);
         currentLinearityPersistence--;
-        rooms.Add(room);
         if (currentLinearityPersistence <= 0)
         {
             currentAlgorithm = Random.Range(0f, 1f) < linearity ? algorithm.DFS : algorithm.BFS;
