@@ -71,15 +71,15 @@ public class FlowAttack : MonoBehaviour
         anim.SetBool("Combo", combo >= 1);
     }
 
-    public void SetFwdVelocity(float vel)
-    {
-        rb.velocity = transform.forward * vel;
-    }
-
     public void EndAttack()
     {
         if (this.isActiveAndEnabled)
             controller.switchState.Invoke("move"); 
+    }
+
+    void SetFwdVelocity(float vel)
+    {
+        rb.velocity = transform.forward * vel;
     }
 
     void DodgeCancel()

@@ -51,10 +51,9 @@ public class PlayerAnimHandler : MonoBehaviour
         weapon.SetPSEmission(false);
     }
 
-    public void EndAttack()
+    public void SetFwdVelocity(float vel)
     {
-        if (this.isActiveAndEnabled)
-            controller.switchState.Invoke("move");
+        rb.velocity = transform.forward * vel;
     }
 
     public void OrientTowardsInput()
