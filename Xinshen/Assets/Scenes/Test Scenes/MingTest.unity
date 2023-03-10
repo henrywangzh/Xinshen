@@ -16236,6 +16236,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 366500968746317989, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
+      propertyPath: m_Drag
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 366500968746318008, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
       propertyPath: m_Name
       value: WaifuBoss
