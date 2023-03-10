@@ -19,6 +19,8 @@ public class SlashFX : MonoBehaviour
         trfm.Rotate(Vector3.forward * Random.Range(-20,21));
         trfm.position -= trfm.right * backOffset;
         vect3.z = 1;
+
+        CameraController.SetTrauma(14);
     }
 
     // Update is called once per frame
