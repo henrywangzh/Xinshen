@@ -82,7 +82,7 @@ public class FlowEvade : MonoBehaviour
     void Update()
     {
         currentDashTime += Time.deltaTime;
-        if(currentDashTime >= totalDashTime || Input.GetKeyUp(KeyCode.LeftShift))
+        if(currentDashTime >= totalDashTime || (!Input.GetKey(KeyCode.LeftShift) && currentDashTime >= totalDashTime / 2f))
         {
             move.SetDashCD(dashCD);
             controller.switchState.Invoke("move");
