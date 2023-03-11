@@ -9742,7 +9742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 20
+  knockbackPower: 8
   ps: {fileID: 5588416017458312304}
 --- !u!1 &1622452025970368418
 GameObject:
@@ -11387,7 +11387,6 @@ MonoBehaviour:
   targLocked: 0
   moveSpeed: 4
   turnSpeed: 15
-  dashCD: 0.5
 --- !u!114 &1622452027422676413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11402,6 +11401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashSpeed: 20
   totalDashTime: 0.25
+  dashCD: 0.5
   disappearFX: {fileID: 7407885422050670031}
   appearFX: {fileID: 9141845562813935842}
   mesh: {fileID: 1622452026158532303}
