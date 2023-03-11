@@ -29,7 +29,10 @@ public class PlaytestingManager : MonoBehaviour
             else
                 SceneManager.LoadScene("FirstLevel");
         }
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 
     }
 }
