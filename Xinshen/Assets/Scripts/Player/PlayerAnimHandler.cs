@@ -7,11 +7,16 @@ public class PlayerAnimHandler : MonoBehaviour
     Animator anim;
     FlowScriptController controller;
     Rigidbody rb;
-    [SerializeField] Collider weaponCollider;
+    [SerializeField] BoxCollider weaponCollider;
     PlayerWeapon weapon;
     bool canCancel = false;
     Transform cam;
     Vector3 targOrientation;
+
+    float originalHbWidth;
+    float originalHbLength;
+    float originalHbHeight;
+    float originalZOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +27,11 @@ public class PlayerAnimHandler : MonoBehaviour
         cam = GetComponent<FlowMove>().cam;
         weapon = weaponCollider.gameObject.GetComponent<PlayerWeapon>();
         targOrientation = Vector3.zero;
+        originalHbWidth = weaponCollider.size.x;
+        originalHbHeight = weaponCollider.size.y;
+        originalHbLength = weaponCollider.size.z;
+        originalZOffset = weaponCollider.center.z;
+        Debug.Log(originalHbHeight);
     }
 
 
@@ -37,6 +47,19 @@ public class PlayerAnimHandler : MonoBehaviour
         {
             targOrientation = Vector3.zero;
         }
+    }
+
+    // Adjusts the dimensions of the hitbox as a percent of the original. Hitbox will always be adjusted to be centered in front of player.
+    public void AdjustSlashHitbox(float length = 1f, float width = 1f, float height = 1f)
+    {
+        float newLen = length * originalHbLength;
+        // Z offset = size diff / 2
+        float newZ = (newLen - originalHbLength) / 2 + originalZOffset;
+        float newWidth = width * originalHbWidth;
+        float newHeight = height * originalHbHeight;
+
+        weaponCollider.center = new Vector3(0, 0, newZ);
+        weaponCollider.size = new Vector3(newWidth, newHeight, newLen);
     }
 
     public void StartSwing()

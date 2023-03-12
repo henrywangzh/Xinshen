@@ -9729,7 +9729,7 @@ BoxCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.2, y: 2, z: 2.8}
-  m_Center: {x: 0.16145277, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &621580694564329897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9742,7 +9742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 20
+  knockbackPower: 5
   ps: {fileID: 5588416017458312304}
 --- !u!1 &1622452025970368418
 GameObject:
@@ -11267,6 +11267,7 @@ GameObject:
   - component: {fileID: 1622452027422676412}
   - component: {fileID: 1622452027422676413}
   - component: {fileID: 1622452027422676414}
+  - component: {fileID: 4907681234521911061}
   - component: {fileID: 1526374468572174153}
   - component: {fileID: 5677707444087698955}
   - component: {fileID: 9061349209974271388}
@@ -11387,7 +11388,6 @@ MonoBehaviour:
   targLocked: 0
   moveSpeed: 4
   turnSpeed: 15
-  dashCD: 0.5
 --- !u!114 &1622452027422676413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11402,6 +11402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashSpeed: 20
   totalDashTime: 0.25
+  dashCD: 0.5
   disappearFX: {fileID: 7407885422050670031}
   appearFX: {fileID: 9141845562813935842}
   mesh: {fileID: 1622452026158532303}
@@ -11421,6 +11422,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponCollider: {fileID: 5096054253207069689}
+--- !u!114 &4907681234521911061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43159109f82a24a4fae56b7bb2a02efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1526374468572174153
 MonoBehaviour:
   m_ObjectHideFlags: 0
