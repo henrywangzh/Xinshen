@@ -6861,6 +6861,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4907681234521911061, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5677707444087698955, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: dashRange
       value: 3
