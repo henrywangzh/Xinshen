@@ -328,9 +328,10 @@ MonoBehaviour:
   xSensitivity: 1
   ySensitivity: 1
   playerTrfm: {fileID: 0}
-  screenShakeStrength: 0.003
+  screenShakeStrength: 0.004
   trauma: 0
   canvas: {fileID: 1574979750}
+  lockTarget: {fileID: 0}
   move: 0
   recalibrationRate: 0.1
   rotationVector: {x: 0, y: 0, z: 0}
@@ -349,7 +350,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4372971bceda54591a8f3f5f5c6047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageNumberObj: {fileID: 1139965508695556701, guid: 1412abf71cfbf4d4dbab15bb6dae3a22, type: 3}
+  damageNumberObj:
+  - {fileID: 1139965508695556701, guid: 1412abf71cfbf4d4dbab15bb6dae3a22, type: 3}
+  - {fileID: 2768850394372430196, guid: 8e875b3463383bc4fa4c36f7cdddec1a, type: 3}
   slashFXObj: {fileID: 8347097717444502745, guid: ce81695849cb7fb4097154300761a7b8, type: 3}
   canvasTrfm: {fileID: 1574979751}
 --- !u!1 &5984531608720494478

@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TakeDamage(int dmg, bool doSlashFX = true, bool doDamageNumber = true)
     {
         if (doSlashFX) { Instantiate(slashFXObj, transform.position + Vector3.up * centerYOffset, transform.rotation); }
-        if (doDamageNumber) { GameManager.InstantiateDamageNumber(transform.position + Vector3.up * centerYOffset, dmg); }
+        if (doDamageNumber) { GameManager.InstantiateDamageNumber(transform.position + Vector3.up * centerYOffset, dmg, GameManager.BLUE); }
 
         hp -= dmg;
         if (hp > maxHP)

@@ -12,6 +12,7 @@ public class WaifuBehaviour : Enemy
     [SerializeField] GameObject shard;
     [SerializeField] GameObject bomb;
     [SerializeField] TrailRenderer trail;
+    [SerializeField] ParticleSystem ps;
     [SerializeField] [Tooltip("Element 0 - evade, element 1 - splitter star, element 2 - basic attack, element 3 - rush attack")] List<int> delays;
     List<int> counter;
     float startTime;
@@ -19,12 +20,13 @@ public class WaifuBehaviour : Enemy
     Rigidbody rb;
     Collider col;
     Animator anim;
+    ParticleSystem.MainModule psmain;
 
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
-
+        psmain = ps.main;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         startTime = Time.timeSinceLevelLoad;
@@ -37,7 +39,7 @@ public class WaifuBehaviour : Enemy
     // Update is called once per frame
     void Update()
     {
-        transform.forward = Vector3.Lerp(transform.forward, new Vector3(player.position.x, 0, player.position.z) - new Vector3(transform.position.x, 0, transform.position.z), 0.2f);
+        transform.forward = Vector3.Lerp(transform.forward, new Vector3(player.position.x, 0, player.position.z) - new Vector3(transform.position.x, 0, transform.position.z), 0.1f);
         if ((Time.timeSinceLevelLoad - startTime) % decisionPeriod <= Time.deltaTime)  // Make a decision every few seconds
         {
             // Debug.Log("Making decision");
@@ -84,6 +86,12 @@ public class WaifuBehaviour : Enemy
 
     // Note: All actions should be done within 2 seconds, or whatever the decision period is
 
+    public void PlayParticles(Color color)
+    {
+        psmain.startColor = color;
+        ps.Emit(10);
+    }
+
     public void SpawnStars()
     {
         GameObject obj = Instantiate(star, transform.position + transform.up * 1.5f, transform.rotation);
@@ -98,6 +106,11 @@ public class WaifuBehaviour : Enemy
 
     IEnumerator SplitterStars()
     {
+        Color orange = new Color(255, 128, 0, 1);
+        PlayParticles(orange);
+        yield return new WaitForSeconds(.5f);
+        PlayParticles(Color.red);
+        yield return new WaitForSeconds(.5f);
         anim.Play("WaifuStar");
         yield return new WaitForSeconds(0.8f);
         SpawnStars();
@@ -105,6 +118,9 @@ public class WaifuBehaviour : Enemy
 
     IEnumerator Attack()
     {
+        attacking = true;
+        PlayParticles(Color.cyan);
+        yield return new WaitForSeconds(.5f);
         anim.Play("WaifuAttack");
         yield return new WaitForSeconds(.5f);
         for (int i = 0; i < 3; i++)
@@ -112,6 +128,7 @@ public class WaifuBehaviour : Enemy
             BasicAttack();
             yield return new WaitForSeconds(.2f);
         }
+        attacking = false;
     }
 
     IEnumerator Evade()
@@ -153,7 +170,14 @@ public class WaifuBehaviour : Enemy
     // Dash through the player, leaving bombs in the trail (Does not account for falling off edges)
     IEnumerator RushAssault()
     {
+        Color orange = new Color(255, 128, 0, 1);
         attacking = true;
+        PlayParticles(Color.red);
+        yield return new WaitForSeconds(.3f);
+        PlayParticles(orange);
+        yield return new WaitForSeconds(.3f);
+        PlayParticles(Color.yellow);
+        yield return new WaitForSeconds(.3f);
         for (int i = 0; i < 3; i++)
         {
             Vector3 direction = (player.position - transform.position);
@@ -168,6 +192,7 @@ public class WaifuBehaviour : Enemy
             float horiOffset = 0.25f;
             while (duration > 0 && Vector3.Distance(transform.position, destPoint) > 0.4f)
             {
+                rb.velocity = direction * dashSpeed * 3;
                 yield return new WaitForSeconds(0.025f);
                 duration -= 0.025f;
                 if (duration % 0.1f <= Time.deltaTime)

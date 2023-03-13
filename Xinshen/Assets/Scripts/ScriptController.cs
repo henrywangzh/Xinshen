@@ -41,7 +41,8 @@ public class ScriptController : MonoBehaviour
         stringToNodeMap.TryGetValue(s, out nextState);
         if (!currentState.getNextAvailableStates().Contains(nextState))
         {
-            Debug.LogError($"state \"{s}\" not in allowed states");
+            //Debug.LogError(currentState.getStateName());
+            //Debug.LogError($"state \"{s}\" not in allowed states");
             return;
         }
         currentState.disableScript();
