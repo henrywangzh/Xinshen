@@ -58,6 +58,12 @@ public class FrustrationMove : GlobalVariableManager
         {
             controller.switchState.Invoke("attack");
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            controller.switchState.Invoke("evade");
+            anim.Play("FrustrationEvade");
+            PlayerHP.SetInvulnerable(16);
+        }
 
     }
     

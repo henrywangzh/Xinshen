@@ -8,7 +8,7 @@ public class FrustrationScriptController : ScriptController
     Animator anim;
 
     FrustrationMove move;
-    // FlowEvade evade;
+    FrustrationEvade evade;
     FrustrationAttack attack;
     FrustrationDashStrike dashstrike;
 
@@ -22,7 +22,7 @@ public class FrustrationScriptController : ScriptController
 
         // Get references to sub-scripts
         move = GetComponent<FrustrationMove>();
-        // evade = GetComponent<FlowEvade>();
+        evade = GetComponent<FrustrationEvade>();
         attack = GetComponent<FrustrationAttack>();
         dashstrike = GetComponent<FrustrationDashStrike>();
 
@@ -34,12 +34,12 @@ public class FrustrationScriptController : ScriptController
         Node moveNode = addNode(stateName, state, null, requiredStates, canBeInterruptedByTheseStates);
 
         // Setting up evade node
-        // string name = "evade";
-        // state = new ScriptKeyPair(evade, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
-        // requiredStates = new List<MonoBehaviour>();
-        // canBeInterruptedByTheseStates = new List<MonoBehaviour>();
-        // Node evadeNode = addNode(name, state, null, requiredStates, canBeInterruptedByTheseStates);
-        //
+        string name = "evade";
+        state = new ScriptKeyPair(evade, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
+        requiredStates = new List<MonoBehaviour>();
+        canBeInterruptedByTheseStates = new List<MonoBehaviour>();
+        Node evadeNode = addNode(name, state, null, requiredStates, canBeInterruptedByTheseStates);
+        
         string atkname = "attack";
         state = new ScriptKeyPair(attack, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
         requiredStates = new List<MonoBehaviour>();
@@ -52,11 +52,11 @@ public class FrustrationScriptController : ScriptController
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node dashStrikeNode = addNode(stateName, state, null, requiredStates, canBeInterruptedByTheseStates);
 
-        // moveNode.addNextAvailableStates(evadeNode);
+        moveNode.addNextAvailableStates(evadeNode);
         moveNode.addNextAvailableStates(attackNode);
         moveNode.addNextAvailableStates(moveNode);
         moveNode.addNextAvailableStates(dashStrikeNode);
-        // evadeNode.addNextAvailableStates(moveNode);
+        evadeNode.addNextAvailableStates(moveNode);
         attackNode.addNextAvailableStates(moveNode);
         dashStrikeNode.addNextAvailableStates(moveNode);
         dashStrikeNode.addNextAvailableStates(dashStrikeNode);
