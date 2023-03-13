@@ -53,7 +53,7 @@ public class PlayerHP : MonoBehaviour
         self.m_HP = HP;
 
         if (playBloodFX) { Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation); }
-        if (doDamageNumbers) { GameManager.InstantiateDamageNumber(torsoTrfm.position, damage); }
+        if (doDamageNumbers) { GameManager.InstantiateDamageNumber(torsoTrfm.position, damage, GameManager.RED); }
 
         CameraController.SetTrauma(damage);
         

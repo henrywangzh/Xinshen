@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1139965508695556673}
   - component: {fileID: 1139965508695556672}
   m_Layer: 5
-  m_Name: DamageNumber
+  m_Name: DamageNumberRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,8 +79,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278205183
-  m_fontColor: {r: 1, g: 0.22798406, b: 0, a: 1}
+    rgba: 4278206975
+  m_fontColor: {r: 1, g: 0.25563663, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

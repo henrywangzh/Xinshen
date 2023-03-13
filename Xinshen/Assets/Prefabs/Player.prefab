@@ -9742,7 +9742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 5
+  knockbackPower: 20
   ps: {fileID: 5588416017458312304}
 --- !u!1 &1622452025970368418
 GameObject:

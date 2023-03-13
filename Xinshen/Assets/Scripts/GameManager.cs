@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject damageNumberObj;
+    [SerializeField] GameObject[] damageNumberObj;
+    public const int RED = 0, BLUE = 1;
     [SerializeField] GameObject slashFXObj;
     [SerializeField] Transform canvasTrfm;
     public static GameManager self;
@@ -15,9 +16,9 @@ public class GameManager : MonoBehaviour
         Enemy.AssignSlashFXObj(slashFXObj);
     }
 
-    public static void InstantiateDamageNumber(Vector3 position, int value)
+    public static void InstantiateDamageNumber(Vector3 position, int value, int color = 0)
     {
-        Instantiate(self.damageNumberObj, Vector3.zero, Quaternion.identity).GetComponent<DamageNumber>().Init(value, position);
+        Instantiate(self.damageNumberObj[color], Vector3.zero, Quaternion.identity).GetComponent<DamageNumber>().Init(value, position);
     }
 
     public static void SetCanvasChild(Transform trfm)
