@@ -19,6 +19,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
     [SerializeField] int gridSpaceSize;
     [SerializeField] int floors = 1;
     [SerializeField] int linearityPersistence = 5;
+    [SerializeField] float skipChance = 0.5f;
     int currentLinearityPersistence;
 
     List<List<Room>> allRooms = new List<List<Room>>();
@@ -123,17 +124,22 @@ public class ProceduralGenerationV1 : MonoBehaviour
         if (!doneGenerating) return;
         if (roomIndex < rooms.Count)
         {
-            InstantiateRoomObject(rooms[roomIndex]);
-            InstantiateWalls(rooms[roomIndex]);
-
-            for (int i = 0; i < 4; i++)
+            if(Random.Range(0f, 1f) > skipChance)
             {
-                if (rooms[roomIndex].nodeStatus[i] == SELECTED)
+                InstantiateRoomObject(rooms[roomIndex]);
+                InstantiateWalls(rooms[roomIndex]);
+                for (int i = 0; i < 4; i++)
                 {
-                    InstantiateHallway(rooms[roomIndex], GetRoomAtPosition(rooms[roomIndex].gridPosition + DirectionToGridVector(i), rooms[roomIndex].yPosition));
-                    //InstantiateHallway(rooms[roomIndex], i);
+                    if (rooms[roomIndex].nodeStatus[i] == SELECTED)
+                    {
+                        InstantiateHallway(rooms[roomIndex], GetRoomAtPosition(rooms[roomIndex].gridPosition + DirectionToGridVector(i), rooms[roomIndex].yPosition));
+                        //InstantiateHallway(rooms[roomIndex], i);
+                    }
                 }
             }
+            
+
+           
             roomIndex++;
         }
     }
