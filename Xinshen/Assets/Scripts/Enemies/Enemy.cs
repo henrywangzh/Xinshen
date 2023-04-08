@@ -67,10 +67,13 @@ public abstract class Enemy : MonoBehaviour
     }
 
     //source: where the knockback is coming from (flies away from source); power: how much to knockback
-    public void TakeKnockback(Vector3 source, float power)
+    public void TakeKnockback(Vector3 source, float power, int stunFrames = -1)
     {
         GetComponent<Rigidbody>().velocity = (trfm.position - source).normalized * power;
-        stunned = (int)(power * 2);
+        if (stunFrames < 0)
+            stunned = (int)(power * 2);
+        else
+            stunned = stunFrames;
     }
 
     public void InvokedFixedUpdate()

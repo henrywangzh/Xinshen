@@ -60,9 +60,12 @@ public class FrustrationMove : GlobalVariableManager
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            // Note: Hey Eric, I commented this out for now since it looks like the implementation is incomplete. Feel free to uncomment when you need to test the slide
+            /*
             controller.switchState.Invoke("evade");
             anim.Play("FrustrationEvade");
             PlayerHP.SetInvulnerable(16);
+            */
         }
 
     }
