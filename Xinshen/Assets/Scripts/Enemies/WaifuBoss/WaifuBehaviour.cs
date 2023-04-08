@@ -21,6 +21,7 @@ public class WaifuBehaviour : Enemy
     Collider col;
     Animator anim;
     ParticleSystem.MainModule psmain;
+    bool stunned = false;
 
     // Start is called before the first frame update
     new void Start()
@@ -44,6 +45,19 @@ public class WaifuBehaviour : Enemy
         {
             // Debug.Log("Making decision");
             if (attacking) return;
+            if (IsStunned())
+            {
+                if (!stunned)
+                {
+                    // Play animation
+                    stunned = true;
+                }
+                Debug.Log("Stunned");
+                return;
+            } else if (stunned)
+            {
+                stunned = false;
+            }
 
             for (int i = 0; i < counter.Count; i++)
             {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] int knockbackPower;
+    [SerializeField] int stunPower;
     [SerializeField] ParticleSystem ps;
     ParticleSystem.EmissionModule emitter;
     // Start is called before the first frame update
@@ -41,7 +42,7 @@ public class PlayerWeapon : MonoBehaviour
         if (other.gameObject.GetComponent<Enemy>() != null)
         {
             other.gameObject.GetComponent<Enemy>().TakeDamage(GlobalVariableManager.Damage);
-            other.gameObject.GetComponent<Enemy>().TakeKnockback(PlayerHP.torsoTrfm.position + PlayerHP.torsoTrfm.forward * -2, knockbackPower);
+            other.gameObject.GetComponent<Enemy>().TakeKnockback(PlayerHP.torsoTrfm.position + PlayerHP.torsoTrfm.forward * -2, knockbackPower, stunPower);
         }
     }
 }
