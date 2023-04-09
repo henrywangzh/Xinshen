@@ -64,11 +64,12 @@ public class DiscordAttack : MonoBehaviour
     {
         anim.SetBool("DiscordAttack", false);
         weaponCollider.enabled = false;
+        controller.switchState.Invoke("discordMove");
     }
     public void EndAttack()
     {
         if (this.isActiveAndEnabled)
-            controller.switchState.Invoke("move");
+            controller.switchState.Invoke("discordMove");
     }
 }
 
