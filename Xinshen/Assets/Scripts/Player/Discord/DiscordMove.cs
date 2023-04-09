@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DiscordMove : MonoBehaviour
 {
-    FlowScriptController controller;
+    ActualDiscordScriptController controller;
     Rigidbody rb;
     [SerializeField] Transform cam;
     Animator anim;
@@ -20,7 +20,7 @@ public class DiscordMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        controller = GetComponent<FlowScriptController>();
+        controller = GetComponent<ActualDiscordScriptController>();
         speed = moveSpeed;
     }
 
@@ -60,6 +60,8 @@ public class DiscordMove : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             controller.switchState.Invoke("discordAttack");
+            //anim.Play("attack07");
+            rb.velocity = Vector3.zero;
         }
     }
 }

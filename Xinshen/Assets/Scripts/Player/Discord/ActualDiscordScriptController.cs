@@ -9,10 +9,6 @@ public class ActualDiscordScriptController : ScriptController
     Animator anim;
 
     // Define sub-script references
-    /* FlowMove move;
-     FlowEvade evade;
-     FlowAttack attack;*/
-
     DiscordMove discordMove;
     DiscordAttack discordAttack;
 

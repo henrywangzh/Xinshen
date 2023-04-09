@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bf5d8b3e99fdbff449a948c77d9ef9f6
+guid: 03beb19fea8fc754cb7ff7da14b7b071
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -36,6 +36,35 @@ ModelImporter:
       name: DiscordAttack1
       takeName: attack07
       internalID: -1547200936971108984
+      firstFrame: 11
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: attack07
+      takeName: attack07
+      internalID: 8318564559593096810
       firstFrame: 11
       lastFrame: 30
       wrapMode: 0

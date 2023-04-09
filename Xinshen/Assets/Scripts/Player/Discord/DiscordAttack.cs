@@ -40,6 +40,7 @@ public class DiscordAttack : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //isAttacking1 = true;
+            //anim.SetBool("DiscordAttack", true);
             DiscordCombo(1);
 
         }
@@ -58,6 +59,16 @@ public class DiscordAttack : MonoBehaviour
     public void DiscordCombo(int attack)
     {
         anim.SetBool("DiscordAttack", attack >= 1);
+    }
+    public void EndDiscordAttack()
+    {
+        anim.SetBool("DiscordAttack", false);
+        weaponCollider.enabled = false;
+    }
+    public void EndAttack()
+    {
+        if (this.isActiveAndEnabled)
+            controller.switchState.Invoke("move");
     }
 }
 

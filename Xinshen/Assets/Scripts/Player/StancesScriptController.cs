@@ -7,6 +7,7 @@ public class StancesScriptController : ScriptController
     FrustrationScriptController frustration;
     FlowScriptController flow;
     DeterminationScriptController determination;
+    ActualDiscordScriptController discord;
 
     enum Stance
     {
@@ -26,7 +27,8 @@ public class StancesScriptController : ScriptController
         // Get references to sub-scripts
         frustration = GetComponent<FrustrationScriptController>();
         flow = GetComponent<FlowScriptController>(); 
-        determination = GetComponent<DeterminationScriptController>(); 
+        determination = GetComponent<DeterminationScriptController>();
+        discord = GetComponent<ActualDiscordScriptController>();
 
         // Setting up move node
         string stateName = "frustration";
@@ -60,9 +62,17 @@ public class StancesScriptController : ScriptController
         frustNode.addNextAvailableStates(flowNode);
         determinationNode.addNextAvailableStates(flowNode);
 
+        //discord 
+        string discordName = "discord";
+        state = new ScriptKeyPair(discord, KeyCode.None);
+        requiredStates = new List<MonoBehaviour>();
+        canBeInterruptedByTheseStates = new List<MonoBehaviour>();
+        Node discordNode = addNode(discordName, state, null, requiredStates, canBeInterruptedByTheseStates);
+        
         switch (defaultStance)
         {
             case Stance.discord:
+                setDefaultState(discordNode);
                 break;
             case Stance.determination:
                 setDefaultState(determinationNode);
