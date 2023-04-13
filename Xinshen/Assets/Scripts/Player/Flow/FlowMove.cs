@@ -43,6 +43,12 @@ public class FlowMove : MonoBehaviour
         moveDirection += new Vector3(0, rb.velocity.y, 0);
         rb.velocity = moveDirection;
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            moveDirection.y += 7.5f;
+            rb.velocity = moveDirection;
+        }
+
         if (targLocked)
         {
             speed = moveSpeed;
@@ -56,7 +62,7 @@ public class FlowMove : MonoBehaviour
             anim.SetFloat("yInput", Mathf.Sqrt(yinput*yinput + xinput*xinput) * 2f);
             transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(moveDirection.x, 0, moveDirection.z), turnSpeed * Time.deltaTime, 0f);
             // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
-        }
+        }      
         
         if (dashTimer > 0)
         {
@@ -80,5 +86,6 @@ public class FlowMove : MonoBehaviour
             controller.switchState.Invoke("cross");
             anim.Play("FlowCrossSlash");
         }
+        
     }
 }

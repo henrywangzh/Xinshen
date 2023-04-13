@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerHP : MonoBehaviour
 {
-    [SerializeField] int m_HP, m_maxHP;
+    [SerializeField] int m_HP, m_maxHP, m_frenzyHPThresholdPercent;
     [SerializeField] GameObject bloodFX;
     [SerializeField] Transform m_torsoTrfm;
     [SerializeField] CapsuleCollider hitboxCollider;
 
-    static int HP, maxHP, invulnerability;
+    static int HP, maxHP, frenzyHP, invulnerability;
 
     static PlayerHP self;
 
@@ -20,6 +20,7 @@ public class PlayerHP : MonoBehaviour
         m_HP = m_maxHP;
         maxHP = m_maxHP;
         HP = m_maxHP;
+        frenzyHP = (int)(m_maxHP * (m_frenzyHPThresholdPercent / 100f));
 
         self = GetComponent<PlayerHP>();
         torsoTrfm = m_torsoTrfm;
@@ -60,6 +61,11 @@ public class PlayerHP : MonoBehaviour
         if (HP <= 0)
         {
             Debug.Log("bit the dust");
+        }
+        else if (HP <= frenzyHP)
+        {
+            // TODO: frenzy
+            Debug.Log("frenzy time");
         }
     }
 }
