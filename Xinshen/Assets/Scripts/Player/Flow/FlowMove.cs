@@ -17,12 +17,16 @@ public class FlowMove : MonoBehaviour
     float speed;
     float dashTimer = 0;
 
+    Grapple grapple;
+    bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
+        grapple = GetComponent<Grapple>();
         speed = moveSpeed;
         dashTimer = 0;
     }
@@ -35,13 +39,19 @@ public class FlowMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float xinput = Input.GetAxis("Horizontal");
         float yinput = Input.GetAxis("Vertical");
 
         Vector3 moveDirection = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * yinput + new Vector3(cam.right.x, 0, cam.right.z).normalized * xinput).normalized * speed;
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
-        rb.velocity = moveDirection;
+
+        // TODO: add check for onGround, we don't want to affect movement if we are not on the ground
+        if (!grapple.isGrappling())
+        {
+            rb.velocity = moveDirection;
+        }
 
         if (targLocked)
         {

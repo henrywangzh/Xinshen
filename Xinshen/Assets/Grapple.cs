@@ -11,7 +11,7 @@ public class Grapple : MonoBehaviour
     public LayerMask whatIsGrappleable;
 
     [Header("Swinging")]
-    private float maxSwingDistance = 25f;
+    private float maxSwingDistance = 35f;
     private Vector3 swingPoint;
     private SpringJoint joint;
 
@@ -46,6 +46,10 @@ public class Grapple : MonoBehaviour
         }
     }
 
+    public bool isGrappling()
+    {
+        return joint;
+    }
     private void StartGrapple()
     {
         RaycastHit hit;
