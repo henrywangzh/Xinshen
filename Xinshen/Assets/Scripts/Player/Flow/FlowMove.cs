@@ -13,9 +13,11 @@ public class FlowMove : MonoBehaviour
     // TODO: use global variable manager instead of local variable
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float turnSpeed = 5f;
+    [SerializeField] float jumpHeight = 2f;
 
     float speed;
     float dashTimer = 0;
+    bool onGround = false;
 
     Grapple grapple;
     bool canMove = true;
@@ -36,6 +38,21 @@ public class FlowMove : MonoBehaviour
         dashTimer = dashCD;
     }
 
+    void OnCollisionEnter (Collision collision) {
+		EvaluateCollision(collision);
+	}
+
+	void OnCollisionStay (Collision collision) {
+		EvaluateCollision(collision);
+	}
+	
+	void EvaluateCollision (Collision collision) {
+        for (int i = 0; i < collision.contactCount; i++) {
+			Vector3 normal = collision.GetContact(i).normal;
+            onGround |= normal.y >= 0.9f;
+		}
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -53,10 +70,12 @@ public class FlowMove : MonoBehaviour
             rb.velocity = moveDirection;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (onGround && Input.GetKeyDown(KeyCode.Space))
         {
-            moveDirection.y += 7.5f;
+            moveDirection.y += Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
             rb.velocity = moveDirection;
+            Debug.Log("Jump");
+            Debug.Log((jumpHeight, rb.velocity.y));
         }
 
         if (targLocked)
@@ -96,6 +115,6 @@ public class FlowMove : MonoBehaviour
             controller.switchState.Invoke("cross");
             anim.Play("FlowCrossSlash");
         }
-        
+        onGround = false;
     }
 }
