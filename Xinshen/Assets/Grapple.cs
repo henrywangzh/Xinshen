@@ -32,22 +32,21 @@ public class Grapple : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            StartSwing();
+            StartGrapple();
         }
         if (Input.GetKeyUp(KeyCode.Q))
         {
-            StopSwing();
+            StopGrapple();
         }
-
-        if(joint != null)
+        if (joint != null)
         {
             OdmGearMovement();
         }
     }
 
-    private void StartSwing()
+    private void StartGrapple()
     {
         RaycastHit hit;
         if(Physics.Raycast(cam.position, cam.forward, out hit, maxSwingDistance, whatIsGrappleable))
@@ -72,7 +71,7 @@ public class Grapple : MonoBehaviour
         }
     }
 
-    void StopSwing()
+    void StopGrapple()
     {
         lr.positionCount = 0;
         Destroy(joint);
