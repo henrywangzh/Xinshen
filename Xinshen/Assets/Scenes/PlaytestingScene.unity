@@ -77265,6 +77265,16 @@ MonoBehaviour:
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 3703
+  orientation: {fileID: 1674858096}
+  rb: {fileID: 1674858101}
+  horizontalThrustForce: 1000
+  forwardThrustForce: 1000
+  extendCableSpeed: 20
+--- !u!54 &1674858101 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1622452027422676408, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+  m_PrefabInstance: {fileID: 504192344}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1708303384
 GameObject:
   m_ObjectHideFlags: 0

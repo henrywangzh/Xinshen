@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 560084449}
-  m_IndirectSpecularColor: {r: 0.13274601, g: 0.48253477, b: 0.9821059, a: 1}
+  m_IndirectSpecularColor: {r: 0.1327832, g: 0.48223078, b: 0.9808688, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6904,7 +6904,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4372971bceda54591a8f3f5f5c6047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageNumberObj: {fileID: 1139965508695556701, guid: 1412abf71cfbf4d4dbab15bb6dae3a22, type: 3}
+  damageNumberObj:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   slashFXObj: {fileID: 8347097717444502745, guid: ce81695849cb7fb4097154300761a7b8, type: 3}
   canvasTrfm: {fileID: 1672209325}
 --- !u!1001 &2011929588

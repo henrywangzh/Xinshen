@@ -15,6 +15,13 @@ public class Grapple : MonoBehaviour
     private Vector3 swingPoint;
     private SpringJoint joint;
 
+    [Header("OdmGear")]
+    public Transform orientation;
+    public Rigidbody rb;
+    public float horizontalThrustForce;
+    public float forwardThrustForce;
+    public float extendCableSpeed;
+
     private Vector3 currentGrapplePosition;
     // Start is called before the first frame update
     void Start()
@@ -32,6 +39,11 @@ public class Grapple : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Q))
         {
             StopSwing();
+        }
+
+        if(joint != null)
+        {
+            OdmGearMovement();
         }
     }
 
@@ -79,5 +91,32 @@ public class Grapple : MonoBehaviour
     private void LateUpdate()
     {
         DrawRope();
+    }
+
+    private void OdmGearMovement()
+    {
+        if (Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);
+        if (Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * horizontalThrustForce * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.W)) rb.AddForce(orientation.forward * forwardThrustForce * Time.deltaTime);
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Vector3 directionToPoint = swingPoint - transform.position;
+            rb.AddForce(directionToPoint.normalized * forwardThrustForce * Time.deltaTime);
+
+            float distanceFromPoint = Vector3.Distance(transform.position, swingPoint);
+
+            joint.maxDistance = distanceFromPoint * 0.8f;
+            joint.minDistance = distanceFromPoint * 0.25f;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            float extendedDistanceFromPoint = Vector3.Distance(transform.position, swingPoint) + extendCableSpeed;
+
+            joint.maxDistance = extendedDistanceFromPoint * 0.8f;
+            joint.minDistance = extendedDistanceFromPoint * 0.25f;
+        }
     }
 }

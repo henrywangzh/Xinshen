@@ -11367,6 +11367,9 @@ GameObject:
   - component: {fileID: 1622452027422676408}
   - component: {fileID: 1622452027422676406}
   - component: {fileID: 1972243411234665722}
+  - component: {fileID: 2038843097397423655}
+  - component: {fileID: 8103047821866095291}
+  - component: {fileID: 56115233731183276}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -11733,6 +11736,50 @@ MonoBehaviour:
   bloodFX: {fileID: 7475258681696905396, guid: 6aa622b609202eb409c6d0bb1de7e3eb, type: 3}
   m_torsoTrfm: {fileID: 3572478479524031552}
   hitboxCollider: {fileID: 1622452027422676406}
+--- !u!114 &2038843097397423655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35f676b115011d14e840056db30d3350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchState:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8103047821866095291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266b01ce909e5c242ac8e45c09de6600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponCollider: {fileID: 0}
+--- !u!114 &56115233731183276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fadbfd627d2dfb46a933c37fdc4d8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  targLocked: 0
+  moveSpeed: 3
+  turnSpeed: 5
 --- !u!1 &1622452027453068107
 GameObject:
   m_ObjectHideFlags: 0
