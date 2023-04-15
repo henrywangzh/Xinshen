@@ -18,9 +18,12 @@ public class GlobalVariableManager : MonoBehaviour {
     // Combat Stats
     public static int Damage;
     public static int Armor;
-    public static string Stance;
+    public static StancesScriptController.Stance Stance;
     public static Transform LockedTarget = null;
-    
+    public static AbilitiesScriptController.Ability Ability1 = AbilitiesScriptController.Ability.Null;
+    public static AbilitiesScriptController.Ability Ability2 = AbilitiesScriptController.Ability.Null;
+
+
     // Inventory
     public static List<Item> Items = new List<Item>();
 

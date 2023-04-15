@@ -9,7 +9,7 @@ public class StancesScriptController : ScriptController
     DeterminationScriptController determination;
     ActualDiscordScriptController discord;
 
-    enum Stance
+    public enum Stance
     {
         discord,
         determination,

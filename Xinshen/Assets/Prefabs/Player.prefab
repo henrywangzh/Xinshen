@@ -11370,6 +11370,7 @@ GameObject:
   - component: {fileID: 2038843097397423655}
   - component: {fileID: 8103047821866095291}
   - component: {fileID: 56115233731183276}
+  - component: {fileID: 557452805525474370}
   - component: {fileID: 1243719911700389649}
   - component: {fileID: 2058568195420056383}
   m_Layer: 8
@@ -11456,7 +11457,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91ed37f618124b440bbe4863c9d75b69, type: 3}
   m_Name: 
@@ -11471,7 +11472,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18129fa22e7599748b1a8220a1d0a73e, type: 3}
   m_Name: 
@@ -11480,6 +11481,7 @@ MonoBehaviour:
   targLocked: 0
   moveSpeed: 4
   turnSpeed: 15
+  jumpHeight: 2
 --- !u!114 &1622452027422676413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11487,7 +11489,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9d8611b31fc6284aa435a9bc629eae9, type: 3}
   m_Name: 
@@ -11508,7 +11510,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 184b21ccd37ef9948b11852a8068c6c4, type: 3}
   m_Name: 
@@ -11521,7 +11523,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43159109f82a24a4fae56b7bb2a02efb, type: 3}
   m_Name: 
@@ -11735,6 +11737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HP: 0
   m_maxHP: 100
+  m_frenzyHPThresholdPercent: 0
   bloodFX: {fileID: 7475258681696905396, guid: 6aa622b609202eb409c6d0bb1de7e3eb, type: 3}
   m_torsoTrfm: {fileID: 3572478479524031552}
   hitboxCollider: {fileID: 1622452027422676406}
@@ -11745,7 +11748,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35f676b115011d14e840056db30d3350, type: 3}
   m_Name: 
@@ -11760,7 +11763,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 266b01ce909e5c242ac8e45c09de6600, type: 3}
   m_Name: 
@@ -11773,7 +11776,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fadbfd627d2dfb46a933c37fdc4d8ef, type: 3}
   m_Name: 
@@ -11782,6 +11785,21 @@ MonoBehaviour:
   targLocked: 0
   moveSpeed: 3
   turnSpeed: 5
+--- !u!114 &557452805525474370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160709f509ba19744b37409cd6edd11f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finishAbility:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!120 &1243719911700389649
 LineRenderer:
   m_ObjectHideFlags: 0

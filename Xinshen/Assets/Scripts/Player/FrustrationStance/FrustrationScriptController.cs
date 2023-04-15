@@ -11,6 +11,7 @@ public class FrustrationScriptController : ScriptController
     FrustrationEvade evade;
     FrustrationAttack attack;
     FrustrationDashStrike dashstrike;
+    AbilitiesScriptController ability;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class FrustrationScriptController : ScriptController
         evade = GetComponent<FrustrationEvade>();
         attack = GetComponent<FrustrationAttack>();
         dashstrike = GetComponent<FrustrationDashStrike>();
+        ability = GetComponent<AbilitiesScriptController>();
 
         // Setting up move node
         string stateName = "move";
@@ -52,14 +54,22 @@ public class FrustrationScriptController : ScriptController
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node dashStrikeNode = addNode(stateName, state, null, requiredStates, canBeInterruptedByTheseStates);
 
+        stateName = "ability";
+        state = new ScriptKeyPair(ability, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
+        requiredStates = new List<MonoBehaviour>();
+        canBeInterruptedByTheseStates = new List<MonoBehaviour>();
+        Node abilityNode = addNode(stateName, state, null, requiredStates, canBeInterruptedByTheseStates);
+
         moveNode.addNextAvailableStates(evadeNode);
         moveNode.addNextAvailableStates(attackNode);
         moveNode.addNextAvailableStates(moveNode);
         moveNode.addNextAvailableStates(dashStrikeNode);
+        moveNode.addNextAvailableStates(abilityNode);
         evadeNode.addNextAvailableStates(moveNode);
         attackNode.addNextAvailableStates(moveNode);
         dashStrikeNode.addNextAvailableStates(moveNode);
         dashStrikeNode.addNextAvailableStates(dashStrikeNode);
+        abilityNode.addNextAvailableStates(moveNode);
 
         setDefaultState(dashStrikeNode);
     }
@@ -67,6 +77,8 @@ public class FrustrationScriptController : ScriptController
     private void OnEnable()
     {
         anim.Play("Unsheathe");
+        GlobalVariableManager.Stance = StancesScriptController.Stance.frustration;
+        GlobalVariableManager.Ability1 = AbilitiesScriptController.Ability.CrossSlash;
     }
 
     private void Update()
