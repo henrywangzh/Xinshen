@@ -52,11 +52,15 @@ public class FlowMove : MonoBehaviour
             onGround |= normal.y >= 0.9f;
 		}
     }
+
+    void OnCollisionExit(Collision collision) {
+        onGround = false;
+    }
     
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("Oneground "+onGround);
         float xinput = Input.GetAxis("Horizontal");
         float yinput = Input.GetAxis("Vertical");
 
@@ -115,6 +119,5 @@ public class FlowMove : MonoBehaviour
             controller.switchState.Invoke("cross");
             anim.Play("FlowCrossSlash");
         }
-        onGround = false;
     }
 }
