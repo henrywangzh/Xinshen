@@ -22,7 +22,7 @@ public class DummyWeapon : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             int dmg = wielder.damage;
-            GlobalVariableManager.TakeDamage(dmg);
+            PlayerHP.TakeDamage(dmg);
         }
     }
 }

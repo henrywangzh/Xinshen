@@ -18,6 +18,7 @@ public class GlobalVariableManager : MonoBehaviour {
     // Combat Stats
     public static int Damage;
     public static int Armor;
+    public static bool FrenzyMode;
     public static StancesScriptController.Stance Stance;
     public static Transform LockedTarget = null;
     public static AbilitiesScriptController.Ability Ability1 = AbilitiesScriptController.Ability.Null;
@@ -28,7 +29,8 @@ public class GlobalVariableManager : MonoBehaviour {
     public static List<Item> Items = new List<Item>();
 
     // TakeDamage is called whenever damage is taken, subtracting dmg from health
-    public static void TakeDamage(int dmg)
+    /* IMPORTANT: this method is DEPRECATED, use PlayerHP.TakeDamage instead */
+    private void TakeDamage(int dmg) 
     {
         Debug.Log("Taking damage");
         Health = Health - dmg;

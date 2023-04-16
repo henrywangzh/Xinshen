@@ -60,7 +60,6 @@ public class FlowMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Oneground "+onGround);
         float xinput = Input.GetAxis("Horizontal");
         float yinput = Input.GetAxis("Vertical");
 
