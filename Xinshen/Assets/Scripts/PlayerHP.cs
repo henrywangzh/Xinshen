@@ -67,24 +67,49 @@ public class PlayerHP : MonoBehaviour
         else if (HP <= frenzyHP)
         {
             Debug.Log("frenzy time");
-            Color splatterAlpha = self.frenzySplatter.color;
-            splatterAlpha.a = 0.6f;
-            self.frenzySplatter.color = splatterAlpha;
-            GlobalVariableManager.FrenzyMode = true;
+            setFrenzyMode(true);
         }
         if (HP > frenzyHP || HP <= 0)
         {
-            Color splatterAlpha = self.frenzySplatter.color;
-            splatterAlpha.a = 0f;
-            self.frenzySplatter.color = splatterAlpha;
-            GlobalVariableManager.FrenzyMode = false;
+            setFrenzyMode(false);
         }
     }
 
-    public static void Heal(int heal)
+    public static void Heal(int heal=-1)
     {
+        if (heal == -1) { heal = maxHP; }
         HP += heal;
         if (HP > maxHP) { HP = maxHP; }
         self.m_HP = HP;
+        if (HP > frenzyHP)
+        {
+            setFrenzyMode(false);
+        }
+    }
+    private static void setFrenzyMode(bool frenzy)
+    {
+        GlobalVariableManager.FrenzyMode = frenzy;
+        if (frenzy){
+            Color splatterAlpha = self.frenzySplatter.color;
+            splatterAlpha.a = 0.6f;
+            self.frenzySplatter.color = splatterAlpha;
+        }
+        else{
+            Color splatterAlpha = self.frenzySplatter.color;
+            splatterAlpha.a = 0f;
+            self.frenzySplatter.color = splatterAlpha;
+        }
+
+        // TODO: add frenzy mode stat boost
+    }
+
+    private static void Die(){
+        // TODO: show death screen
+
+    }
+
+    private static void Respawn(){
+        // TODO: Respawn
+
     }
 }
