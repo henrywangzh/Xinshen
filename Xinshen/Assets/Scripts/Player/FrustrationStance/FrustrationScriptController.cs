@@ -78,7 +78,7 @@ public class FrustrationScriptController : ScriptController
     {
         anim.Play("Unsheathe");
         GlobalVariableManager.Stance = StancesScriptController.Stance.frustration;
-        GlobalVariableManager.Ability1 = AbilitiesScriptController.Ability.CrossSlash;
+        GlobalVariableManager.Ability1 = AbilitiesScriptController.Ability.JumpSlam;
     }
 
     private void Update()
