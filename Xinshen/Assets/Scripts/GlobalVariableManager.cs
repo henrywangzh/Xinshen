@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GlobalVariableManager : MonoBehaviour {
+
+    // Position Stats
+    public static Transform PlayerSpawn;
 
     // Health Stats
     public static int Health;
@@ -24,6 +28,17 @@ public class GlobalVariableManager : MonoBehaviour {
     public static AbilitiesScriptController.Ability Ability1 = AbilitiesScriptController.Ability.Null;
     public static AbilitiesScriptController.Ability Ability2 = AbilitiesScriptController.Ability.Null;
 
+    // Frenzy Stats 
+    public static int FrenzyThreshold;
+    public static int FrenzyDamageBonus;
+    public static int FrenzyArmorBonus;
+    public static int FrenzyWalkSpeedBonus;
+    public static int FrenzyRunSpeedBonus;
+    /* We can add more stats later */
+    
+    // Screens and UI
+    public static Image FrenzySplatter;
+    public static Image DeathScreen;
 
     // Inventory
     public static List<Item> Items = new List<Item>();

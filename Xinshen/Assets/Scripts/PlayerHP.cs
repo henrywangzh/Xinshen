@@ -9,7 +9,9 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] GameObject bloodFX;
     [SerializeField] Transform m_torsoTrfm;
     [SerializeField] CapsuleCollider hitboxCollider;
-    [SerializeField] private Image frenzySplatter = null;
+    [SerializeField] private Image frenzySplatter = null, deathScreen = null;
+    [SerializeField] Transform DebugSpawnPoint;
+    [SerializeField] int FrenzyAtkBoost = 5;
 
     static int HP, maxHP, frenzyHP, invulnerability;
 
@@ -25,6 +27,12 @@ public class PlayerHP : MonoBehaviour
         frenzyHP = (int)(m_maxHP * (m_frenzyHPThresholdPercent / 100f));
         self = GetComponent<PlayerHP>();
         torsoTrfm = m_torsoTrfm;
+
+        // Debug stuff for now
+        GlobalVariableManager.PlayerSpawn = DebugSpawnPoint;
+        GlobalVariableManager.FrenzySplatter = frenzySplatter;
+        GlobalVariableManager.DeathScreen = deathScreen;
+        GlobalVariableManager.FrenzyDamageBonus = FrenzyAtkBoost;
     }
 
     // Update is called once per frame
@@ -51,6 +59,7 @@ public class PlayerHP : MonoBehaviour
 
     public static void TakeDamage(int damage, bool playBloodFX = true, bool doDamageNumbers = true)
     {
+        if (HP <= 0) { return; }
         HP -= damage;
         self.m_HP = HP;
         Debug.Log("HP: " + HP);
@@ -62,7 +71,7 @@ public class PlayerHP : MonoBehaviour
         
         if (HP <= 0)
         {
-            Debug.Log("bit the dust");
+            Die();
         }
         else if (HP <= frenzyHP)
         {
@@ -88,28 +97,63 @@ public class PlayerHP : MonoBehaviour
     }
     private static void setFrenzyMode(bool frenzy)
     {
+        // TODO: complete boosts
+        if (frenzy != GlobalVariableManager.FrenzyMode)
+        {
+            FrenzyBoost(GlobalVariableManager.FrenzyMode);
+        }
         GlobalVariableManager.FrenzyMode = frenzy;
         if (frenzy){
-            Color splatterAlpha = self.frenzySplatter.color;
+            Color splatterAlpha = GlobalVariableManager.FrenzySplatter.color;
             splatterAlpha.a = 0.6f;
-            self.frenzySplatter.color = splatterAlpha;
+            GlobalVariableManager.FrenzySplatter.color = splatterAlpha;
         }
         else{
-            Color splatterAlpha = self.frenzySplatter.color;
+            Color splatterAlpha = GlobalVariableManager.FrenzySplatter.color;
             splatterAlpha.a = 0f;
-            self.frenzySplatter.color = splatterAlpha;
+            GlobalVariableManager.FrenzySplatter.color = splatterAlpha;
         }
 
         // TODO: add frenzy mode stat boost
     }
 
     private static void Die(){
-        // TODO: show death screen
-
+        Debug.Log("bit the dust");
+        self.StartCoroutine(self.FadeIn(GlobalVariableManager.DeathScreen));
+        self.StartCoroutine(self.Respawn());
     }
 
-    private static void Respawn(){
-        // TODO: Respawn
-
+    private static void FrenzyBoost(bool revert = false){
+        if (revert){
+            GlobalVariableManager.Damage -= GlobalVariableManager.FrenzyDamageBonus;
+        }
+        else{
+            GlobalVariableManager.Damage += GlobalVariableManager.FrenzyDamageBonus;
+        }
     }
+
+    IEnumerator Respawn(){
+        self.transform.position = GlobalVariableManager.PlayerSpawn.position;
+        yield return new WaitForSeconds(3f);
+        HP = maxHP;   
+        GlobalVariableManager.DeathScreen.color = new Color(1, 1, 1, 0); 
+        yield return null;    
+    }
+
+    // WIP: Fade in the input UI element
+
+    IEnumerator FadeIn( Image image )
+    {
+        Color c = image.color;
+        for (float alpha = c.a; alpha <= 1; alpha += 0.1f)
+        {
+            c.a = alpha;
+            image.color = c;
+            yield return null;
+        }
+        c.a = 1;
+        image.color = c;
+        yield return null;
+    }
+
 }
