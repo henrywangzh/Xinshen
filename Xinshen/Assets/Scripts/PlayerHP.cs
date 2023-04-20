@@ -33,6 +33,10 @@ public class PlayerHP : MonoBehaviour
         GlobalVariableManager.FrenzySplatter = frenzySplatter;
         GlobalVariableManager.DeathScreen = deathScreen;
         GlobalVariableManager.FrenzyDamageBonus = FrenzyAtkBoost;
+
+        if (GlobalVariableManager.PlayerSpawn == null) {
+            GlobalVariableManager.PlayerSpawn = transform;
+        }
     }
 
     // Update is called once per frame
@@ -105,7 +109,7 @@ public class PlayerHP : MonoBehaviour
         GlobalVariableManager.FrenzyMode = frenzy;
         if (frenzy){
             Color splatterAlpha = GlobalVariableManager.FrenzySplatter.color;
-            splatterAlpha.a = 0.6f;
+            splatterAlpha.a = 0.4f;
             GlobalVariableManager.FrenzySplatter.color = splatterAlpha;
         }
         else{
