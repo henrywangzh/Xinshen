@@ -23,10 +23,11 @@ public class DummyBehavior : Enemy
         sword.enabled = false;
     }
 
-    public override void TakeDamage(int dmg)
+    public override bool TakeDamage(int dmg)
     {
-        base.TakeDamage(dmg);
+        bool retVal = base.TakeDamage(dmg);
         ps.Play();
+        return retVal;
     }
 
     public override void Die()
