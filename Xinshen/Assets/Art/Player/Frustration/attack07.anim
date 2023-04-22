@@ -125493,15 +125493,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.26666668
-    functionName: StartSwing
+  - time: 0
+    functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.26666668
-    functionName: SetFwdVelocityFrust
+    functionName: StartSwing
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -125516,6 +125516,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.36666667
     functionName: EndSwing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.36666667
+    functionName: EndAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -125544,6 +125551,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.56666666
     functionName: ReadyCombo
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.56666666
+    functionName: SetFwdVelocityFrust
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
