@@ -11,7 +11,7 @@ public class Grapple : MonoBehaviour
     public LayerMask whatIsGrappleable;
 
     [Header("Swinging")]
-    private float maxSwingDistance = 35f;
+    public float maxSwingDistance = 35f;
     private Vector3 swingPoint;
     private SpringJoint joint;
 

@@ -11400,6 +11400,7 @@ Transform:
   - {fileID: 3572478479524031552}
   - {fileID: 6041723837054187487}
   - {fileID: 2463870216561883571}
+  - {fileID: 7058734412367663798}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11731,7 +11732,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1622452027422676384}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 51f99057b43e7459a845e00e800b3915, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.3
@@ -11757,6 +11758,9 @@ MonoBehaviour:
   m_torsoTrfm: {fileID: 3572478479524031552}
   hitboxCollider: {fileID: 1622452027422676406}
   frenzySplatter: {fileID: 0}
+  deathScreen: {fileID: 0}
+  DebugSpawnPoint: {fileID: 0}
+  FrenzyAtkBoost: 5
 --- !u!114 &2038843097397423655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11928,12 +11932,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lr: {fileID: 1243719911700389649}
-  gunTip: {fileID: 0}
+  gunTip: {fileID: 4344443219568930954}
   cam: {fileID: 0}
   player: {fileID: 1622452027422676409}
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 3703
+  maxSwingDistance: 35
   orientation: {fileID: 1622452027422676409}
   rb: {fileID: 1622452027422676408}
   horizontalThrustForce: 1000
@@ -12921,6 +12926,69 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2824343883652128242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7058734412367663798}
+  m_Layer: 0
+  m_Name: Grapple Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7058734412367663798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824343883652128242}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4344443219568930954}
+  m_Father: {fileID: 1622452027422676409}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3074807012966530629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4344443219568930954}
+  m_Layer: 0
+  m_Name: Gun Tip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4344443219568930954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3074807012966530629}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7058734412367663798}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3088424049744146757
 GameObject:
   m_ObjectHideFlags: 0
@@ -12960,7 +13028,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3088424049744146757}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 51f99057b43e7459a845e00e800b3915, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
