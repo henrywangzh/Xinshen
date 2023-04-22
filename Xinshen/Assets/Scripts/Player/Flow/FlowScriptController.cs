@@ -11,7 +11,7 @@ public class FlowScriptController : ScriptController
     FlowMove move;
     FlowEvade evade;
     FlowAttack attack;
-
+    AbilitiesScriptController ability;
     FlowCrossSlash cross;
 
     private void Awake()
@@ -27,6 +27,7 @@ public class FlowScriptController : ScriptController
         evade = GetComponent<FlowEvade>();
         attack = GetComponent<FlowAttack>();
         cross = GetComponent<FlowCrossSlash>();
+        ability = GetComponent<AbilitiesScriptController>();
 
         // Setting up move node
         string stateName = "move";
@@ -54,15 +55,25 @@ public class FlowScriptController : ScriptController
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node crossNode = addNode(atkname, state, null, requiredStates, canBeInterruptedByTheseStates);
 
+        stateName = "ability";
+        state = new ScriptKeyPair(ability, KeyCode.None);  // Script maps to a key. If the Keycode is None then the script cannot be switched into via keybinds
+        requiredStates = new List<MonoBehaviour>();
+        canBeInterruptedByTheseStates = new List<MonoBehaviour>();
+        Node abilityNode = addNode(stateName, state, null, requiredStates, canBeInterruptedByTheseStates);
+
         moveNode.addNextAvailableStates(evadeNode);
         moveNode.addNextAvailableStates(attackNode);
         moveNode.addNextAvailableStates(moveNode);
         moveNode.addNextAvailableStates(crossNode);
+        moveNode.addNextAvailableStates(abilityNode);
         evadeNode.addNextAvailableStates(moveNode);
         attackNode.addNextAvailableStates(moveNode);
         attackNode.addNextAvailableStates(evadeNode);
         attackNode.addNextAvailableStates(crossNode);
+        attackNode.addNextAvailableStates(abilityNode);
         crossNode.addNextAvailableStates(moveNode);
+        abilityNode.addNextAvailableStates(moveNode);
+
 
         setDefaultState(moveNode);
     }
@@ -71,6 +82,8 @@ public class FlowScriptController : ScriptController
     {
         anim.Play("FlowTransitionIn");
         GlobalVariableManager.Stance = StancesScriptController.Stance.flow;
+        GlobalVariableManager.Ability1 = AbilitiesScriptController.Ability.CrossSlash;
+        GlobalVariableManager.Ability2 = AbilitiesScriptController.Ability.DoubleKick;
     }
 
     private void Update()
