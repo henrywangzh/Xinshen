@@ -205,7 +205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &539863478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,14 +311,14 @@ MonoBehaviour:
   - {fileID: 8555192757271917523, guid: a486018243c35e74297f261b11fb89bb, type: 3}
   windTunnel: {fileID: 869108579543961114, guid: 6a99febded7634935807e793d2374560, type: 3}
   spawnChance: 1
-  spawnChanceDecrRate: 0.05
+  spawnChanceDecrRate: 0.01
   linearity: 0.5
   yElevation: 0
   currentAlgorithm: 1
   gridSpaceSize: 26
   floors: 5
   linearityPersistence: 10
-  skipChance: 0.9
+  skipChance: 0
 --- !u!4 &1081300062
 Transform:
   m_ObjectHideFlags: 0
