@@ -49,7 +49,7 @@ public class FlowAttack : MonoBehaviour
             DodgeCancel();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.F))
         {
             CrossSlash();
         }
@@ -107,8 +107,8 @@ public class FlowAttack : MonoBehaviour
     void CrossSlash()
     {
         Cleanup();
-        anim.Play("FlowCrossSlash");
-        controller.switchState.Invoke("cross");
+        // anim.Play("FlowCrossSlash");
+        controller.switchState.Invoke("ability");
     }
 
     //public void OrientTowardsInput()

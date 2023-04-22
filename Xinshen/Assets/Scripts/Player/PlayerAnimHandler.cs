@@ -8,6 +8,8 @@ public class PlayerAnimHandler : MonoBehaviour
     FlowScriptController controller;
     Rigidbody rb;
     [SerializeField] BoxCollider weaponCollider;
+    [SerializeField] ParticleSystem leftLegTrail;
+    [SerializeField] ParticleSystem rightLegTrail;
     PlayerWeapon weapon;
     bool canCancel = false;
     Transform cam;
@@ -72,6 +74,31 @@ public class PlayerAnimHandler : MonoBehaviour
     {
         weaponCollider.enabled = false;
         weapon.SetPSEmission(false);
+    }
+
+    // 0 - left, 1 - right, 2 - both
+    public void StartKick(int leg)
+    {
+        weaponCollider.enabled = true;
+        switch (leg)
+        {
+            case 0:
+                leftLegTrail.Emit(10);
+                break;
+            case 1:
+                rightLegTrail.Emit(10);
+                break;
+            case 2:
+                leftLegTrail.Emit(10);
+                rightLegTrail.Emit(10);
+                break;
+        }
+    }
+
+    // 0 - left, 1 - right, 2 - both
+    public void EndKick(int leg)
+    {
+        weaponCollider.enabled = false;
     }
 
     public void SetFwdVelocity(float vel)

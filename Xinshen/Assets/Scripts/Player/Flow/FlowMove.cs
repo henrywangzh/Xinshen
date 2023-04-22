@@ -113,10 +113,10 @@ public class FlowMove : MonoBehaviour
             anim.Play("SlashCombo1_1");
             rb.velocity = Vector3.zero;
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.F))
         {
-            controller.switchState.Invoke("cross");
-            anim.Play("FlowCrossSlash");
+            controller.switchState.Invoke("ability");
+            // anim.Play("FlowCrossSlash");
         }
     }
 }
