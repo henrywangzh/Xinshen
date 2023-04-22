@@ -24,12 +24,12 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // Can assign negative number to heal
-    public virtual void TakeDamage(int dmg)
+    public virtual bool TakeDamage(int dmg)
     {
-        TakeDamage(dmg, true, true);
+        return TakeDamage(dmg, true, true);
     }
 
-    public virtual void TakeDamage(int dmg, bool doSlashFX = true, bool doDamageNumber = true)
+    public virtual bool TakeDamage(int dmg, bool doSlashFX = true, bool doDamageNumber = true)
     {
         if (doSlashFX) { Instantiate(slashFXObj, transform.position + Vector3.up * centerYOffset, transform.rotation); }
         if (doDamageNumber) { GameManager.InstantiateDamageNumber(transform.position + Vector3.up * centerYOffset, dmg, GameManager.BLUE); }
@@ -49,8 +49,9 @@ public abstract class Enemy : MonoBehaviour
             {
                 Debug.LogError("Abstract function Die() is not given an override! Please define an override function for Die() in the class inheriting from Enemy");
             }
-            
+            return true;
         }
+        return false;
     }
 
     public abstract void Die();

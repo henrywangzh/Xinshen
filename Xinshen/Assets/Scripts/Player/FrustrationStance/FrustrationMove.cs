@@ -67,6 +67,10 @@ public class FrustrationMove : GlobalVariableManager
             PlayerHP.SetInvulnerable(16);
             */
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            controller.switchState.Invoke("ability");
+        }
 
     }
     

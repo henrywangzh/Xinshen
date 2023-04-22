@@ -25,7 +25,7 @@ public class Arrow : MonoBehaviour {
             // Gets GVM of player
             GlobalVariableManager GlobalVariableManager = other.GetComponent<GlobalVariableManager>();
             // Uses GVM to take damage for player
-            GlobalVariableManager.TakeDamage(damage);
+            PlayerHP.TakeDamage(damage);
         }
 
         // Disables arrow if it hits

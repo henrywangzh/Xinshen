@@ -24,6 +24,7 @@ public class FlowCrossSlash : MonoBehaviour
             animhandler = GetComponent<PlayerAnimHandler>();
         }
         animhandler.AdjustSlashHitbox(1.5f);
+        anim.Play("FlowCrossSlash");
     }
 
     // Update is called once per frame

@@ -41,8 +41,15 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Enemy>() != null)
         {
-            other.gameObject.GetComponent<Enemy>().TakeDamage(GlobalVariableManager.Damage);
-            other.gameObject.GetComponent<Enemy>().TakeKnockback(PlayerHP.torsoTrfm.position + PlayerHP.torsoTrfm.forward * -2, knockbackPower, stunPower);
+            if (other.gameObject.GetComponent<Enemy>().TakeDamage(GlobalVariableManager.Damage)){
+                // heal player to full if enemy is killed in frenzy mode
+                if (GlobalVariableManager.FrenzyMode){
+                    PlayerHP.Heal();
+                }
+            }
+            else {
+                other.gameObject.GetComponent<Enemy>().TakeKnockback(PlayerHP.torsoTrfm.position + PlayerHP.torsoTrfm.forward * -2, knockbackPower, stunPower);
+            }
         }
     }
 }

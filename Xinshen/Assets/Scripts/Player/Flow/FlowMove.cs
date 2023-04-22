@@ -13,9 +13,14 @@ public class FlowMove : MonoBehaviour
     // TODO: use global variable manager instead of local variable
     [SerializeField] float moveSpeed = 3f;
     [SerializeField] float turnSpeed = 5f;
+    [SerializeField] float jumpHeight = 2f;
 
     float speed;
     float dashTimer = 0;
+    bool onGround = false;
+
+    Grapple grapple;
+    bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +28,7 @@ public class FlowMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
+        grapple = GetComponent<Grapple>();
         speed = moveSpeed;
         dashTimer = 0;
     }
@@ -32,6 +38,25 @@ public class FlowMove : MonoBehaviour
         dashTimer = dashCD;
     }
 
+    void OnCollisionEnter (Collision collision) {
+		EvaluateCollision(collision);
+	}
+
+	void OnCollisionStay (Collision collision) {
+		EvaluateCollision(collision);
+	}
+	
+	void EvaluateCollision (Collision collision) {
+        for (int i = 0; i < collision.contactCount; i++) {
+			Vector3 normal = collision.GetContact(i).normal;
+            onGround |= normal.y >= 0.7f;
+		}
+    }
+
+    void OnCollisionExit(Collision collision) {
+        onGround = false;
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +66,20 @@ public class FlowMove : MonoBehaviour
         Vector3 moveDirection = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * yinput + new Vector3(cam.right.x, 0, cam.right.z).normalized * xinput).normalized * speed;
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
-        rb.velocity = moveDirection;
+
+        // TODO: add check for onGround, we don't want to affect movement if we are not on the ground
+        if (!grapple.isGrappling())
+        {
+            rb.velocity = moveDirection;
+        }
+
+        if (onGround && Input.GetKeyDown(KeyCode.Space))
+        {
+            moveDirection.y += Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
+            rb.velocity = moveDirection;
+            Debug.Log("Jump");
+            Debug.Log((jumpHeight, rb.velocity.y));
+        }
 
         if (targLocked)
         {
@@ -56,7 +94,7 @@ public class FlowMove : MonoBehaviour
             anim.SetFloat("yInput", Mathf.Sqrt(yinput*yinput + xinput*xinput) * 2f);
             transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(moveDirection.x, 0, moveDirection.z), turnSpeed * Time.deltaTime, 0f);
             // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
-        }
+        }      
         
         if (dashTimer > 0)
         {

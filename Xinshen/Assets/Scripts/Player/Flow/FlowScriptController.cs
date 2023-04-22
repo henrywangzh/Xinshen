@@ -70,6 +70,7 @@ public class FlowScriptController : ScriptController
     private void OnEnable()
     {
         anim.Play("FlowTransitionIn");
+        GlobalVariableManager.Stance = StancesScriptController.Stance.flow;
     }
 
     private void Update()

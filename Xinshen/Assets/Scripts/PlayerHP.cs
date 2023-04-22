@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
 {
-    [SerializeField] int m_HP, m_maxHP;
+    [SerializeField] int m_HP, m_maxHP, m_frenzyHPThresholdPercent;
     [SerializeField] GameObject bloodFX;
     [SerializeField] Transform m_torsoTrfm;
     [SerializeField] CapsuleCollider hitboxCollider;
+    [SerializeField] private Image frenzySplatter = null, deathScreen = null;
+    [SerializeField] Transform DebugSpawnPoint;
+    [SerializeField] int FrenzyAtkBoost = 5;
 
-    static int HP, maxHP, invulnerability;
+    static int HP, maxHP, frenzyHP, invulnerability;
 
     static PlayerHP self;
 
@@ -20,9 +24,19 @@ public class PlayerHP : MonoBehaviour
         m_HP = m_maxHP;
         maxHP = m_maxHP;
         HP = m_maxHP;
-
+        frenzyHP = (int)(m_maxHP * (m_frenzyHPThresholdPercent / 100f));
         self = GetComponent<PlayerHP>();
         torsoTrfm = m_torsoTrfm;
+
+        // Debug stuff for now
+        GlobalVariableManager.PlayerSpawn = DebugSpawnPoint;
+        GlobalVariableManager.FrenzySplatter = frenzySplatter;
+        GlobalVariableManager.DeathScreen = deathScreen;
+        GlobalVariableManager.FrenzyDamageBonus = FrenzyAtkBoost;
+
+        if (GlobalVariableManager.PlayerSpawn == null) {
+            GlobalVariableManager.PlayerSpawn = transform;
+        }
     }
 
     // Update is called once per frame
@@ -49,8 +63,10 @@ public class PlayerHP : MonoBehaviour
 
     public static void TakeDamage(int damage, bool playBloodFX = true, bool doDamageNumbers = true)
     {
+        if (HP <= 0) { return; }
         HP -= damage;
         self.m_HP = HP;
+        Debug.Log("HP: " + HP);
 
         if (playBloodFX) { Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation); }
         if (doDamageNumbers) { GameManager.InstantiateDamageNumber(torsoTrfm.position, damage, GameManager.RED); }
@@ -59,7 +75,89 @@ public class PlayerHP : MonoBehaviour
         
         if (HP <= 0)
         {
-            Debug.Log("bit the dust");
+            Die();
+        }
+        else if (HP <= frenzyHP)
+        {
+            Debug.Log("frenzy time");
+            setFrenzyMode(true);
+        }
+        if (HP > frenzyHP || HP <= 0)
+        {
+            setFrenzyMode(false);
         }
     }
+
+    public static void Heal(int heal=-1)
+    {
+        if (heal == -1) { heal = maxHP; }
+        HP += heal;
+        if (HP > maxHP) { HP = maxHP; }
+        self.m_HP = HP;
+        if (HP > frenzyHP)
+        {
+            setFrenzyMode(false);
+        }
+    }
+    private static void setFrenzyMode(bool frenzy)
+    {
+        // TODO: complete boosts
+        if (frenzy != GlobalVariableManager.FrenzyMode)
+        {
+            FrenzyBoost(GlobalVariableManager.FrenzyMode);
+        }
+        GlobalVariableManager.FrenzyMode = frenzy;
+        if (frenzy){
+            Color splatterAlpha = GlobalVariableManager.FrenzySplatter.color;
+            splatterAlpha.a = 0.4f;
+            GlobalVariableManager.FrenzySplatter.color = splatterAlpha;
+        }
+        else{
+            Color splatterAlpha = GlobalVariableManager.FrenzySplatter.color;
+            splatterAlpha.a = 0f;
+            GlobalVariableManager.FrenzySplatter.color = splatterAlpha;
+        }
+
+        // TODO: add frenzy mode stat boost
+    }
+
+    private static void Die(){
+        Debug.Log("bit the dust");
+        self.StartCoroutine(self.FadeIn(GlobalVariableManager.DeathScreen));
+        self.StartCoroutine(self.Respawn());
+    }
+
+    private static void FrenzyBoost(bool revert = false){
+        if (revert){
+            GlobalVariableManager.Damage -= GlobalVariableManager.FrenzyDamageBonus;
+        }
+        else{
+            GlobalVariableManager.Damage += GlobalVariableManager.FrenzyDamageBonus;
+        }
+    }
+
+    IEnumerator Respawn(){
+        self.transform.position = GlobalVariableManager.PlayerSpawn.position;
+        yield return new WaitForSeconds(3f);
+        HP = maxHP;   
+        GlobalVariableManager.DeathScreen.color = new Color(1, 1, 1, 0); 
+        yield return null;    
+    }
+
+    // WIP: Fade in the input UI element
+
+    IEnumerator FadeIn( Image image )
+    {
+        Color c = image.color;
+        for (float alpha = c.a; alpha <= 1; alpha += 0.1f)
+        {
+            c.a = alpha;
+            image.color = c;
+            yield return null;
+        }
+        c.a = 1;
+        image.color = c;
+        yield return null;
+    }
+
 }
