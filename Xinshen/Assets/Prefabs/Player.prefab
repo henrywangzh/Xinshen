@@ -9857,8 +9857,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 10
-  stunPower: 30
+  _knockbackPower: 0
+  _stunPower: 0
+  _traumaPower: 0
   ps: {fileID: 5588416017458312304}
 --- !u!1 &1622452025970368418
 GameObject:
@@ -11336,8 +11337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 20
-  stunPower: 0
+  _knockbackPower: 0
+  _stunPower: 0
+  _traumaPower: 0
   ps: {fileID: 0}
 --- !u!1 &1622452027231566635
 GameObject:
@@ -11869,6 +11871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71378117466fca44902aeeba6275353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockback: 20
+  stunFrames: 100
 --- !u!120 &1243719911700389649
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -11987,6 +11991,7 @@ MonoBehaviour:
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 3703
+  maxSwingDistance: 35
   orientation: {fileID: 1622452027422676409}
   rb: {fileID: 1622452027422676408}
   horizontalThrustForce: 1000
@@ -13044,7 +13049,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3088424049744146757}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 51f99057b43e7459a845e00e800b3915, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

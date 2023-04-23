@@ -7,7 +7,7 @@ public class PlayerAnimHandler : MonoBehaviour
     Animator anim;
     FlowScriptController controller;
     Rigidbody rb;
-    [SerializeField] BoxCollider weaponCollider;
+    [SerializeField] public BoxCollider weaponCollider;
     [SerializeField] ParticleSystem leftLegTrail;
     [SerializeField] ParticleSystem rightLegTrail;
     PlayerWeapon weapon;
