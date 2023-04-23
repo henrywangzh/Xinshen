@@ -32,6 +32,7 @@ public class AbilitiesScriptController : MonoBehaviour
 
     // (STEP 2) Add a script reference for your ability (make sure your script is DISABLED on the Player GameObject!)
     FlowCrossSlash crossSlash;
+    DoubleKick dblKick;
     JumpSlam jumpSlam;
 
     void Awake()
@@ -41,11 +42,12 @@ public class AbilitiesScriptController : MonoBehaviour
         // (STEP 3) Get the reference to your ability script
         crossSlash = GetComponent<FlowCrossSlash>();
         jumpSlam = GetComponent<JumpSlam>();
+        dblKick = GetComponent<DoubleKick>();
 
         // (STEP 4) Add your script reference to this dictionary, following the format {Ability, Script}
         abilityDict = new Dictionary<Ability, MonoBehaviour>()
         {
-            {Ability.CrossSlash, crossSlash},{Ability.JumpSlam, jumpSlam}, 
+            {Ability.CrossSlash, crossSlash},{Ability.DoubleKick, dblKick},{Ability.JumpSlam, jumpSlam}, 
         };
     }
 
