@@ -11987,6 +11987,7 @@ MonoBehaviour:
   whatIsGrappleable:
     serializedVersion: 2
     m_Bits: 3703
+  maxSwingDistance: 35
   orientation: {fileID: 1622452027422676409}
   rb: {fileID: 1622452027422676408}
   horizontalThrustForce: 1000
@@ -13044,7 +13045,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3088424049744146757}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 51f99057b43e7459a845e00e800b3915, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
