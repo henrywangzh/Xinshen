@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public int FirstLevel, UI;
-    public GameObject MainMenu, CreditMenu, SettingsMenu, PauseMenu;
+    public GameObject MainMenu, CreditMenu, SettingsMenu, PauseMenu, PauseButton;
 
     public void StartGame()
     {
@@ -34,9 +34,8 @@ public class UIManager : MonoBehaviour
         MainMenu.SetActive(true);
         CreditMenu.SetActive(false);
         SettingsMenu.SetActive(false);
-        //pauseScreen.SetActive(false);
+        //pauseMenu.SetActive(false);
         //PauseButton.SetActive(false);
-
     }
 
     public void QuitGame()
@@ -49,11 +48,13 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         PauseMenu.SetActive(true);
+        PauseButton.SetActive(false);
     }
 
     public void Resume()
     {
         Time.timeScale = 1f;
         PauseMenu.SetActive(false);
+        PauseButton.SetActive(true);
     }
 }
