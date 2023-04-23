@@ -20,14 +20,28 @@ public abstract class Enemy : MonoBehaviour
 
     Transform trfm;
     EnemyCamp enemyCamp;
+    Rigidbody _rb;
 
-    protected void Start()
+
+    protected virtual void Start()
     {
         trfm = transform;
-
+        _rb = GetComponent<Rigidbody>();
         hp = maxHP;
+        onStun = new UnityEvent();
+        onAtkInterrupt = new UnityEvent();
 
         InvokeRepeating("InvokedFixedUpdate", .02f, .02f);
+    }
+
+    public int GetStunMeter()
+    {
+        return stunMeter;
+    }
+
+    public virtual bool TakeDamage(int dmg)
+    {
+        return TakeDamage(dmg, true, true, 5);
     }
 
     // Can assign negative number to heal
@@ -83,7 +97,7 @@ public abstract class Enemy : MonoBehaviour
     //source: where the knockback is coming from (flies away from source); power: how much to knockback
     public void TakeKnockback(Vector3 source, float power, int stunFrames = -1)
     {
-        GetComponent<Rigidbody>().velocity = (trfm.position - source).normalized * power;
+        _rb.velocity = (trfm.position - source).normalized * power;
         if (stunFrames < 0)
             stunned = (int)(power * 2);
         else

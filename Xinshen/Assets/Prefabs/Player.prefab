@@ -9857,8 +9857,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 10
-  stunPower: 30
+  _knockbackPower: 0
+  _stunPower: 0
+  _traumaPower: 0
   ps: {fileID: 5588416017458312304}
 --- !u!1 &1622452025970368418
 GameObject:
@@ -11336,8 +11337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc32f728d7db154180a19b6c026f9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackPower: 20
-  stunPower: 0
+  _knockbackPower: 0
+  _stunPower: 0
+  _traumaPower: 0
   ps: {fileID: 0}
 --- !u!1 &1622452027231566635
 GameObject:
@@ -11869,6 +11871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71378117466fca44902aeeba6275353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockback: 20
+  stunFrames: 100
 --- !u!120 &1243719911700389649
 LineRenderer:
   m_ObjectHideFlags: 0
