@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 
 public class DiscordAttack : MonoBehaviour
@@ -8,7 +9,6 @@ public class DiscordAttack : MonoBehaviour
     ActualDiscordScriptController controller;
     Rigidbody rb;
     [SerializeField] Collider weaponCollider;
-
 
     // Start is called before the first frame update
     void Start()
@@ -31,19 +31,19 @@ public class DiscordAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            //SetCombo(1);
-
-        }*/
-
         if (Input.GetMouseButtonDown(0))
         {
-            //isAttacking1 = true;
-            //anim.SetBool("DiscordAttack", true);
-            DiscordCombo(1);
 
+            DiscordCombo(1);
         }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //isAttacking1 = true;
+        //anim.SetBool("DiscordAttack", true);
+
+        //DiscordCombo(1);
+
+        //}
     }
     public void StartSwing()
     {
@@ -66,10 +66,20 @@ public class DiscordAttack : MonoBehaviour
         weaponCollider.enabled = false;
         controller.switchState.Invoke("discordMove");
     }
+
     public void EndAttack()
     {
         if (this.isActiveAndEnabled)
             controller.switchState.Invoke("discordMove");
+    }
+
+    // Move player after attack
+    public float moveSpeed = 3f;
+    // Function triggered by the animation event
+    public void UpdateDiscordPlayerPosition()
+    {
+        // Update player's position based on forward movement
+        transform.position += transform.forward * moveSpeed * Time.deltaTime;
     }
 }
 
