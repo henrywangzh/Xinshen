@@ -9,7 +9,14 @@ public class Shatter : Enemy
 
     public override void Die()
     {
-        Instantiate(shatteredVersion, transform.position, Quaternion.identity);
+        GameObject shatteredObject = Instantiate(shatteredVersion, transform.position, Quaternion.identity);
+
+        Rigidbody[] rigidbodies = shatteredObject.GetComponentsInChildren<Rigidbody>();
+        foreach(Rigidbody rb in rigidbodies)
+        {
+                rb.AddExplosionForce(Random.Range(500, 1000), transform.position, 10);
+        }
+
         Destroy(parent);
     }
 
