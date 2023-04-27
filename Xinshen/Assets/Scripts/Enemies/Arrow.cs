@@ -6,7 +6,7 @@ using UnityEngine;
 // https://www.youtube.com/watch?v=QzitQSLhfG0
 
 public class Arrow : MonoBehaviour {
-    [SerializeField] public float AutoDestroyTime = 5f; // destroy the arrow set time after it's been shot
+    [SerializeField] public float AutoDestroyTime = 2f; // destroy the arrow set time after it's been shot
     [SerializeField] public int damage = 5; // damage p/arrow
     Rigidbody rb; // rigidbody of obj.
 

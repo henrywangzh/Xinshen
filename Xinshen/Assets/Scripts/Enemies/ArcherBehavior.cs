@@ -10,6 +10,7 @@ public class ArcherBehavior : Enemy
     [SerializeField] Transform player; // location of player
     [SerializeField] Vector3 chestOffset = new Vector3(0, 1.84f, 0); // currently defaulted to roughly at the chest
     Rigidbody rb; // rigidbody of enemy
+    Animator anim;
     
     [SerializeField] List<Transform> pathCheckpoints;
     int curCheckpoint = 0;
@@ -60,7 +61,7 @@ public class ArcherBehavior : Enemy
             lookingDirection.Normalize();
             lookingDirection.y = 0;
             targetRotation = Quaternion.LookRotation(lookingDirection);
-            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360 * Time.deltaTime);
+            targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 1080 * Time.deltaTime);
             rb.MoveRotation(targetRotation);
         } else {
             lookingDirection = vectorTowardsPlayer;
@@ -94,8 +95,13 @@ public class ArcherBehavior : Enemy
             }
 
         } else if (enemyDetected && !attacking) {
+            Debug.Log("Help");
             attacking = true;
+            Debug.Log("What");
+            //anim.SetBool("Attacking", true);
+            Debug.Log("Help2");
             StartCoroutine(Attack());
+            Debug.Log("Help3");
         }
     }
 
@@ -121,6 +127,8 @@ public class ArcherBehavior : Enemy
     IEnumerator Attack() {
 
         attacking = true;
+        //anim.SetBool("Attacking", true);
+        Debug.Log("Start Atk");
         while (enemyDetected) {
             WaitForSeconds wait = new WaitForSeconds(shootingSpeed);
             yield return wait;
@@ -129,12 +137,14 @@ public class ArcherBehavior : Enemy
         
         // enemy is no longer detected
         attacking = false;
+        anim.SetBool("Attacking", false);
         StopCoroutine(Attack());
     }
     
     // Shoot an arrow at the player at a regular interval
     void Shoot() {
         shotArrow = Instantiate(arrow, transform.position + arrowSpawnOffset, arrowRotation);
+        Debug.Log("Shoot");
         Rigidbody arrowRb = shotArrow.GetComponent<Rigidbody>();
         arrowRb.velocity = Vector3.Normalize(vectorTowardsPlayer) * arrowMoveSpeed;
     }
@@ -172,6 +182,7 @@ public class ArcherBehavior : Enemy
     public override void Die()
     {
         Debug.Log("ahhhh im dying");
+        anim.Play("ArcherDie");
         Destroy(gameObject);
     }
 }
