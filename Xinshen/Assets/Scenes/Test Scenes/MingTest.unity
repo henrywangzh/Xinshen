@@ -16402,6 +16402,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 144016782}
     - target: {fileID: 366500968746318011, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 366500968746318011, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
       propertyPath: decisionPeriod
       value: 1.5
       objectReference: {fileID: 0}
