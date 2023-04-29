@@ -58,7 +58,7 @@ public abstract class Enemy : MonoBehaviour
             stunned = stunDuration;
             if (!prevStun)
                 onStun.Invoke();
-        } 
+        }
         if (!IsStunned() && trauma > poise)
         {
             onAtkInterrupt.Invoke(); // Invoke attack interrupt
@@ -89,6 +89,11 @@ public abstract class Enemy : MonoBehaviour
     protected bool IsStunned()
     {
         return stunned > 0;
+    }
+
+    protected void Stun(int duration)
+    {
+        if (stunned < duration) { stunned = duration; }
     }
 
     public static void AssignSlashFXObj(GameObject obj)
