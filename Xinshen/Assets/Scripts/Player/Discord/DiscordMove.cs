@@ -36,6 +36,11 @@ public class DiscordMove : MonoBehaviour
     [SerializeField] private bool isFalling = false; // Flag to track if the player is currently falling
     private float fallStartTime; // Time when the player starts falling
 
+    // Rolling
+    public float rollForce = 10.0f; // The force applied to perform the roll
+    //public Animator animator; // Reference to the player's animator component
+    private Vector3 currentMoveDirection; // The current movement direction of the player
+
     // Update is called once per frame
     void Update()
     {
@@ -64,11 +69,11 @@ public class DiscordMove : MonoBehaviour
 
 
         //Attacking
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+      /*  if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             controller.switchState.Invoke("evade");
             PlayerHP.SetInvulnerable(16);
-        }
+        }*/
         if (Input.GetMouseButtonDown(0))
         {
             controller.switchState.Invoke("discordAttack");
@@ -76,11 +81,41 @@ public class DiscordMove : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
 
+        //Rolling  
+        // Get the input for movement
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        // Update the current movement direction
+        currentMoveDirection = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        // Check for input to perform roll
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            // Perform roll in the current movement direction
+            PerformRoll(currentMoveDirection);
+        }
+        void PerformRoll(Vector3 rollDirection)
+        {
+        // Normalize the roll direction
+        rollDirection.Normalize();
+
+        // Apply a force to the player in the roll direction
+        rb.AddForce(rollDirection * rollForce, ForceMode.Impulse);
+
+        // Play the rolling animation
+        anim.Play("Rolling");
+
+            //ISSUE:  DOES NOT UPDATE PLAYER AFTER ROLLING
+
+            //Make player invulerable ???
+            PlayerHP.SetInvulnerable(16);
+        }
+
 
         //Player is climbing
-
-        // Detect input for 'W' key
+        // Detect input for 'W' key, also 'A', 'D'
         bool isHoldingW = Input.GetKey(KeyCode.W);
+        bool isHoldingD = Input.GetKey(KeyCode.D);
+        bool isHoldingA = Input.GetKey(KeyCode.A);
         // Check if player is colliding with a wall
         bool isCollidingWithWall = false;
         //collision detection:
@@ -112,6 +147,12 @@ public class DiscordMove : MonoBehaviour
             //play climbing animation
             anim.Play("Climbing");
         }
+        else if (isHoldingD && isCollidingWithWall && isClimbing)
+        {
+            transform.position += Vector3.right * 1f * Time.deltaTime;
+            anim.Play("Climbing");
+
+        }
         else if (!isHoldingW && isCollidingWithWall)
         {
             rb.useGravity = false;  
@@ -123,6 +164,8 @@ public class DiscordMove : MonoBehaviour
             rb.useGravity = true;
             // Reset climbing logic
             // e.g., restore player's movement, animation, physics, etc.
+
+            //anim.Play("Falling");
         }
 
 
