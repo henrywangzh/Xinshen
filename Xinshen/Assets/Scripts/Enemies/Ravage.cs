@@ -95,6 +95,9 @@ public class Ravage :  Enemy
         {
             isAngered = false; //The enemy stop chasing after the player
         }
+        else {
+            lookAtPlayer();
+        }
 
 
         if (isAngered && distance >= attack_range)
@@ -112,5 +115,10 @@ public class Ravage :  Enemy
                 Lunge();
             }
         }
-    }   
+    }
+    private void lookAtPlayer()
+    {
+        Vector3 direction = player.position - this.transform.position;
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
+    }
 }
