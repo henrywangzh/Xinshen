@@ -10,9 +10,9 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] public int damage = 20;
     [SerializeField] public int stunMeterMax = 100;
     [SerializeField] public int poise = 20;
-    [SerializeField] public int stunDuration = 50;
-    int stunned;
-    int stunMeter = 0;
+    [SerializeField] public int stunDuration = 200;
+    [SerializeField] int stunned;
+    [SerializeField] int stunMeter = 0;
 
     static GameObject slashFXObj;
     protected UnityEvent onStun;
@@ -50,16 +50,18 @@ public abstract class Enemy : MonoBehaviour
         if (doSlashFX) { Instantiate(slashFXObj, transform.position + Vector3.up * centerYOffset, transform.rotation); }
         if (doDamageNumber) { GameManager.InstantiateDamageNumber(transform.position + Vector3.up * centerYOffset, dmg, GameManager.BLUE); }
 
-        if (trauma > poise)
-        {
-            onAtkInterrupt.Invoke(); // Invoke attack interrupt
-        }
         stunMeter += trauma;
         if (stunMeter > stunMeterMax)
         {
+            bool prevStun = stunned > 0;
             stunMeter = 0;
             stunned = stunDuration;
-            onStun.Invoke();
+            if (!prevStun)
+                onStun.Invoke();
+        }
+        if (!IsStunned() && trauma > poise)
+        {
+            onAtkInterrupt.Invoke(); // Invoke attack interrupt
         }
 
         hp -= dmg;
@@ -89,6 +91,11 @@ public abstract class Enemy : MonoBehaviour
         return stunned > 0;
     }
 
+    protected void Stun(int duration)
+    {
+        if (stunned < duration) { stunned = duration; }
+    }
+
     public static void AssignSlashFXObj(GameObject obj)
     {
         slashFXObj = obj;
@@ -98,11 +105,17 @@ public abstract class Enemy : MonoBehaviour
     public void TakeKnockback(Vector3 source, float power, int stunFrames = -1)
     {
         _rb.velocity = (trfm.position - source).normalized * power;
+        bool alreadyStunned = stunned > 0;
         if (stunFrames < 0)
-            stunned = (int)(power * 2);
-        else
-            stunned = stunFrames;
-        if (stunned > 0)
+        {
+            stunned = 0;
+        }
+        else if (stunFrames > 10)   
+        {
+            stunned = stunDuration;
+        }
+            
+        if (stunned > 0 && !alreadyStunned)
         {
             onStun.Invoke();
         }
