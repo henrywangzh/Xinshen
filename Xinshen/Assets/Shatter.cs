@@ -19,6 +19,8 @@ public class Shatter : Enemy
     [SerializeField]
     private float PieceFadeSpeed = 0.25f;
 
+    private GameObject shatteredObject;
+
 
     public override void Die()
     {
@@ -26,7 +28,7 @@ public class Shatter : Enemy
         GetComponent<Collider>().enabled = false;
         GetComponent<Renderer>().enabled = false;
 
-        GameObject shatteredObject = Instantiate(shatteredVersion, transform.position, Quaternion.identity);
+        shatteredObject = Instantiate(shatteredVersion, transform.position, Quaternion.identity);
 
         Rigidbody[] rigidbodies = shatteredObject.GetComponentsInChildren<Rigidbody>();
         foreach(Rigidbody rb in rigidbodies)
@@ -82,7 +84,8 @@ public class Shatter : Enemy
         {
             Destroy(renderer.gameObject);
         }
-        Destroy(gameObject);
+        Destroy(shatteredObject);
+        Destroy(parent);
     }
 
     private Renderer GetRendererFromRigidbody(Rigidbody Rigidbody)
