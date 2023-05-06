@@ -517,7 +517,7 @@ MonoBehaviour:
   HPSlider: {fileID: 831831942}
   healthBarUI: {fileID: 1777201952}
   player: {fileID: 0}
-  chestOffset: {x: 0, y: 1.85, z: 0}
+  chestOffset: {x: 0, y: 1.5, z: 0}
   pathCheckpoints:
   - {fileID: 5207392650946936065}
   - {fileID: 5207392651631752854}

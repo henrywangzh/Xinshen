@@ -113,12 +113,13 @@ public class ArcherBehavior : Enemy
             return false;
         }
 
-        bool hitSomething = Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer, out hit, dist + 5);
+        bool hitSomething = Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer.normalized, out hit, dist + 5);
         Debug.DrawRay(transform.position + arrowSpawnOffset, vectorTowardsPlayer.normalized * (dist + 5), Color.green);
         // Debug.Log("Hit something: " + hitSomething);
-        // Debug.Log("Hit: " + hit);
+        Debug.Log("Hit: " + hit.collider.name);
 
         if (hitSomething && hit.collider.tag == "Player") {
+            Debug.Log("Detectged player!");
             return true;
         }
 
