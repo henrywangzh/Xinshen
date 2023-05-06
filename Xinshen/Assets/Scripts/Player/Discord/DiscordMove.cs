@@ -98,11 +98,11 @@ public class DiscordMove : MonoBehaviour
         // Normalize the roll direction
         rollDirection.Normalize();
 
-        // Apply a force to the player in the roll direction
-        rb.AddForce(rollDirection * rollForce, ForceMode.Impulse);
+            // Apply a force to the player in the roll direction
+            rb.AddForce(rollDirection * rollForce, ForceMode.Impulse);
 
-        // Play the rolling animation
-        anim.Play("Rolling");
+            // Play the rolling animation
+            anim.Play("Rolling");
 
             //ISSUE:  DOES NOT UPDATE PLAYER AFTER ROLLING
 
@@ -116,6 +116,7 @@ public class DiscordMove : MonoBehaviour
         bool isHoldingW = Input.GetKey(KeyCode.W);
         bool isHoldingD = Input.GetKey(KeyCode.D);
         bool isHoldingA = Input.GetKey(KeyCode.A);
+        bool isHoldingS = Input.GetKey(KeyCode.S);
         // Check if player is colliding with a wall
         bool isCollidingWithWall = false;
         //collision detection:
@@ -146,6 +147,12 @@ public class DiscordMove : MonoBehaviour
 
             //play climbing animation
             anim.Play("Climbing");
+        }
+        else if (isHoldingS && isCollidingWithWall)
+        {
+            isClimbing = true;
+            transform.position += Vector3.down * 1f * Time.deltaTime;
+            anim.Play("Climbing"); 
         }
         else if (isHoldingD && isCollidingWithWall && isClimbing)
         {
