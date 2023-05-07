@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public abstract class Enemy : MonoBehaviour
     EnemyCamp enemyCamp;
     Rigidbody _rb;
 
+    // HP bar stuff
+    [SerializeField] Slider HPSlider;
+    [SerializeField] GameObject healthBarUI;
+
+
 
     protected virtual void Start()
     {
@@ -31,7 +37,16 @@ public abstract class Enemy : MonoBehaviour
         onStun = new UnityEvent();
         onAtkInterrupt = new UnityEvent();
 
+        // HP bar stuff
+        HPSlider.value = CalculateHealth();
+        healthBarUI.SetActive(false);
+
         InvokeRepeating("InvokedFixedUpdate", .02f, .02f);
+    }
+
+    float CalculateHealth()
+    {
+        return (float)hp / (float)maxHP;
     }
 
     public int GetStunMeter()
@@ -126,6 +141,13 @@ public abstract class Enemy : MonoBehaviour
         if (stunned > 0)
         {
             stunned--;
+        }
+
+        // hp bar stuff
+        HPSlider.value = CalculateHealth();
+        if(hp < maxHP)
+        {
+            healthBarUI.SetActive(true);
         }
     }
 

@@ -40,7 +40,9 @@ public class ArcherBehavior : Enemy
     // bool patrolling = false;
 
     // Start is called before the first frame update
-    void Start() {
+    protected override void Start()
+    {
+        base.Start();
         rb = GetComponent<Rigidbody>();
         if(player == null)
         {
@@ -95,28 +97,29 @@ public class ArcherBehavior : Enemy
             }
 
         } else if (enemyDetected && !attacking) {
-            Debug.Log("Help");
+            //Debug.Log("Help");
             attacking = true;
-            Debug.Log("What");
+            //Debug.Log("What");
             //anim.SetBool("Attacking", true);
-            Debug.Log("Help2");
+            //Debug.Log("Help2");
             StartCoroutine(Attack());
-            Debug.Log("Help3");
+            //Debug.Log("Help3");
         }
     }
 
     // Check in range and raycast to check for LoS
     private bool Detection() {
-
         if (dist > combatRange) {
             return false;
         }
 
-        bool hitSomething = Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer, out hit, dist + 1);
+        bool hitSomething = Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer.normalized, out hit, dist + 5);
+        Debug.DrawRay(transform.position + arrowSpawnOffset, vectorTowardsPlayer.normalized * (dist + 5), Color.green);
         // Debug.Log("Hit something: " + hitSomething);
-        // Debug.Log("Hit: " + hit);
-        
+        Debug.Log("Hit: " + hit.collider.name);
+
         if (hitSomething && hit.collider.tag == "Player") {
+            Debug.Log("Detectged player!");
             return true;
         }
 
@@ -169,7 +172,7 @@ public class ArcherBehavior : Enemy
 
         curCheckpoint++; // Go to next checkpoint
         
-        Debug.Log(curCheckpoint);
+        //Debug.Log(curCheckpoint);
         
         if (curCheckpoint >= pathCheckpoints.Count) { // if reached end of checkpoint
             curCheckpoint = 0;  // loop back to the first checkpoint
@@ -182,7 +185,7 @@ public class ArcherBehavior : Enemy
     public override void Die()
     {
         Debug.Log("ahhhh im dying");
-        anim.Play("ArcherDie");
+        //anim.Play("ArcherDie");
         Destroy(gameObject);
     }
 }

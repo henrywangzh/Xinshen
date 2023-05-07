@@ -43,6 +43,9 @@ public class GlobalVariableManager : MonoBehaviour {
     // Inventory
     public static List<Item> Items = new List<Item>();
 
+    // Camera
+    public static Transform MainCamera;
+
     // TakeDamage is called whenever damage is taken, subtracting dmg from health
     /* IMPORTANT: this method is DEPRECATED, use PlayerHP.TakeDamage instead */
     private void TakeDamage(int dmg) 

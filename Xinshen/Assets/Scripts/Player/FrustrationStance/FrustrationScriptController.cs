@@ -85,7 +85,7 @@ public class FrustrationScriptController : ScriptController
     {
         if (Input.GetKeyDown(KeyCode.LeftBracket))
         {
-            masterController.switchState.Invoke("flow");
+            masterController.switchState.Invoke("determination");
         }
     }
 }

@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
         canvas.transform.parent = null;
         s_cameraTrfm = cameraTrfm;
         self = GetComponent<CameraController>();
+        GlobalVariableManager.MainCamera = transform;
     }
 
     void Start()

@@ -63,7 +63,7 @@ public class DeterminationScriptController : ScriptController
 
 	private void Update()
 	{
-		// if (Input.GetKeyDown(KeyCode.LeftBracket))
-		// 	masterController.switchState.Invoke("flow");
-	}
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+            masterController.switchState.Invoke("flow");
+    }
 }

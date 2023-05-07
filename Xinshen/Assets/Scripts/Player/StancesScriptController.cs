@@ -60,6 +60,7 @@ public class StancesScriptController : ScriptController
         // moveNode.addNextAvailableStates(evadeNode);
         flowNode.addNextAvailableStates(frustNode);
         frustNode.addNextAvailableStates(flowNode);
+        frustNode.addNextAvailableStates(determinationNode);
         determinationNode.addNextAvailableStates(flowNode);
 
         //discord 
