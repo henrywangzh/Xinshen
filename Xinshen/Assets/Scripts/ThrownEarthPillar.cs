@@ -56,7 +56,8 @@ public class ThrownEarthPillar : EarthPillar
     {
         rb.useGravity = true;
 
-        float distance = Vector3.Distance(/*NOTE*/, trfm.position);
+        //float distance = Vector3.Distance(/*NOTE*/, trfm.position);
+        float distance = 0;
         float flightTime = distance / flightSpeed / 50;
 
         rb.velocity += Vector3.up * -Physics.gravity.y / 2 * flightTime;
