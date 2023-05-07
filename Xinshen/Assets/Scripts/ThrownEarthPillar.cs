@@ -6,6 +6,7 @@ public class ThrownEarthPillar : EarthPillar
 {
     [SerializeField] float riseRate, flightSpeed;
     [SerializeField] int launchDelay, delay;
+    [SerializeField] EarthBendingBoss bossScript;
     int collisionDelay;
     Rigidbody rb;
     bool inFlight;
@@ -18,10 +19,11 @@ public class ThrownEarthPillar : EarthPillar
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(int pDelay, Transform pTarget)
+    public void Init(int pDelay, Transform pTarget, EarthBendingBoss pBossScript)
     {
         target = pTarget;
         delay = pDelay;
+        bossScript = pBossScript;
     }
 
     // Update is called once per frame
@@ -54,7 +56,7 @@ public class ThrownEarthPillar : EarthPillar
     {
         rb.useGravity = true;
 
-        float distance = Vector3.Distance(target.position, trfm.position);
+        float distance = Vector3.Distance(/*NOTE*/, trfm.position);
         float flightTime = distance / flightSpeed / 50;
 
         rb.velocity += Vector3.up * -Physics.gravity.y / 2 * flightTime;
@@ -67,6 +69,11 @@ public class ThrownEarthPillar : EarthPillar
     protected void FaceTarget()
     {
         trfm.forward = target.position - trfm.position;
+    }
+
+    private Vector3 GetDistancedTargetPosition()
+    {
+        return bossScript.GetPredictedPos(Vector3.Distance(target.position, trfm.position));
     }
 
     private void OnTriggerEnter(Collider other)

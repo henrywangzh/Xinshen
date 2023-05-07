@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KaiwayTest : Enemy
+public class EarthBendingBoss : Enemy
 {
+    [SerializeField] Transform predictionIndicator;
+
     [SerializeField] Transform target;
 
     [SerializeField] float leapDuration;
@@ -25,6 +27,7 @@ public class KaiwayTest : Enemy
 
         trfm = transform;
         rb = GetComponent<Rigidbody>();
+        playerPositions = new Vector3[10];
 
         pillarCharges = 500;
     }
@@ -47,7 +50,7 @@ public class KaiwayTest : Enemy
             {
                 if (TargetInRange(range) && !TargetInRange(fissureMinRange))
                 {
-                    FaceTarget();
+                    FaceTarget(Vector3.Distance(target.position, trfm.position)/.4f);
                     Instantiate(fissureProjectile, trfm.position, trfm.rotation);
                     SetAnimationLock(25);
                     fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
@@ -60,7 +63,7 @@ public class KaiwayTest : Enemy
 
                 for (int i = 0; i < numPillars; i++)
                 {
-                    Instantiate(pillarProjectile, trfm.position + trfm.forward * 2, trfm.rotation).GetComponent<ThrownEarthPillar>().Init(i * 15, target);
+                    Instantiate(pillarProjectile, trfm.position + trfm.forward * 2, trfm.rotation).GetComponent<ThrownEarthPillar>().Init(i * 15, target, this);
                     trfm.Rotate(Vector3.up * 360/numPillars);
                 }
 
@@ -72,19 +75,27 @@ public class KaiwayTest : Enemy
                 pillarCharges++;
             }
         }
+
+        if (calculateTimer > 0) { calculateTimer--; }
+        else
+        {
+            calculateTimer = 5;
+            CalculatePredictedPos();
+            predictionIndicator.position = GetPredictedPos(2);
+        }
     }
 
     void DoLeapAttack()
     {
         SetAnimationLock(Mathf.RoundToInt(leapDuration * 50 + 25));
 
-        FaceTarget();
+        FaceTarget(leapDuration);
 
         //leapDuration *= Vector3.Distance(target.position, trfm.position) / 10;
 
         rb.velocity += Vector3.up * -Physics.gravity.y / 2 * leapDuration;
 
-        float distance = Vector3.Distance(target.position, trfm.position);
+        float distance = Vector3.Distance(GetPredictedPos(leapDuration), trfm.position);
         if (distance > range) { distance = range; }
         rb.velocity += trfm.forward * distance / leapDuration;
 
@@ -120,9 +131,27 @@ public class KaiwayTest : Enemy
         if (attackAnimationTimer < duration) { attackAnimationTimer = duration; }
     }
 
-    protected void FaceTarget()
+    protected void FaceTarget(float predictionTime = 0)
     {
-        trfm.forward = target.position - trfm.position;
+        trfm.forward = GetPredictedPos(predictionTime) - trfm.position;
+    }
+
+    [SerializeField] Vector3[] playerPositions;
+    Vector3 predictedOffset;
+    int addPos, calculateTimer;
+    public Vector3 GetPredictedPos(float seconds)
+    {
+        int newestPos = addPos - 3;
+        if (newestPos < 0) { newestPos += 10; }
+        predictedOffset = (target.position - playerPositions[addPos]) * seconds * .5f;
+        predictedOffset += (target.position - playerPositions[newestPos]) * 4 * seconds * .5f;
+        return predictedOffset + target.position;
+    }
+    private void CalculatePredictedPos()
+    {
+        playerPositions[addPos] = target.position;
+        addPos++;
+        if (addPos > 9) { addPos = 0; }
     }
 
     public override void Die()
