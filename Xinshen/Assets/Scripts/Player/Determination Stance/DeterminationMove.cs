@@ -6,14 +6,14 @@ public class DeterminationMove : MonoBehaviour
 {
 	private DeterminationScriptController controller;
 	private DeterminationInput inputHandler;
-  private Rigidbody rb;
-  private Animator animator;
+	private Rigidbody rb;
+	private Animator animator;
 
 	[SerializeField] private Transform cam;
 	[SerializeField] private float walkSpeed = 2f; // walk movement speed
 	[SerializeField] private float runSpeed = 8f; // run movement speed
 	[SerializeField] private float rotSpeed = 10f; // rotation speed
-  [SerializeField] bool targLocked = false;
+	[SerializeField] bool targLocked = false;
 
 	private float currSpeed; // current speed
 	private float animMultiplier;
@@ -22,11 +22,11 @@ public class DeterminationMove : MonoBehaviour
 	{
 		controller = GetComponent<DeterminationScriptController>();
 		inputHandler = GetComponent<DeterminationInput>();
-    rb = GetComponent<Rigidbody>();
-    animator = GetComponent<Animator>();
+		rb = GetComponent<Rigidbody>();
+		animator = GetComponent<Animator>();
 	}
 
-		// Start is called before the first frame update
+	// Start is called before the first frame update
 	void Start()
 	{
 		currSpeed = walkSpeed;
@@ -46,7 +46,7 @@ public class DeterminationMove : MonoBehaviour
 		{
 			currSpeed = walkSpeed;
 			animMultiplier = 1f;
-			
+
 			animator.SetFloat("xInput", inputVec.x);
 			animator.SetFloat("yInput", inputVec.y);
 		}
@@ -60,7 +60,7 @@ public class DeterminationMove : MonoBehaviour
 
 			if (isRunning)
 				animMultiplier = Mathf.Min(2f, animMultiplier + 2.5f * Time.deltaTime);
-			else 
+			else
 				animMultiplier = 1f;
 
 			animator.SetFloat("yInput", inputHandler.getInputVector().magnitude * animMultiplier);
@@ -73,7 +73,7 @@ public class DeterminationMove : MonoBehaviour
 		// Update rigidbody velocity
 		Vector3 moveDir = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * inputVec.y + new Vector3(cam.right.x, 0, cam.right.z).normalized * inputVec.x);
 		moveDir.y = 0;
-		
+
 		Vector3 moveVelocity = moveDir * currSpeed;
 		rb.velocity = moveVelocity + new Vector3(0, rb.velocity.y, 0);
 
@@ -82,5 +82,12 @@ public class DeterminationMove : MonoBehaviour
 		// anim.SetFloat("xInput", 0);
 		// anim.SetFloat("yInput", Mathf.Sqrt(yinput*yinput + xinput*xinput) * 2f);
 
+
+		if (Input.GetMouseButtonDown(0))
+		{
+			controller.switchState.Invoke("attack");
+			animator.Play("DeterminationAttack_1");
+			rb.velocity = Vector3.zero;
+		}
 	}
 }

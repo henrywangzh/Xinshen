@@ -11398,6 +11398,7 @@ GameObject:
   - component: {fileID: 1418846340601218321}
   - component: {fileID: 7534844710386178684}
   - component: {fileID: 4563010473810539702}
+  - component: {fileID: 2712195433599607032}
   - component: {fileID: 128105626493686340}
   - component: {fileID: 1622452027422676407}
   - component: {fileID: 3296430303023041181}
@@ -11700,6 +11701,19 @@ MonoBehaviour:
   runSpeed: 8
   rotSpeed: 10
   targLocked: 0
+--- !u!114 &2712195433599607032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247aa0e8d205b4ecd9104b353d10bfcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponCollider: {fileID: 0}
 --- !u!114 &128105626493686340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11828,6 +11842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponCollider: {fileID: 1608383342168834120}
+  moveSpeed: 3
 --- !u!114 &56115233731183276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11844,6 +11859,14 @@ MonoBehaviour:
   targLocked: 0
   moveSpeed: 3
   turnSpeed: 5
+  isClimbing: 0
+  raycastDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  fallThreshold: -10
+  fallTimeThreshold: 1
+  isFalling: 0
 --- !u!114 &557452805525474370
 MonoBehaviour:
   m_ObjectHideFlags: 0

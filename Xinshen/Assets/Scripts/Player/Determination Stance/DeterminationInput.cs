@@ -6,7 +6,7 @@ public class DeterminationInput : MonoBehaviour
 {
 	private float startTime;
 
-	private Vector2 inputVector; 
+	private Vector2 inputVector;
 
 	public Vector2 getInputVector()
 	{
