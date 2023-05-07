@@ -95,14 +95,15 @@ public class DiscordMove : MonoBehaviour
         }
         void PerformRoll(Vector3 rollDirection)
         {
-        // Normalize the roll direction
-        rollDirection.Normalize();
+            // Normalize the roll direction
+            rollDirection.Normalize();
 
             // Apply a force to the player in the roll direction
             rb.AddForce(rollDirection * rollForce, ForceMode.Impulse);
+            //rb.AddForce(transform.forward * 2000f, ForceMode.Force);
 
             // Play the rolling animation
-            anim.Play("Rolling");
+            anim.Play("TRUERoll");
 
             //ISSUE:  DOES NOT UPDATE PLAYER AFTER ROLLING
 
@@ -210,36 +211,40 @@ public class DiscordMove : MonoBehaviour
             }
         }
     }
-       /* if (transform.position.y < fallThreshold)
-        {
-            if (!isFalling)
-            {
-                // Player is starting to fall, record fall start time
-                isFalling = true;
-                fallStartTime = Time.time;
-            }
-            else
-            {
-                // Player is already falling, check fall time threshold
-                float fallTime = Time.time - fallStartTime;
-                if (fallTime >= fallTimeThreshold)
-                {
-                    // Player has fallen for more than the time threshold, trigger falling mode
-                    //anim.play falling
-                    //isFalling = true;
-                }
-            }
-        }
-        else
-        {
-            // Player is not falling
-            if (isFalling)
-            {
-                // Player was previously falling, trigger landing animation
-                //anim.play
-                isFalling = false;
-            }
+    /* if (transform.position.y < fallThreshold)
+     {
+         if (!isFalling)
+         {
+             // Player is starting to fall, record fall start time
+             isFalling = true;
+             fallStartTime = Time.time;
+         }
+         else
+         {
+             // Player is already falling, check fall time threshold
+             float fallTime = Time.time - fallStartTime;
+             if (fallTime >= fallTimeThreshold)
+             {
+                 // Player has fallen for more than the time threshold, trigger falling mode
+                 //anim.play falling
+                 //isFalling = true;
+             }
+         }
+     }
+     else
+     {
+         // Player is not falling
+         if (isFalling)
+         {
+             // Player was previously falling, trigger landing animation
+             //anim.play
+             isFalling = false;
+         }
 
-        }*/
+     }*/
 
+    public void moveRollingPlayerForward()
+    {
+        rb.AddForce(transform.forward * rollForce, ForceMode.Impulse);
+    }
 }
