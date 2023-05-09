@@ -13,6 +13,8 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] Transform DebugSpawnPoint;
     [SerializeField] int FrenzyAtkBoost = 5;
 
+    [SerializeField] bool actuallyDie;
+
     static int HP, maxHP, frenzyHP, invulnerability;
 
     static PlayerHP self;
@@ -122,6 +124,7 @@ public class PlayerHP : MonoBehaviour
     }
 
     private static void Die(){
+        if (self.actuallyDie) { Destroy(self.gameObject); }
         Debug.Log("bit the dust");
         self.StartCoroutine(self.FadeIn(GlobalVariableManager.DeathScreen));
         self.StartCoroutine(self.Respawn());

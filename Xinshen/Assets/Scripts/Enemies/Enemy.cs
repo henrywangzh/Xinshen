@@ -36,12 +36,11 @@ public abstract class Enemy : MonoBehaviour
         hp = maxHP;
         onStun = new UnityEvent();
         onAtkInterrupt = new UnityEvent();
+        InvokeRepeating("InvokedFixedUpdate", .02f, .02f);
 
         // HP bar stuff
         HPSlider.value = CalculateHealth();
         healthBarUI.SetActive(false);
-
-        InvokeRepeating("InvokedFixedUpdate", .02f, .02f);
     }
 
     float CalculateHealth()

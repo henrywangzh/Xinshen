@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class RisingEarthPillar : EarthPillar
 {
-    [SerializeField] int duration;
+    [SerializeField] int duration, damage;
     [SerializeField] float riseRate;
     [SerializeField] int manualDelay;
+    [SerializeField] MeshCollider meshCol;
     // Start is called before the first frame update
-    new void Start()
+    void Start()
     {
-        base.Start();
         //trfm.Rotate(Vector3.right * Random.Range(-85, -34));
         //trfm.Rotate(Vector3.right * Random.Range(0, 25));
 
         //trfm.Rotate(Vector3.up * Random.Range(-25, 26));
-        duration += Random.Range(-5, 6);
+
+        //trfm.forward = EarthBendingBoss.targetTrfm.position - trfm.position;
+        //trfm.Rotate(trfm.forward * 45);
+        duration += Random.Range(-3, 7);
         //trfm.position += trfm.forward * riseRate * (duration + 2);
         trfm.localScale += Vector3.right * Random.Range(-.4f, .4f);
         trfm.localScale += Vector3.up * Random.Range(-.4f, .4f);
@@ -25,11 +28,29 @@ public class RisingEarthPillar : EarthPillar
     void FixedUpdate()
     {
         manualDelay++;
+        duration--;
+
         if (duration > 0)
         {
             trfm.position -= trfm.forward * riseRate;
-            duration--;
+            if (duration == 1) { meshCol.enabled = false; }
         }
-        trfm.position += trfm.forward * .1f;
+        if (duration < -150)
+        {
+            trfm.position += trfm.forward * riseRate * .5f;
+            if (duration < -250)
+            {
+                Destroy(gameObject);
+            }
+        }
+        //trfm.position += trfm.forward * .1f;
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.layer == 8)
+        {
+            PlayerHP.TakeDamage(damage);
+        }
     }
 }

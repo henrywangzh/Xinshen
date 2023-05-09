@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EarthBendingBoss : Enemy
 {
-    [SerializeField] Transform predictionIndicator;
+    [SerializeField] ParticleSystem telegraphPtcls;
+    [SerializeField] GroundTrigger groundTrigger;
+    [SerializeField] EnemyAttack rammingHitbox;
 
     [SerializeField] Transform target;
 
@@ -15,21 +17,34 @@ public class EarthBendingBoss : Enemy
     [SerializeField] GameObject pillarProjectile;
     [SerializeField] int[] cooldownRange;
 
-    int attackAnimationTimer;
-    int leapCooldown, fissureCooldown, pillarCooldown, pillarCharges;
+    int attackAnimationTimer, actionQueTimer, actionID;
+    int leapCooldown, fissureCooldown, pillarCooldown, columnCooldown, pillarCharges;
     float initialY;
 
+    const int LEAP = 0, FISSURE = 1, PILLAR_THROW = 2, COLUMN = 3;
+
+    public static Transform targetTrfm;
     Transform trfm;
     Rigidbody rb;
+
+    private void Awake()
+    {
+        targetTrfm = target;
+    }
+
     new void Start()
     {
-        base.Start();
-
         trfm = transform;
         rb = GetComponent<Rigidbody>();
+
         playerPositions = new Vector3[10];
 
-        pillarCharges = 500;
+        //pillarCharges = 500;
+        leapCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
+        fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
+
+
+        base.Start();
     }
 
     // Update is called once per frame
@@ -40,40 +55,66 @@ public class EarthBendingBoss : Enemy
 
     private void FixedUpdate()
     {
-        if (!IsStunned())
+        if (!IsStunned() && groundTrigger.IsOnGround() && actionQueTimer < 1)
         {
+            /*
+            if (columnCooldown > 0) { columnCooldown--; } else
+            {
+                QueAttack(COLUMN);
+            }
+            */
             if (leapCooldown > 0) { leapCooldown--; } else
             {
-                DoLeapAttack();
+                QueAttack(LEAP);
             }
             if (fissureCooldown > 0) { fissureCooldown--; } else
             {
                 if (TargetInRange(range) && !TargetInRange(fissureMinRange))
                 {
-                    FaceTarget(Vector3.Distance(target.position, trfm.position)/.4f);
-                    Instantiate(fissureProjectile, trfm.position, trfm.rotation);
-                    SetAnimationLock(25);
-                    fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
+                    QueAttack(FISSURE);
                 }
             }
             if (pillarCooldown > 0) { pillarCooldown--; } else
             {
-                int numPillars = pillarCharges / 100;
-                SetAnimationLock(15 * numPillars);
-
-                for (int i = 0; i < numPillars; i++)
-                {
-                    Instantiate(pillarProjectile, trfm.position + trfm.forward * 2, trfm.rotation).GetComponent<ThrownEarthPillar>().Init(i * 15, target, this);
-                    trfm.Rotate(Vector3.up * 360/numPillars);
-                }
-
-                pillarCharges = pillarCharges % 100;
-                pillarCooldown = Random.Range(200, 600);
+                QueAttack(PILLAR_THROW);
             }
-            if (pillarCharges < 700)
+            if (pillarCharges < 120)
             {
                 pillarCharges++;
             }
+        }
+
+        if (actionQueTimer > 0)
+        {
+            if (actionQueTimer == 1)
+            {
+                if (actionID == FISSURE)
+                {
+                    FaceTarget(Vector3.Distance(target.position, trfm.position) / 20f);
+                    Instantiate(fissureProjectile, trfm.position, trfm.rotation);
+                    SetAnimationLock(25);
+                    fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
+                }
+                else if (actionID == LEAP)
+                {
+                    DoLeapAttack();
+                }
+                else if (actionID == PILLAR_THROW)
+                {
+                    int numPillars = pillarCharges / 20;
+                    SetAnimationLock(15 * numPillars);
+
+                    for (int i = 0; i < numPillars; i++)
+                    {
+                        Instantiate(pillarProjectile, trfm.position + trfm.forward * 2, trfm.rotation).GetComponent<ThrownEarthPillar>().Init(i * 15, target, this);
+                        trfm.Rotate(Vector3.up * 360 / numPillars);
+                    }
+
+                    pillarCharges = pillarCharges % 20;
+                    pillarCooldown = Random.Range(cooldownRange[0], cooldownRange[1]) * 2;
+                }
+            }
+            actionQueTimer--;
         }
 
         if (calculateTimer > 0) { calculateTimer--; }
@@ -81,12 +122,20 @@ public class EarthBendingBoss : Enemy
         {
             calculateTimer = 5;
             CalculatePredictedPos();
-            predictionIndicator.position = GetPredictedPos(2);
         }
+    }
+
+    void QueAttack(int ID)
+    {
+        actionID = ID;
+        actionQueTimer = 40;
+        telegraphPtcls.Play();
     }
 
     void DoLeapAttack()
     {
+        rammingHitbox.EnableHitbox(Mathf.RoundToInt(leapDuration * 45));
+
         SetAnimationLock(Mathf.RoundToInt(leapDuration * 50 + 25));
 
         FaceTarget(leapDuration);
@@ -97,11 +146,12 @@ public class EarthBendingBoss : Enemy
 
         float distance = Vector3.Distance(GetPredictedPos(leapDuration), trfm.position);
         if (distance > range) { distance = range; }
+        if (distance < 10) { distance = 10; }
         rb.velocity += trfm.forward * distance / leapDuration;
 
         if (Random.Range(0,100) < leapChainChance)
         {
-            leapCooldown = 25;
+            leapCooldown = 15;
         }
         else
         {
@@ -109,11 +159,6 @@ public class EarthBendingBoss : Enemy
             Stun(100);
         }
         initialY = transform.position.y;
-    }
-
-    bool IsAirborne() //TODO
-    {
-        return false;
     }
 
     bool TargetInRange(int pRange)
@@ -133,18 +178,20 @@ public class EarthBendingBoss : Enemy
 
     protected void FaceTarget(float predictionTime = 0)
     {
-        trfm.forward = GetPredictedPos(predictionTime) - trfm.position;
+        trfm.forward = (GetPredictedPos(predictionTime) - trfm.position);
     }
 
     [SerializeField] Vector3[] playerPositions;
     Vector3 predictedOffset;
     int addPos, calculateTimer;
-    public Vector3 GetPredictedPos(float seconds)
+    public Vector3 GetPredictedPos(float seconds, bool verticalTargeting = true)
     {
         int newestPos = addPos - 3;
         if (newestPos < 0) { newestPos += 10; }
         predictedOffset = (target.position - playerPositions[addPos]) * seconds * .5f;
         predictedOffset += (target.position - playerPositions[newestPos]) * 4 * seconds * .5f;
+
+        if (verticalTargeting) { return predictedOffset + target.position; }
         return predictedOffset + target.position;
     }
     private void CalculatePredictedPos()
