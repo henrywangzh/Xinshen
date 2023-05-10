@@ -13,8 +13,7 @@ public class EarthBendingBoss : Enemy
     [SerializeField] float leapDuration;
     [SerializeField] int range, fissureMinRange, leapChainChance;
 
-    [SerializeField] GameObject fissureProjectile;
-    [SerializeField] GameObject pillarProjectile;
+    [SerializeField] GameObject fissureProjectile, pillarProjectile, fallingPillar;
     [SerializeField] int[] cooldownRange;
 
     int attackAnimationTimer, actionQueTimer, actionID;
@@ -57,12 +56,12 @@ public class EarthBendingBoss : Enemy
     {
         if (!IsStunned() && groundTrigger.IsOnGround() && actionQueTimer < 1)
         {
-            /*
             if (columnCooldown > 0) { columnCooldown--; } else
             {
+                Instantiate(fallingPillar, GetPredictedPos(50), Quaternion.identity);
+                columnCooldown = Random.Range(cooldownRange[0], cooldownRange[1]) * 2;
                 QueAttack(COLUMN);
             }
-            */
             if (leapCooldown > 0) { leapCooldown--; } else
             {
                 QueAttack(LEAP);
@@ -112,6 +111,10 @@ public class EarthBendingBoss : Enemy
 
                     pillarCharges = pillarCharges % 20;
                     pillarCooldown = Random.Range(cooldownRange[0], cooldownRange[1]) * 2;
+                }
+                else if (actionID == COLUMN)
+                {
+                    
                 }
             }
             actionQueTimer--;
