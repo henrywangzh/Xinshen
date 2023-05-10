@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EarthBendingBoss : Enemy
 {
+    [SerializeField] BoxCollider pillarDestroyer;
+
     [SerializeField] Material defaultMaterial, redMaterial;
     [SerializeField] MeshRenderer meshRenderer;
 
@@ -136,6 +138,7 @@ public class EarthBendingBoss : Enemy
             if (leapTimer == 1)
             {
                 meshRenderer.material = defaultMaterial;
+                pillarDestroyer.enabled = false;
             }
             leapTimer--;
         }
@@ -155,6 +158,7 @@ public class EarthBendingBoss : Enemy
         rammingHitbox.EnableHitbox(Mathf.RoundToInt(leapDuration * 45));
         leapTimer = 46;
         meshRenderer.material = redMaterial;
+        //pillarDestroyer.enabled = true;
 
         SetAnimationLock(Mathf.RoundToInt(leapDuration * 50 + 25));
 
@@ -225,5 +229,13 @@ public class EarthBendingBoss : Enemy
     {
         Debug.Log("GG NO RE");
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.GetComponent<EarthPillar>())
+        {
+            Destroy(col.gameObject);
+        }
     }
 }

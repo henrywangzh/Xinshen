@@ -16,7 +16,7 @@ public class EarthPillar : MonoBehaviour
     protected void Inertenize(Collider col) //a real word that means 'to become inert'
     {
         inert = true;
-        col.isTrigger = false;
+        //col.isTrigger = false;
         gameObject.layer = 0;
         col.gameObject.layer = 0;
     }
