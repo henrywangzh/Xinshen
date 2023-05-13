@@ -8,7 +8,7 @@ using UnityEngine;
 public class ArcherBehavior : Enemy
 {
     [SerializeField] Transform player; // location of player
-    [SerializeField] Vector3 chestOffset = new Vector3(0, 1.84f, 0); // currently defaulted to roughly at the chest
+    [SerializeField] Vector3 chestOffset = new Vector3(0, 0.5f, 0); // currently defaulted to roughly at the chest
     Rigidbody rb; // rigidbody of enemy
     Animator anim;
     
@@ -43,6 +43,7 @@ public class ArcherBehavior : Enemy
     protected override void Start()
     {
         base.Start();
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         if(player == null)
         {
@@ -116,10 +117,10 @@ public class ArcherBehavior : Enemy
         bool hitSomething = Physics.Raycast(transform.position + arrowSpawnOffset, vectorTowardsPlayer.normalized, out hit, dist + 5);
         Debug.DrawRay(transform.position + arrowSpawnOffset, vectorTowardsPlayer.normalized * (dist + 5), Color.green);
         // Debug.Log("Hit something: " + hitSomething);
-        Debug.Log("Hit: " + hit.collider.name);
+        // Debug.Log("Hit: " + hit.collider.name);
 
         if (hitSomething && hit.collider.tag == "Player") {
-            Debug.Log("Detectged player!");
+            // Debug.Log("Detected player!");
             return true;
         }
 
@@ -128,24 +129,28 @@ public class ArcherBehavior : Enemy
 
     // Attack at a regular interval
     IEnumerator Attack() {
-
+    
         attacking = true;
-        //anim.SetBool("Attacking", true);
-        Debug.Log("Start Atk");
+        Debug.Log("Are you attacking?");
+        
+        // anim.Play("ArcherShoot");
+        // yield return new WaitForSeconds(2f);
+        // Debug.Log("Start Atk");
         while (enemyDetected) {
-            WaitForSeconds wait = new WaitForSeconds(shootingSpeed);
-            yield return wait;
-            Shoot();
+            Debug.Log(enemyDetected);
+            anim.Play("ArcherShoot");
+            yield return new WaitForSeconds(3f);
         }
         
         // enemy is no longer detected
         attacking = false;
         anim.SetBool("Attacking", false);
-        StopCoroutine(Attack());
+        // StopCoroutine(Attack());
     }
     
     // Shoot an arrow at the player at a regular interval
     void Shoot() {
+        Debug.Log("Are you shooting?");
         shotArrow = Instantiate(arrow, transform.position + arrowSpawnOffset, arrowRotation);
         Debug.Log("Shoot");
         Rigidbody arrowRb = shotArrow.GetComponent<Rigidbody>();
