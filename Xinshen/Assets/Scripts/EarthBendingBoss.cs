@@ -76,6 +76,7 @@ public class EarthBendingBoss : Enemy
             {
                 if (TargetInRange(range) && !TargetInRange(fissureMinRange))
                 {
+                    FaceTarget(1);
                     QueAttack(FISSURE);
                 }
             }

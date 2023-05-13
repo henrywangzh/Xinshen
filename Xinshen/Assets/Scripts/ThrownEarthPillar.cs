@@ -49,7 +49,7 @@ public class ThrownEarthPillar : EarthPillar
 
         if (inFlight)
         {
-            //trfm.forward = lastPos - trfm.position;
+            trfm.forward = lastPos - trfm.position;
             lastPos = trfm.position;
         }
     }
@@ -66,7 +66,7 @@ public class ThrownEarthPillar : EarthPillar
         //rb.velocity += Vector3.up * -Physics.gravity.y * 1000 * flightTime;
 
         rb.velocity += (target.position - trfm.position).normalized * flightSpeed * 52;
-        rb.velocity += Vector3.up * -Physics.gravity.y * .9f * flightTime;
+        rb.velocity += Vector3.up * -Physics.gravity.y * .5f * flightTime;
 
         Debug.Log(rb.velocity);
 
