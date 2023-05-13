@@ -18,15 +18,17 @@ public class DiscordAttack : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-  /*  private void OnEnable()
+    private void OnEnable()
     {
-        if (anim == null)
-            anim = GetComponent<Animator>();
-        //SetCombo(1);
-        if (rb != null)
-            rb.velocity = Vector3.zero;
-        GlobalVariableManager.Damage = 25;
-    }*/
+        /*  if (anim == null)
+              anim = GetComponent<Animator>();
+          //SetCombo(1);
+          if (rb != null)
+              rb.velocity = Vector3.zero;
+          GlobalVariableManager.Damage = 25;*/
+
+        DiscordCombo(1);
+    }
 
     // Update is called once per frame
     void Update()
@@ -45,7 +47,7 @@ public class DiscordAttack : MonoBehaviour
 
         //}
     }
-    public void StartSwing()
+  /*  public void StartSwing()
     {
         weaponCollider.enabled = true;
 
@@ -54,7 +56,7 @@ public class DiscordAttack : MonoBehaviour
     public void EndSwing()
     {
         weaponCollider.enabled = false;
-    }
+    }*/
 
     public void DiscordCombo(int attack)
     {
@@ -63,7 +65,7 @@ public class DiscordAttack : MonoBehaviour
     public void EndDiscordAttack()
     {
         anim.SetBool("DiscordAttack", false);
-        weaponCollider.enabled = false;
+        //weaponCollider.enabled = false;
         controller.switchState.Invoke("discordMove");
     }
 

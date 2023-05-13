@@ -13,6 +13,8 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] Transform DebugSpawnPoint;
     [SerializeField] int FrenzyAtkBoost = 5;
 
+    [SerializeField] bool actuallyDie;
+
     static int HP, maxHP, frenzyHP, invulnerability;
 
     static PlayerHP self;
@@ -66,7 +68,7 @@ public class PlayerHP : MonoBehaviour
         if (HP <= 0) { return; }
         HP -= damage;
         self.m_HP = HP;
-        Debug.Log("HP: " + HP);
+        // Debug.Log("HP: " + HP);
 
         if (playBloodFX) { Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation); }
         if (doDamageNumbers) { GameManager.InstantiateDamageNumber(torsoTrfm.position, damage, GameManager.RED); }
@@ -122,6 +124,7 @@ public class PlayerHP : MonoBehaviour
     }
 
     private static void Die(){
+        if (self.actuallyDie) { Destroy(self.gameObject); }
         Debug.Log("bit the dust");
         self.StartCoroutine(self.FadeIn(GlobalVariableManager.DeathScreen));
         self.StartCoroutine(self.Respawn());

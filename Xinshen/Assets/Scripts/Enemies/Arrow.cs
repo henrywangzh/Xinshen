@@ -37,6 +37,7 @@ public class Arrow : MonoBehaviour {
         CancelInvoke("Disable");
         rb.velocity = Vector3.zero;
         this.GameObject().SetActive(false);
+        Destroy(gameObject);
     }
     
 }

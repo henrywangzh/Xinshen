@@ -5,23 +5,26 @@ using UnityEngine;
 public class ThrownEarthPillar : EarthPillar
 {
     [SerializeField] float riseRate, flightSpeed;
-    [SerializeField] int launchDelay, delay;
+    [SerializeField] int damage, launchDelay, delay;
+    [SerializeField] EarthBendingBoss bossScript;
     int collisionDelay;
     Rigidbody rb;
     bool inFlight;
+    [SerializeField] Collider hitbox;
     [SerializeField] Transform target;
     Vector3 lastPos;
     // Start is called before the first frame update
-    new void Start()
+    void Start()
     {
-        base.Start();
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(int pDelay, Transform pTarget)
+    public void Init(int pDelay, Transform pTarget, EarthBendingBoss pBossScript)
     {
         target = pTarget;
         delay = pDelay;
+        bossScript = pBossScript;
+        trfm.forward = target.position - trfm.position;
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class ThrownEarthPillar : EarthPillar
         else if (launchDelay > 0)
         {
             trfm.position += Vector3.up * riseRate;
+            trfm.forward = target.position - trfm.position;
             launchDelay--;
         }
         else
@@ -52,14 +56,19 @@ public class ThrownEarthPillar : EarthPillar
 
     void Launch()
     {
+        hitbox.enabled = true;
         rb.useGravity = true;
 
         float distance = Vector3.Distance(target.position, trfm.position);
-        float flightTime = distance / flightSpeed / 50;
+        float flightTime = distance / flightSpeed / 50f;
+        Debug.Log("flight time: " + flightTime);
 
-        rb.velocity += Vector3.up * -Physics.gravity.y / 2 * flightTime;
+        //rb.velocity += Vector3.up * -Physics.gravity.y * 1000 * flightTime;
 
         rb.velocity += (target.position - trfm.position).normalized * flightSpeed * 52;
+        rb.velocity += Vector3.up * (-Physics.gravity.y * .5f * flightTime + .8f);
+
+        Debug.Log(rb.velocity);
 
         lastPos = trfm.position;
         inFlight = true;
@@ -69,9 +78,19 @@ public class ThrownEarthPillar : EarthPillar
         trfm.forward = target.position - trfm.position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private Vector3 GetDistancedTargetPosition()
     {
-        if (collisionDelay > 24 && other.gameObject.layer == 6)
+        return bossScript.GetPredictedPos(Vector3.Distance(target.position, trfm.position));
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.layer == 8)
+        {
+            PlayerHP.TakeDamage(damage);
+        }
+
+        if (collisionDelay > 24 && col.gameObject.layer == 6)
         {
             Destroy(rb);
             Destroy(GetComponent<ThrownEarthPillar>());

@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 75
-  pillarSpawnRate: 6
-  speed: 0.3
-  pillar: {fileID: 3185934718500769736, guid: fb7f12ccdda714b4eaa88afe3ad58b29, type: 3}
+  pillarSpawnRate: 5
+  speed: 0.4
+  pillar: {fileID: 8046649285474798493, guid: cde62e2a72b1b744498f11456411fa8f, type: 3}

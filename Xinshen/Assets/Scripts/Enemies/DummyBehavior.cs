@@ -8,6 +8,8 @@ public class DummyBehavior : Enemy
     [SerializeField] ParticleSystem ps;
     Animator anim;
 
+    bool swinging = false;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -37,6 +39,7 @@ public class DummyBehavior : Enemy
     {
         // Interrupt the current attack (for this just cut to animation)
         anim.Play("DummyImpact");
+        poise = 20;  // Poise recovery
     }
 
     IEnumerator FallAndRecover()
@@ -44,6 +47,17 @@ public class DummyBehavior : Enemy
         anim.Play("DummyDown");
         yield return new WaitUntil(() => !IsStunned());
         anim.Play("DummyGetup");
+    }
+
+    IEnumerator Swing()
+    {
+        poise = 10;
+        anim.Play("DummyAtk");
+        swinging = true;
+        yield return new WaitForSeconds(0.1f);
+        poise = 50;
+        yield return new WaitUntil(() => !swinging);
+        poise = 20;
     }
 
     public void StartAttack()
@@ -54,6 +68,7 @@ public class DummyBehavior : Enemy
     public void EndAttack()
     {
         sword.enabled = false;
+        swinging = false;
     }
 
     public override void Die()
