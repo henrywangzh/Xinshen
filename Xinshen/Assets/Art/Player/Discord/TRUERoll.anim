@@ -121951,8 +121951,36 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: moveRollingPlayerForward
+  - time: 0.033333335
+    functionName: SetFwdVelocity
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 35
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: SetFwdVelocity
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 20
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.4
+    functionName: SetFwdVelocity
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 25
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5
+    functionName: SetFwdVelocity
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

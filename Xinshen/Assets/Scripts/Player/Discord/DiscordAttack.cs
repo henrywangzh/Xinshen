@@ -47,17 +47,7 @@ public class DiscordAttack : MonoBehaviour
 
         //}
     }
-  /*  public void StartSwing()
-    {
-        weaponCollider.enabled = true;
-
-    }
-
-    public void EndSwing()
-    {
-        weaponCollider.enabled = false;
-    }*/
-
+ 
     public void DiscordCombo(int attack)
     {
         anim.SetBool("DiscordAttack", attack >= 1);
