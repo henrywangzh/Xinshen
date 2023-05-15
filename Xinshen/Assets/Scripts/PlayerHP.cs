@@ -140,8 +140,8 @@ public class PlayerHP : MonoBehaviour
     }
 
     IEnumerator Respawn(){
-        self.transform.position = GlobalVariableManager.PlayerSpawn.position;
         yield return new WaitForSeconds(3f);
+        self.transform.position = GlobalVariableManager.PlayerSpawn.position;
         HP = maxHP;   
         GlobalVariableManager.DeathScreen.color = new Color(1, 1, 1, 0); 
         yield return null;    

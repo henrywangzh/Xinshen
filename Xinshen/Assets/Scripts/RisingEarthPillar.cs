@@ -33,12 +33,12 @@ public class RisingEarthPillar : EarthPillar
         if (duration > 0)
         {
             trfm.position -= trfm.forward * riseRate;
-            if (duration == 1) { meshCol.enabled = false; }
+            if (duration == 1) { Inertenize(meshCol); }
         }
-        if (duration < -150)
+        if (duration < -250)
         {
             trfm.position += trfm.forward * riseRate * .5f;
-            if (duration < -250)
+            if (duration < -350)
             {
                 Destroy(gameObject);
             }
@@ -48,7 +48,7 @@ public class RisingEarthPillar : EarthPillar
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.layer == 8)
+        if (col.gameObject.layer == 8 && !inert)
         {
             PlayerHP.TakeDamage(damage);
         }

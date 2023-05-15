@@ -17,6 +17,8 @@ public class Ravage :  Enemy
     [SerializeField] float attack_range = 5;
     [SerializeField] float combat_range = 10;
     [SerializeField] float detection_range = 20;
+    [SerializeField] Vector3 chestOffset = new Vector3(0, 1.84f, 0); // currently defaulted to roughly at the chest
+
     Rigidbody rb; // rigidbody of enemy
     Animator anim;
 
@@ -26,18 +28,22 @@ public class Ravage :  Enemy
 
     float distance;
     bool isAngered;
-    float timer;
     float attackTimer;
+    float freezeTimer;
+    Vector3 targetPosition;
+    int layerMask;
 
     void Start() {
         attackTimer = 0;
-        timer = lungeCD;
+        attackTimer = lungeCD;
         rb = GetComponent<Rigidbody>();
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if(player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            player = playerObject.transform;
         }
-
+        targetPosition = player.position;
+        layerMask = ~LayerMask.GetMask(playerObject.layer.ToString());
     }
 
     public override void Die()
@@ -60,15 +66,26 @@ public class Ravage :  Enemy
         // Move to player
         // this.transform.position = Vector3.MoveTowards(this.transform.position, player.transform.position, 20 * moveSpeed * Time.deltaTime);
         
-        Vector3 direction = player.position - this.transform.position;
-        this.transform.position = player.position - direction.normalized;
+        // ray cast to ground bypassing player from targetPosition xz
+        // if hit, set targetPosition to hit point
+        Vector3 raySource = targetPosition;
+        RaycastHit hit;
+        Vector3 groundCoord = targetPosition;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask))
+        {
+            // Get the ground coordinate from the hit point
+            groundCoord = hit.point;
+        }
+
+        Vector3 direction = groundCoord - this.transform.position;
+        this.transform.position = targetPosition - direction.normalized;
         StabbingAttack();
-        timer = lungeCD;
+        attackTimer = lungeCD;
+        freezeTimer = 0.5f;
     } 
 
     public void StartAttack()
     {
-        attackTimer = 1f;
         rapier.enabled = true;
     }
 
@@ -80,12 +97,16 @@ public class Ravage :  Enemy
     // Update is called once per frame
     void Update()
     {
-        distance = Vector3.Distance(player.position, this.transform.position);
+        EndAttack();
         attackTimer -= Time.deltaTime;
-        if (attackTimer <= 0)
+        freezeTimer -= Time.deltaTime;
+        if (freezeTimer > 0)
         {
-            EndAttack();
+            return;
         }
+
+        distance = Vector3.Distance(targetPosition, this.transform.position);
+
         if (distance <= combat_range)
         {
             isAngered = true; //switch on the enemy moving mode
@@ -109,16 +130,22 @@ public class Ravage :  Enemy
         {
             //need to implement the lunge action
             //call the Lunge function
-            timer -= Time.deltaTime;
-            if(timer <= 0)
+            if(attackTimer >= 0.5f){
+                targetPosition = player.position;
+            }
+            if(attackTimer <= 0)
             {
                 Lunge();
+            }
+            if (attackTimer <= 1f && attackTimer > 0){
+                Debug.Log("Preping");
             }
         }
     }
     private void lookAtPlayer()
     {
-        Vector3 direction = player.position - this.transform.position;
+        Vector3 direction = targetPosition + chestOffset - this.transform.position;
+        direction.y = 0;
         this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), 0.1f);
     }
 }

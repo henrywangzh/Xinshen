@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class EarthBendingBoss : Enemy
 {
-    [SerializeField] ParticleSystem telegraphPtcls;
+    [SerializeField] BoxCollider pillarDestroyer;
+
+    [SerializeField] Material defaultMaterial, redMaterial;
+    [SerializeField] MeshRenderer meshRenderer;
+
+    [SerializeField] ParticleSystem leapTelegraph, fissureTelegraph;
     [SerializeField] GroundTrigger groundTrigger;
     [SerializeField] EnemyAttack rammingHitbox;
 
@@ -13,12 +18,11 @@ public class EarthBendingBoss : Enemy
     [SerializeField] float leapDuration;
     [SerializeField] int range, fissureMinRange, leapChainChance;
 
-    [SerializeField] GameObject fissureProjectile;
-    [SerializeField] GameObject pillarProjectile;
+    [SerializeField] GameObject fissureProjectile, pillarProjectile, fallingPillar, fallingPillarTelegraph;
     [SerializeField] int[] cooldownRange;
 
-    int attackAnimationTimer, actionQueTimer, actionID;
-    int leapCooldown, fissureCooldown, pillarCooldown, columnCooldown, pillarCharges;
+    int attackAnimationTimer, actionQueTimer, actionID, leapTimer;
+    [SerializeField] int leapCooldown, fissureCooldown, pillarCooldown, columnCooldown, pillarCharges;
     float initialY;
 
     const int LEAP = 0, FISSURE = 1, PILLAR_THROW = 2, COLUMN = 3;
@@ -42,6 +46,7 @@ public class EarthBendingBoss : Enemy
         //pillarCharges = 500;
         leapCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
         fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
+        columnCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
 
 
         base.Start();
@@ -57,12 +62,12 @@ public class EarthBendingBoss : Enemy
     {
         if (!IsStunned() && groundTrigger.IsOnGround() && actionQueTimer < 1)
         {
-            /*
             if (columnCooldown > 0) { columnCooldown--; } else
             {
-                QueAttack(COLUMN);
+                Instantiate(fallingPillar, GetPredictedPos(1) + Vector3.up * 30, fallingPillar.transform.rotation);
+                Instantiate(fallingPillarTelegraph, GetPredictedPos(1), fallingPillarTelegraph.transform.rotation);
+                columnCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
             }
-            */
             if (leapCooldown > 0) { leapCooldown--; } else
             {
                 QueAttack(LEAP);
@@ -71,6 +76,7 @@ public class EarthBendingBoss : Enemy
             {
                 if (TargetInRange(range) && !TargetInRange(fissureMinRange))
                 {
+                    FaceTarget(1);
                     QueAttack(FISSURE);
                 }
             }
@@ -113,6 +119,10 @@ public class EarthBendingBoss : Enemy
                     pillarCharges = pillarCharges % 20;
                     pillarCooldown = Random.Range(cooldownRange[0], cooldownRange[1]) * 2;
                 }
+                else if (actionID == COLUMN)
+                {
+                    
+                }
             }
             actionQueTimer--;
         }
@@ -123,18 +133,33 @@ public class EarthBendingBoss : Enemy
             calculateTimer = 5;
             CalculatePredictedPos();
         }
+
+        if (leapTimer > 0)
+        {
+            if (leapTimer == 1)
+            {
+                meshRenderer.material = defaultMaterial;
+                pillarDestroyer.enabled = false;
+            }
+            leapTimer--;
+        }
     }
 
     void QueAttack(int ID)
     {
         actionID = ID;
         actionQueTimer = 40;
-        telegraphPtcls.Play();
+
+        if (ID == LEAP) leapTelegraph.Play();
+        if (ID == FISSURE) fissureTelegraph.Play();
     }
 
     void DoLeapAttack()
     {
         rammingHitbox.EnableHitbox(Mathf.RoundToInt(leapDuration * 45));
+        leapTimer = 46;
+        meshRenderer.material = redMaterial;
+        //pillarDestroyer.enabled = true;
 
         SetAnimationLock(Mathf.RoundToInt(leapDuration * 50 + 25));
 
@@ -151,7 +176,7 @@ public class EarthBendingBoss : Enemy
 
         if (Random.Range(0,100) < leapChainChance)
         {
-            leapCooldown = 15;
+            leapCooldown = 10;
         }
         else
         {
@@ -205,5 +230,13 @@ public class EarthBendingBoss : Enemy
     {
         Debug.Log("GG NO RE");
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.GetComponent<EarthPillar>())
+        {
+            Destroy(col.gameObject);
+        }
     }
 }
