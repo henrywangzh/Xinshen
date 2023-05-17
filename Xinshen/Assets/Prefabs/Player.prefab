@@ -11411,6 +11411,7 @@ GameObject:
   - component: {fileID: 8795833453457307}
   - component: {fileID: 1243719911700389649}
   - component: {fileID: 2058568195420056383}
+  - component: {fileID: 6135942801865053579}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -11800,6 +11801,7 @@ MonoBehaviour:
   deathScreen: {fileID: 0}
   DebugSpawnPoint: {fileID: 0}
   FrenzyAtkBoost: 5
+  actuallyDie: 0
 --- !u!114 &2038843097397423655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11828,6 +11830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponCollider: {fileID: 1608383342168834120}
+  moveSpeed: 3
 --- !u!114 &56115233731183276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11844,6 +11847,15 @@ MonoBehaviour:
   targLocked: 0
   moveSpeed: 3
   turnSpeed: 5
+  isClimbing: 0
+  raycastDistance: 1
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  fallThreshold: -10
+  fallTimeThreshold: 1
+  isFalling: 0
+  rollForce: 10
 --- !u!114 &557452805525474370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11997,6 +12009,18 @@ MonoBehaviour:
   horizontalThrustForce: 1000
   forwardThrustForce: 1000
   extendCableSpeed: 20
+--- !u!114 &6135942801865053579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622452027422676384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9187d7a467583438395b11acbf5ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1622452027453068107
 GameObject:
   m_ObjectHideFlags: 0

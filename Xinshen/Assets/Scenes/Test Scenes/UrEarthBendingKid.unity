@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.35337925, g: 0.22635908, b: 0.3511407, a: 1}
+  m_IndirectSpecularColor: {r: 0.3531146, g: 0.22632456, b: 0.35116702, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -195,18 +195,17 @@ MonoBehaviour:
   leapDuration: 1
   range: 25
   fissureMinRange: 0
-  leapChainChance: 75
+  leapChainChance: 40
   fissureProjectile: {fileID: 3609973570637663887, guid: 64c38201433c1aa47bb56188d6c1a2d1, type: 3}
   pillarProjectile: {fileID: 3185934718500769736, guid: 9aebf5812b00bab479672459a548b8ec, type: 3}
   fallingPillar: {fileID: 3185934718500769736, guid: 238b32088e137e047893d9d51698d3b1, type: 3}
   fallingPillarTelegraph: {fileID: 4891961544920066903, guid: f635c7b7b0906204db7fb9f7d3b7a0bf, type: 3}
-  cooldownRange: 3200000050000000
+  cooldownRange: 500000007e000000
   leapCooldown: 0
   fissureCooldown: 0
   pillarCooldown: 0
   columnCooldown: 0
   pillarCharges: 0
-  playerPositions: []
 --- !u!65 &525533384
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -451,7 +450,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0

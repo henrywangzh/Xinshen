@@ -53,6 +53,8 @@ public abstract class Enemy : MonoBehaviour
         return stunMeter;
     }
 
+    public int GetHP() { return hp; }
+
     public virtual bool TakeDamage(int dmg)
     {
         return TakeDamage(dmg, true, true, 5);
