@@ -67382,18 +67382,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.06666667
-    functionName: SetFwdVelocity
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.1
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 8
+    floatParameter: 5
     intParameter: 0
     messageOptions: 0
   - time: 0.1
@@ -67412,6 +67405,13 @@ AnimationClip:
     messageOptions: 0
   - time: 0.36666667
     functionName: EndSwing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.36666667
+    functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

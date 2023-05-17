@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DiscordMove : MonoBehaviour
 {
@@ -31,19 +32,67 @@ public class DiscordMove : MonoBehaviour
     public LayerMask wallLayer; // Layer mask for the wall objects
 
     // Falling mode flag
-    [SerializeField] public float fallThreshold = -10f; // Threshold for detecting falling
+    [SerializeField] public float fallThreshold = 1f; // Threshold for detecting falling
     public float fallTimeThreshold = 1f; // Time threshold for detecting falling
     [SerializeField] private bool isFalling = false; // Flag to track if the player is currently falling
-    private float fallStartTime; // Time when the player starts falling
+    
 
     // Rolling
     public float rollForce = 10.0f; // The force applied to perform the roll
     //public Animator animator; // Reference to the player's animator component
     private Vector3 currentMoveDirection; // The current movement direction of the player
 
+    //Time since contact
+    float timeSinceContact = 0f;
+    private float fallStartTime; // Time when the player starts falling
+    void OnCollisionEnter(Collision collision)
+    {
+        /* if (collision.gameObject.CompareTag("Ground"))
+         {
+             isFalling = false;
+             timeSinceContact = 0f;
+             anim.Play("DiscordMove");
+         }*/
+        if (isFalling && Time.time - fallStartTime >= 1f)  //player lands on surface, is no longer falling
+        {
+            isFalling = false;
+            anim.SetBool("Falling", false);
+            anim.Play("FellDown");
+        }
+        timeSinceContact = 0f;
+    }
+/*    void OnCollisionExit(Collision collision)
+    {
+        timeSinceContact += Time.deltaTime;
+        //isFalling = false;
+    }*/
+    void OnCollisionStay(Collision collision)
+    {
+        
+        if (!isFalling && timeSinceContact >= 1f)   //player wasn't falling, and now is falling
+        {
+            isFalling = true;
+            fallStartTime = Time.time;
+            anim.SetBool("Falling", true);
+            anim.Play("Falling");
+        }
+        timeSinceContact = 0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        //update time since contact
+        timeSinceContact += Time.deltaTime;
+
+        // Detect input for 'W' key, also 'A', 'D'
+        bool isHoldingW = Input.GetKey(KeyCode.W);
+        bool isHoldingD = Input.GetKey(KeyCode.D);
+        bool isHoldingA = Input.GetKey(KeyCode.A);
+        bool isHoldingS = Input.GetKey(KeyCode.S);
+
+
+        // Get movement
         float xinput = Input.GetAxis("Horizontal");
         float yinput = Input.GetAxis("Vertical");
 
@@ -68,12 +117,7 @@ public class DiscordMove : MonoBehaviour
         }
 
 
-        //Attacking
-      /*  if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            controller.switchState.Invoke("evade");
-            PlayerHP.SetInvulnerable(16);
-        }*/
+        //ATTACKING
         if (Input.GetMouseButtonDown(0))
         {
             controller.switchState.Invoke("discordAttack");
@@ -81,7 +125,7 @@ public class DiscordMove : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
 
-        //Rolling  
+        //ROLLING
         // Get the input for movement
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
@@ -99,7 +143,7 @@ public class DiscordMove : MonoBehaviour
             rollDirection.Normalize();
 
             // Apply a force to the player in the roll direction
-            rb.AddForce(rollDirection * rollForce, ForceMode.Impulse);
+            //rb.AddForce(rollDirection * rollForce, ForceMode.Impulse);
             //rb.AddForce(transform.forward * 2000f, ForceMode.Force);
 
             // Play the rolling animation
@@ -112,12 +156,7 @@ public class DiscordMove : MonoBehaviour
         }
 
 
-        //Player is climbing
-        // Detect input for 'W' key, also 'A', 'D'
-        bool isHoldingW = Input.GetKey(KeyCode.W);
-        bool isHoldingD = Input.GetKey(KeyCode.D);
-        bool isHoldingA = Input.GetKey(KeyCode.A);
-        bool isHoldingS = Input.GetKey(KeyCode.S);
+        //CLIMBING
         // Check if player is colliding with a wall
         bool isCollidingWithWall = false;
         //collision detection:
@@ -149,21 +188,26 @@ public class DiscordMove : MonoBehaviour
             //play climbing animation
             anim.Play("Climbing");
         }
-        else if (isHoldingS && isCollidingWithWall)
+        if (isHoldingS && isCollidingWithWall)
         {
             isClimbing = true;
             transform.position += Vector3.down * 1f * Time.deltaTime;
-            anim.Play("Climbing"); 
-        }
-        else if (isHoldingD && isCollidingWithWall && isClimbing)
-        {
-            transform.position += Vector3.right * 1f * Time.deltaTime;
             anim.Play("Climbing");
-
         }
-        else if (!isHoldingW && isCollidingWithWall)
+        if (isHoldingD && isCollidingWithWall)
         {
-            rb.useGravity = false;  
+            transform.position += transform.right * 1f * Time.deltaTime;
+            anim.Play("Climbing");
+        }
+        if (isHoldingA && isCollidingWithWall)
+        {
+            //transform.position += transform.left * 1f * Time.deltaTime;
+            anim.Play("Climbing");
+        }
+
+        if (!isHoldingW && isCollidingWithWall || !isHoldingD && isCollidingWithWall || !isHoldingS && isCollidingWithWall || !isHoldingA && isCollidingWithWall)
+        {
+            rb.useGravity = false;
         }
         else
         {
@@ -177,39 +221,74 @@ public class DiscordMove : MonoBehaviour
         }
 
 
-        //Player is falling
-            //only do this when player presses jump maybe
-        if (isClimbing)
-        {
-            if (isFalling)
-            {
-                //trigger landing animation
-                isFalling = false;
-                anim.Play("FellDown");
-            }
-        }
-        else
-        {
-            // Player is not climbing
-            if (!isFalling && transform.position.y < fallThreshold)
-            {
-                // Player is starting to fall, record fall start time
-                isFalling = true;
-                fallStartTime = Time.time;
-            }
-            else if (isFalling)
-            {
-                // Player is already falling, check fall time threshold
-                float fallTime = Time.time - fallStartTime;
-                if (fallTime >= fallTimeThreshold)
-                {
-                    // Player has fallen for more than the time threshold, trigger falling mode
-                    // play anim.play falling animation
+        //check if time since on ground
 
-                    anim.Play("Falling");
-                }
+
+        /*Collision collision ;
+        {
+            for (int i = 0; i < collision.contactCount; i++)
+            {
+                Vector3 normal = collision.GetContact(i).normal;
             }
+        }*/
+
+        //FALLING
+        //only do this when player presses jump maybe
+        /* if (isClimbing)
+         {
+             if (isFalling)
+             {
+                 //trigger landing animation
+                 isFalling = false;
+                 anim.Play("FellDown");
+             }
+         }
+         else
+         {
+             // Player is not climbing
+             //if (!isFalling && transform.position.y < fallThreshold)
+             if (!isFalling && timeSinceContact > 1f)
+             {
+                 // Player is starting to fall, record fall start time
+                 isFalling = true;
+                 fallStartTime = Time.time;
+                 anim.Play("Falling");
+             }
+            *//* else if (isFalling)
+             {
+                 // Player is already falling, check fall time threshold
+                 float fallTime = Time.time - fallStartTime;
+                 if (fallTime >= fallTimeThreshold)
+                 {
+                     // Player has fallen for more than the time threshold, trigger falling mode
+                     // play anim.play falling animation
+
+                     anim.Play("Falling");
+                 }
+             }*//*
+         }*/
+      /*  if (!isFalling && timeSinceContact >= 1f)
+        {
+            // Player is starting to fall, record fall start time
+            isFalling = true;
+            fallStartTime = Time.time;
+            anim.Play("Falling");
+            rb.useGravity = true;
         }
+        if (isFalling && (timeSinceContact == 0f))
+        {
+            isFalling = false;
+            anim.Play("FellDown");
+            rb.useGravity = true;
+        }*/
+
+        //player lands
+       /* if (isFalling && timeSinceContact == 0f && (fallStartTime > 0f))
+        {
+            isFalling = false;
+            anim.SetBool("Falling", false);
+            anim.Play("FellDown");
+        }*/
     }
     /* if (transform.position.y < fallThreshold)
      {
@@ -243,8 +322,10 @@ public class DiscordMove : MonoBehaviour
 
      }*/
 
-    public void moveRollingPlayerForward()
+    public int moveRollingPlayerForward(int rollForceReal)
     {
-        rb.AddForce(transform.forward * rollForce, ForceMode.Impulse);
+
+        rb.AddForce(transform.forward * rollForceReal, ForceMode.Impulse);
+        return 0;
     }
 }

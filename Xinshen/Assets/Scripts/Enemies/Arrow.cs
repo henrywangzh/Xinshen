@@ -21,6 +21,7 @@ public class Arrow : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
+        Debug.Log("Collided with " + other.tag);
         if (other.tag == "Player") {
             // Gets GVM of player
             GlobalVariableManager GlobalVariableManager = other.GetComponent<GlobalVariableManager>();
@@ -30,13 +31,15 @@ public class Arrow : MonoBehaviour {
 
         // Disables arrow if it hits
         Disable();
+        Debug.Log("DOES THIS RUN?");
     }
     
     // Function for disabling game objects
     private void Disable() {
-        CancelInvoke("Disable");
-        rb.velocity = Vector3.zero;
-        this.GameObject().SetActive(false);
+        Debug.Log("Disable?");
+        // CancelInvoke("Disable");
+        // rb.velocity = Vector3.zero;
+        // this.GameObject().SetActive(false);
         Destroy(gameObject);
     }
     
