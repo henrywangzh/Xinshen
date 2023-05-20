@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
     // HP bar stuff
     [SerializeField] Slider HPSlider;
     [SerializeField] GameObject healthBarUI;
-
+    [SerializeField] bool HPNotConfigured;
 
 
     protected virtual void Start()
@@ -145,10 +145,13 @@ public abstract class Enemy : MonoBehaviour
         }
 
         // hp bar stuff
-        HPSlider.value = CalculateHealth();
-        if(hp < maxHP)
+        if (!HPNotConfigured)
         {
-            healthBarUI.SetActive(true);
+            HPSlider.value = CalculateHealth();
+            if (hp < maxHP)
+            {
+                healthBarUI.SetActive(true);
+            }
         }
     }
 

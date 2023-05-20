@@ -9859,7 +9859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _knockbackPower: 0
   _stunPower: 0
-  _traumaPower: 0
+  _traumaPower: 5
   ps: {fileID: 5588416017458312304}
 --- !u!1 &1622452025970368418
 GameObject:
