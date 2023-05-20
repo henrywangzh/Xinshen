@@ -31,7 +31,7 @@ public class Arrow : MonoBehaviour {
 
         // Disables arrow if it hits
         Disable();
-        Debug.Log("DOES THIS RUN?");
+        // Debug.Log("DOES THIS RUN?");
     }
     
     // Function for disabling game objects
