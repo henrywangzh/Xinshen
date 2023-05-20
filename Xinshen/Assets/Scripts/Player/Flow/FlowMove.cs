@@ -49,7 +49,7 @@ public class FlowMove : MonoBehaviour
 	void EvaluateCollision (Collision collision) {
         for (int i = 0; i < collision.contactCount; i++) {
 			Vector3 normal = collision.GetContact(i).normal;
-            onGround |= normal.y >= 0.7f;
+            onGround |= normal.y >= 0.6f;
 		}
     }
 
@@ -66,6 +66,15 @@ public class FlowMove : MonoBehaviour
         Vector3 moveDirection = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * yinput + new Vector3(cam.right.x, 0, cam.right.z).normalized * xinput).normalized * speed;
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
+
+        Debug.Log(moveDirection.magnitude);
+        if(moveDirection.magnitude >= 0.2 && onGround)
+        {
+            AudioManager.audioManager.playRepeatedSound("WalkingOnGrass");
+        } else
+        {
+            AudioManager.audioManager.stopRepeatedSound();
+        }
 
         // TODO: add check for onGround, we don't want to affect movement if we are not on the ground
         if (!grapple.isGrappling())
