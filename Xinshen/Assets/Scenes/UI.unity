@@ -2666,8 +2666,8 @@ MonoBehaviour:
   MainMenu: {fileID: 2024760579}
   CreditMenu: {fileID: 586827356}
   SettingsMenu: {fileID: 1235873253}
-  PauseMenu: {fileID: 0}
-  PauseButton: {fileID: 0}
+  PauseMenu: {fileID: 84874915}
+  PauseButton: {fileID: 1561908782}
 --- !u!1 &1045316473
 GameObject:
   m_ObjectHideFlags: 0
@@ -4363,7 +4363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1561908783
 RectTransform:
   m_ObjectHideFlags: 0

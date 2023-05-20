@@ -67,7 +67,6 @@ public class FlowMove : MonoBehaviour
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
 
-        Debug.Log(moveDirection.magnitude);
         if(moveDirection.magnitude >= 0.2 && onGround)
         {
             AudioManager.audioManager.playRepeatedSound("WalkingOnGrass");
