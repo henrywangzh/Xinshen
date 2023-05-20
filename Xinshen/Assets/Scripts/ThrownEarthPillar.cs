@@ -80,7 +80,7 @@ public class ThrownEarthPillar : EarthPillar
 
     private Vector3 GetDistancedTargetPosition()
     {
-        return bossScript.GetPredictedPos(Vector3.Distance(target.position, trfm.position));
+        return PredictionManager.GetPredictedPos(Vector3.Distance(target.position, trfm.position));
     }
 
     private void OnTriggerEnter(Collider col)

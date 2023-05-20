@@ -58403,7 +58403,7 @@ AnimationClip:
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 15
+    floatParameter: 20
     intParameter: 0
     messageOptions: 0
   - time: 0.33333334

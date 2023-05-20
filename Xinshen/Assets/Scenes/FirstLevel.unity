@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 560084449}
-  m_IndirectSpecularColor: {r: 0.1327832, g: 0.48223078, b: 0.9808688, a: 1}
+  m_IndirectSpecularColor: {r: 0.13274601, g: 0.48253477, b: 0.9821059, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4008,13 +4008,22 @@ MonoBehaviour:
   hp: 0
   centerYOffset: 0
   damage: 20
+  stunMeterMax: 100
+  poise: 20
+  stunDuration: 200
+  stunned: 0
+  stunMeter: 0
+  HPSlider: {fileID: 0}
+  healthBarUI: {fileID: 0}
+  player: {fileID: 0}
+  rapier: {fileID: 0}
   attack_range: 5
   combat_range: 10
   detection_range: 20
-  Player: {fileID: 1997873390}
-  distance: 0
-  isAngered: 0
-  _agent: {fileID: 1562825228}
+  chestOffset: {x: 0, y: 1.84, z: 0}
+  moveSpeed: 2
+  lungeSpeed: 10
+  lungeCD: 5
 --- !u!65 &1562825230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7006,6 +7015,10 @@ PrefabInstance:
     - target: {fileID: 8924793094377582, guid: 66056d1de5e42b74783c14f202032240, type: 3}
       propertyPath: m_Name
       value: CameraYaw
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924793094377582, guid: 66056d1de5e42b74783c14f202032240, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8924793094377583, guid: 66056d1de5e42b74783c14f202032240, type: 3}
       propertyPath: m_RootOrder
