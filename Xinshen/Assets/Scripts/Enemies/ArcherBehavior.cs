@@ -100,6 +100,7 @@ public class ArcherBehavior : Enemy
         } else if (enemyDetected && !attacking) {
             //Debug.Log("Help");
             attacking = true;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             //Debug.Log("What");
             //anim.SetBool("Attacking", true);
             //Debug.Log("Help2");
@@ -131,13 +132,10 @@ public class ArcherBehavior : Enemy
     IEnumerator Attack() {
     
         attacking = true;
-        Debug.Log("Are you attacking?");
-        
-        // anim.Play("ArcherShoot");
-        // yield return new WaitForSeconds(2f);
-        // Debug.Log("Start Atk");
+        // Debug.Log("Are you attacking?");
+
         while (enemyDetected) {
-            Debug.Log(enemyDetected);
+            // Debug.Log(enemyDetected);
             anim.Play("ArcherShoot");
             yield return new WaitForSeconds(3f);
         }
@@ -145,14 +143,16 @@ public class ArcherBehavior : Enemy
         // enemy is no longer detected
         attacking = false;
         anim.SetBool("Attacking", false);
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        anim.Play("ArcherWalk");
         // StopCoroutine(Attack());
     }
     
     // Shoot an arrow at the player at a regular interval
     void Shoot() {
-        Debug.Log("Are you shooting?");
+        // Debug.Log("Are you shooting?");
         shotArrow = Instantiate(arrow, transform.position + arrowSpawnOffset, arrowRotation);
-        Debug.Log("Shoot");
+        // Debug.Log("Shoot");
         Rigidbody arrowRb = shotArrow.GetComponent<Rigidbody>();
         arrowRb.velocity = Vector3.Normalize(vectorTowardsPlayer) * arrowMoveSpeed;
     }
