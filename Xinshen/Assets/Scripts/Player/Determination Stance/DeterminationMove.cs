@@ -38,37 +38,25 @@ public class DeterminationMove : MonoBehaviour
 		Vector2 inputVec = inputHandler.getInputVectorNorm();
 		float forwardDuration = inputHandler.getForwardDuration();
 
-		// Start running after 0.5 sec
-		bool isRunning = forwardDuration > 0.5f;
+		// Start running after 0.3 sec
+		bool isRunning = forwardDuration > 0.3f;
 
+		// Update player speed
+		currSpeed = isRunning ? runSpeed : walkSpeed;
 
-		if (targLocked)
-		{
-			currSpeed = walkSpeed;
+		// Update animator parameters
+		// animator.SetFloat("xInput", 0);
+
+		if (isRunning)
+			animMultiplier = Mathf.Min(2f, animMultiplier + 2.5f * Time.deltaTime);
+		else 
 			animMultiplier = 1f;
-			
-			animator.SetFloat("xInput", inputVec.x);
-			animator.SetFloat("yInput", inputVec.y);
-		}
-		else
-		{
-			// Update player speed
-			currSpeed = isRunning ? runSpeed : walkSpeed;
 
-			// Update animator parameters
-			animator.SetFloat("xInput", 0);
+		animator.SetFloat("yInput", inputHandler.getInputVector().magnitude / 2 * animMultiplier);
 
-			if (isRunning)
-				animMultiplier = Mathf.Min(2f, animMultiplier + 2.5f * Time.deltaTime);
-			else 
-				animMultiplier = 1f;
-
-			animator.SetFloat("yInput", inputHandler.getInputVector().magnitude * animMultiplier);
-
-			// Update player rotation
-			Vector3 forwardDir = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), rotSpeed * Time.deltaTime, 0f);
-			transform.forward = forwardDir;
-		}
+		// Update player rotation
+		Vector3 forwardDir = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), rotSpeed * Time.deltaTime, 0f);
+		transform.forward = forwardDir;
 
 		// Update rigidbody velocity
 		Vector3 moveDir = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * inputVec.y + new Vector3(cam.right.x, 0, cam.right.z).normalized * inputVec.x);
@@ -82,5 +70,13 @@ public class DeterminationMove : MonoBehaviour
 		// anim.SetFloat("xInput", 0);
 		// anim.SetFloat("yInput", Mathf.Sqrt(yinput*yinput + xinput*xinput) * 2f);
 
+		if (Input.GetMouseButtonDown(0))
+        {
+			controller.switchState.Invoke("attack");
+        } else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+			controller.switchState.Invoke("evade");
+        }
+		
 	}
 }

@@ -8,6 +8,7 @@ public class FlowMoveAnimManager : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.gameObject.GetComponent<FlowScriptController>().switchState.Invoke("move");
+        animator.SetBool("Combo", false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
