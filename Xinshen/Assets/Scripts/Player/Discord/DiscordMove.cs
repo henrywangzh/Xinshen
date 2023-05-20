@@ -137,6 +137,7 @@ public class DiscordMove : MonoBehaviour
             // Perform roll in the current movement direction
             PerformRoll(currentMoveDirection);
         }
+
         void PerformRoll(Vector3 rollDirection)
         {
             // Normalize the roll direction
@@ -152,7 +153,10 @@ public class DiscordMove : MonoBehaviour
             //ISSUE:  DOES NOT UPDATE PLAYER AFTER ROLLING
 
             //Make player invulerable ???
-            PlayerHP.SetInvulnerable(16);
+            //PlayerHP.SetInvulnerable(16);
+
+            //PlayerHP.SetDamageReduction(0);
+            //1 = %100 damage reduction
         }
 
 

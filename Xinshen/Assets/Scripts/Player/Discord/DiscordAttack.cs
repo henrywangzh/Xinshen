@@ -20,12 +20,12 @@ public class DiscordAttack : MonoBehaviour
 
     private void OnEnable()
     {
-        /*  if (anim == null)
+        if (anim == null)
               anim = GetComponent<Animator>();
           //SetCombo(1);
           if (rb != null)
               rb.velocity = Vector3.zero;
-          GlobalVariableManager.Damage = 25;*/
+          //GlobalVariableManager.Damage = 25;
 
         DiscordCombo(1);
     }
@@ -52,6 +52,7 @@ public class DiscordAttack : MonoBehaviour
     {
         anim.SetBool("DiscordAttack", attack >= 1);
     }
+
     public void EndDiscordAttack()
     {
         anim.SetBool("DiscordAttack", false);
@@ -65,13 +66,13 @@ public class DiscordAttack : MonoBehaviour
             controller.switchState.Invoke("discordMove");
     }
 
+    public float DiscordAttackMoveSpeed = 5f;
     // Move player after attack
-    public float moveSpeed = 3f;
     // Function triggered by the animation event
     public void UpdateDiscordPlayerPosition()
     {
         // Update player's position based on forward movement
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        transform.position += transform.forward * DiscordAttackMoveSpeed * Time.deltaTime;
     }
 }
 
