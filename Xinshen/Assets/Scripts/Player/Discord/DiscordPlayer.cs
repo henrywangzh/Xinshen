@@ -144,14 +144,14 @@ public class DiscordPlayer : MonoBehaviour
             animator.SetBool("isRolling", false);
         }
 
-        //left cliking for attack
+        /*//left cliking for attack
         if (Input.GetMouseButtonDown(0))
         {
             //isAttacking1 = true;
             animator.SetBool("attack1", true);
 
         }
-        //animator.SetBool("attack1", false);
+        animator.SetBool("attack1", false);*/
 
 
         /*if (timeHeld < 0)
