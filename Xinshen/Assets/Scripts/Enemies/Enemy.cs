@@ -145,10 +145,12 @@ public abstract class Enemy : MonoBehaviour
         }
 
         // hp bar stuff
-        HPSlider.value = CalculateHealth();
+        if (HPSlider != null)
+            HPSlider.value = CalculateHealth();
         if(hp < maxHP)
         {
-            healthBarUI.SetActive(true);
+            if (healthBarUI != null && !healthBarUI.activeSelf)
+                healthBarUI.SetActive(true);
         }
     }
 

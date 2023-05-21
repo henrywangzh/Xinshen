@@ -37,7 +37,7 @@ public class DropCorpse : MonoBehaviour
             spawnPoint.y = y;
             spawnPoint.z += z;
             // get random rotation
-            Quaternion rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+            Quaternion rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
             Instantiate(corpse, spawnPoint, rotation);
             yield return new WaitForSeconds(waitTime);
         }
