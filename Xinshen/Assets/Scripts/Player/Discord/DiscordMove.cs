@@ -153,14 +153,14 @@ public class DiscordMove : MonoBehaviour
             //ISSUE:  DOES NOT UPDATE PLAYER AFTER ROLLING
 
             //Make player invulerable ???
-            //PlayerHP.SetInvulnerable(16);
+            PlayerHP.SetInvulnerable(2);
 
-            //PlayerHP.SetDamageReduction(0);
+            //PlayerHP.SetDamageReduction(1);
             //1 = %100 damage reduction
         }
 
 
-        //CLIMBING
+        /*//CLIMBING
         // Check if player is colliding with a wall
         bool isCollidingWithWall = false;
         //collision detection:
@@ -222,7 +222,7 @@ public class DiscordMove : MonoBehaviour
             // e.g., restore player's movement, animation, physics, etc.
 
             //anim.Play("Falling");
-        }
+        }*/
 
 
         //check if time since on ground
