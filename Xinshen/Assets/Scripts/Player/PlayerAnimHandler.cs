@@ -66,7 +66,10 @@ public class PlayerAnimHandler : MonoBehaviour
 
     public void StartSwing()
     {
-        AudioManager.audioManager.playSound("OneSlashNoHit");
+        if(AudioManager.audioManager != null)
+        {
+            AudioManager.audioManager.playSound("OneSlashNoHit");
+        }
         weaponCollider.enabled = true;
         weapon.SetPSEmission(true);
     }
