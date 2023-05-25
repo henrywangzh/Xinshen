@@ -80,6 +80,11 @@ public class PlayerAnimHandler : MonoBehaviour
         weapon.SetPSEmission(false);
     }
 
+    public void DeterminationSwordGuard(bool guard)
+    {
+        weapon.ToggleDeterminationGuard(guard);
+    }
+
     // 0 - left, 1 - right, 2 - both
     public void StartKick(int leg)
     {

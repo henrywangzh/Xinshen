@@ -9,6 +9,7 @@ public class DeterminationEvade : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
     private Transform cam;
+    private PlayerAnimHandler animHandler;
 
     [SerializeField] private float walkSpeed = 2f; // walk movement speed
     [SerializeField] private float rotSpeed = 10f; // rotation speed
@@ -23,8 +24,10 @@ public class DeterminationEvade : MonoBehaviour
             rb = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
             cam = GetComponent<FlowMove>().cam;
+            animHandler = GetComponent<PlayerAnimHandler>();
         }
         animator.SetTrigger("DeterminationGuard");
+        animHandler.DeterminationSwordGuard(true);
     }
 
     // Update is called once per frame
@@ -32,6 +35,7 @@ public class DeterminationEvade : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            animHandler.DeterminationSwordGuard(false);
             controller.switchState.Invoke("move");
             animator.SetTrigger("DeterminationGuard");
         }
