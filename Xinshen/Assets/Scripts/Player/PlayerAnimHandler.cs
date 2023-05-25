@@ -36,6 +36,21 @@ public class PlayerAnimHandler : MonoBehaviour
         Debug.Log(originalHbHeight);
     }
 
+    public void ForMing()
+    {
+        if (AudioManager.audioManager != null)
+        {
+            // FOR MING: only play sound if we are moving and if we are on the ground
+            //if (moveDirection.magnitude >= 0.2 && onGround)
+            //{
+            //    AudioManager.audioManager.playRepeatedSound("WalkingOnGrass");
+            //}
+            //else
+            //{
+            //    AudioManager.audioManager.stopRepeatedSound();
+            //}
+        }
+    }
 
     // Update is called once per frame
     void Update()

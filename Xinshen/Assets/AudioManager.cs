@@ -21,8 +21,8 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public Sound[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource;
+    public Sound[] musicSounds, sfxSounds, ambientSounds;
+    public AudioSource musicSource, sfxSource, ambientSource;
 
     public void playMusic(string name)
     {
@@ -84,6 +84,10 @@ public class AudioManager : MonoBehaviour
         SceneManager.activeSceneChanged += ChangedActiveScene;
         playMusic("MainMenuTheme");
         musicSource.loop = true;
+
+
+        ambientSource.volume = 0;
+        ambientSource.loop = true;
     }
 
     private void ChangedActiveScene(Scene current, Scene next)
@@ -94,8 +98,25 @@ public class AudioManager : MonoBehaviour
         {
             StartCoroutine(FadeIn(musicSource, 5f, 0.3f));
             playMusic("Region1BGMusic");
+            PlayAmbient("AmbientMusic");
         }
 
+    }
+
+    public void PlayAmbient(string name)
+    {
+        Sound s = Array.Find(ambientSounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogError("Ambient sound not found");
+        }
+        else
+        {
+            ambientSource.clip = s.clip;
+            ambientSource.volume = 0.1f;
+            ambientSource.Play();
+            StartCoroutine(RandomlyPlayAmbientSound(name));
+        }
     }
 
     bool currentlyFading = false;
@@ -112,13 +133,14 @@ public class AudioManager : MonoBehaviour
         }
 
         audioSource.Stop();
-        audioSource.volume = startVolume;
+        audioSource.volume = 0;
         currentlyFading = false;
     }
 
     public IEnumerator FadeIn(AudioSource audioSource, float FadeTime, float volume)
     {
         audioSource.volume = 0;
+        audioSource.Play();
         while (audioSource.volume < volume)
         {
             audioSource.volume += volume * Time.deltaTime / FadeTime;
@@ -126,5 +148,37 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
         audioSource.volume = volume;
+    }
+
+    IEnumerator RandomlyPlayAmbientSound(string name)
+    {
+        float time = 0;
+        float ambientSoundLength = 0;
+        Sound s = Array.Find(ambientSounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogError("Ambient sound not found");
+        }
+        else
+        {
+            ambientSoundLength = s.clip.length;
+        }
+        while (true)
+        {
+            ambientSource.time = time;
+            if(ambientSource.time >= ambientSoundLength)
+            {
+                ambientSource.time = 0;
+            }
+            StartCoroutine(FadeIn(ambientSource, 2f, 0.2f));
+            float randomWaitTime = UnityEngine.Random.Range(5f, 10f);
+            time += randomWaitTime;
+            yield return new WaitForSeconds(randomWaitTime);
+            StartCoroutine(FadeOut(ambientSource, 2f));
+            randomWaitTime = UnityEngine.Random.Range(5f, 10f);
+            yield return new WaitForSeconds(randomWaitTime);
+
+        }
+
     }
 }
