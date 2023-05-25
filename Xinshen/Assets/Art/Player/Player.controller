@@ -1,5 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1101 &-9199195642938472521
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3265976761771940925}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-9173543088101392887
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -990,6 +1012,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-1814131789297090624
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RealLanding
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 6333164091654187613}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 69c82edc642f2ea46ab41a69747cf424, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-1748490896676849567
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1995,13 +2044,13 @@ AnimatorStateMachine:
     m_Position: {x: 1410, y: 550, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5020700478687323069}
-    m_Position: {x: 1280, y: 700, z: 0}
+    m_Position: {x: 1250, y: 700, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 984938164589164324}
-    m_Position: {x: 1520, y: 750, z: 0}
+    m_Position: {x: 1410, y: 780, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2130517241258687011}
-    m_Position: {x: 1220, y: 780, z: 0}
+    m_Position: {x: 1160, y: 780, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 978861429191381609}
     m_Position: {x: 1660, y: 620, z: 0}
@@ -2041,6 +2090,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -3416556276704105215}
     m_Position: {x: 1690, y: 370, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 4565886870860772759}
+    m_Position: {x: 1603.6038, y: 864.4646, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1814131789297090624}
+    m_Position: {x: 1802.8584, y: 738.0558, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -2311,6 +2366,33 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &4565886870860772759
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RealFalling
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -9199195642938472521}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 0e8b54c3140d6eb45a0886987ce76392, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &4601486764047990481
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2461,7 +2543,7 @@ BlendTree:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlowMove
+  m_Name: DiscordBlend
   m_Childs:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 183dc0395398c12449394c0628f5821f, type: 2}
@@ -2692,6 +2774,28 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0.84504133
   m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &6333164091654187613
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 4565886870860772759}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.46428573
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

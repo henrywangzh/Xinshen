@@ -57,19 +57,21 @@ public class StancesScriptController : ScriptController
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node determinationNode = addNode(determinationStateName, state, null, requiredStates, canBeInterruptedByTheseStates);
 
-        // moveNode.addNextAvailableStates(evadeNode);
-        flowNode.addNextAvailableStates(frustNode);
-        frustNode.addNextAvailableStates(flowNode);
-        frustNode.addNextAvailableStates(determinationNode);
-        determinationNode.addNextAvailableStates(flowNode);
-
         //discord 
         string discordName = "discord";
         state = new ScriptKeyPair(discord, KeyCode.None);
         requiredStates = new List<MonoBehaviour>();
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node discordNode = addNode(discordName, state, null, requiredStates, canBeInterruptedByTheseStates);
-        
+
+        // moveNode.addNextAvailableStates(evadeNode);
+        flowNode.addNextAvailableStates(frustNode);
+        frustNode.addNextAvailableStates(flowNode);
+        frustNode.addNextAvailableStates(determinationNode);
+        determinationNode.addNextAvailableStates(flowNode);
+        determinationNode.addNextAvailableStates(discordNode);
+        discordNode.addNextAvailableStates(flowNode);
+
         switch (defaultStance)
         {
             case Stance.discord:
