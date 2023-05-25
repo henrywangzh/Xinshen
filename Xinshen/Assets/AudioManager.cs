@@ -115,7 +115,7 @@ public class AudioManager : MonoBehaviour
             ambientSource.clip = s.clip;
             ambientSource.volume = 0.1f;
             ambientSource.Play();
-            StartCoroutine(RandomlyPlayAmbientSound());
+            StartCoroutine(RandomlyPlayAmbientSound(name));
         }
     }
 
@@ -150,16 +150,31 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = volume;
     }
 
-    IEnumerator RandomlyPlayAmbientSound()
+    IEnumerator RandomlyPlayAmbientSound(string name)
     {
-        while(true)
+        float time = 0;
+        float ambientSoundLength = 0;
+        Sound s = Array.Find(ambientSounds, sound => sound.name == name);
+        if (s == null)
         {
-            Debug.Log("fading in");
+            Debug.LogError("Ambient sound not found");
+        }
+        else
+        {
+            ambientSoundLength = s.clip.length;
+        }
+        while (true)
+        {
+            ambientSource.time = time;
+            if(ambientSource.time >= ambientSoundLength)
+            {
+                ambientSource.time = 0;
+            }
             StartCoroutine(FadeIn(ambientSource, 2f, 0.2f));
             float randomWaitTime = UnityEngine.Random.Range(5f, 10f);
+            time += randomWaitTime;
             yield return new WaitForSeconds(randomWaitTime);
             StartCoroutine(FadeOut(ambientSource, 2f));
-            Debug.Log("fading out");
             randomWaitTime = UnityEngine.Random.Range(5f, 10f);
             yield return new WaitForSeconds(randomWaitTime);
 
