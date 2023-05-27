@@ -42,7 +42,7 @@ public class SwordFragController : MonoBehaviour
             }
             for (int i = 0; i < bladeFragments.Length; ++i)
             {
-                bladeFragments[i].transform.position = Vector3.Lerp(bladeFragments[i].transform.position, bladePivots[i].position, 0.2f);
+                bladeFragments[i].transform.position = Vector3.Lerp(bladeFragments[i].transform.position, bladePivots[i].position, 0.4f);
                 bladeFragments[i].transform.rotation = Quaternion.Lerp(bladeFragments[i].transform.rotation, bladePivots[i].rotation, 0.1f);
 
                 /*

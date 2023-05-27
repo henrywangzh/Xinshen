@@ -36,10 +36,11 @@ public class PlayerAnimHandler : MonoBehaviour
         Debug.Log(originalHbHeight);
     }
 
-    public void ForMing()
+    public void PlayFootstep()
     {
-        if (AudioManager.audioManager != null)
+        if (AudioManager.audioManager != null && GlobalVariableManager.OnGround)
         {
+            AudioManager.audioManager.playSound("RunningOnGrass");
             // FOR MING: only play sound if we are moving and if we are on the ground
             //if (moveDirection.magnitude >= 0.2 && onGround)
             //{

@@ -13,7 +13,10 @@ public class DeterminationEvade : MonoBehaviour
 
     [SerializeField] private float walkSpeed = 2f; // walk movement speed
     [SerializeField] private float rotSpeed = 10f; // rotation speed
-
+    [SerializeField] private float guardDamageReduction = 0.7f;
+    [SerializeField] private float parryWindow = 0.2f;
+    float dr = 0;
+    float parryTimer = 0;
 
     private void OnEnable()
     {
@@ -28,6 +31,9 @@ public class DeterminationEvade : MonoBehaviour
         }
         animator.SetTrigger("DeterminationGuard");
         animHandler.DeterminationSwordGuard(true);
+        dr = 1f;
+        parryTimer = 0f;
+        PlayerHP.SetDamageReduction(dr);
     }
 
     // Update is called once per frame
@@ -35,9 +41,17 @@ public class DeterminationEvade : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            animHandler.DeterminationSwordGuard(false);
             controller.switchState.Invoke("move");
             animator.SetTrigger("DeterminationGuard");
+        }
+
+        if (parryTimer < parryWindow)
+        {
+            parryTimer += Time.deltaTime;
+        } else
+        {
+            dr = Mathf.Lerp(dr, guardDamageReduction, Time.deltaTime * 2);
+            PlayerHP.SetDamageReduction(dr);
         }
 
         Vector2 inputVec = inputHandler.getInputVectorNorm();
@@ -56,5 +70,11 @@ public class DeterminationEvade : MonoBehaviour
         Vector3 moveVelocity = moveDir * walkSpeed;
         rb.velocity = moveVelocity + new Vector3(0, rb.velocity.y, 0);
 
+    }
+
+    private void OnDisable()
+    {
+        PlayerHP.SetDamageReduction(0);
+        animHandler.DeterminationSwordGuard(false);
     }
 }
