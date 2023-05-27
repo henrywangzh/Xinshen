@@ -11752,6 +11752,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 2
   rotSpeed: 10
+  guardDamageReduction: 0.7
+  parryWindow: 0.2
 --- !u!114 &128105626493686340
 MonoBehaviour:
   m_ObjectHideFlags: 0

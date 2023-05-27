@@ -15,6 +15,8 @@ public class SwordFragController : MonoBehaviour
     bool prevGuarding = false;
     float baseRotSpd;
 
+    int shardReturnTimer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,13 @@ public class SwordFragController : MonoBehaviour
         {
             bladerbs[i] = bladeFragments[i].GetComponent<Rigidbody>();
         }
+
+        //for (int i = 0; i < bladeFragments.Length; i++)
+        //{
+        //    bladeFragments[i].transform.parent = null;
+        //}
+        //effectiveTrackingRate = new float[bladeFragments.Length];
+
         baseRotSpd = guardRotationVel;
     }
 
@@ -42,7 +51,8 @@ public class SwordFragController : MonoBehaviour
             }
             for (int i = 0; i < bladeFragments.Length; ++i)
             {
-                bladeFragments[i].transform.position = Vector3.Lerp(bladeFragments[i].transform.position, bladePivots[i].position, 0.4f);
+                if (shardReturnTimer < 1) { bladeFragments[i].transform.position = bladePivots[i].position; }
+
                 bladeFragments[i].transform.rotation = Quaternion.Lerp(bladeFragments[i].transform.rotation, bladePivots[i].rotation, 0.1f);
 
                 /*
@@ -63,6 +73,7 @@ public class SwordFragController : MonoBehaviour
             }
         } else
         {
+            shardReturnTimer = 20;
             if (prevGuarding != guarding)
             {
                 Debug.Log("trigger");
@@ -88,8 +99,40 @@ public class SwordFragController : MonoBehaviour
         prevGuarding = guarding;
     }
 
+    [SerializeField] float fragmentTrackingRate;
+    [SerializeField] float[] effectiveTrackingRate;  
+
+    private void FixedUpdate()
+    {
+        //HandleFragmentFollowing();
+
+        if (shardReturnTimer > 0)
+        {
+            for (int i = 0; i < bladeFragments.Length; i++)
+            {
+                bladeFragments[i].transform.position += (bladePivots[i].position - bladeFragments[i].transform.position) * (20f-shardReturnTimer)*.05f;
+            }
+            shardReturnTimer--;
+        }
+    }
+
     public void ToggleGuard(bool guard)
     {
         guarding = guard;
+    }
+
+    void HandleFragmentFollowing()
+    {
+        for (int i = 0; i < bladeFragments.Length; i++)
+        {
+            effectiveTrackingRate[i] += Random.Range(-.03f,.03f);
+            if (effectiveTrackingRate[i] < fragmentTrackingRate * .8f) { effectiveTrackingRate[i] = fragmentTrackingRate * .8f; }
+            else if (effectiveTrackingRate[i] > fragmentTrackingRate * 1.2f) { effectiveTrackingRate[i] = fragmentTrackingRate * 1.2f; }
+
+            bladeFragments[i].transform.position += (bladePivots[i].position - bladeFragments[i].transform.position) * effectiveTrackingRate[i];
+
+            //bladeFragments[i].transform.eulerAngles += (bladePivots[i].eulerAngles - bladeFragments[i].transform.eulerAngles) * .8f;
+            bladeFragments[i].transform.rotation = bladePivots[i].rotation;
+        }
     }
 }
