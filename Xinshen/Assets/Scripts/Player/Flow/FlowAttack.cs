@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlowAttack : MonoBehaviour
 {
     Animator anim;
+    PlayerAnimHandler animHandler;
     FlowScriptController controller;
     Rigidbody rb;
     [SerializeField] Collider weaponCollider;
@@ -27,12 +28,16 @@ public class FlowAttack : MonoBehaviour
     private void OnEnable()
     {
         if (anim == null)
+        {
             anim = GetComponent<Animator>();
+            animHandler = GetComponent<PlayerAnimHandler>();
+        }
         SetCombo(1);
         if (rb != null)
             rb.velocity = Vector3.zero;
         targOrientation = Vector3.zero;
         GlobalVariableManager.Damage = 25;
+        animHandler.LockPhysics(true);
     }
 
     // Update is called once per frame
@@ -109,6 +114,11 @@ public class FlowAttack : MonoBehaviour
         Cleanup();
         // anim.Play("FlowCrossSlash");
         controller.switchState.Invoke("ability");
+    }
+
+    private void OnDisable()
+    {
+        animHandler.LockPhysics(false);
     }
 
     //public void OrientTowardsInput()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeterminationAttack : MonoBehaviour
 {
     Animator anim;
+    PlayerAnimHandler animHandler;
     DeterminationScriptController controller;
     Rigidbody rb;
     [SerializeField] [Tooltip("For debugging purposes only! Sets the locked target to this.")] Transform debugTarget;
@@ -25,7 +26,10 @@ public class DeterminationAttack : MonoBehaviour
     private void OnEnable()
     {
         if (anim == null)
+        {
             anim = GetComponent<Animator>();
+            animHandler = GetComponent<PlayerAnimHandler>();
+        }
         comboCount = 1;
         anim.Play("DeterminationAtkc" + comboCount);
         if (rb != null)
@@ -33,6 +37,7 @@ public class DeterminationAttack : MonoBehaviour
         GlobalVariableManager.Damage = 30;
         AlignToTarget();
         comboReady = false;
+        animHandler.LockPhysics(true);
     }
 
     void AlignToTarget()
@@ -68,6 +73,11 @@ public class DeterminationAttack : MonoBehaviour
     {
         Debug.Log("Calling");
         comboReady = true;
+    }
+
+    private void OnDisable()
+    {
+        animHandler.LockPhysics(false);
     }
 
 }

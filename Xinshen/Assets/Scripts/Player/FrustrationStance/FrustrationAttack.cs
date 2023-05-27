@@ -5,6 +5,7 @@ using UnityEngine;
 public class FrustrationAttack : MonoBehaviour
 {
     Animator anim;
+    PlayerAnimHandler animHandler;
     FrustrationScriptController controller;
     Rigidbody rb;
     [SerializeField] [Tooltip("For debugging purposes only! Sets the locked target to this.")] Transform debugTarget;
@@ -26,13 +27,17 @@ public class FrustrationAttack : MonoBehaviour
     private void OnEnable()
     {
         if (anim == null)
+        {
             anim = GetComponent<Animator>();
+            animHandler = GetComponent<PlayerAnimHandler>();
+        }
         comboCount = 1;
         anim.Play("FrustrationAtk" + comboCount);
         if (rb != null)
             rb.velocity = Vector3.zero;
         GlobalVariableManager.Damage = 10;
         AlignToTarget();
+        animHandler.LockPhysics(true);
     }
 
     void AlignToTarget()
@@ -86,5 +91,10 @@ public class FrustrationAttack : MonoBehaviour
     {
         if (this.isActiveAndEnabled)
             controller.switchState.Invoke("move");
+    }
+
+    private void OnDisable()
+    {
+        animHandler.LockPhysics(false);
     }
 }
