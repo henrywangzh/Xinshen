@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PredictionManager : MonoBehaviour
 {
+    [SerializeField] Transform predictionIndicator;
     static Transform playerTrfm;
     // Start is called before the first frame update
     void Awake()
@@ -20,6 +21,7 @@ public class PredictionManager : MonoBehaviour
         {
             calculateTimer = 5;
             CalculatePredictedPos();
+            predictionIndicator.position = GetPredictedPos(1, false);
         }
     }
 
