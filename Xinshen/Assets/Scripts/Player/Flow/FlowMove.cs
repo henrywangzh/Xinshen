@@ -17,7 +17,7 @@ public class FlowMove : MonoBehaviour
 
     float speed;
     float dashTimer = 0;
-    bool onGround = false;
+    // bool onGround = false;
 
     Grapple grapple;
     bool canMove = true;
@@ -38,24 +38,24 @@ public class FlowMove : MonoBehaviour
         dashTimer = dashCD;
     }
 
-    void OnCollisionEnter (Collision collision) {
-		EvaluateCollision(collision);
-	}
+ //   void OnCollisionEnter (Collision collision) {
+	//	EvaluateCollision(collision);
+	//}
 
-	void OnCollisionStay (Collision collision) {
-		EvaluateCollision(collision);
-	}
+	//void OnCollisionStay (Collision collision) {
+	//	EvaluateCollision(collision);
+	//}
 	
-	void EvaluateCollision (Collision collision) {
-        for (int i = 0; i < collision.contactCount; i++) {
-			Vector3 normal = collision.GetContact(i).normal;
-            onGround |= normal.y >= 0.6f;
-		}
-    }
+	//void EvaluateCollision (Collision collision) {
+ //       for (int i = 0; i < collision.contactCount; i++) {
+	//		Vector3 normal = collision.GetContact(i).normal;
+ //           onGround |= normal.y >= 0.6f;
+	//	}
+ //   }
 
-    void OnCollisionExit(Collision collision) {
-        onGround = false;
-    }
+ //   void OnCollisionExit(Collision collision) {
+ //       onGround = false;
+ //   }
     
     // Update is called once per frame
     void Update()
@@ -67,9 +67,10 @@ public class FlowMove : MonoBehaviour
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
 
+        /*
         if(AudioManager.audioManager != null)
         {
-            if (moveDirection.magnitude >= 0.2 && onGround)
+            if (moveDirection.magnitude >= 0.2 && GlobalVariableManager.OnGround)
             {
                 AudioManager.audioManager.playRepeatedSound("WalkingOnGrass");
             }
@@ -78,7 +79,7 @@ public class FlowMove : MonoBehaviour
                 AudioManager.audioManager.stopRepeatedSound();
             }
         }
-
+        */
 
         // TODO: add check for onGround, we don't want to affect movement if we are not on the ground
         if (!grapple.isGrappling())
@@ -86,7 +87,7 @@ public class FlowMove : MonoBehaviour
             rb.velocity = moveDirection;
         }
 
-        if (onGround && Input.GetKeyDown(KeyCode.Space))
+        if (GlobalVariableManager.OnGround && Input.GetKeyDown(KeyCode.Space))
         {
             moveDirection.y += Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y);
             rb.velocity = moveDirection;

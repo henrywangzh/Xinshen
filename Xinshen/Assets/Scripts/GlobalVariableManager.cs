@@ -8,6 +8,7 @@ public class GlobalVariableManager : MonoBehaviour {
 
     // Position Stats
     public static Transform PlayerSpawn;
+    public static bool OnGround;
 
     // Health Stats
     public static int Health;
@@ -69,4 +70,29 @@ public class GlobalVariableManager : MonoBehaviour {
     {
         LockedTarget = targetTrfm;
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    void EvaluateCollision(Collision collision)
+    {
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            Vector3 normal = collision.GetContact(i).normal;
+            OnGround |= normal.y >= 0.6f;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        OnGround = false;
+    }
+
 }
