@@ -67,7 +67,7 @@ public class ActualDiscordScriptController : ScriptController
     {
         if (Input.GetKeyDown(KeyCode.LeftBracket))
         {
-            masterController.switchState.Invoke("frustration");
+            masterController.switchState.Invoke("flow");
         }
     }
 }

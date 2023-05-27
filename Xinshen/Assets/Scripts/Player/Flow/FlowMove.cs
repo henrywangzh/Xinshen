@@ -67,14 +67,18 @@ public class FlowMove : MonoBehaviour
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
 
-        Debug.Log(moveDirection.magnitude);
-        if(moveDirection.magnitude >= 0.2 && onGround)
+        if(AudioManager.audioManager != null)
         {
-            AudioManager.audioManager.playRepeatedSound("WalkingOnGrass");
-        } else
-        {
-            AudioManager.audioManager.stopRepeatedSound();
+            if (moveDirection.magnitude >= 0.2 && onGround)
+            {
+                AudioManager.audioManager.playRepeatedSound("WalkingOnGrass");
+            }
+            else
+            {
+                AudioManager.audioManager.stopRepeatedSound();
+            }
         }
+
 
         // TODO: add check for onGround, we don't want to affect movement if we are not on the ground
         if (!grapple.isGrappling())

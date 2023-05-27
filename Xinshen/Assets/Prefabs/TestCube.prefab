@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1741163227980213295}
   - component: {fileID: 1741163227980213292}
   - component: {fileID: 1007148807108608828}
+  - component: {fileID: 3484543263388214672}
   m_Layer: 0
   m_Name: ChestMesh
   m_TagString: Untagged
@@ -114,6 +115,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3484543263388214672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741163227980213266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d337d7094bc4219bd23b984ffd58ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  hp: 0
+  centerYOffset: 0
+  damage: 20
+  stunMeterMax: 100
+  poise: 20
+  stunDuration: 200
+  stunned: 0
+  stunMeter: 0
+  HPSlider: {fileID: 0}
+  healthBarUI: {fileID: 0}
+  shatteredVersion: {fileID: 1741163227980213266}
+  parent: {fileID: 1741163229430434576}
+  power: 500
+  PieceSleepCheckDelay: 0.1
+  PieceDestroyDelay: 5
+  PieceFadeSpeed: 0.25
 --- !u!1 &1741163229430434576
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] float centerYOffset; //used to instantiate on-hit effects at object's center
     [SerializeField] public int damage = 20;
     [SerializeField] public int stunMeterMax = 100;
-    [SerializeField] public int poise = 50;
+    [SerializeField] public int poise = 20;
     [SerializeField] public int stunDuration = 200;
     [SerializeField] int stunned;
     [SerializeField] int stunMeter = 0;
@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
     // HP bar stuff
     [SerializeField] Slider HPSlider;
     [SerializeField] GameObject healthBarUI;
-    [SerializeField] bool HPNotConfigured;
+
 
 
     protected virtual void Start()
@@ -61,7 +61,7 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // Can assign negative number to heal
-    public virtual bool TakeDamage(int dmg, bool doSlashFX = true, bool doDamageNumber = true, int trauma = 25)
+    public virtual bool TakeDamage(int dmg, bool doSlashFX = true, bool doDamageNumber = true, int trauma = 5)
     {
         if (doSlashFX) { Instantiate(slashFXObj, transform.position + Vector3.up * centerYOffset, transform.rotation); }
         if (doDamageNumber) { GameManager.InstantiateDamageNumber(transform.position + Vector3.up * centerYOffset, dmg, GameManager.BLUE); }
@@ -139,17 +139,18 @@ public abstract class Enemy : MonoBehaviour
 
     public void InvokedFixedUpdate()
     {
-        if (stunned > 0) { stunned--; }
-        if (stunMeter > 0) { stunMeter--; }
+        if (stunned > 0)
+        {
+            stunned--;
+        }
 
         // hp bar stuff
-        if (!HPNotConfigured)
-        {
+        if (HPSlider != null)
             HPSlider.value = CalculateHealth();
-            if (hp < maxHP)
-            {
+        if(hp < maxHP)
+        {
+            if (healthBarUI != null && !healthBarUI.activeSelf)
                 healthBarUI.SetActive(true);
-            }
         }
     }
 
