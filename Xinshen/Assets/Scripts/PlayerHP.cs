@@ -27,6 +27,7 @@ public class PlayerHP : MonoBehaviour
         maxHP = m_maxHP;
         HP = m_maxHP;
         frenzyHP = (int)(m_maxHP * (m_frenzyHPThresholdPercent / 100f));
+        damageMultiplier = 1;
         self = GetComponent<PlayerHP>();
         torsoTrfm = m_torsoTrfm;
 
@@ -63,9 +64,16 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
+    float damageMultiplier;
+    public static void SetDamageReduction(float value) //0: full damage;  0.3: 30% damage reduction;  1.0: no damage
+    {
+        self.damageMultiplier = 1 - value;
+    }
+
     public static void TakeDamage(int damage, bool playBloodFX = true, bool doDamageNumbers = true)
     {
         if (HP <= 0) { return; }
+        damage = Mathf.RoundToInt(damage * self.damageMultiplier);
         HP -= damage;
         self.m_HP = HP;
         // Debug.Log("HP: " + HP);

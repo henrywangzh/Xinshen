@@ -49,8 +49,10 @@ public class EarthBendingBoss : Enemy
         fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
         columnCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
 
-        lastHP = GetHP();
+        //onAtkInterrupt.AddListener(OnAttackInterrupt);
+        //onStun.AddListener(OnStunned);
 
+        lastHP = GetHP();
         base.Start();
     }
 
@@ -190,7 +192,14 @@ public class EarthBendingBoss : Enemy
         if (distance < 10) { distance = 10; }
         rb.velocity += trfm.forward * distance / leapDuration;
 
-        if (Random.Range(0,100) < leapChainChance)
+        SetLeapCooldown();
+        
+        initialY = transform.position.y;
+    }
+
+    void SetLeapCooldown()
+    {
+        if (Random.Range(0, 100) < leapChainChance)
         {
             leapCooldown = 10;
         }
@@ -199,7 +208,6 @@ public class EarthBendingBoss : Enemy
             leapCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
             Stun(100);
         }
-        initialY = transform.position.y;
     }
 
     bool TargetInRange(int pRange)
@@ -226,6 +234,31 @@ public class EarthBendingBoss : Enemy
     {
         Debug.Log("GG NO RE");
         Destroy(gameObject);
+    }
+
+    void OnAttackInterrupt()
+    {
+        Debug.Log("atk interrupted");
+        if (actionID == FISSURE)
+        {
+            fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
+        }
+        else if (actionID == LEAP)
+        {
+            SetLeapCooldown();
+        }
+        else if (actionID == PILLAR_THROW)
+        {
+            pillarCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
+        }
+
+        actionQueTimer = 0;
+    }
+    void OnStunned()
+    {
+        Debug.Log("stunned");
+        OnAttackInterrupt();
+        Stun(50);
     }
 
     private void OnCollisionEnter(Collision col)

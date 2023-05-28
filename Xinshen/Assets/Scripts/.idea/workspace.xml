@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="317483cf-c015-4bf6-8f3f-6f59aa9f35fd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Art/DeterminationSwordIdle.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/DeterminationSwordIdle.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Material/Shader Textures.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Material/Shader Textures/Bricks084_2K_NormalGL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Material/Shader Textures/Bricks084_2K_NormalGL.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Material/WindSlash.shadergraph" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Material/WindSlash.shadergraph.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Material/WindSlashMat.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Material/WindSlashMat.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealFalling.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealFalling.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealFalling.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealFalling.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealLanding.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealLanding.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealLanding.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/Player/Discord/RealLanding.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationsword.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationsword.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationsword.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationsword.fbx.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationsword.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationsword.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationsword_DefaultMaterial_BaseMap.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationsword_DefaultMaterial_BaseMap.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationsword_DefaultMaterial_MaskMap.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationsword_DefaultMaterial_MaskMap.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationsword_DefaultMaterial_Normal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationsword_DefaultMaterial_Normal.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationswordmat.mat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Art/determinationswordtextures/determinationswordmat.mat.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../New Terrain 1.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../New Terrain 1.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Prefabs/barrel2DEBUG.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Prefabs/barrel2DEBUG.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Scenes/Dungeon.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Scenes/Dungeon/Find a key.unity" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Scenes/Dungeon/Find a key.unity.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Player/Determination Stance/SwordFragController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Player/Discord/DiscordClimbing.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Player/Discord/DiscordClimbing.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sound/Music/End_credits_maybe.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sound/Music/End_credits_maybe.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sound/SFX/Movement/running_on_grass_loop.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sound/SFX/Movement/running_on_grass_loop.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sound/ambiance_wind_birds.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Sound/ambiance_wind_birds.mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Art/Player/Discord/DiscordAttack1Real.anim" beforeDir="false" afterPath="$PROJECT_DIR$/../Art/Player/Discord/DiscordAttack1Real.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Art/Player/Discord/DiscordAttack2Real.anim" beforeDir="false" afterPath="$PROJECT_DIR$/../Art/Player/Discord/DiscordAttack2Real.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Art/Player/Discord/TRUERoll.anim" beforeDir="false" afterPath="$PROJECT_DIR$/../Art/Player/Discord/TRUERoll.anim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Art/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/../Art/Player/Player.controller" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../AudioManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Dungeon/DropCorpse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Dungeon/DropCorpse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/Corpse.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/Corpse.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Prefabs/TestCube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../Prefabs/TestCube.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/FirstLevel.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/FirstLevel.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/ProceduralGen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/ProceduralGen.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Test Scenes/DiscordStanceTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Test Scenes/DiscordStanceTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Test Scenes/JohnTest 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Test Scenes/JohnTest 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/Test Scenes/MingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/Test Scenes/MingTest.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Scenes/UI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Scenes/UI.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Enemies/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Enemies/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Determination Stance/DeterminationEvade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Determination Stance/DeterminationEvade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Determination Stance/DeterminationScriptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Determination Stance/DeterminationScriptController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Discord/ActualDiscordScriptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Discord/ActualDiscordScriptController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Discord/DiscordMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Discord/DiscordMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Discord/NewBehaviourScript.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Discord/NewBehaviourScript.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Determination Stance/SwordFragController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/Flow/FlowMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/Flow/FlowMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/PlayerAnimHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/PlayerAnimHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/PlayerWeapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/PlayerWeapon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player/StancesScriptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Player/StancesScriptController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../changesXinshen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../changesXinshen.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProjectSettings/InputManager.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="2QOVSLZWDvDa5tSdwn5CbAsz5hj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging main",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="317483cf-c015-4bf6-8f3f-6f59aa9f35fd" name="Changes" comment="" />
+      <created>1685224614649</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685224614649</updated>
+      <workItem from="1685224617343" duration="54000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

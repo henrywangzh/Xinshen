@@ -37,6 +37,10 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     [SerializeField] ParticleSystem ps;
+    [SerializeField] GameObject flowSword;
+    [SerializeField] GameObject determinationSword;
+    SwordFragController determinationWeapon;
+
     ParticleSystem.EmissionModule emitter;
 
     // Start is called before the first frame update
@@ -44,12 +48,18 @@ public class PlayerWeapon : MonoBehaviour
     {
         emitter = ps.emission;
         SetPSEmission(false);
+        determinationWeapon = determinationSword.GetComponent<SwordFragController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ToggleDeterminationGuard(bool on)
+    {
+        determinationWeapon.ToggleGuard(on);
     }
 
     public void SetPSEmission(bool start)
