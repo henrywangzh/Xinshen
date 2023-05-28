@@ -78237,6 +78237,7 @@ GameObject:
   - component: {fileID: 6412110267573086646}
   - component: {fileID: 2887348666876019367}
   - component: {fileID: 3344428168551693802}
+  - component: {fileID: 6412110267573086647}
   m_Layer: 0
   m_Name: Landscape_5
   m_TagString: Untagged
@@ -86582,6 +86583,19 @@ Transform:
   m_Father: {fileID: 2534669222313499372}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6412110267573086647
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753662188917726133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 69.99999, y: 69.999985, z: 3.999999}
+  m_Center: {x: 0, y: -4.6185278e-14, z: 2}
 --- !u!1 &6413402930855303319
 GameObject:
   m_ObjectHideFlags: 0
