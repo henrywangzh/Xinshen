@@ -54,16 +54,16 @@ public class DeterminationMove : MonoBehaviour
 
 		animator.SetFloat("yInput", inputHandler.getInputVector().magnitude / 2 * animMultiplier);
 
-		// Update player rotation
-		Vector3 forwardDir = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), rotSpeed * Time.deltaTime, 0f);
-		transform.forward = forwardDir;
-
 		// Update rigidbody velocity
 		Vector3 moveDir = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * inputVec.y + new Vector3(cam.right.x, 0, cam.right.z).normalized * inputVec.x);
 		moveDir.y = 0;
 		
 		Vector3 moveVelocity = moveDir * currSpeed;
 		rb.velocity = moveVelocity + new Vector3(0, rb.velocity.y, 0);
+
+		// Update player rotation
+		Vector3 forwardDir = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), rotSpeed * Time.deltaTime, 0f);
+		transform.forward = forwardDir;
 
 		// Update speed
 		// currSpeed = moveSpeed * 1.5f;

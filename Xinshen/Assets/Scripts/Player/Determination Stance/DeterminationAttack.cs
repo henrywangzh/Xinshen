@@ -14,6 +14,9 @@ public class DeterminationAttack : MonoBehaviour
     int comboCount = 1;  // Corresponds with animation state name
     int maxCombo = 3;  // Highest animation number we have 
     [SerializeField] bool comboReady = false;
+    [SerializeField] float chargeInterval = 0.8f;
+    float heldTime = 0;
+    int chargeLevel = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -27,17 +30,19 @@ public class DeterminationAttack : MonoBehaviour
     {
         if (anim == null)
         {
-            anim = GetComponent<Animator>();
+            anim = GetComponent<Animator>(); 
             animHandler = GetComponent<PlayerAnimHandler>();
         }
         comboCount = 1;
         anim.Play("DeterminationAtkc" + comboCount);
         if (rb != null)
             rb.velocity = Vector3.zero;
-        GlobalVariableManager.Damage = 30;
+        GlobalVariableManager.Damage = 10;
         AlignToTarget();
         comboReady = false;
         animHandler.LockPhysics(true);
+        heldTime = 0;
+        chargeLevel = 0;
     }
 
     void AlignToTarget()
@@ -53,6 +58,7 @@ public class DeterminationAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        heldTime += Time.deltaTime; 
         if (Input.GetMouseButtonDown(0) && comboReady)
         {
             comboCount++;
@@ -63,16 +69,35 @@ public class DeterminationAttack : MonoBehaviour
             }
             comboReady = false;
         }
+        if (heldTime > chargeInterval)
+        {
+            heldTime = 0;
+            if (chargeLevel < 2)
+            {
+                ++chargeLevel;
+                GlobalVariableManager.Damage = 10 + chargeLevel * 10;
+            }
+        }
         if (Input.GetMouseButtonUp(0))
         {
-            anim.SetTrigger("DeterminationAttack");
+            anim.SetTrigger("DeterminationAttack"); 
+            
         }
+    }
+
+    public void ChargeForward()
+    {
+        float vel = 5f + chargeLevel * 15f;
+        animHandler.SetFwdVelocity(vel);
     }
 
     public void DetReadyCombo()
     {
         Debug.Log("Calling");
         comboReady = true;
+        chargeLevel = 0;
+        heldTime = 0;
+        GlobalVariableManager.Damage = 10;
     }
 
     private void OnDisable()
