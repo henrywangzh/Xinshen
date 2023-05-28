@@ -6,9 +6,11 @@ public class PredictionManager : MonoBehaviour
 {
     [SerializeField] Transform predictionIndicator;
     static Transform playerTrfm;
+    static PredictionManager self;
     // Start is called before the first frame update
     void Awake()
     {
+        self = GetComponent<PredictionManager>();
         playerTrfm = transform;
         playerPositions = new Vector3[10];
     }
@@ -19,26 +21,31 @@ public class PredictionManager : MonoBehaviour
         if (calculateTimer > 0) { calculateTimer--; }
         else
         {
-            calculateTimer = 5;
+            calculateTimer = 4;
             CalculatePredictedPos();
-            predictionIndicator.position = GetPredictedPos(1, false);
+            //predictionIndicator.position = GetPredictedPos(1, false);
         }
     }
 
-    static Vector3[] playerPositions;
-    static Vector3 predictedOffset;
+    [SerializeField] Vector3[] playerPositions;
+    [SerializeField] Vector3 predictedPosition;
+    [SerializeField] Vector3 positionDelta;
     static int addPos, calculateTimer;
 
     public static Vector3 GetPredictedPos(float seconds, bool verticalTargeting = true) //larger preditions are less accurate (obviously), ~1.5s is the higher end of accurate predictions
     {
-        int newestPos = addPos - 3;
-        if (newestPos < 0) { newestPos += 10; }
-        predictedOffset = (playerTrfm.position - playerPositions[addPos]) * seconds * .5f;
-        predictedOffset += (playerTrfm.position - playerPositions[newestPos]) * 4 * seconds * .5f;
+        int latestPos1 = addPos - 2;
+        int latestPos2 = addPos - 3;
+        if (latestPos1 < 0) { latestPos1 += 10; }
+        if (latestPos2 < 0) { latestPos2 += 10; }
 
-        if (verticalTargeting) { return predictedOffset + playerTrfm.position; }
-        predictedOffset.y = 0;
-        return predictedOffset;
+        self.positionDelta = (playerTrfm.position - self.playerPositions[latestPos2]) * 2 * seconds;
+        self.positionDelta += (playerTrfm.position - self.playerPositions[latestPos1]) * 6 * seconds;
+        self.predictedPosition = playerTrfm.position + self.positionDelta;
+
+        if (verticalTargeting) { return self.predictedPosition; }
+        self.predictedPosition.y = 0;
+        return self.predictedPosition;
     }
     private void CalculatePredictedPos()
     {

@@ -12,6 +12,8 @@ public class PlayerAnimHandler : MonoBehaviour
     [SerializeField] ParticleSystem rightLegTrail;
     PlayerWeapon weapon;
     bool canCancel = false;
+    bool lockPhysics = false;
+    Vector3 commandVelocity;
     Transform cam;
     Vector3 targOrientation;
 
@@ -29,6 +31,7 @@ public class PlayerAnimHandler : MonoBehaviour
         cam = GetComponent<FlowMove>().cam;
         weapon = weaponCollider.gameObject.GetComponent<PlayerWeapon>();
         targOrientation = Vector3.zero;
+        commandVelocity = Vector3.zero;
         originalHbWidth = weaponCollider.size.x;
         originalHbHeight = weaponCollider.size.y;
         originalHbLength = weaponCollider.size.z;
@@ -36,10 +39,11 @@ public class PlayerAnimHandler : MonoBehaviour
         Debug.Log(originalHbHeight);
     }
 
-    public void ForMing()
+    public void PlayFootstep()
     {
-        if (AudioManager.audioManager != null)
+        if (AudioManager.audioManager != null && GlobalVariableManager.OnGround)
         {
+            AudioManager.audioManager.playSound("RunningOnGrass");
             // FOR MING: only play sound if we are moving and if we are on the ground
             //if (moveDirection.magnitude >= 0.2 && onGround)
             //{
@@ -64,6 +68,16 @@ public class PlayerAnimHandler : MonoBehaviour
         {
             targOrientation = Vector3.zero;
         }
+
+        if (lockPhysics)
+        {
+            rb.velocity = commandVelocity;
+        }
+    }
+    
+    public void LockPhysics(bool locked)
+    {
+        lockPhysics = locked;
     }
 
     // Adjusts the dimensions of the hitbox as a percent of the original. Hitbox will always be adjusted to be centered in front of player.
@@ -128,6 +142,7 @@ public class PlayerAnimHandler : MonoBehaviour
     public void SetFwdVelocity(float vel)
     {
         rb.velocity = transform.forward * vel;
+        commandVelocity = transform.forward * vel;
     }
 
     public void OrientTowardsInput()
