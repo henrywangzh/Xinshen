@@ -43,6 +43,8 @@ public class DeterminationEvade : MonoBehaviour
 
     void OnPlayerHit()
     {
+        if (!this.isActiveAndEnabled)
+            return;
         // If this is called, player would be guarding, so discord meter drops 
         GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.discord, -20);
 

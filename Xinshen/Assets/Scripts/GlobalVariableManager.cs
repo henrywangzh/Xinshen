@@ -28,10 +28,10 @@ public class GlobalVariableManager : MonoBehaviour {
     public static Transform LockedTarget = null;
     public static AbilitiesScriptController.Ability Ability1 = AbilitiesScriptController.Ability.Null;
     public static AbilitiesScriptController.Ability Ability2 = AbilitiesScriptController.Ability.Null;
-    private static int _discordMeter = 0;
-    private static int _determinationMeter = 0;
-    private static int _frustrationMeter = 0;
-    private static int _flowMeter = 0;
+    public static int _discordMeter = 0;
+    public static int _determinationMeter = 0;
+    public static int _frustrationMeter = 0;
+    public static int _flowMeter = 0;
 
     // Frenzy Stats 
     public static int FrenzyThreshold;

@@ -82,6 +82,15 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Enemy>() != null)
         {
+            if (GlobalVariableManager.Stance == StancesScriptController.Stance.frustration)
+            {
+                GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.flow, 7);  // 16 hits to fill
+                GlobalVariableManager.SetStanceMeter(StancesScriptController.Stance.discord, 0);  // Reset discord buildup
+            } else if (GlobalVariableManager.Stance == StancesScriptController.Stance.discord)
+            {
+                GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.flow, 17);  // 6 hits to fill
+                GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.frustration, 9);  // 12 hits to fill
+            }
             if (other.gameObject.GetComponent<Enemy>().TakeDamage(GlobalVariableManager.Damage, true, true, _traumaPower)){
                 // heal player to full if enemy is killed in frenzy mode
                 if (GlobalVariableManager.FrenzyMode){

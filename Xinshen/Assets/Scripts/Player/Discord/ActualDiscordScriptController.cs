@@ -56,11 +56,31 @@ public class ActualDiscordScriptController : ScriptController
         attackNode.addNextAvailableStates(moveNode);
 
         setDefaultState(moveNode);
+        PlayerHP.PlayerHit.AddListener(OnPlayerHit);
+    }
+
+    void OnPlayerHit()
+    {
+        if (!this.isActiveAndEnabled)
+            return;
+        GlobalVariableManager.SetStanceMeter(StancesScriptController.Stance.flow, 0);
     }
 
     private void OnEnable()
     {
         anim.Play("DiscordTransition");
+        GlobalVariableManager.ResetStanceMeters();
+    }
+
+    public void CheckStanceTransitions()
+    {
+        if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.flow))
+        {
+            masterController.switchState.Invoke("flow");
+        } else if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.frustration))
+        {
+            masterController.switchState.Invoke("frustration");
+        }
     }
 
     private void Update()
@@ -68,6 +88,14 @@ public class ActualDiscordScriptController : ScriptController
         if (Input.GetKeyDown(KeyCode.LeftBracket))
         {
             masterController.switchState.Invoke("flow");
+        }
+        if (Time.time % 1f <= Time.deltaTime)
+        {
+            GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.determination, 2);
+            if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.determination))
+            {
+                masterController.switchState.Invoke("determination");
+            }
         }
     }
 }

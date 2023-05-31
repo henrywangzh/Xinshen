@@ -76,6 +76,18 @@ public class FlowScriptController : ScriptController
 
 
         setDefaultState(moveNode);
+        PlayerHP.PlayerHit.AddListener(OnPlayerHit);
+    }
+
+    void OnPlayerHit()
+    {
+        if (!this.isActiveAndEnabled)
+            return;
+        GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.discord, 34);
+        if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.discord))
+        {
+            masterController.switchState.Invoke("discord");
+        }
     }
 
     private void OnEnable()
@@ -84,6 +96,7 @@ public class FlowScriptController : ScriptController
         GlobalVariableManager.Stance = StancesScriptController.Stance.flow;
         GlobalVariableManager.Ability1 = AbilitiesScriptController.Ability.CrossSlash;
         GlobalVariableManager.Ability2 = AbilitiesScriptController.Ability.DoubleKick;
+        GlobalVariableManager.ResetStanceMeters();
     }
 
     private void Update()
