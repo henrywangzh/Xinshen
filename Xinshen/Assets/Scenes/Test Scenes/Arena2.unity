@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0632434, g: 0.023335502, b: 0.020783357, a: 1}
+  m_IndirectSpecularColor: {r: 0.0632409, g: 0.02332162, b: 0.020734537, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -90868,7 +90868,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7416200057686061637}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.919965, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -98421,7 +98421,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7848017792122261945}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.9199668, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -99870,7 +99870,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7306281335735392067}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.9199621, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -101749,7 +101749,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 8662094976603413040}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.9199641, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -103226,7 +103226,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 6739460071369958738}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.91996396, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -103435,7 +103435,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7604084432606991401}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.9199641, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -106220,7 +106220,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7612488389215946027}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.9199639, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -107040,7 +107040,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 8369887903445140481}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.9199652, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -111080,7 +111080,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 8567815335927508498}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.91996557, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -116120,7 +116120,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 8704893413225614011}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.91996497, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -119350,7 +119350,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7524516491972158826}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.91996497, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -121108,7 +121108,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7793331667493678030}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.91996497, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -121567,7 +121567,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 7555132499063473366}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.919963, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
@@ -127872,7 +127872,7 @@ HingeJoint:
   m_ConnectedBody: {fileID: 8073757146806321916}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.91996485, z: 0}
-  m_Axis: {x: 1, y: 0, z: 1}
+  m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_UseSpring: 0
