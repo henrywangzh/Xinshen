@@ -31,7 +31,14 @@ public class DeterminationMove : MonoBehaviour
 	{
 		currSpeed = walkSpeed;
 		animMultiplier = 1f;
+		PlayerHP.PlayerHit.AddListener(OnPlayerHit);
 	}
+
+	void OnPlayerHit()
+    {
+		// If this is called, the player did not guard nor charge an attack
+		GlobalVariableManager.SetStanceMeter(StancesScriptController.Stance.flow, 0);
+    }
 
 	private void Update()
 	{

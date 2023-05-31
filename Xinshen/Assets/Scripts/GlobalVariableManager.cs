@@ -86,21 +86,64 @@ public class GlobalVariableManager : MonoBehaviour {
                 _discordMeter += amount;
                 if (_discordMeter > 100)
                     _discordMeter = 100;
+                else if (_discordMeter < 0)
+                    _discordMeter = 0;
                 break;
             case StancesScriptController.Stance.determination:
                 _determinationMeter += amount;
                 if (_determinationMeter > 100)
                     _determinationMeter = 100;
+                else if (_determinationMeter < 0)
+                    _determinationMeter = 0;
                 break;
             case StancesScriptController.Stance.flow:
                 _flowMeter += amount;
                 if (_flowMeter > 100)
                     _flowMeter = 100;
+                else if (_flowMeter < 0)
+                    _flowMeter = 0;
                 break;
             case StancesScriptController.Stance.frustration:
                 _frustrationMeter += amount;
                 if (_frustrationMeter > 100)
                     _frustrationMeter = 100;
+                else if (_frustrationMeter < 0)
+                    _frustrationMeter = 0;
+                break;
+        }
+    }
+
+    public static void SetStanceMeter(StancesScriptController.Stance stance, int amount)
+    {
+        switch (stance)
+        {
+            case StancesScriptController.Stance.discord:
+                _discordMeter = amount;
+                if (_discordMeter > 100)
+                    _discordMeter = 100;
+                else if (_discordMeter < 0)
+                    _discordMeter = 0;
+                break;
+            case StancesScriptController.Stance.determination:
+                _determinationMeter = amount;
+                if (_determinationMeter > 100)
+                    _determinationMeter = 100;
+                else if (_determinationMeter < 0)
+                    _determinationMeter = 0;
+                break;
+            case StancesScriptController.Stance.flow:
+                _flowMeter = amount;
+                if (_flowMeter > 100)
+                    _flowMeter = 100;
+                else if (_flowMeter < 0)
+                    _flowMeter = 0;
+                break;
+            case StancesScriptController.Stance.frustration:
+                _frustrationMeter = amount;
+                if (_frustrationMeter > 100)
+                    _frustrationMeter = 100;
+                else if (_frustrationMeter < 0)
+                    _frustrationMeter = 0;
                 break;
         }
     }
@@ -119,6 +162,14 @@ public class GlobalVariableManager : MonoBehaviour {
                 return _frustrationMeter >= 100;
         }
         return false;
+    }
+
+    public static void ResetStanceMeters()
+    {
+        _discordMeter = 0;
+        _determinationMeter = 0;
+        _frustrationMeter = 0;
+        _flowMeter = 0;
     }
 
     #endregion

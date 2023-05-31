@@ -44,22 +44,45 @@ public class DeterminationScriptController : ScriptController
 		requiredStates = new List<MonoBehaviour>();
 		canBeInterruptedByTheseStates = new List<MonoBehaviour>();
 		Node attackNode = addNode(atkname, state, null, requiredStates, canBeInterruptedByTheseStates);
-			
-			
+
+
 		moveNode.addNextAvailableStates(evadeNode);
 		moveNode.addNextAvailableStates(attackNode);
 		moveNode.addNextAvailableStates(moveNode);
 		evadeNode.addNextAvailableStates(moveNode);
 		attackNode.addNextAvailableStates(moveNode);
-			 
+
 
 		setDefaultState(moveNode);
+		PlayerHP.PlayerHit.AddListener(OnPlayerHit);
+	}
+
+	void OnPlayerHit()
+	{
+		// Used to handle discord meter buildup
+		GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.discord, 10);
+		if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.discord))
+		{
+			masterController.switchState.Invoke("discord");
+		}
+	}
+
+	public void CheckStanceSwitch()
+	{
+		if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.flow))
+		{
+			masterController.switchState.Invoke("flow");
+		} else if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.frustration))
+		{
+			masterController.switchState.Invoke("frustration");
+		}
 	}
 
     private void OnEnable()
     {
         anim.Play("DeterminationTransitionIn");
 		GlobalVariableManager.Stance = StancesScriptController.Stance.determination;
+		GlobalVariableManager.ResetStanceMeters();
     }
 
     private void Update()
