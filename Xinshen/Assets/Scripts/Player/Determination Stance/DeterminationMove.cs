@@ -36,6 +36,8 @@ public class DeterminationMove : MonoBehaviour
 
 	void OnPlayerHit()
     {
+		if (!this.isActiveAndEnabled)
+			return;
 		// If this is called, the player did not guard nor charge an attack
 		GlobalVariableManager.SetStanceMeter(StancesScriptController.Stance.flow, 0);
     }

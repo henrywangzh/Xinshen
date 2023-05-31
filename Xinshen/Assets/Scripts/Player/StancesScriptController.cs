@@ -9,6 +9,11 @@ public class StancesScriptController : ScriptController
     DeterminationScriptController determination;
     ActualDiscordScriptController discord;
 
+    [SerializeField] int flowMeter;
+    [SerializeField] int frustMeter;
+    [SerializeField] int detMeter;
+    [SerializeField] int discMeter;
+
     public enum Stance
     {
         discord,
@@ -113,5 +118,13 @@ public class StancesScriptController : ScriptController
                 break;
         }
         switchState.Invoke(stateId);
+    }
+
+    private void Update()
+    {
+        flowMeter = GlobalVariableManager._flowMeter;
+        frustMeter = GlobalVariableManager._frustrationMeter;
+        detMeter = GlobalVariableManager._determinationMeter;
+        discMeter = GlobalVariableManager._discordMeter;
     }
 }

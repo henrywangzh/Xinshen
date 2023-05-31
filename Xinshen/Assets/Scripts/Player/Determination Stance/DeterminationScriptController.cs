@@ -59,6 +59,8 @@ public class DeterminationScriptController : ScriptController
 
 	void OnPlayerHit()
 	{
+		if (!this.isActiveAndEnabled)
+			return;
 		// Used to handle discord meter buildup
 		GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.discord, 10);
 		if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.discord))

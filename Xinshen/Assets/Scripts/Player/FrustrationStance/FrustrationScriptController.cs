@@ -72,6 +72,27 @@ public class FrustrationScriptController : ScriptController
         abilityNode.addNextAvailableStates(moveNode);
 
         setDefaultState(dashStrikeNode);
+        PlayerHP.PlayerHit.AddListener(OnPlayerHit);
+    }
+
+    void OnPlayerHit()
+    {
+        if (!this.isActiveAndEnabled)
+            return;
+        GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.determination, 17);
+        GlobalVariableManager.SetStanceMeter(StancesScriptController.Stance.flow, 0);
+        if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.determination))
+        {
+            masterController.switchState.Invoke("determination");
+        }
+    }
+
+    public void CheckStanceTransitions()
+    {
+        if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.flow))
+        {
+            masterController.switchState.Invoke("flow");
+        }
     }
 
     private void OnEnable()
@@ -86,6 +107,14 @@ public class FrustrationScriptController : ScriptController
         if (Input.GetKeyDown(KeyCode.LeftBracket))
         {
             masterController.switchState.Invoke("determination");
+        }
+        if (Time.time % 1f <= Time.deltaTime)
+        {
+            GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.discord, 5);
+            if (GlobalVariableManager.CanTransitionStance(StancesScriptController.Stance.discord))
+            {
+                masterController.switchState.Invoke("discord");
+            }
         }
     }
 }
