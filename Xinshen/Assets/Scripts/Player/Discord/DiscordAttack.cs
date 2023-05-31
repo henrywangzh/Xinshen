@@ -6,6 +6,7 @@ using UnityEngine;
 public class DiscordAttack : MonoBehaviour
 {
     Animator anim;
+    PlayerAnimHandler animHandler;
     ActualDiscordScriptController controller;
     Rigidbody rb;
     [SerializeField] Collider weaponCollider;
@@ -21,12 +22,15 @@ public class DiscordAttack : MonoBehaviour
     private void OnEnable()
     {
         if (anim == null)
-              anim = GetComponent<Animator>();
-          //SetCombo(1);
-          if (rb != null)
+        {
+            anim = GetComponent<Animator>();
+            animHandler = GetComponent<PlayerAnimHandler>();
+        }
+        //SetCombo(1);
+        if (rb != null)
               rb.velocity = Vector3.zero;
-          //GlobalVariableManager.Damage = 25;
-
+        //GlobalVariableManager.Damage = 25;
+        animHandler.LockPhysics(true);
         DiscordCombo(1);
     }
 
@@ -73,6 +77,11 @@ public class DiscordAttack : MonoBehaviour
     {
         // Update player's position based on forward movement
         transform.position += transform.forward * DiscordAttackMoveSpeed * Time.deltaTime;
+    }
+
+    private void OnDisable()
+    {
+        animHandler.LockPhysics(false);
     }
 }
 
