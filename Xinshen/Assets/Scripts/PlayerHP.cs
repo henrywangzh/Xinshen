@@ -105,7 +105,7 @@ public class PlayerHP : MonoBehaviour
     public static void Heal(int heal=-1)
     {
         if (heal == -1) { heal = maxHP; }
-        HP += heal;
+        else { HP += heal; }
         if (HP > maxHP) { HP = maxHP; }
         self.m_HP = HP;
         if (HP > frenzyHP)

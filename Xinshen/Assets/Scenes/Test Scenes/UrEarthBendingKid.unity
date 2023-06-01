@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3534827, g: 0.22635531, b: 0.3511058, a: 1}
+  m_IndirectSpecularColor: {r: 0.35337925, g: 0.22635908, b: 0.3511407, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -362,6 +362,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &525533388
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525533381}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.41146454
+  m_Height: 1.8340559
+  m_Direction: 1
+  m_Center: {x: 0.00008200605, y: 0.41341156, z: 0}
+--- !u!95 &525533389
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525533381}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4d0228375c22f4e188f98b242e3f46ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &631374638
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,40 +529,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8046278080284174721, guid: 9a9c90d97006dd64fb2a066cde58ef40, type: 3}
   m_PrefabInstance: {fileID: 811340332}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &525533388
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525533381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.41146454
-  m_Height: 1.8340559
-  m_Direction: 1
-  m_Center: {x: 0.00008200605, y: 0.41341156, z: 0}
---- !u!95 &525533389
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525533381}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4d0228375c22f4e188f98b242e3f46ed, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &811340332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10346,6 +10346,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1301476451}
+    - target: {fileID: 56115233731183276, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: rollForce
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 664617779280905925, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: fragmentTrackingRate
       value: 0.8
@@ -10418,6 +10422,10 @@ PrefabInstance:
       propertyPath: predictionIndicator
       value: 
       objectReference: {fileID: 754150571}
+    - target: {fileID: 8258692605149598926, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
+      propertyPath: defaultStance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9061349209974271388, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: cam
       value: 
@@ -11119,7 +11127,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2125507001
 Rigidbody:
