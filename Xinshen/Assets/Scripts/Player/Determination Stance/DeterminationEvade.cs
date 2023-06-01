@@ -18,6 +18,11 @@ public class DeterminationEvade : MonoBehaviour
     float dr = 0;
     float parryTimer = 0;
 
+    private void Start()
+    {
+        PlayerHP.PlayerHit.AddListener(OnPlayerHit);
+    }
+
     private void OnEnable()
     {
         if (animator == null)
@@ -36,6 +41,21 @@ public class DeterminationEvade : MonoBehaviour
         PlayerHP.SetDamageReduction(dr);
     }
 
+    void OnPlayerHit()
+    {
+        if (!this.isActiveAndEnabled)
+            return;
+        // If this is called, player would be guarding, so discord meter drops 
+        GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.discord, -20);
+
+        if (parryTimer < parryWindow)  // Perfect guard 
+        {
+            GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.flow, 17);
+        } 
+        
+        GlobalVariableManager.AddStanceMeter(StancesScriptController.Stance.frustration, 10);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -43,6 +63,7 @@ public class DeterminationEvade : MonoBehaviour
         {
             controller.switchState.Invoke("move");
             animator.SetTrigger("DeterminationGuard");
+            controller.CheckStanceSwitch();
         }
 
         if (parryTimer < parryWindow)

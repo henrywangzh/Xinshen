@@ -199,6 +199,8 @@ MonoBehaviour:
   guardRotationVel: 1
   guarding: 0
   guardingTarget: {fileID: 0}
+  fragmentTrackingRate: 0
+  effectiveTrackingRate: []
 --- !u!95 &5228916388101124728
 Animator:
   serializedVersion: 5
@@ -710,7 +712,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6659003102834268097, guid: 8d4054a504832c6468cebf48230ebe4b, type: 3}
 --- !u!1 &3077053781029690812
@@ -1284,10 +1286,10 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5854663396629478635}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4077493834598983977, guid: 8d4054a504832c6468cebf48230ebe4b, type: 3}
 --- !u!1 &6163252882361161335

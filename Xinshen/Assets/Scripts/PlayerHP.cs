@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
@@ -20,6 +21,7 @@ public class PlayerHP : MonoBehaviour
     static PlayerHP self;
 
     public static Transform torsoTrfm;
+    public static UnityEvent PlayerHit;
 
     private void Awake()
     {
@@ -30,7 +32,8 @@ public class PlayerHP : MonoBehaviour
         damageMultiplier = 1;
         self = GetComponent<PlayerHP>();
         torsoTrfm = m_torsoTrfm;
-
+        PlayerHit = new UnityEvent();
+        
         // Debug stuff for now
         GlobalVariableManager.PlayerSpawn = DebugSpawnPoint;
         GlobalVariableManager.FrenzySplatter = frenzySplatter;
@@ -77,6 +80,7 @@ public class PlayerHP : MonoBehaviour
         HP -= damage;
         self.m_HP = HP;
         // Debug.Log("HP: " + HP);
+        PlayerHit.Invoke();
 
         if (playBloodFX) { Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation); }
         if (doDamageNumbers) { GameManager.InstantiateDamageNumber(torsoTrfm.position, damage, GameManager.RED); }

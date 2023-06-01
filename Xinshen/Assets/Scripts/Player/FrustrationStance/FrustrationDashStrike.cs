@@ -29,12 +29,13 @@ public class FrustrationDashStrike : MonoBehaviour
     private void OnEnable()
     {
         FrustChargeAtk();
+        rb.velocity = Vector3.zero;
     }
 
     public void FrustChargeAtk()
     {
         // If locked on, dash towards target and perform an attack. If not, dash forward and perform an attack
-        StartCoroutine(ChargeAtk());
+        // StartCoroutine(ChargeAtk());
     }
 
     IEnumerator ChargeAtk()
@@ -42,7 +43,7 @@ public class FrustrationDashStrike : MonoBehaviour
         Vector3 targetPos;
         if (GlobalVariableManager.LockedTarget != null)
         {
-            Debug.Log("Starting");
+            // Debug.Log("Starting");
             AlignToTarget();
             if (Vector3.Distance(transform.position, GlobalVariableManager.LockedTarget.position) < dashRange)
             {
@@ -54,13 +55,13 @@ public class FrustrationDashStrike : MonoBehaviour
                 fwd = (fwd - new Vector3(0, fwd.y, 0)).normalized;
                 targetPos = transform.position + fwd * dashRange;
             }
-            Debug.Log(targetPos);
+            // Debug.Log(targetPos);
         }
         else
         {
             targetPos = transform.position + transform.forward * dashRange;
         }
-        Debug.Log("Dashing");
+        // Debug.Log("Dashing");
         rb.velocity = transform.forward * dashSpeed;
         float duration = maxDashDuration;
         while (Vector3.Distance(transform.position, targetPos) >= 0.2f && duration > 0)
