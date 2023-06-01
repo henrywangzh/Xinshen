@@ -23,7 +23,7 @@ public class PredictionManager : MonoBehaviour
         {
             calculateTimer = 4;
             CalculatePredictedPos();
-            //predictionIndicator.position = GetPredictedPos(1, false);
+            predictionIndicator.position = GetPredictedPos(1, false);
         }
     }
 

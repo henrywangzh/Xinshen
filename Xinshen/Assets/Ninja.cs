@@ -7,18 +7,25 @@ public class Ninja : Enemy
     [SerializeField] int slashCooldown, evadeCooldown;
     [SerializeField] int trackingRange, attackRange, evadeRange;
     [SerializeField] float strafeSpeed;
-    [SerializeField] Transform target;
-    [SerializeField] ParticleSystem teleportPtcls, slashTelegraph;
+    [SerializeField] Transform target, teleportPtclTrfm;
+    [SerializeField] ParticleSystem teleportPtcls, slashTelegraph, slashAttackPtcls;
+    [SerializeField] EnemyAttack attackHitbox;
 
     Rigidbody rb;
     Transform trfm;
     int slashTimer;
+    int slashCharges;
+
+    Vector3 vect3;
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody>();
         trfm = transform;
+        teleportPtclTrfm.parent = null;
+
+        strafeDirection = Random.Range(0, 2) * 2 - 1;
     }
 
     // Update is called once per frame
@@ -31,17 +38,17 @@ public class Ninja : Enemy
 
         HandleSlashAttack();
         HandleEvading();
-        HandleStrafing();
     }
 
-    void HandleStrafing()
+    int strafeDirection;
+    void Strafe()
     {
         if (slashTimer > 0) { return; }
 
         if (Vector3.SqrMagnitude(target.position - trfm.position) < evadeRange * evadeRange * 4)
         {
-            trfm.forward = target.position;
-            rb.velocity += trfm.forward * -strafeSpeed;
+            trfm.forward = target.position - trfm.position;
+            rb.velocity += trfm.forward * -strafeSpeed + trfm.right * strafeSpeed * strafeDirection;
         }
     }
 
@@ -54,9 +61,12 @@ public class Ninja : Enemy
         {
             if (Vector3.SqrMagnitude(target.position - trfm.position) < evadeRange * evadeRange)
             {
-                evadeCooldown = 150 + Random.Range(-25, 25);
-                trfm.forward = target.position - trfm.position;
-                Teleport(trfm.forward * evadeRange * 2);
+                evadeCooldown = 250;
+
+                vect3 = target.position - trfm.position;
+                vect3.y = 0;
+
+                Teleport(trfm.position + vect3.normalized * evadeRange * 2);
                 Slash();
             }
         }
@@ -71,26 +81,68 @@ public class Ninja : Enemy
 
         if (slashTimer > 0)
         {
-            if (slashTimer == 1)
+            if (slashTimer == 12)
             {
                 slashTelegraph.Stop();
-                trfm.position += trfm.forward * 10;
+            }
+
+            if (slashTimer == 7)
+            {
+                slashAttackPtcls.Play();
+            }
+
+            if (slashTimer == 3)
+            {
+                trfm.position += trfm.forward * 11;
+                attackHitbox.EnableHitbox();
+            }
+
+            if (slashTimer == 1)
+            {
+                attackHitbox.DisableHitbox();
             }
 
             slashTimer--;
+        }
+        else if (Vector3.SqrMagnitude(target.position - trfm.position) < attackRange * attackRange)
+        {
+            if (slashCooldown > 0)
+            {
+                Strafe();
+            }
+            else
+            {
+                Slash();
+            }
         }
     }
 
     void Slash()
     {
-        slashCooldown = 150 + Random.Range(-25, 25);
-        trfm.forward = PredictionManager.GetPredictedPos(1);
+        if (slashCharges > 0)
+        {
+            slashCooldown = 25;
+            slashCharges--;
+        }
+        else
+        {
+            slashCooldown = 125 + Random.Range(0, 50);
+
+            if (GetHP() > 50) { slashCharges = Random.Range(2, 4); }
+            else { slashCharges = Random.Range(4, 6); }
+        }
+        
+        vect3 = PredictionManager.GetPredictedPos(.45f, false) - trfm.position;
+        vect3.y = 0;
+
+        trfm.forward = vect3;
         slashTelegraph.Play();
-        slashTimer = 50;
+        slashTimer = 30;
     }
 
     void Teleport(Vector3 position)
     {
+        teleportPtclTrfm.position = trfm.position;
         teleportPtcls.Play();
         trfm.position = position;
     }
@@ -99,7 +151,8 @@ public class Ninja : Enemy
     {
         slashTelegraph.transform.parent = null;
         slashTelegraph.Play();
-        Destroy(slashTelegraph, 2);
+        Destroy(teleportPtclTrfm.gameObject);
+        Destroy(slashTelegraph);
         Destroy(gameObject);
     }
 }
