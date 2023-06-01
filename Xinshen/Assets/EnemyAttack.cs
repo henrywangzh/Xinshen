@@ -8,7 +8,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] Collider hitbox;
     int timer;
 
-    public void EnableHitbox(int duration = 0)
+    public void EnableHitbox(int duration = 0) //ticks
     {
         hitbox.enabled = true;
         if (timer < duration) { timer = duration; }
@@ -18,6 +18,11 @@ public class EnemyAttack : MonoBehaviour
     {
         hitbox.enabled = false;
         timer = 0;
+    }
+
+    public void ToggleHitbox()
+    {
+        hitbox.enabled = !hitbox.enabled;
     }
 
     private void FixedUpdate()
