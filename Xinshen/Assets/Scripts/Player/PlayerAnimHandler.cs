@@ -109,6 +109,28 @@ public class PlayerAnimHandler : MonoBehaviour
         weapon.SetPSEmission(false);
     }
 
+    #region FlowDualWield
+
+    public void SwingFlowDagger(int enable)
+    {
+        weapon.ToggleFlowSlash(1, 0, enable == 1);
+        weaponCollider.enabled = enable == 1;
+    }
+
+    public void SwingFlowSpear(int enable)
+    {
+        weapon.ToggleFlowSlash(0, 1, enable == 1);
+        weaponCollider.enabled = enable == 1;
+    }
+
+    public void SwingFlowSword(int enable)
+    {
+        weapon.ToggleFlowSlash(0, 0, enable == 1);
+        weaponCollider.enabled = enable == 1;
+    }
+
+    #endregion
+
     public void DeterminationSwordGuard(bool guard)
     {
         weapon.ToggleDeterminationGuard(guard);

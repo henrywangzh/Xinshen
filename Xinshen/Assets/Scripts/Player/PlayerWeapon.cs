@@ -37,9 +37,21 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     [SerializeField] ParticleSystem ps;
-    [SerializeField] GameObject flowSword;
+    [SerializeField] GameObject discordSword;
     [SerializeField] GameObject determinationSword;
+
     SwordFragController determinationWeapon;
+
+    // Flow shenanigans 
+    [SerializeField] GameObject lFlowDagger;  // Reverse gripped, FYI
+    [SerializeField] ParticleSystem daggerTrail;
+    ParticleSystem daggerAppearfx;
+    // [SerializeField] GameObject lFlowSword;
+    [SerializeField] GameObject rFlowSword;  // Normally enabled
+    ParticleSystem swordAppearfx;
+    [SerializeField] GameObject rFlowSpear;
+    [SerializeField] ParticleSystem spearTrail;
+    ParticleSystem spearAppearfx;
 
     ParticleSystem.EmissionModule emitter;
 
@@ -49,11 +61,92 @@ public class PlayerWeapon : MonoBehaviour
         emitter = ps.emission;
         SetPSEmission(false);
         determinationWeapon = determinationSword.GetComponent<SwordFragController>();
+        daggerAppearfx = lFlowDagger.GetComponent<ParticleSystem>();
+        swordAppearfx = rFlowSword.GetComponent<ParticleSystem>();
+        spearAppearfx = rFlowSpear.GetComponent<ParticleSystem>(); 
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public void ToggleWeapon(StancesScriptController.Stance stance)
+    {
+        switch (stance)
+        {
+            case StancesScriptController.Stance.discord:
+                discordSword.SetActive(true);
+                determinationSword.SetActive(false);
+                // rFlowSword.SetActive(false);
+                break;
+            case StancesScriptController.Stance.determination:
+                discordSword.SetActive(false);
+                determinationSword.SetActive(true);
+                break;
+            case StancesScriptController.Stance.frustration:
+                discordSword.SetActive(false);
+                determinationSword.SetActive(false);
+                break;
+            case StancesScriptController.Stance.flow:
+                discordSword.SetActive(false);
+                determinationSword.SetActive(false);
+                break;
+        }
+    }
+
+    public void ToggleFlowSlash(int left = 0, int weaponType = 0, bool enable = true)
+    {
+        /*
+         * (0, 0) - right, sword
+         * (0, 1) - right, spear
+         * (1, 0) - left, dagger
+         * (1, 1) - left, sword (No sword for now)
+         */
+        if (left > 0)
+        {
+            if (enable)
+            {
+                // lFlowDagger.enabled = true;
+                lFlowDagger.SetActive(true);
+                daggerAppearfx.Play();
+                daggerTrail.Emit(8);
+            } else
+            {
+                // daggerAppearfx.Play();
+                lFlowDagger.SetActive(false);
+            }
+        } else
+        {
+            if (weaponType == 0)
+            {
+                if (enable)
+                {
+                    rFlowSword.SetActive(true);
+                    swordAppearfx.Play();
+                    ps.Emit(8);
+                }
+                else
+                {
+                    // swordAppearfx.Play();
+                    rFlowSword.SetActive(false);
+                }
+            } else
+            {
+                if (enable)
+                {
+                    rFlowSpear.SetActive(true);
+                    spearAppearfx.Play();
+                    spearTrail.Emit(8);
+                }
+                else
+                {
+                    // spearAppearfx.Play();
+                    rFlowSpear.SetActive(false);
+                }
+            }
+        }
         
     }
 
