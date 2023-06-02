@@ -7,6 +7,8 @@ public class Stomper : Enemy
     [SerializeField] bool isStomper;
     [SerializeField] Transform target;
     [SerializeField] int trackingRange, jumpCooldown;
+    [SerializeField] float minHorzJump, maxHorzJump, vertJump;
+    [SerializeField] EnemyAttack attackScript;
     int smashTimer;
     Transform trfm;
     Rigidbody rb;
@@ -37,9 +39,11 @@ public class Stomper : Enemy
             }
             else
             {
-                if (isStomper) { jumpCooldown = 40 + Random.Range(0, 30); }
-                else { jumpCooldown = 70 + Random.Range(0, 40); }
-                rb.velocity += trfm.forward * Random.Range(4,7) + Vector3.up * 10;
+                if (isStomper) { jumpCooldown = 50 + Random.Range(0, 30); }
+                else { jumpCooldown = 80 + Random.Range(0, 40); }
+                rb.velocity += trfm.forward * Random.Range(minHorzJump,maxHorzJump) + Vector3.up * vertJump;
+
+                attackScript.EnableHitbox(45);
 
                 if (isStomper) { smashTimer = 35; }
             }
