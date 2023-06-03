@@ -8,6 +8,7 @@ public class GlobalVariableManager : MonoBehaviour {
 
     // Position Stats
     public static Transform PlayerSpawn;
+    public static bool OnGround;
 
     // Health Stats
     public static int Health;
@@ -27,6 +28,10 @@ public class GlobalVariableManager : MonoBehaviour {
     public static Transform LockedTarget = null;
     public static AbilitiesScriptController.Ability Ability1 = AbilitiesScriptController.Ability.Null;
     public static AbilitiesScriptController.Ability Ability2 = AbilitiesScriptController.Ability.Null;
+    public static int _discordMeter = 0;
+    public static int _determinationMeter = 0;
+    public static int _frustrationMeter = 0;
+    public static int _flowMeter = 0;
 
     // Frenzy Stats 
     public static int FrenzyThreshold;
@@ -55,6 +60,7 @@ public class GlobalVariableManager : MonoBehaviour {
     }
 
     // Heal is called whenever the character is healed, adding amt to health such that it doesn't go over MaxHealth
+    // NOTE: This method is also deprecated. Refer to PlayerHP class instead
     public static void Heal(int amt)
     {
         Health = Health + amt;
@@ -69,4 +75,127 @@ public class GlobalVariableManager : MonoBehaviour {
     {
         LockedTarget = targetTrfm;
     }
+
+    #region Stance Switching
+
+    public static void AddStanceMeter(StancesScriptController.Stance stance, int amount)
+    {
+        switch (stance)
+        {
+            case StancesScriptController.Stance.discord:
+                _discordMeter += amount;
+                if (_discordMeter > 100)
+                    _discordMeter = 100;
+                else if (_discordMeter < 0)
+                    _discordMeter = 0;
+                break;
+            case StancesScriptController.Stance.determination:
+                _determinationMeter += amount;
+                if (_determinationMeter > 100)
+                    _determinationMeter = 100;
+                else if (_determinationMeter < 0)
+                    _determinationMeter = 0;
+                break;
+            case StancesScriptController.Stance.flow:
+                _flowMeter += amount;
+                if (_flowMeter > 100)
+                    _flowMeter = 100;
+                else if (_flowMeter < 0)
+                    _flowMeter = 0;
+                break;
+            case StancesScriptController.Stance.frustration:
+                _frustrationMeter += amount;
+                if (_frustrationMeter > 100)
+                    _frustrationMeter = 100;
+                else if (_frustrationMeter < 0)
+                    _frustrationMeter = 0;
+                break;
+        }
+    }
+
+    public static void SetStanceMeter(StancesScriptController.Stance stance, int amount)
+    {
+        switch (stance)
+        {
+            case StancesScriptController.Stance.discord:
+                _discordMeter = amount;
+                if (_discordMeter > 100)
+                    _discordMeter = 100;
+                else if (_discordMeter < 0)
+                    _discordMeter = 0;
+                break;
+            case StancesScriptController.Stance.determination:
+                _determinationMeter = amount;
+                if (_determinationMeter > 100)
+                    _determinationMeter = 100;
+                else if (_determinationMeter < 0)
+                    _determinationMeter = 0;
+                break;
+            case StancesScriptController.Stance.flow:
+                _flowMeter = amount;
+                if (_flowMeter > 100)
+                    _flowMeter = 100;
+                else if (_flowMeter < 0)
+                    _flowMeter = 0;
+                break;
+            case StancesScriptController.Stance.frustration:
+                _frustrationMeter = amount;
+                if (_frustrationMeter > 100)
+                    _frustrationMeter = 100;
+                else if (_frustrationMeter < 0)
+                    _frustrationMeter = 0;
+                break;
+        }
+    }
+
+    public static bool CanTransitionStance(StancesScriptController.Stance stance)
+    {
+        switch (stance)
+        {
+            case StancesScriptController.Stance.discord:
+                return _discordMeter >= 100;
+            case StancesScriptController.Stance.determination:
+                return _determinationMeter >= 100;
+            case StancesScriptController.Stance.flow:
+                return _flowMeter >= 100;
+            case StancesScriptController.Stance.frustration:
+                return _frustrationMeter >= 100;
+        }
+        return false;
+    }
+
+    public static void ResetStanceMeters()
+    {
+        _discordMeter = 0;
+        _determinationMeter = 0;
+        _frustrationMeter = 0;
+        _flowMeter = 0;
+    }
+
+    #endregion
+
+    void OnCollisionEnter(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        EvaluateCollision(collision);
+    }
+
+    void EvaluateCollision(Collision collision)
+    {
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            Vector3 normal = collision.GetContact(i).normal;
+            OnGround |= normal.y >= 0.6f;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        OnGround = false;
+    }
+
 }

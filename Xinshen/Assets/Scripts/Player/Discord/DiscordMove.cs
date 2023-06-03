@@ -25,6 +25,10 @@ public class DiscordMove : MonoBehaviour
         speed = moveSpeed;
     }
 
+    private void OnEnable()
+    {
+        controller.CheckStanceTransitions();
+    }
 
     // Climbing mode flag
     [SerializeField] bool isClimbing = false;

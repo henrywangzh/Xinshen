@@ -9,6 +9,11 @@ public class StancesScriptController : ScriptController
     DeterminationScriptController determination;
     ActualDiscordScriptController discord;
 
+    [SerializeField] int flowMeter;
+    [SerializeField] int frustMeter;
+    [SerializeField] int detMeter;
+    [SerializeField] int discMeter;
+
     public enum Stance
     {
         discord,
@@ -50,18 +55,12 @@ public class StancesScriptController : ScriptController
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node flowNode = addNode(atkname, state, null, requiredStates, canBeInterruptedByTheseStates);
 
-				// Determination node
+		// Determination node
         string determinationStateName = "determination";
          state = new ScriptKeyPair(determination, KeyCode.None);
         requiredStates = new List<MonoBehaviour>();
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node determinationNode = addNode(determinationStateName, state, null, requiredStates, canBeInterruptedByTheseStates);
-
-        // moveNode.addNextAvailableStates(evadeNode);
-        flowNode.addNextAvailableStates(frustNode);
-        frustNode.addNextAvailableStates(flowNode);
-        frustNode.addNextAvailableStates(determinationNode);
-        determinationNode.addNextAvailableStates(flowNode);
 
         //discord 
         string discordName = "discord";
@@ -69,7 +68,20 @@ public class StancesScriptController : ScriptController
         requiredStates = new List<MonoBehaviour>();
         canBeInterruptedByTheseStates = new List<MonoBehaviour>();
         Node discordNode = addNode(discordName, state, null, requiredStates, canBeInterruptedByTheseStates);
-        
+
+        flowNode.addNextAvailableStates(frustNode);
+        flowNode.addNextAvailableStates(discordNode);
+        flowNode.addNextAvailableStates(determinationNode);
+        frustNode.addNextAvailableStates(flowNode);
+        frustNode.addNextAvailableStates(determinationNode);
+        frustNode.addNextAvailableStates(discordNode);
+        determinationNode.addNextAvailableStates(flowNode);
+        determinationNode.addNextAvailableStates(frustNode);
+        determinationNode.addNextAvailableStates(discordNode);
+        discordNode.addNextAvailableStates(flowNode);
+        discordNode.addNextAvailableStates(frustNode);
+        discordNode.addNextAvailableStates(determinationNode);
+
         switch (defaultStance)
         {
             case Stance.discord:
@@ -85,5 +97,34 @@ public class StancesScriptController : ScriptController
                 setDefaultState(flowNode);
                 break;
         }
+    }
+
+    public void SwitchStance(Stance stance)
+    {
+        string stateId = "";
+        switch (stance)
+        {
+            case Stance.discord:
+                stateId = "discord";
+                break;
+            case Stance.determination:
+                stateId = "determination";
+                break;
+            case Stance.flow:
+                stateId = "flow";
+                break;
+            case Stance.frustration:
+                stateId = "frustration";
+                break;
+        }
+        switchState.Invoke(stateId);
+    }
+
+    private void Update()
+    {
+        flowMeter = GlobalVariableManager._flowMeter;
+        frustMeter = GlobalVariableManager._frustrationMeter;
+        detMeter = GlobalVariableManager._determinationMeter;
+        discMeter = GlobalVariableManager._discordMeter;
     }
 }

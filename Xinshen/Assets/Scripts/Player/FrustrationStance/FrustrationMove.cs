@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrustrationMove : GlobalVariableManager
+public class FrustrationMove : MonoBehaviour
 {
     // Start is called before the first frame update
     FrustrationScriptController controller;
@@ -13,7 +13,7 @@ public class FrustrationMove : GlobalVariableManager
 
     // TODO: use global variable manager instead of local variable
     
-    [SerializeField] float moveSpeed = RunningSpeed;
+    [SerializeField] float moveSpeed = GlobalVariableManager.RunningSpeed;
     
     [SerializeField] float turnSpeed = 5f;
     float speed;
@@ -27,6 +27,10 @@ public class FrustrationMove : GlobalVariableManager
         speed = moveSpeed; //player immediately runs
     }
 
+    private void OnEnable()
+    {
+        controller.CheckStanceTransitions();
+    }
 
     // Update is called once per frame
     void Update()

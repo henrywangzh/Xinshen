@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
@@ -20,6 +21,7 @@ public class PlayerHP : MonoBehaviour
     static PlayerHP self;
 
     public static Transform torsoTrfm;
+    public static UnityEvent PlayerHit;
 
     private void Awake()
     {
@@ -27,9 +29,11 @@ public class PlayerHP : MonoBehaviour
         maxHP = m_maxHP;
         HP = m_maxHP;
         frenzyHP = (int)(m_maxHP * (m_frenzyHPThresholdPercent / 100f));
+        damageMultiplier = 1;
         self = GetComponent<PlayerHP>();
         torsoTrfm = m_torsoTrfm;
-
+        PlayerHit = new UnityEvent();
+        
         // Debug stuff for now
         GlobalVariableManager.PlayerSpawn = DebugSpawnPoint;
         GlobalVariableManager.FrenzySplatter = frenzySplatter;
@@ -63,12 +67,20 @@ public class PlayerHP : MonoBehaviour
         }
     }
 
+    float damageMultiplier;
+    public static void SetDamageReduction(float value) //0: full damage;  0.3: 30% damage reduction;  1.0: no damage
+    {
+        self.damageMultiplier = 1 - value;
+    }
+
     public static void TakeDamage(int damage, bool playBloodFX = true, bool doDamageNumbers = true)
     {
         if (HP <= 0) { return; }
+        damage = Mathf.RoundToInt(damage * self.damageMultiplier);
         HP -= damage;
         self.m_HP = HP;
         // Debug.Log("HP: " + HP);
+        PlayerHit.Invoke();
 
         if (playBloodFX) { Instantiate(self.bloodFX, torsoTrfm.position, torsoTrfm.rotation); }
         if (doDamageNumbers) { GameManager.InstantiateDamageNumber(torsoTrfm.position, damage, GameManager.RED); }
@@ -93,7 +105,7 @@ public class PlayerHP : MonoBehaviour
     public static void Heal(int heal=-1)
     {
         if (heal == -1) { heal = maxHP; }
-        HP += heal;
+        else { HP += heal; }
         if (HP > maxHP) { HP = maxHP; }
         self.m_HP = HP;
         if (HP > frenzyHP)
