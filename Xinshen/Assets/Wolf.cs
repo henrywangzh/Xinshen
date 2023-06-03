@@ -18,6 +18,7 @@ public class Wolf : Enemy
     {
         base.Start();
 
+        target = PredictionManager.playerTrfm;
         trfm = transform;
         rb = GetComponent<Rigidbody>();
     }

@@ -21,6 +21,7 @@ public class Stomper : Enemy
         base.Start();
 
         trfm = transform;
+        target = PredictionManager.playerTrfm;
         rb = GetComponent<Rigidbody>();
     }
 
@@ -39,20 +40,25 @@ public class Stomper : Enemy
             }
             else
             {
-                if (isStomper) { jumpCooldown = 50 + Random.Range(0, 30); }
-                else { jumpCooldown = 80 + Random.Range(0, 40); }
+                jumpCooldown = 100 + Random.Range(0, 60);
                 rb.velocity += trfm.forward * Random.Range(minHorzJump,maxHorzJump) + Vector3.up * vertJump;
 
-                attackScript.EnableHitbox(45);
-
-                if (isStomper) { smashTimer = 35; }
+                if (isStomper)
+                {
+                    smashTimer = 36;
+                }
+                else
+                {
+                    attackScript.EnableHitbox(45);
+                }
             }
 
             if (isStomper && smashTimer > 0)
             {
                 if (smashTimer == 1)
                 {
-                    rb.velocity += trfm.up * -15;
+                    attackScript.EnableHitbox(14);
+                    rb.velocity += trfm.up * -10 + trfm.forward * maxHorzJump * 1.3f;
                 }
                 smashTimer--;
             }

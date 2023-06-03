@@ -37,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
         onStun = new UnityEvent();
         onAtkInterrupt = new UnityEvent();
         InvokeRepeating("InvokedFixedUpdate", .02f, .02f);
+        InvokeRepeating("UpdateLineOfSight", 0, .5f);
 
         if (HPSlider)
         {
@@ -168,5 +169,12 @@ public abstract class Enemy : MonoBehaviour
         {
             enemyCamp.removeEnemy(this);
         }
+    }
+
+    protected static int terrainLayerMask = (1 << 6);
+    [SerializeField] protected bool playerInSight;
+    void UpdateLineOfSight()
+    {
+        playerInSight = !Physics.Linecast(trfm.position + trfm.forward * 1, PredictionManager.playerTrfm.position, terrainLayerMask);
     }
 }

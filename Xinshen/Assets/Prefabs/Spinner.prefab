@@ -4952,11 +4952,12 @@ MonoBehaviour:
   stunMeter: 0
   HPSlider: {fileID: 0}
   healthBarUI: {fileID: 0}
+  playerInSight: 0
   target: {fileID: 0}
   spinPtclTrfm: {fileID: 7993798921514415878}
   speed: 0.4
   trackingRange: 15
-  attackRange: 2
+  attackRange: 3
   spinCooldown: 0
   spinTimer: 0
   attackScript: {fileID: 7993798922937319399}
@@ -4987,7 +4988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7993798922937319398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5006,7 +5007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9190e36ac0a409e4181c78a1f1874389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   hitbox: {fileID: 7993798922937319402}
 --- !u!135 &7993798922937319402
 SphereCollider:
@@ -5019,5 +5020,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
