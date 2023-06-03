@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2494649836308562395}
   - component: {fileID: 8089273766312113061}
   m_Layer: 0
-  m_Name: Chunk 1
+  m_Name: Chunk (default)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953342563285855207, guid: 405b4a2f276868842bcb620bc72166d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 953342563285855207, guid: 405b4a2f276868842bcb620bc72166d0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -448,7 +448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 953342563285855207, guid: 405b4a2f276868842bcb620bc72166d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.25
       objectReference: {fileID: 0}
     - target: {fileID: 953342563285855207, guid: 405b4a2f276868842bcb620bc72166d0, type: 3}
       propertyPath: m_LocalRotation.w

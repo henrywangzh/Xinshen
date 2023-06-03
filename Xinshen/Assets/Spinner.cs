@@ -19,6 +19,7 @@ public class Spinner : Enemy
     {
         base.Start();
 
+        target = PredictionManager.playerTrfm;
         trfm = transform;
         rb = GetComponent<Rigidbody>();
     }
@@ -26,7 +27,7 @@ public class Spinner : Enemy
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Vector3.SqrMagnitude(target.position - trfm.position) < trackingRange * trackingRange)
+        if (Vector3.SqrMagnitude(target.position - trfm.position) < trackingRange * trackingRange && playerInSight)
         {
             vect3 = target.position - trfm.position;
             vect3.y = 0;
@@ -65,8 +66,8 @@ public class Spinner : Enemy
                 if (Vector3.SqrMagnitude(target.position - trfm.position) < attackRange * attackRange)
                 {
                     spinPtcls.Play();
-                    spinTimer = 200;
-                    spinCooldown = 250 + Random.Range(0, 100);
+                    spinTimer = 225;
+                    spinCooldown = 325 + Random.Range(0, 150);
                 }
             }
         }

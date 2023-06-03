@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6231812526315212777}
   - component: {fileID: 4005979772875258851}
   - component: {fileID: 7992680316883675539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall 16 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3155763611083984021}
   - component: {fileID: 3733176303465255482}
   - component: {fileID: 2044186667338300146}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall 16 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6606608481613855708}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Doorway 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}

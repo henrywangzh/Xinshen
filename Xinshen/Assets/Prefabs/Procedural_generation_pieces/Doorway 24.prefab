@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6408453735659227859}
   - component: {fileID: 4110844870938492633}
   - component: {fileID: 6953288062256082089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall 16 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 2692933265154935215}
   - component: {fileID: 4420941436163495680}
   - component: {fileID: 1354130140596977608}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall 16 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6141746233091981030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Doorway 24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
