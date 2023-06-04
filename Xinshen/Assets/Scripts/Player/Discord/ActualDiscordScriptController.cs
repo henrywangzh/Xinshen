@@ -7,6 +7,7 @@ public class ActualDiscordScriptController : ScriptController
 {
     StancesScriptController masterController;
     Animator anim;
+    PlayerAnimHandler animHandler;
 
     // Define sub-script references
     DiscordMove discordMove;
@@ -16,6 +17,7 @@ public class ActualDiscordScriptController : ScriptController
     {
         masterController = GetComponent<StancesScriptController>();
         anim = GetComponent<Animator>();
+        animHandler = GetComponent<PlayerAnimHandler>();
 
         // Initialize the state machine
         createStates();
@@ -70,6 +72,7 @@ public class ActualDiscordScriptController : ScriptController
     {
         anim.Play("DiscordTransition");
         GlobalVariableManager.ResetStanceMeters();
+        animHandler.weapon.ToggleWeapon(StancesScriptController.Stance.discord);
     }
 
     public void CheckStanceTransitions()
