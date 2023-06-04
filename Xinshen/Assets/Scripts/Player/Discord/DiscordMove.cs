@@ -23,7 +23,6 @@ public class DiscordMove : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<ActualDiscordScriptController>();
         speed = moveSpeed;
-        cam = GlobalVariableManager.MainCamera;
     }
 
     private void OnEnable()
