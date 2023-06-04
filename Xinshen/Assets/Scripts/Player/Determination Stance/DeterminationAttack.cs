@@ -93,7 +93,6 @@ public class DeterminationAttack : MonoBehaviour
 
     public void DetReadyCombo()
     {
-        Debug.Log("Calling");
         comboReady = true;
         chargeLevel = 0;
         heldTime = 0;

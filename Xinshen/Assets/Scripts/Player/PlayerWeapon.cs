@@ -38,6 +38,7 @@ public class PlayerWeapon : MonoBehaviour
 
     [SerializeField] ParticleSystem ps;
     [SerializeField] GameObject discordSword;
+    [SerializeField] GameObject frustrationSword; 
     [SerializeField] GameObject determinationSword;
 
     SwordFragController determinationWeapon;
@@ -78,20 +79,27 @@ public class PlayerWeapon : MonoBehaviour
         {
             case StancesScriptController.Stance.discord:
                 discordSword.SetActive(true);
+                discordSword.GetComponent<ParticleSystem>().Play();
                 determinationSword.SetActive(false);
+                frustrationSword.SetActive(false);
                 // rFlowSword.SetActive(false);
                 break;
             case StancesScriptController.Stance.determination:
                 discordSword.SetActive(false);
                 determinationSword.SetActive(true);
+                determinationSword.GetComponent<ParticleSystem>().Play();
+                frustrationSword.SetActive(false);
                 break;
             case StancesScriptController.Stance.frustration:
                 discordSword.SetActive(false);
                 determinationSword.SetActive(false);
+                frustrationSword.SetActive(true);
+                frustrationSword.GetComponent<ParticleSystem>().Play();
                 break;
             case StancesScriptController.Stance.flow:
                 discordSword.SetActive(false);
                 determinationSword.SetActive(false);
+                frustrationSword.SetActive(false);
                 break;
         }
     }
