@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EarthBendingBoss : Enemy
@@ -20,10 +21,12 @@ public class EarthBendingBoss : Enemy
 
     [SerializeField] GameObject fissureProjectile, pillarProjectile, fallingPillar, fallingPillarTelegraph;
     [SerializeField] int[] cooldownRange;
+    private Animator anim;
 
     int attackAnimationTimer, actionQueTimer, actionID, leapTimer;
     [SerializeField] int leapCooldown, fissureCooldown, pillarCooldown, columnCooldown, pillarCharges;
     float initialY;
+    private bool landed = true;
 
     const int LEAP = 0, FISSURE = 1, PILLAR_THROW = 2, COLUMN = 3;
 
@@ -43,6 +46,7 @@ public class EarthBendingBoss : Enemy
     {
         trfm = transform;
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
 
         //pillarCharges = 500;
         leapCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
@@ -71,6 +75,7 @@ public class EarthBendingBoss : Enemy
                 if (columnCooldown > 0) { columnCooldown--; }
                 else
                 {
+                    // anim.Play("dropPillar");
                     Instantiate(fallingPillar, PredictionManager.GetPredictedPos(1) + Vector3.up * 30, fallingPillar.transform.rotation);
                     Instantiate(fallingPillarTelegraph, PredictionManager.GetPredictedPos(1), fallingPillarTelegraph.transform.rotation);
                     columnCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
@@ -109,13 +114,16 @@ public class EarthBendingBoss : Enemy
                 if (actionID == FISSURE)
                 {
                     FaceTarget(Vector3.Distance(target.position, trfm.position) / 20f);
+                    
                     Instantiate(fissureProjectile, trfm.position, trfm.rotation);
                     SetAnimationLock(25);
                     fissureCooldown = Random.Range(cooldownRange[0], cooldownRange[1]);
                 }
                 else if (actionID == LEAP)
                 {
+                    anim.Play("dash");
                     DoLeapAttack();
+                    
                 }
                 else if (actionID == PILLAR_THROW)
                 {
@@ -139,6 +147,15 @@ public class EarthBendingBoss : Enemy
             actionQueTimer--;
         }
 
+        if (!groundTrigger.IsOnGround())
+        {
+            landed = false;
+        }
+        if (groundTrigger.IsOnGround() && landed ==false)
+        {
+            landed  = true;
+            rb.velocity = Vector3.zero;
+        }
         if (leapTimer > 0)
         {
             if (leapTimer == 1)
@@ -168,8 +185,12 @@ public class EarthBendingBoss : Enemy
         actionID = ID;
         actionQueTimer = 40;
 
-        if (ID == LEAP) leapTelegraph.Play();
-        if (ID == FISSURE) fissureTelegraph.Play();
+        if (ID == LEAP){leapTelegraph.Play();}
+        if (ID == FISSURE)
+        {
+            anim.Play("earthbend");
+            fissureTelegraph.Play();
+        }
     }
 
     void DoLeapAttack()
@@ -182,6 +203,7 @@ public class EarthBendingBoss : Enemy
         SetAnimationLock(Mathf.RoundToInt(leapDuration * 50 + 25));
 
         FaceTarget(leapDuration);
+        
 
         //leapDuration *= Vector3.Distance(target.position, trfm.position) / 10;
 
@@ -191,9 +213,9 @@ public class EarthBendingBoss : Enemy
         if (distance > range) { distance = range; }
         if (distance < 10) { distance = 10; }
         rb.velocity += trfm.forward * distance / leapDuration;
-
-        SetLeapCooldown();
         
+        SetLeapCooldown();
+
         initialY = transform.position.y;
     }
 
