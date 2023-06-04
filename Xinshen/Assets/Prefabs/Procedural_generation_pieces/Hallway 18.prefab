@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1762854399714976303}
   - component: {fileID: 8892716708255505725}
   - component: {fileID: 3191984457780892879}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hallway 18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 9194814209783224502}
   - component: {fileID: 3081111840082400338}
   - component: {fileID: 5673337946731371972}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hallway 18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 7985717663307853621}
   - component: {fileID: 2357293667050010832}
   - component: {fileID: 4530482691484790184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hallway 18 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
