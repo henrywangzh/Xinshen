@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7693595128257580787}
   - component: {fileID: 7286894092593154685}
   - component: {fileID: 7801524045333899250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Voronoi_Fracture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +135,11 @@ MonoBehaviour:
   stunMeterMax: 100
   poise: 20
   stunDuration: 50
+  stunned: 0
+  stunMeter: 0
+  HPSlider: {fileID: 0}
+  healthBarUI: {fileID: 0}
+  playerInSight: 0
   shatteredVersion: {fileID: 1855137436542310247, guid: 04013f2ccde084eed83fc56a6e74c1b8, type: 3}
   parent: {fileID: 5301470117814505885}
   power: 500
@@ -150,7 +155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4816963015265930023}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}

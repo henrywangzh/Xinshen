@@ -6,6 +6,7 @@ public class FrustrationScriptController : ScriptController
 {
     StancesScriptController masterController;
     Animator anim;
+    PlayerAnimHandler animHandler;
 
     FrustrationMove move;
     FrustrationEvade evade;
@@ -17,6 +18,7 @@ public class FrustrationScriptController : ScriptController
     {
         masterController = GetComponent<StancesScriptController>();
         anim = GetComponent<Animator>();
+        animHandler = GetComponent<PlayerAnimHandler>();
 
         // Initialize the state machine
         createStates();
@@ -100,6 +102,8 @@ public class FrustrationScriptController : ScriptController
         anim.Play("Unsheathe");
         GlobalVariableManager.Stance = StancesScriptController.Stance.frustration;
         GlobalVariableManager.Ability1 = AbilitiesScriptController.Ability.JumpSlam;
+        GlobalVariableManager.ResetStanceMeters();
+        animHandler.weapon.ToggleWeapon(StancesScriptController.Stance.frustration);
     }
 
     private void Update()

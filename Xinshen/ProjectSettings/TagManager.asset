@@ -10,6 +10,7 @@ TagManager:
   - Pickup
   - Sign
   - barrel
+  - Collidable
   layers:
   - Default
   - TransparentFX

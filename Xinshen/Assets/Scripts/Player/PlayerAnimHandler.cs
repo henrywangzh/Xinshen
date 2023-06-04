@@ -10,7 +10,7 @@ public class PlayerAnimHandler : MonoBehaviour
     [SerializeField] public BoxCollider weaponCollider;
     [SerializeField] ParticleSystem leftLegTrail;
     [SerializeField] ParticleSystem rightLegTrail;
-    PlayerWeapon weapon;
+    public PlayerWeapon weapon;
     bool canCancel = false;
     bool lockPhysics = false;
     Vector3 commandVelocity;
@@ -111,20 +111,46 @@ public class PlayerAnimHandler : MonoBehaviour
 
     #region FlowDualWield
 
+    int baseDmg = 0;
+
     public void SwingFlowDagger(int enable)
     {
+        if (enable == 1)
+        {
+            baseDmg = GlobalVariableManager.Damage;
+            GlobalVariableManager.Damage = baseDmg;
+        }
+        {
+            GlobalVariableManager.Damage = baseDmg;
+        }
         weapon.ToggleFlowSlash(1, 0, enable == 1);
         weaponCollider.enabled = enable == 1;
     }
 
     public void SwingFlowSpear(int enable)
     {
+        if (enable == 1)
+        {
+            baseDmg = GlobalVariableManager.Damage;
+            GlobalVariableManager.Damage = baseDmg * 2;
+        }
+        {
+            GlobalVariableManager.Damage = baseDmg;
+        }
         weapon.ToggleFlowSlash(0, 1, enable == 1);
         weaponCollider.enabled = enable == 1;
     }
 
     public void SwingFlowSword(int enable)
     {
+        if (enable == 1)
+        {
+            baseDmg = GlobalVariableManager.Damage;
+            GlobalVariableManager.Damage = (int) (baseDmg * 1.2f);
+        }
+        {
+            GlobalVariableManager.Damage = baseDmg;
+        }
         weapon.ToggleFlowSlash(0, 0, enable == 1);
         weaponCollider.enabled = enable == 1;
     }
