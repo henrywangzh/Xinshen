@@ -10,7 +10,7 @@ public class RoomPopulator : MonoBehaviour
     [SerializeField] List<Transform> spawnPoints;
     [SerializeField] GameObject[] enemies;
     [SerializeField] int[] enemyDifficulty;
-    bool[] spawnPointUsed;
+    [SerializeField] bool[] spawnPointUsed;
     
     // Start is called before the first frame update
     void Start()
@@ -29,12 +29,27 @@ public class RoomPopulator : MonoBehaviour
         spawnPointUsed = new bool[spawnPoints.Count];
 
         int spawnIndex, enemyIndex;
-        while (currentDifficulty < targetDifficulty)
+        while (currentDifficulty < targetDifficulty - 5)
         {
             spawnIndex = Random.Range(0, spawnPoints.Count);
-            while (spawnPointUsed[spawnIndex]) { spawnIndex = Random.Range(0, spawnPoints.Count); }
+
+            for (int i = 0; i < 500; i++)
+            {
+                if (spawnPointUsed[spawnIndex]) { spawnIndex = Random.Range(0, spawnPoints.Count); }
+                else { break; }
+            }
 
             enemyIndex = Random.Range(0, enemies.Length);
+            for (int i = 0; i < 500; i++)
+            {
+                if (currentDifficulty + enemyDifficulty[enemyIndex] > Mathf.RoundToInt(targetDifficulty * 1.3f)) { enemyIndex = Random.Range(0, enemies.Length); }
+                else { break; }
+            }
+
+            Instantiate(enemies[enemyIndex], spawnPoints[spawnIndex].position, Quaternion.Euler(0, Random.Range(0, 360), 0));
+
+            currentDifficulty += enemyDifficulty[enemyIndex];
+            spawnPointUsed[spawnIndex] = true;
         }
     }
 }

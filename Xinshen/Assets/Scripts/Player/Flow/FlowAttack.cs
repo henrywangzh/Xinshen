@@ -117,6 +117,7 @@ public class FlowAttack : MonoBehaviour
     {
         Cleanup();
         // anim.Play("FlowCrossSlash");
+
         controller.switchState.Invoke("ability");
     }
 

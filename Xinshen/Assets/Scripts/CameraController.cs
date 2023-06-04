@@ -21,8 +21,11 @@ public class CameraController : MonoBehaviour
     public static Transform s_cameraTrfm;
     public static CameraController self;
 
+    public static Camera mainCamera;
+
     private void Awake()
     {
+        mainCamera = GetComponent<Camera>();
         canvas.transform.parent = null;
         s_cameraTrfm = cameraTrfm;
         self = GetComponent<CameraController>();

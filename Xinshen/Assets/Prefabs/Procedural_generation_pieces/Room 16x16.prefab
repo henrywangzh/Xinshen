@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8892716708255505725}
   - component: {fileID: 3191984457780892879}
   - component: {fileID: 473491212553796464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Room 16x16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426b2f739369a1744bc500e9f6fa0432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDifficulty: 0
+  targetDifficulty: 50
   currentDifficulty: 0
   chunkPoints:
   - {fileID: 5069935811754602446}
@@ -122,7 +122,7 @@ MonoBehaviour:
   - {fileID: 7355789374898364266}
   - {fileID: 2035611703881285577}
   chunkObj:
-  - {fileID: 8527405799521429917, guid: 5884d676bb7ce7f439cc9184d03405a5, type: 3}
+  - {fileID: 8527405799521429917, guid: 095d78783b4851e4da95d9ce9c3a16fd, type: 3}
   - {fileID: 4868760656259620103, guid: 1b692c428fac0144fbc674f418b3c016, type: 3}
   - {fileID: 4868760656259620103, guid: 28f033c5187b00d41a345a32858fe630, type: 3}
   - {fileID: 4868760656259620103, guid: 205464d0c4f6c0f428e081d26173b264, type: 3}
@@ -130,6 +130,17 @@ MonoBehaviour:
   - {fileID: 4868760656259620103, guid: 0bf0177e43bef5a42884c26a693a7769, type: 3}
   - {fileID: 4868760656259620103, guid: e6ac5ce1306c6f9428cd3cee11b50f50, type: 3}
   - {fileID: 4868760656259620103, guid: a3a407b7e2c35dc4eb673dbfed5374b7, type: 3}
+  - {fileID: 8527405799521429917, guid: dc2e3dc60beaf564d8e19acb1479571e, type: 3}
+  - {fileID: 8527405799521429917, guid: bc420c55a4dcd1a4ebc75d8294816ed7, type: 3}
+  spawnPoints: []
+  enemies:
+  - {fileID: 9060529364531580427, guid: e90bf435a9494a64d8abd100768517ab, type: 3}
+  - {fileID: 6604227746938736513, guid: 999feae6d60697a4296beabe5b78f3b4, type: 3}
+  - {fileID: 5855580242972284851, guid: 42ffedbe9b60a094894a7943c9b737d6, type: 3}
+  - {fileID: 7993798922024517690, guid: 31cbd9492a9431e4aacdc9aca1d230e5, type: 3}
+  - {fileID: 8218034775835236363, guid: 04065427d06244a4daae27473a4fbce8, type: 3}
+  enemyDifficulty: 050000000a000000140000001400000032000000
+  spawnPointUsed: 
 --- !u!1001 &1226393129109771310
 PrefabInstance:
   m_ObjectHideFlags: 0

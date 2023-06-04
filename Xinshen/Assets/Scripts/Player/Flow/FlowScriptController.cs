@@ -6,6 +6,7 @@ public class FlowScriptController : ScriptController
 {
     StancesScriptController masterController;
     Animator anim;
+    PlayerAnimHandler animHandler;
 
     // Define sub-script references
     FlowMove move;
@@ -18,6 +19,7 @@ public class FlowScriptController : ScriptController
     {
         masterController = GetComponent<StancesScriptController>();
         anim = GetComponent<Animator>();
+        animHandler = GetComponent<PlayerAnimHandler>();
 
         // Initialize the state machine
         createStates();
@@ -97,6 +99,7 @@ public class FlowScriptController : ScriptController
         GlobalVariableManager.Ability1 = AbilitiesScriptController.Ability.CrossSlash;
         GlobalVariableManager.Ability2 = AbilitiesScriptController.Ability.DoubleKick;
         GlobalVariableManager.ResetStanceMeters();
+        animHandler.weapon.ToggleWeapon(StancesScriptController.Stance.flow);
     }
 
     private void Update()

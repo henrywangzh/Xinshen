@@ -6,6 +6,7 @@ public class DeterminationScriptController : ScriptController
 {
 	StancesScriptController masterController;
 	Animator anim;
+	PlayerAnimHandler animHandler;
 
 	// Define sub-script references
 	DeterminationMove move;
@@ -16,6 +17,7 @@ public class DeterminationScriptController : ScriptController
 	{
 		masterController = GetComponent<StancesScriptController>();
 		anim = GetComponent<Animator>();
+		animHandler = GetComponent<PlayerAnimHandler>();
 
 		// Initialize the state machine
 		createStates();
@@ -85,6 +87,7 @@ public class DeterminationScriptController : ScriptController
         anim.Play("DeterminationTransitionIn");
 		GlobalVariableManager.Stance = StancesScriptController.Stance.determination;
 		GlobalVariableManager.ResetStanceMeters();
+		animHandler.weapon.ToggleWeapon(StancesScriptController.Stance.determination);
     }
 
     private void Update()

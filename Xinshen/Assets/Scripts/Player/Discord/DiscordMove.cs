@@ -30,7 +30,7 @@ public class DiscordMove : MonoBehaviour
         controller.CheckStanceTransitions();
     }
 
-    // Climbing mode flag
+/*    // Climbing mode flag
     [SerializeField] bool isClimbing = false;
     public float raycastDistance = 1f; // Distance of the raycast from the player
     public LayerMask wallLayer; // Layer mask for the wall objects
@@ -38,25 +38,25 @@ public class DiscordMove : MonoBehaviour
     // Falling mode flag
     [SerializeField] public float fallThreshold = 1f; // Threshold for detecting falling
     public float fallTimeThreshold = 1f; // Time threshold for detecting falling
-    [SerializeField] private bool isFalling = false; // Flag to track if the player is currently falling
-    
+    [SerializeField] private bool isFalling = false; // Flag to track if the player is currently falling*/
+
 
     // Rolling
     public float rollForce = 10.0f; // The force applied to perform the roll
     //public Animator animator; // Reference to the player's animator component
     private Vector3 currentMoveDirection; // The current movement direction of the player
 
-    //Time since contact
+   /* //Time since contact
     float timeSinceContact = 0f;
     private float fallStartTime; // Time when the player starts falling
     void OnCollisionEnter(Collision collision)
     {
-        /* if (collision.gameObject.CompareTag("Ground"))
+        *//* if (collision.gameObject.CompareTag("Ground"))
          {
              isFalling = false;
              timeSinceContact = 0f;
              anim.Play("DiscordMove");
-         }*/
+         }*//*
         if (isFalling && Time.time - fallStartTime >= 1f)  //player lands on surface, is no longer falling
         {
             isFalling = false;
@@ -65,11 +65,11 @@ public class DiscordMove : MonoBehaviour
         }
         timeSinceContact = 0f;
     }
-/*    void OnCollisionExit(Collision collision)
+*//*    void OnCollisionExit(Collision collision)
     {
         timeSinceContact += Time.deltaTime;
         //isFalling = false;
-    }*/
+    }*//*
     void OnCollisionStay(Collision collision)
     {
         
@@ -81,13 +81,13 @@ public class DiscordMove : MonoBehaviour
             anim.Play("Falling");
         }
         timeSinceContact = 0f;
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
     {
         //update time since contact
-        timeSinceContact += Time.deltaTime;
+        //timeSinceContact += Time.deltaTime;
 
         // Detect input for 'W' key, also 'A', 'D'
         bool isHoldingW = Input.GetKey(KeyCode.W);
@@ -140,6 +140,8 @@ public class DiscordMove : MonoBehaviour
         {
             // Perform roll in the current movement direction
             PerformRoll(currentMoveDirection);
+
+            //Debug.Log("roll");
         }
 
         void PerformRoll(Vector3 rollDirection)

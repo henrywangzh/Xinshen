@@ -76,7 +76,6 @@ public class SwordFragController : MonoBehaviour
             shardReturnTimer = 20;
             if (prevGuarding != guarding)
             {
-                Debug.Log("trigger");
                 guardRotationVel *= 5f;
             }
             for (int i = 0; i < bladeFragments.Length; ++i)

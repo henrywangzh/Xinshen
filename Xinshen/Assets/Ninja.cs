@@ -24,6 +24,7 @@ public class Ninja : Enemy
         rb = GetComponent<Rigidbody>();
         trfm = transform;
         teleportPtclTrfm.parent = null;
+        target = PredictionManager.playerTrfm;
 
         strafeDirection = Random.Range(0, 2) * 2 - 1;
     }
@@ -65,8 +66,18 @@ public class Ninja : Enemy
 
                 vect3 = target.position - trfm.position;
                 vect3.y = 0;
+                vect3 = vect3.normalized;
 
-                Teleport(trfm.position + vect3.normalized * evadeRange * 2);
+                if (Physics.Raycast(trfm.position, trfm.forward, out hit, evadeRange * 2, terrainLayerMask))
+                {
+                    Debug.Log("hit distance: " + hit.distance + "hit object: " + hit.collider.gameObject);
+                    Teleport(trfm.position + vect3 * hit.distance);
+                }
+                else
+                {
+                    Teleport(trfm.position + vect3 * evadeRange * 2);
+                }
+
                 Slash();
             }
         }
@@ -93,7 +104,16 @@ public class Ninja : Enemy
 
             if (slashTimer == 3)
             {
-                trfm.position += trfm.forward * 11;
+                if (Physics.Raycast(trfm.position, trfm.forward, out hit, 11, terrainLayerMask))
+                {
+                    Debug.Log("hit distance: " + hit.distance + "hit object: " + hit.collider.gameObject);
+                    trfm.position += trfm.forward * hit.distance;
+                }
+                else
+                {
+                    trfm.position += trfm.forward * 11;
+                }
+                
                 attackHitbox.EnableHitbox();
             }
 
@@ -117,6 +137,7 @@ public class Ninja : Enemy
         }
     }
 
+    RaycastHit hit;
     void Slash()
     {
         if (slashCharges > 0)
