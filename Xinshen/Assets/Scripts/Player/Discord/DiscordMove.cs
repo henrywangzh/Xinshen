@@ -30,7 +30,7 @@ public class DiscordMove : MonoBehaviour
         
             
         lastPos = transform.position.y;
-        InvokeRepeating("checkPos", 0.01f, .01f);
+        InvokeRepeating("checkPos", 0.01f, .2f);
         //invokeRepeating is called each x seconds
     }
 
