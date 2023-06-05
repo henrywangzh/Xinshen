@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FullProceduralGen_R&D.unity
     guid: bf2dbbd09da32d142a19c65ffcd3f9cd
+  - enabled: 1
+    path: Assets/Scenes/Test Scenes/WaifuBoss.unity
+    guid: 43501d772f4093a439d43b681f8093bc
+  - enabled: 1
+    path: Assets/Scenes/SecondLevel.unity
+    guid: 02169beb98607a24ba4554e2704e6c21
   m_configObjects: {}

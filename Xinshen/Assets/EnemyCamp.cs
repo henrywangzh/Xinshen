@@ -6,7 +6,7 @@ public class EnemyCamp : MonoBehaviour
 {
 
     [SerializeField] List<GameObject> enemies;
-    [SerializeField] GameObject chest;
+    [SerializeField] GameObject campfire, chest;
     [SerializeField] List<Transform> spawnPoints;
 
     List<Enemy> activeEnemies;
@@ -18,7 +18,7 @@ public class EnemyCamp : MonoBehaviour
         foreach(GameObject enemy in enemies)
         {
             Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
-            GameObject enemyInstance = Instantiate(enemy, spawnPoint);
+            GameObject enemyInstance = Instantiate(enemy, spawnPoint.position, Quaternion.identity);
             foreach(Enemy e in enemyInstance.GetComponentsInChildren<Enemy>())
             {
                 activeEnemies.Add(e);
@@ -26,6 +26,8 @@ public class EnemyCamp : MonoBehaviour
             }
             spawnPoints.Remove(spawnPoint);
         }
+
+        if (campfire) { campfire.SetActive(false); }
     }
     public void removeEnemy(Enemy enemy)
     {
@@ -38,7 +40,11 @@ public class EnemyCamp : MonoBehaviour
         {
             Debug.Log("here");
             // camp has been cleared, spawn chest
-            Instantiate(chest, this.transform.position, Quaternion.identity);
+            if (campfire) {
+                campfire.SetActive(true);
+                campfire.transform.parent = null;
+            }
+            if (chest) { Instantiate(chest, this.transform.position, Quaternion.identity); }
             Destroy(gameObject);
         }
     }

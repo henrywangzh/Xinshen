@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -305,6 +305,8 @@ MonoBehaviour:
   floors: 1
   linearityPersistence: 10
   skipChance: 0
+  teleporter: {fileID: 0}
+  nextScene: 
 --- !u!4 &539863479
 Transform:
   m_ObjectHideFlags: 0
@@ -372,14 +374,16 @@ MonoBehaviour:
   - {fileID: 8555192757271917523, guid: a486018243c35e74297f261b11fb89bb, type: 3}
   windTunnel: {fileID: 869108579543961114, guid: 6a99febded7634935807e793d2374560, type: 3}
   spawnChance: 2
-  spawnChanceDecrRate: 0.4
+  spawnChanceDecrRate: 0.3
   linearity: 0.5
   yElevation: 10
   currentAlgorithm: 1
   gridSpaceSize: 26
-  floors: 5
+  floors: 2
   linearityPersistence: 10
   skipChance: 0
+  teleporter: {fileID: 8772891107628277746, guid: f65cea0fc989f41cb83afe1148778896, type: 3}
+  nextScene: WaifuBoss
 --- !u!4 &1081300062
 Transform:
   m_ObjectHideFlags: 0

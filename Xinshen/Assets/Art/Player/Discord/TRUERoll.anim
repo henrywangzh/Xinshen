@@ -121955,70 +121955,70 @@ AnimationClip:
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 20
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.13333334
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 21
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.16666667
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 21.5
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.2
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 22
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.23333333
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 20
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.26666668
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 19.5
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.33333334
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 19
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.36666667
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 19.5
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.4
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 20
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.43333334
     functionName: SetFwdVelocity
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 19
+    floatParameter: 9
     intParameter: 0
     messageOptions: 0
   - time: 0.6666667

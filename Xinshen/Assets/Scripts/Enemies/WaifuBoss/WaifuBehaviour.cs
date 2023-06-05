@@ -14,6 +14,7 @@ public class WaifuBehaviour : Enemy
     [SerializeField] TrailRenderer trail;
     [SerializeField] ParticleSystem ps;
     [SerializeField] [Tooltip("Element 0 - evade, element 1 - splitter star, element 2 - basic attack, element 3 - rush attack")] List<int> delays;
+    [SerializeField] GameObject teleporter;
     List<int> counter;
     float startTime;
     bool attacking = false;
@@ -227,6 +228,7 @@ public class WaifuBehaviour : Enemy
 
     public override void Die()
     {
+        Instantiate(teleporter, transform.position + Vector3.up * 2, Quaternion.identity).GetComponent<Teleporter>().Init("SecondLevel", 200);
         Debug.Log("GG NO RE");
         Destroy(gameObject);
     }
