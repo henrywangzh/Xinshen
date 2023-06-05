@@ -59,16 +59,19 @@ public class AbilitiesScriptController : MonoBehaviour
         detCon = GetComponent<DeterminationScriptController>();
         anim = GetComponent<Animator>();
         finishAbility.AddListener(OnAbilityFinish);
+        activeAbility = Ability.Null;
     }
     
     void ActivateAbility(Ability name)
     {
-        abilityDict[name].enabled = true;
+        if (name != Ability.Null)
+            abilityDict[name].enabled = true;
     }
 
     void DeactivateAbility(Ability name)
     {
-        abilityDict[name].enabled = false;
+        if (name != Ability.Null)
+            abilityDict[name].enabled = false;
     }
 
     private void OnEnable()

@@ -29,6 +29,8 @@ public class FrustrationMove : MonoBehaviour
 
     private void OnEnable()
     {
+        if (controller == null)
+            controller = GetComponent<FrustrationScriptController>();
         controller.CheckStanceTransitions();
     }
 
