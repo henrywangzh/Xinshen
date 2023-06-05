@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 560084449}
-  m_IndirectSpecularColor: {r: 0.13274601, g: 0.48253477, b: 0.9821059, a: 1}
+  m_IndirectSpecularColor: {r: 0.1327832, g: 0.48223078, b: 0.9808688, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6804,7 +6804,7 @@ PrefabInstance:
     - target: {fileID: 366500968746318011, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1096713682}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7c800c22ae3daf458f0e50838c98dff, type: 3}
 --- !u!1 &1877934508
@@ -7708,7 +7708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133694268472383487, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1279063296360050496, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9363,7 +9363,7 @@ PrefabInstance:
     - target: {fileID: 8924792872843783, guid: 66056d1de5e42b74783c14f202032240, type: 3}
       propertyPath: playerTrfm
       value: 
-      objectReference: {fileID: 1096713682}
+      objectReference: {fileID: 0}
     - target: {fileID: 8924792872843899, guid: 66056d1de5e42b74783c14f202032240, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -9455,7 +9455,7 @@ PrefabInstance:
     - target: {fileID: 8713669292861114191, guid: 66056d1de5e42b74783c14f202032240, type: 3}
       propertyPath: playerTrfm
       value: 
-      objectReference: {fileID: 1096713682}
+      objectReference: {fileID: 0}
     - target: {fileID: 9079439939783015190, guid: 66056d1de5e42b74783c14f202032240, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
