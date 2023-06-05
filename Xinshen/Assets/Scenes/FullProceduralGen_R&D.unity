@@ -371,8 +371,8 @@ MonoBehaviour:
   - {fileID: 8555192757271917523, guid: 24ba83c81d79d9b44a30ad5159b71ec7, type: 3}
   - {fileID: 8555192757271917523, guid: a486018243c35e74297f261b11fb89bb, type: 3}
   windTunnel: {fileID: 869108579543961114, guid: 6a99febded7634935807e793d2374560, type: 3}
-  spawnChance: 1
-  spawnChanceDecrRate: 0.03
+  spawnChance: 2
+  spawnChanceDecrRate: 0.4
   linearity: 0.5
   yElevation: 10
   currentAlgorithm: 1

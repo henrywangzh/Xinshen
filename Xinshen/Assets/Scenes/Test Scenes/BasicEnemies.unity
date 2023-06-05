@@ -2239,6 +2239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spinner
       objectReference: {fileID: 0}
+    - target: {fileID: 7993798922024517690, guid: 31cbd9492a9431e4aacdc9aca1d230e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31cbd9492a9431e4aacdc9aca1d230e5, type: 3}
 --- !u!4 &9103625661962447128

@@ -28,6 +28,7 @@ public class DiscordMove : MonoBehaviour
         controller = GetComponent<ActualDiscordScriptController>();
         speed = moveSpeed;
         
+        cam = GlobalVariableManager.MainCamera;
             
         lastPos = transform.position.y;
         InvokeRepeating("checkPos", 0.01f, .2f);

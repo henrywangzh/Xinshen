@@ -32,28 +32,6 @@ public class Spinner : Enemy
             vect3 = target.position - trfm.position;
             vect3.y = 0;
             trfm.forward = vect3;
-                
-            if (spinTimer > 0)
-            {
-                if (spinTimer < 151)
-                {
-                    spinPtclTrfm.localEulerAngles += Vector3.up * 10;
-
-                    rb.velocity += trfm.forward * speed;
-                    if (spinTimer % 10 == 0)
-                    {
-                        attackScript.ToggleHitbox();
-                    }
-
-                    if (spinTimer == 1)
-                    {
-                        spinPtcls.Stop();
-                        attackScript.DisableHitbox();
-                    }
-                }
-
-                spinTimer--;
-            }
 
             if (spinCooldown > 0)
             {
@@ -61,8 +39,6 @@ public class Spinner : Enemy
             }
             else
             {
-                rb.velocity += trfm.forward * speed;
-
                 if (Vector3.SqrMagnitude(target.position - trfm.position) < attackRange * attackRange)
                 {
                     spinPtcls.Play();
@@ -70,6 +46,31 @@ public class Spinner : Enemy
                     spinCooldown = 325 + Random.Range(0, 150);
                 }
             }
+
+            if (spinCooldown < 1 || spinTimer > 0)
+            {
+                rb.velocity += trfm.forward * speed;
+            }
+        }
+
+        if (spinTimer > 0)
+        {
+            if (spinTimer < 151)
+            {
+                spinPtclTrfm.localEulerAngles += Vector3.up * 10;
+                if (spinTimer % 10 == 0)
+                {
+                    attackScript.ToggleHitbox();
+                }
+
+                if (spinTimer == 1)
+                {
+                    spinPtcls.Stop();
+                    attackScript.DisableHitbox();
+                }
+            }
+
+            spinTimer--;
         }
     }
     public override void Die()
