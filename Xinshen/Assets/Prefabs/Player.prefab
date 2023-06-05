@@ -15740,7 +15740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18129fa22e7599748b1a8220a1d0a73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
   targLocked: 0
   moveSpeed: 4
   turnSpeed: 15
@@ -15765,7 +15765,7 @@ MonoBehaviour:
   mesh: {fileID: 997793076096441441}
   weapon: {fileID: 9112777066903144562}
   trail: {fileID: 220556622957288092}
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
 --- !u!114 &1208938187492957389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15834,7 +15834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1097b3a05b9c4dcfbc41a2783ae74ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
   targLocked: 0
   moveSpeed: 6
   turnSpeed: 15
@@ -15879,7 +15879,7 @@ MonoBehaviour:
   mesh: {fileID: 0}
   weapon: {fileID: 0}
   trail: {fileID: 0}
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
 --- !u!114 &1581845797629987938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15919,7 +15919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332637a3ea7e2455ebbc4ec1763e2194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
   walkSpeed: 2
   runSpeed: 8
   rotSpeed: 10
@@ -16098,7 +16098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fadbfd627d2dfb46a933c37fdc4d8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
   targLocked: 0
   moveSpeed: 3
   turnSpeed: 5
@@ -16245,7 +16245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lr: {fileID: 1657762054082352738}
   gunTip: {fileID: 718510558243544716}
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
   player: {fileID: 1208938187492957386}
   whatIsGrappleable:
     serializedVersion: 2
@@ -50669,8 +50669,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8713669292861114191, guid: 66056d1de5e42b74783c14f202032240, type: 3}
+      propertyPath: playerTrfm
+      value: 
+      objectReference: {fileID: 1208938187492957386}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66056d1de5e42b74783c14f202032240, type: 3}
+--- !u!4 &2739754370344480574 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9079439939783015190, guid: 66056d1de5e42b74783c14f202032240, type: 3}
+  m_PrefabInstance: {fileID: 6342535645318501416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6348531338829874246 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8924793094377582, guid: 66056d1de5e42b74783c14f202032240, type: 3}
