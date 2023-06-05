@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class GlobalVariableManager : MonoBehaviour {
 
@@ -24,7 +25,20 @@ public class GlobalVariableManager : MonoBehaviour {
     public static int Damage;
     public static int Armor;
     public static bool FrenzyMode;
-    public static StancesScriptController.Stance Stance;
+    private static StancesScriptController.Stance _stance;
+    public static UnityEvent StanceChanged = new UnityEvent();
+    public static StancesScriptController.Stance Stance
+    {
+        get
+        {
+            return _stance;
+        }
+        set
+        {
+            _stance = value;
+            StanceChanged.Invoke();
+        }
+    }
     public static Transform LockedTarget = null;
     public static AbilitiesScriptController.Ability Ability1 = AbilitiesScriptController.Ability.Null;
     public static AbilitiesScriptController.Ability Ability2 = AbilitiesScriptController.Ability.Null;
@@ -50,6 +64,11 @@ public class GlobalVariableManager : MonoBehaviour {
 
     // Camera
     public static Transform MainCamera;
+
+    private void Awake()
+    {
+        
+    }
 
     // TakeDamage is called whenever damage is taken, subtracting dmg from health
     /* IMPORTANT: this method is DEPRECATED, use PlayerHP.TakeDamage instead */

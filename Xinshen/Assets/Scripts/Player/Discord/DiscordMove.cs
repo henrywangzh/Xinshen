@@ -16,6 +16,10 @@ public class DiscordMove : MonoBehaviour
     [SerializeField] float turnSpeed = 5f;
     float speed;
 
+    // jumping/falling
+    float lastPos;
+    bool wasFalling = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +27,12 @@ public class DiscordMove : MonoBehaviour
         anim = GetComponent<Animator>();
         controller = GetComponent<ActualDiscordScriptController>();
         speed = moveSpeed;
+        
         cam = GlobalVariableManager.MainCamera;
+            
+        lastPos = transform.position.y;
+        InvokeRepeating("checkPos", 0.01f, .2f);
+        //invokeRepeating is called each x seconds
     }
 
     private void OnEnable()
@@ -31,6 +40,27 @@ public class DiscordMove : MonoBehaviour
         controller.CheckStanceTransitions();
     }
 
+
+    void checkPos()
+    {
+        float difference = transform.position.y - lastPos;
+        if (difference >= 1f)     //this means y is decreasing
+        {
+            /*anim.Play("RealFalling");
+                Debug.Log("fallling");*/
+            wasFalling = true;
+        }
+
+        else if (wasFalling == true) //y stayed the same
+        {
+            lastPos = transform.position.y;
+            anim.Play("RealLanding");
+            Debug.Log("landing");
+            wasFalling = false; 
+        }
+
+        //Debug.Log("fallling")
+    }
 /*    // Climbing mode flag
     [SerializeField] bool isClimbing = false;
     public float raycastDistance = 1f; // Distance of the raycast from the player
@@ -42,7 +72,7 @@ public class DiscordMove : MonoBehaviour
     [SerializeField] private bool isFalling = false; // Flag to track if the player is currently falling*/
 
 
-    // Rolling
+        // Rolling
     public float rollForce = 10.0f; // The force applied to perform the roll
     //public Animator animator; // Reference to the player's animator component
     private Vector3 currentMoveDirection; // The current movement direction of the player

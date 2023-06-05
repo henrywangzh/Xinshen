@@ -10,6 +10,7 @@ public class Wolf : Enemy
     [SerializeField] EnemyAttack attackScript;
     Transform trfm;
     Rigidbody rb;
+    Animator anim;
 
     Vector3 vect3;
 
@@ -21,6 +22,7 @@ public class Wolf : Enemy
         target = PredictionManager.playerTrfm;
         trfm = transform;
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,10 +46,12 @@ public class Wolf : Enemy
                 {
                     rb.velocity += Vector3.up * 6 + trfm.forward * 4;
                     attackScript.EnableHitbox(25);
+                    anim.SetTrigger("Lunge");
                     lungeCooldown = 125 + Random.Range(0, 100);
                 }
             }
         }
+        anim.SetBool("Moving", rb.velocity.magnitude > 0);
     }
     public override void Die()
     {

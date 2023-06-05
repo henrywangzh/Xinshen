@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumpingFalling : MonoBehaviour
 {
-    Animator anim;
+  /*  Animator anim;
     float lastPos;
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class JumpingFalling : MonoBehaviour
         {
             lastPos = transform.position.y;
         }
-    }
+    }*/
     // Update is called once per frame
     void Update()
     {

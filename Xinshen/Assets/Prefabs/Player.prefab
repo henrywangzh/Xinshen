@@ -15762,8 +15762,8 @@ MonoBehaviour:
   dashCD: 0.5
   disappearFX: {fileID: 6957219127200578748}
   appearFX: {fileID: 8691179267931339153}
-  mesh: {fileID: 0}
-  weapon: {fileID: 0}
+  mesh: {fileID: 997793076096441441}
+  weapon: {fileID: 9112777066903144562}
   trail: {fileID: 220556622957288092}
   cam: {fileID: 0}
 --- !u!114 &1208938187492957389

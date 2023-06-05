@@ -71,6 +71,7 @@ public class ActualDiscordScriptController : ScriptController
     private void OnEnable()
     {
         anim.Play("DiscordTransition");
+        GlobalVariableManager.Stance = StancesScriptController.Stance.discord;
         GlobalVariableManager.ResetStanceMeters();
         animHandler.weapon.ToggleWeapon(StancesScriptController.Stance.discord);
     }
