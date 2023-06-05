@@ -16246,7 +16246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lr: {fileID: 1657762054082352738}
   gunTip: {fileID: 718510558243544716}
-  cam: {fileID: 0}
+  cam: {fileID: 2739754370344480574}
   player: {fileID: 1208938187492957386}
   whatIsGrappleable:
     serializedVersion: 2

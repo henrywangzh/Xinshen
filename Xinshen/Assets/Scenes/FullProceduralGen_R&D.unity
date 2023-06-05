@@ -372,12 +372,12 @@ MonoBehaviour:
   - {fileID: 8555192757271917523, guid: a486018243c35e74297f261b11fb89bb, type: 3}
   windTunnel: {fileID: 869108579543961114, guid: 6a99febded7634935807e793d2374560, type: 3}
   spawnChance: 2
-  spawnChanceDecrRate: 0.4
+  spawnChanceDecrRate: 0.3
   linearity: 0.5
   yElevation: 10
   currentAlgorithm: 1
   gridSpaceSize: 26
-  floors: 5
+  floors: 2
   linearityPersistence: 10
   skipChance: 0
 --- !u!4 &1081300062
