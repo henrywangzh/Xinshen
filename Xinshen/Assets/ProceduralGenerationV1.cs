@@ -32,6 +32,9 @@ public class ProceduralGenerationV1 : MonoBehaviour
     const int POS_X = 0, NEG_X = 1, POS_Y = 2, NEG_Y = 3;
     const int UNAVAILABLE = 1, AVAILABLE = 0, SELECTED = 2, OPENED = 3;
 
+    [SerializeField] GameObject teleporter;
+    [SerializeField] string nextScene;
+
     class Room
     {
         public Room(int pRoomSize, Vector2 pgridPosition, float yPosition)
@@ -74,8 +77,6 @@ public class ProceduralGenerationV1 : MonoBehaviour
             else
             {
                 List<Room> potentialStairRooms = allRooms[i - 1].FindAll(room => room.roomSize == ROOM__16x16);
-
-                Debug.Log("----------------- Potential stair rooms: " + potentialStairRooms.Count + " ---------------------");
 
                 Room stairRoom = potentialStairRooms[Random.Range(0, potentialStairRooms.Count)];
 
@@ -139,6 +140,16 @@ public class ProceduralGenerationV1 : MonoBehaviour
                         InstantiateHallway(rooms[roomIndex], GetRoomAtPosition(rooms[roomIndex].gridPosition + DirectionToGridVector(i), rooms[roomIndex].yPosition));
                         //InstantiateHallway(rooms[roomIndex], i);
                     }
+                }
+
+                if (roomIndex == rooms.Count - 1)
+                {
+                    if (latestRoom.GetComponent<RoomPopulator>())
+                    {
+                        Destroy(latestRoom.GetComponent<RoomPopulator>());
+                    }
+
+                    Instantiate(teleporter, GridToWorldCoordinates(rooms[roomIndex].gridPosition, rooms[roomIndex].yPosition) + Vector3.up * 3, Quaternion.identity).GetComponent<Teleporter>().Scene = nextScene;
                 }
             }
             

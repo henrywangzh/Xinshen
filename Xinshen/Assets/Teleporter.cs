@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Teleporter : MonoBehaviour
+public class Teleporter : Interactable
 {
-    [SerializeField] string Scene;
+    public string Scene;
     [SerializeField] Vector3 teleportDestination;
     [SerializeField] float activationRange;
     [SerializeField] ParticleSystem ptclSys;
-    int holdTimer;
+    [SerializeField] Image blackSquare;
+    int holdTimer, tpThreshold = 275;
     Transform target, trfm;
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,7 @@ public class Teleporter : MonoBehaviour
 
             holdTimer++;
 
-            if (holdTimer < 278)
+            if (holdTimer < 400)
             {
                 if (Mathf.RoundToInt(holdTimer * holdTimer / 500) < 1)
                 {
@@ -47,19 +49,13 @@ public class Teleporter : MonoBehaviour
                 ptclSys.Stop();
             }
 
-            if (holdTimer > 300)
+            if (holdTimer == tpThreshold)
             {
-                if (Scene != "")
-                {
-                    SceneManager.LoadScene(Scene);
-                }
-                else
-                {
-                    PredictionManager.playerTrfm.position = teleportDestination;
-                }
+                InvokeRepeating("FadeToBlack", 0, .05f);
+                holdTimer++;
             }
         }
-        else
+        else if (holdTimer < tpThreshold)
         {
             if (ptclSys.isPlaying)
             {
@@ -70,5 +66,27 @@ public class Teleporter : MonoBehaviour
         }
     }
 
-    
+    override protected void Interact()
+    {
+        
+    }
+
+    void FadeToBlack()
+    {
+        if (blackSquare.color.a < 1.3f)
+        {
+            blackSquare.color = new Vector4(blackSquare.color.r, blackSquare.color.g, blackSquare.color.b, blackSquare.color.a + 0.03f);
+        }
+        else
+        {
+            if (Scene != "")
+            {
+                SceneManager.LoadScene(Scene);
+            }
+            else
+            {
+                PredictionManager.playerTrfm.position = teleportDestination;
+            }
+        }
+    }
 }
