@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
 
-public class Ghost : MonoBehaviour
+public class Ghost : Interactable
 {
     public float range = 5f;  // The radius of the spherical range
     public float speed = 2f;  // The speed at which the object moves
@@ -13,9 +13,17 @@ public class Ghost : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 velocity;
 
+    DialogueRunner runner;
+    [SerializeField] string dialogueNode;
+    enum states { Initial, SummonedSpirit, DoingQuest, FinishedQuest };
+    states currentState = states.Initial;
+
     void Start()
     {
         startPosition = transform.position;
+        runner = FindObjectOfType<DialogueRunner>();
+        runner.onDialogueComplete.AddListener(ResetInteractState);
+        currentState = states.Initial;
     }
 
     void Update()
@@ -33,5 +41,31 @@ public class Ghost : MonoBehaviour
 
         // Calculate the target position based on the random direction and range
         targetPosition = startPosition + randomDirection * range;
+    }
+
+    void ResetInteractState()
+    {
+        currentState = states.Initial;
+        Cursor.lockState = CursorLockMode.Locked;
+        // Destroy(spiritObject);
+    }
+
+    [YarnCommand("Destroy")]
+    public void DestroyWisp()
+    {
+        Destroy(gameObject);
+    }
+
+    override protected void Interact()
+    {
+        Debug.Log("Interacting");
+        if (currentState == states.Initial)
+        {
+            //spiritObject = Instantiate(spirit, transform.position, Quaternion.identity);
+            //spiritObject.transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+            currentState = states.SummonedSpirit;
+            Cursor.lockState = CursorLockMode.None;
+            runner.StartDialogue(dialogueNode);
+        }
     }
 }

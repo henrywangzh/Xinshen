@@ -34,16 +34,18 @@ public class Gravestone : Interactable
     void ResetInteractState()
     {
         currentState = states.Initial;
-        Destroy(spiritObject);
+        Cursor.lockState = CursorLockMode.Locked;
+        // Destroy(spiritObject);
     }
 
     override protected void Interact()
     {
         if(currentState == states.Initial)
         {
-            spiritObject = Instantiate(spirit, transform.position, Quaternion.identity);
-            spiritObject.transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+            //spiritObject = Instantiate(spirit, transform.position, Quaternion.identity);
+            //spiritObject.transform.position = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
             currentState = states.SummonedSpirit;
+            Cursor.lockState = CursorLockMode.None;
             runner.StartDialogue(dialogueNode);
         }
     }
