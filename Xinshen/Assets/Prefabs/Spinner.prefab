@@ -6828,8 +6828,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5860612, z: 1}
-  m_Center: {x: 0, y: -0.037829492, z: 0}
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!54 &7993798922024517692
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6872,7 +6872,7 @@ MonoBehaviour:
   playerInSight: 0
   target: {fileID: 0}
   spinPtclTrfm: {fileID: 7993798921514415878}
-  speed: 0.4
+  speed: 0.38
   trackingRange: 15
   attackRange: 3
   spinCooldown: 0

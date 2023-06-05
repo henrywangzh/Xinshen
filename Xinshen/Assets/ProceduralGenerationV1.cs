@@ -74,6 +74,9 @@ public class ProceduralGenerationV1 : MonoBehaviour
             else
             {
                 List<Room> potentialStairRooms = allRooms[i - 1].FindAll(room => room.roomSize == ROOM__16x16);
+
+                Debug.Log("----------------- Potential stair rooms: " + potentialStairRooms.Count + " ---------------------");
+
                 Room stairRoom = potentialStairRooms[Random.Range(0, potentialStairRooms.Count)];
 
                 Vector2 startingPoint = stairRoom.gridPosition;
@@ -91,6 +94,12 @@ public class ProceduralGenerationV1 : MonoBehaviour
             yElevation += 10;
             spawnChance = startingSpawnChance;
         }
+
+        if (latestRoom.GetComponent<RoomPopulator>())
+        {
+            Destroy(latestRoom.GetComponent<RoomPopulator>());
+        }
+
         doneGenerating = true;
         rooms = allRooms.SelectMany(x => x).ToList();
     }
