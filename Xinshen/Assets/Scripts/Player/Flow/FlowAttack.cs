@@ -99,10 +99,6 @@ public class FlowAttack : MonoBehaviour
         weaponCollider.enabled = false;
         weapon.SetPSEmission(false);
         anim.SetBool("Combo", false);
-        animHandler.SwingFlowDagger(0);
-        animHandler.SwingFlowSpear(0);
-        animHandler.SwingFlowSword(0);
-        animHandler.SetFwdVelocity(0);
         //SetVelocityFwd(0);
     }
 
@@ -124,6 +120,10 @@ public class FlowAttack : MonoBehaviour
     private void OnDisable()
     {
         animHandler.LockPhysics(false);
+        animHandler.SwingFlowDagger(0);
+        animHandler.SwingFlowSpear(0);
+        animHandler.SwingFlowSword(0);
+        animHandler.SetFwdVelocity(0);
     }
 
     //public void OrientTowardsInput()
