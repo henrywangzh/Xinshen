@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class StanceUI : MonoBehaviour
 {
+    [SerializeField] float magnificationFactor = 1f;
+    [SerializeField] float magnificationSpeed = 1f;
+    [SerializeField] float turnSpeed = 5f;
     [SerializeField] GameObject sigil;
     [SerializeField] RectTransform determinationSlot;
     [SerializeField] RectTransform frustrationSlot;
@@ -23,6 +26,8 @@ public class StanceUI : MonoBehaviour
     [SerializeField] Sprite flowOn;
     [SerializeField] Sprite discordOff;
     [SerializeField] Sprite discordOn;
+    
+    Transform curIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +66,16 @@ public class StanceUI : MonoBehaviour
         frustrationIcon.sprite = frustrationOff;
         flowIcon.sprite = flowOff;
 
-        Debug.Log(stance);
+        if (curIcon != null)
+        {
+            float targScale = curIcon.localScale.x / magnificationFactor;
+            Vector3 target = new Vector3(targScale, targScale, targScale);
+            while (Vector3.Distance(curIcon.localScale, target) > 0.005f)
+            {
+                curIcon.localScale = Vector3.MoveTowards(curIcon.localScale, target, Time.fixedDeltaTime * magnificationSpeed);
+                yield return new WaitForFixedUpdate();
+            }
+        }
 
         switch (stance)
         {
@@ -80,37 +94,54 @@ public class StanceUI : MonoBehaviour
 
         yield return new WaitForFixedUpdate();
 
-        if (orientation == Vector2.zero)
-            yield break;
-
-        while (sigil.transform.up != (Vector3) orientation)
+        if (orientation != Vector2.zero)
         {
-            if (Vector3.Distance(sigil.transform.up, orientation) >= 2f)  // to stamp edge cases where rotation goes out of xy plane
+            while (sigil.transform.up != (Vector3)orientation)
             {
-                sigil.transform.up = Vector3.RotateTowards(sigil.transform.up, sigil.transform.right, Time.fixedDeltaTime, 0);
+                if (Vector3.Distance(sigil.transform.up, orientation) >= 2f)  // to stamp edge cases where rotation goes out of xy plane
+                {
+                    sigil.transform.up = Vector3.RotateTowards(sigil.transform.up, sigil.transform.right, Time.fixedDeltaTime, 0);
+                }
+                sigil.transform.up = Vector3.RotateTowards(sigil.transform.up, orientation, Time.fixedDeltaTime * turnSpeed, 0);
+                yield return new WaitForFixedUpdate();
             }
-            sigil.transform.up = Vector3.RotateTowards(sigil.transform.up, orientation, Time.fixedDeltaTime * 5f, 0);
-            yield return new WaitForFixedUpdate();
         }
-
+        
         // Play VFX, Light up symbol
         switch (stance)
         {
             case StancesScriptController.Stance.discord:
                 discordIcon.sprite = discordOn;
+                curIcon = discordIcon.transform;
                 break;
             case StancesScriptController.Stance.determination:
                 determinationIcon.sprite = determinationOn;
                 LitPs.Play();
+                curIcon = determinationIcon.transform;
                 break;
             case StancesScriptController.Stance.frustration:
                 frustrationIcon.sprite = frustrationOn;
                 LitPs.Play();
+                curIcon = frustrationIcon.transform;
                 break;
             case StancesScriptController.Stance.flow:
                 flowIcon.sprite = flowOn;
                 LitPs.Play();
+                curIcon = flowIcon.transform;
                 break;
+        }
+
+        // Expand active icon
+
+        if (curIcon != null)
+        {
+            float targScale = curIcon.localScale.x * magnificationFactor;
+            Vector3 target = new Vector3(targScale, targScale, targScale);
+            while (Vector3.Distance(curIcon.localScale, target) > 0.005f)
+            {
+                curIcon.localScale = Vector3.MoveTowards(curIcon.localScale, target, Time.fixedDeltaTime * magnificationSpeed);
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 }

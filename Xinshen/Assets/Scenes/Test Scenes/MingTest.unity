@@ -17920,14 +17920,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1301476451}
-    - target: {fileID: 1208938187492957390, guid: 1dba562f6a25bb947a26905887a8740f, type: 3}
-      propertyPath: mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1208938187492957390, guid: 1dba562f6a25bb947a26905887a8740f, type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1208938187492957391, guid: 1dba562f6a25bb947a26905887a8740f, type: 3}
       propertyPath: cam
       value: 
@@ -19205,11 +19197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2731995567774318107, guid: 84e7577f04a5a7645bf7ad161ebb8fd4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -797
+      value: -778
       objectReference: {fileID: 0}
     - target: {fileID: 2731995567774318107, guid: 84e7577f04a5a7645bf7ad161ebb8fd4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 389
+      value: 347
       objectReference: {fileID: 0}
     - target: {fileID: 2731995567774318107, guid: 84e7577f04a5a7645bf7ad161ebb8fd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19222,6 +19214,10 @@ PrefabInstance:
     - target: {fileID: 2731995567774318107, guid: 84e7577f04a5a7645bf7ad161ebb8fd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2731995567774318108, guid: 84e7577f04a5a7645bf7ad161ebb8fd4, type: 3}
+      propertyPath: magnificationFactor
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84e7577f04a5a7645bf7ad161ebb8fd4, type: 3}

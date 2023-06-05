@@ -119,7 +119,7 @@ public class PlayerAnimHandler : MonoBehaviour
         {
             baseDmg = GlobalVariableManager.Damage;
             GlobalVariableManager.Damage = baseDmg;
-        }
+        } else
         {
             GlobalVariableManager.Damage = baseDmg;
         }
@@ -133,7 +133,7 @@ public class PlayerAnimHandler : MonoBehaviour
         {
             baseDmg = GlobalVariableManager.Damage;
             GlobalVariableManager.Damage = baseDmg * 2;
-        }
+        } else
         {
             GlobalVariableManager.Damage = baseDmg;
         }
@@ -147,7 +147,7 @@ public class PlayerAnimHandler : MonoBehaviour
         {
             baseDmg = GlobalVariableManager.Damage;
             GlobalVariableManager.Damage = (int) (baseDmg * 1.2f);
-        }
+        } else
         {
             GlobalVariableManager.Damage = baseDmg;
         }
