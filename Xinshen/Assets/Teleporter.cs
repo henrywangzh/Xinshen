@@ -11,13 +11,14 @@ public class Teleporter : Interactable
     [SerializeField] float activationRange;
     [SerializeField] ParticleSystem ptclSys;
     [SerializeField] Image blackSquare;
-    int holdTimer, tpThreshold = 275;
+    int holdTimer, tpThreshold = 275, riseTimer;
     Transform target, trfm;
     // Start is called before the first frame update
     void Start()
     {
         target = PredictionManager.playerTrfm;
         trfm = transform;
+        trfm.position -= Vector3.up * .0333f * riseTimer;
     }
 
     // Update is called once per frame
@@ -64,6 +65,12 @@ public class Teleporter : Interactable
 
             holdTimer = 0;
         }
+
+        if (riseTimer > 0)
+        {
+            transform.position += Vector3.up * .0333f;
+            riseTimer--;
+        }
     }
 
     override protected void Interact()
@@ -88,5 +95,11 @@ public class Teleporter : Interactable
                 PredictionManager.playerTrfm.position = teleportDestination;
             }
         }
+    }
+
+    public void Init(string nextScene, int pRiseTimer = 0)
+    {
+        Scene = nextScene;
+        riseTimer = pRiseTimer;
     }
 }

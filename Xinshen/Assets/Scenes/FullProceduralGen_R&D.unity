@@ -383,7 +383,7 @@ MonoBehaviour:
   linearityPersistence: 10
   skipChance: 0
   teleporter: {fileID: 8772891107628277746, guid: f65cea0fc989f41cb83afe1148778896, type: 3}
-  nextScene: FullProceduralGen_R&D
+  nextScene: WaifuBoss
 --- !u!4 &1081300062
 Transform:
   m_ObjectHideFlags: 0

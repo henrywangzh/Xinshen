@@ -92,7 +92,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 959900270948972887}
-  - {fileID: 8058295491730623954}
+  - {fileID: 2406531391054748223}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -113,7 +113,8 @@ MonoBehaviour:
   - {fileID: 5207392651548174969, guid: 0d4189bd24d2b42cf9fab3d3da0f85b3, type: 3}
   - {fileID: 5207392651548174969, guid: 0d4189bd24d2b42cf9fab3d3da0f85b3, type: 3}
   - {fileID: 5207392651548174969, guid: 0d4189bd24d2b42cf9fab3d3da0f85b3, type: 3}
-  chest: {fileID: 1741163229430434576, guid: c4bc265fe7eb54a098e736997ffc3335, type: 3}
+  campfire: {fileID: 2406531391054748218}
+  chest: {fileID: 0}
   spawnPoints:
   - {fileID: 959900271006051921}
   - {fileID: 959900269281101093}
@@ -216,7 +217,7 @@ Transform:
   m_Father: {fileID: 959900270948972887}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2236116610205420458
+--- !u!1001 &5888789353236028487
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -273,8 +274,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 368219a0c70e6444ea36d7c3bc4288b7, type: 3}
---- !u!4 &8058295491730623954 stripped
+--- !u!1 &2406531391054748218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8132543508827948669, guid: 368219a0c70e6444ea36d7c3bc4288b7, type: 3}
+  m_PrefabInstance: {fileID: 5888789353236028487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2406531391054748223 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8132543508827948664, guid: 368219a0c70e6444ea36d7c3bc4288b7, type: 3}
-  m_PrefabInstance: {fileID: 2236116610205420458}
+  m_PrefabInstance: {fileID: 5888789353236028487}
   m_PrefabAsset: {fileID: 0}
