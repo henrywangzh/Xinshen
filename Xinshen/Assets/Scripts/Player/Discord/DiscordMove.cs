@@ -10,6 +10,7 @@ public class DiscordMove : MonoBehaviour
     [SerializeField] Transform cam;
     Animator anim;
     [SerializeField] bool targLocked = false;
+    bool rolling = false;
 
     // TODO: use global variable manager instead of local variable
     [SerializeField] float moveSpeed = 5f;
@@ -37,6 +38,8 @@ public class DiscordMove : MonoBehaviour
 
     private void OnEnable()
     {
+        if (controller == null)
+            controller = GetComponent<ActualDiscordScriptController>();
         controller.CheckStanceTransitions();
     }
 
@@ -134,7 +137,8 @@ public class DiscordMove : MonoBehaviour
         Vector3 moveDirection = (new Vector3(cam.forward.x, 0, cam.forward.z).normalized * yinput + new Vector3(cam.right.x, 0, cam.right.z).normalized * xinput) * speed;
         moveDirection.y = 0;
         moveDirection += new Vector3(0, rb.velocity.y, 0);
-        rb.velocity = moveDirection;
+        if (!rolling)
+            rb.velocity = moveDirection;
 
         if (targLocked)
         {
@@ -150,7 +154,6 @@ public class DiscordMove : MonoBehaviour
             transform.forward = Vector3.RotateTowards(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), turnSpeed * Time.deltaTime, 0f);
             // transform.forward = Vector3.Lerp(transform.forward, new Vector3(rb.velocity.x, 0, rb.velocity.z), 0.1f);
         }
-
 
         //ATTACKING
         if (Input.GetMouseButtonDown(0))
@@ -186,6 +189,7 @@ public class DiscordMove : MonoBehaviour
 
             // Play the rolling animation
             anim.Play("TRUERoll");
+            StartCoroutine(ToggleRoll());
 
             //ISSUE:  DOES NOT UPDATE PLAYER AFTER ROLLING
 
@@ -194,6 +198,13 @@ public class DiscordMove : MonoBehaviour
 
             //PlayerHP.SetDamageReduction(1);
             //1 = %100 damage reduction
+        }
+
+        IEnumerator ToggleRoll()
+        {
+            rolling = true;
+            yield return new WaitForSeconds(0.7f);
+            rolling = false;
         }
 
 
