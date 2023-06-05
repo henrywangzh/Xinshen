@@ -9,12 +9,15 @@ public class RoomPopulator : MonoBehaviour
     [SerializeField] GameObject[] chunkObj;
     [SerializeField] List<Transform> spawnPoints;
     [SerializeField] GameObject[] enemies;
+    [SerializeField] bool is3x3;
     [SerializeField] int[] enemyDifficulty;
     [SerializeField] bool[] spawnPointUsed;
     
     // Start is called before the first frame update
     void Start()
     {
+        if (is3x3) { targetDifficulty = Mathf.RoundToInt(targetDifficulty * 1.8f); }
+
         Transform[] tempTrfms;
         for (int i = 0; i < chunkPoints.Length; i++)
         {

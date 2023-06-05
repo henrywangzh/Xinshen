@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test Scenes/MingTest.unity
     guid: c825049bf3d110a4b9882fdeca3e5936
+  - enabled: 1
+    path: Assets/Scenes/FullProceduralGen_R&D.unity
+    guid: bf2dbbd09da32d142a19c65ffcd3f9cd
   m_configObjects: {}
