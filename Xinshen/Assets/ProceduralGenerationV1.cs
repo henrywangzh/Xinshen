@@ -95,11 +95,6 @@ public class ProceduralGenerationV1 : MonoBehaviour
             spawnChance = startingSpawnChance;
         }
 
-        if (latestRoom.GetComponent<RoomPopulator>())
-        {
-            Destroy(latestRoom.GetComponent<RoomPopulator>());
-        }
-
         doneGenerating = true;
         rooms = allRooms.SelectMany(x => x).ToList();
     }
