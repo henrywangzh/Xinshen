@@ -21,7 +21,7 @@ public class PlayerHP : MonoBehaviour
     static PlayerHP self;
 
     public static Transform torsoTrfm;
-    public static UnityEvent PlayerHit;
+    public static UnityEvent PlayerHit = new UnityEvent();
 
     private void Awake()
     {
@@ -32,7 +32,6 @@ public class PlayerHP : MonoBehaviour
         damageMultiplier = 1;
         self = GetComponent<PlayerHP>();
         torsoTrfm = m_torsoTrfm;
-        PlayerHit = new UnityEvent();
         
         // Debug stuff for now
         GlobalVariableManager.PlayerSpawn = DebugSpawnPoint;

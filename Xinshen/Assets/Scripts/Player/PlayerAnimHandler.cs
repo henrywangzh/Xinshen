@@ -23,7 +23,7 @@ public class PlayerAnimHandler : MonoBehaviour
     float originalZOffset;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<FlowScriptController>();
