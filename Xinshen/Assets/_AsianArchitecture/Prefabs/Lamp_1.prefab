@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5641740104870382916}
   - component: {fileID: 66201672380156118}
   - component: {fileID: 6225733932510213158}
+  - component: {fileID: -4484485641595061833}
   m_Layer: 0
   m_Name: Lamp_1
   m_TagString: Untagged
@@ -25,9 +26,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3060454150531884347}
-  m_LocalRotation: {x: 0.00000002980235, y: -1, z: 0.000000021855634, w: 0.0000020414589}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 11.26, y: 0.035, z: 3.492}
   m_LocalScale: {x: 175.96, y: 175.96, z: 175.96}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,6 +53,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -81,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-4484485641595061833
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060454150531884347}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0029421472, y: 0.013383268, z: 0.0024264392}
+  m_Center: {x: -0.00020777475, y: 0.006114293, z: 0.00005771032}

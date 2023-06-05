@@ -20,7 +20,7 @@ public class ProceduralGenerationV1 : MonoBehaviour
     [SerializeField] int floors = 1;
     [SerializeField] int linearityPersistence = 5;
     [SerializeField] float skipChance = 0.5f;
-    int currentLinearityPersistence;
+    int currentLinearityPersistence, numRooms;
 
     List<List<Room>> allRooms = new List<List<Room>>();
     List<Room> ungeneratedRooms = new List<Room>();
@@ -74,6 +74,9 @@ public class ProceduralGenerationV1 : MonoBehaviour
             else
             {
                 List<Room> potentialStairRooms = allRooms[i - 1].FindAll(room => room.roomSize == ROOM__16x16);
+
+                Debug.Log("----------------- Potential stair rooms: " + potentialStairRooms.Count + " ---------------------");
+
                 Room stairRoom = potentialStairRooms[Random.Range(0, potentialStairRooms.Count)];
 
                 Vector2 startingPoint = stairRoom.gridPosition;
@@ -91,6 +94,12 @@ public class ProceduralGenerationV1 : MonoBehaviour
             yElevation += 10;
             spawnChance = startingSpawnChance;
         }
+
+        if (latestRoom.GetComponent<RoomPopulator>())
+        {
+            Destroy(latestRoom.GetComponent<RoomPopulator>());
+        }
+
         doneGenerating = true;
         rooms = allRooms.SelectMany(x => x).ToList();
     }
@@ -269,12 +278,27 @@ public class ProceduralGenerationV1 : MonoBehaviour
         }
     }
 
+    GameObject latestRoom;
     void InstantiateRoomObject(Room room)
     {
-        Instantiate(roomObjs[room.roomSize], GridToWorldCoordinates(room.gridPosition, room.yPosition), Quaternion.identity);
+        latestRoom = Instantiate(roomObjs[room.roomSize], GridToWorldCoordinates(room.gridPosition, room.yPosition), Quaternion.identity);
         if (room.roomSize == ROOM__16x16__STAIR)
         {
             Instantiate(windTunnel, GridToWorldCoordinates(room.gridPosition, room.yPosition - 10), Quaternion.identity);
+        }
+
+        numRooms++;
+
+        if (numRooms > 1)
+        {
+            if (latestRoom.GetComponent<RoomPopulator>())
+            {
+                latestRoom.GetComponent<RoomPopulator>().targetDifficulty = 30 + numRooms * 5;
+            }
+        }
+        else
+        {
+            Destroy(latestRoom.GetComponent<RoomPopulator>());
         }
     }
 

@@ -9,6 +9,7 @@ public class Spinner : Enemy
     [SerializeField] int trackingRange, attackRange, spinCooldown, spinTimer;
     [SerializeField] EnemyAttack attackScript;
     [SerializeField] ParticleSystem spinPtcls;
+    [SerializeField] Animator anim;
     Transform trfm;
     Rigidbody rb;
 
@@ -32,28 +33,6 @@ public class Spinner : Enemy
             vect3 = target.position - trfm.position;
             vect3.y = 0;
             trfm.forward = vect3;
-                
-            if (spinTimer > 0)
-            {
-                if (spinTimer < 151)
-                {
-                    spinPtclTrfm.localEulerAngles += Vector3.up * 10;
-
-                    rb.velocity += trfm.forward * speed;
-                    if (spinTimer % 10 == 0)
-                    {
-                        attackScript.ToggleHitbox();
-                    }
-
-                    if (spinTimer == 1)
-                    {
-                        spinPtcls.Stop();
-                        attackScript.DisableHitbox();
-                    }
-                }
-
-                spinTimer--;
-            }
 
             if (spinCooldown > 0)
             {
@@ -61,15 +40,42 @@ public class Spinner : Enemy
             }
             else
             {
-                rb.velocity += trfm.forward * speed;
-
                 if (Vector3.SqrMagnitude(target.position - trfm.position) < attackRange * attackRange)
                 {
                     spinPtcls.Play();
+                    anim.SetTrigger("Cast");
                     spinTimer = 225;
                     spinCooldown = 325 + Random.Range(0, 150);
                 }
             }
+
+            if (spinCooldown < 1 || spinTimer > 0)
+            {
+                rb.velocity += trfm.forward * speed;
+            }
+        }
+
+        anim.SetBool("Moving", rb.velocity.magnitude > 0);
+        anim.SetFloat("Speed", rb.velocity.magnitude);
+
+        if (spinTimer > 0)
+        {
+            if (spinTimer < 151)
+            {
+                spinPtclTrfm.localEulerAngles += Vector3.up * 10;
+                if (spinTimer % 10 == 0)
+                {
+                    attackScript.ToggleHitbox();
+                }
+
+                if (spinTimer == 1)
+                {
+                    spinPtcls.Stop();
+                    attackScript.DisableHitbox();
+                }
+            }
+
+            spinTimer--;
         }
     }
     public override void Die()
