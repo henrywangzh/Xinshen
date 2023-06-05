@@ -9,6 +9,7 @@ public class Spinner : Enemy
     [SerializeField] int trackingRange, attackRange, spinCooldown, spinTimer;
     [SerializeField] EnemyAttack attackScript;
     [SerializeField] ParticleSystem spinPtcls;
+    [SerializeField] Animator anim;
     Transform trfm;
     Rigidbody rb;
 
@@ -42,6 +43,7 @@ public class Spinner : Enemy
                 if (Vector3.SqrMagnitude(target.position - trfm.position) < attackRange * attackRange)
                 {
                     spinPtcls.Play();
+                    anim.SetTrigger("Cast");
                     spinTimer = 225;
                     spinCooldown = 325 + Random.Range(0, 150);
                 }
@@ -52,6 +54,9 @@ public class Spinner : Enemy
                 rb.velocity += trfm.forward * speed;
             }
         }
+
+        anim.SetBool("Moving", rb.velocity.magnitude > 0);
+        anim.SetFloat("Speed", rb.velocity.magnitude);
 
         if (spinTimer > 0)
         {
