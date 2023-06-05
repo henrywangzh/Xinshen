@@ -1,88 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7cd50018-d1f6-4aee-8561-47debc18b878" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Art/DeterminationSwordIdle.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/DeterminationSwordIdle.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Material/Shader Textures.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Material/Shader Textures/Bricks084_2K_NormalGL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Material/Shader Textures/Bricks084_2K_NormalGL.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Material/WindSlash.shadergraph" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Material/WindSlash.shadergraph.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Material/WindSlashMat.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Material/WindSlashMat.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealFalling.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealFalling.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealFalling.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealFalling.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealLanding.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealLanding.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealLanding.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/RealLanding.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationsword.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationsword.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationsword.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationsword.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationsword.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationsword.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationsword_DefaultMaterial_BaseMap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationsword_DefaultMaterial_BaseMap.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationsword_DefaultMaterial_MaskMap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationsword_DefaultMaterial_MaskMap.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationsword_DefaultMaterial_Normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationsword_DefaultMaterial_Normal.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationswordmat.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Art/determinationswordtextures/determinationswordmat.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/New Terrain 1.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/New Terrain 1.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/barrel2DEBUG.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/barrel2DEBUG.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Dungeon.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Dungeon/Find a key.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Dungeon/Find a key.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Determination Stance/SwordFragController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/DiscordClimbing.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/DiscordClimbing.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sound/Music/End_credits_maybe.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sound/Music/End_credits_maybe.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sound/SFX/Movement/running_on_grass_loop.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sound/SFX/Movement/running_on_grass_loop.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sound/ambiance_wind_birds.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sound/ambiance_wind_birds.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/Discord/DiscordAttack1Real.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/DiscordAttack1Real.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/Discord/DiscordAttack2Real.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/DiscordAttack2Real.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/Discord/TRUERoll.anim" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/Discord/TRUERoll.anim" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/Player/Player.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Art/Player/Player.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AudioManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Dungeon/DropCorpse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Dungeon/DropCorpse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Corpse.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Corpse.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/TestCube.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/TestCube.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FirstLevel.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FirstLevel.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ProceduralGen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ProceduralGen.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/DiscordStanceTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/DiscordStanceTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/JohnTest 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/JohnTest 1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/MingTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/MingTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/UrEarthBendingKid.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Test Scenes/UrEarthBendingKid.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/UI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/UI.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemies/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemies/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Determination Stance/DeterminationEvade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Determination Stance/DeterminationEvade.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Determination Stance/DeterminationScriptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Determination Stance/DeterminationScriptController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/ActualDiscordScriptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/ActualDiscordScriptController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/DiscordMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/DiscordMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/NewBehaviourScript.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Discord/NewBehaviourScript.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Determination Stance/SwordFragController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Flow/FlowMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Flow/FlowMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerAnimHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerWeapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerWeapon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/StancesScriptController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/StancesScriptController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/changesXinshen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/changesXinshen.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,11 +17,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="2QOV9QQMxeMmC3y4RFq2UA3mNJW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -110,6 +42,7 @@
       <option name="presentableId" value="Default" />
       <updated>1685224464355</updated>
       <workItem from="1685224476151" duration="68000" />
+      <workItem from="1685943184454" duration="670000" />
     </task>
     <servers />
   </component>
