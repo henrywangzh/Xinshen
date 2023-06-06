@@ -724,10 +724,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1622452027422676384, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1622452027422676409, guid: eb94049115d8a784787cbbe301e280a0, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -977,10 +973,6 @@ PrefabInstance:
     - target: {fileID: 3242893008446184994, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_TagString
       value: barrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318280881711879048, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
@@ -1454,7 +1446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1462,7 +1454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1499,10 +1491,6 @@ PrefabInstance:
     - target: {fileID: 3242893008446184994, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_TagString
       value: barrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318280881711879048, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
@@ -72629,10 +72617,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 215444421926522791, guid: 182bc910539de314db1c1fbc34b6de4e, type: 3}
     - target: {fileID: 4203448986916924437, guid: 9f98a1117185b344eb83413d0f5d5289, type: 3}
-      propertyPath: bridge
-      value: 
-      objectReference: {fileID: 1546205437}
-    - target: {fileID: 4203448986916924437, guid: 9f98a1117185b344eb83413d0f5d5289, type: 3}
       propertyPath: holeSize
       value: 7
       objectReference: {fileID: 0}
@@ -72663,7 +72647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -72700,10 +72684,6 @@ PrefabInstance:
     - target: {fileID: 3242893008446184994, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_TagString
       value: barrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318280881711879048, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
@@ -72832,7 +72812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2759231778319762584, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72877,10 +72857,6 @@ PrefabInstance:
     - target: {fileID: 3242893008446184994, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
       propertyPath: m_TagString
       value: barrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318280881711879048, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78871ca04f6e2444882acb7ac4a67eb, type: 3}

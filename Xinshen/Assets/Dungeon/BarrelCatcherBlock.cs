@@ -5,12 +5,14 @@ using UnityEngine;
 public class BarrelCatcherBlock : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] string barrelTag;
+    [SerializeField] string barrelTag="barrel";
     [SerializeField] int targetNumBarrels = 1;
     
     float x, y, z;
     float room_x, room_z;
-    bool activated;
+    public bool activated;
+    int numBarrels = 0;
+
     void Start()
     {
         GameObject obj = gameObject;
@@ -30,23 +32,24 @@ public class BarrelCatcherBlock : MonoBehaviour
     void Update()
     {
         // count number of barrels that lies within the room
-        int numBarrels = 0;
-        GameObject[] allObjects = GameObject.FindGameObjectsWithTag(barrelTag);
-        foreach (GameObject obj in allObjects)
-        {
-            float objX = obj.transform.position.x;
-            float objZ = obj.transform.position.z;
-
-            if (objX >= x-room_x && objX <= x+room_x && objZ >= z-room_z && objZ <= z+room_z)
-            {
-                numBarrels++;
-            }
-        }
         if (numBarrels == targetNumBarrels)
             activated = true;
         else activated = false;
-
-        Debug.Log(numBarrels);
-
+        Debug.Log("numBarrels: "+numBarrels);
+    }
+    void OnCollisionEnter(Collision other)
+    {
+        Debug.Log("Collision: "+other.gameObject.tag);
+        if (other.gameObject.tag == barrelTag)
+        {
+            numBarrels++;
+        }
+    }
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.tag == barrelTag)
+        {
+            numBarrels--;
+        }
     }
 }
