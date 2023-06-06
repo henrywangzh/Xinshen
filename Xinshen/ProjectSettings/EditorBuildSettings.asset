@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SecondLevel.unity
     guid: 02169beb98607a24ba4554e2704e6c21
+  - enabled: 1
+    path: Assets/Scenes/Dungeon/Find a key.unity
+    guid: c22d3c42b93ef11499fc6d6d2c6bded4
   m_configObjects: {}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Shatter : Enemy
 {
@@ -18,6 +19,9 @@ public class Shatter : Enemy
 
     [SerializeField]
     private float PieceFadeSpeed = 0.25f;
+
+    [SerializeField]
+    int loadLevel = -1;
 
     private GameObject shatteredObject;
 
@@ -36,6 +40,10 @@ public class Shatter : Enemy
                 rb.AddExplosionForce(power * UnityEngine.Random.Range(0.5f, 1.5f), transform.position, 10);
         }
         StartCoroutine(FadeOutRigidBodies(rigidbodies));
+        if (loadLevel != -1)
+        {
+            SceneManager.LoadScene(loadLevel);
+        }
     }
 
     private IEnumerator FadeOutRigidBodies(Rigidbody[] Rigidbodies)

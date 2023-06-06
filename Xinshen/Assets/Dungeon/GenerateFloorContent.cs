@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class GenerateFloorContent : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemyCamps;
     [SerializeField] Enemy[] enemies;
     [SerializeField] GameObject[] chests;
     [SerializeField] GameObject[] traps;
     [SerializeField] GameObject[] misc;
+    [SerializeField] GameObject bridge;
     [SerializeField] float enemyCampSpawnChance = 0.1f, enemySpawnChance = 0.5f, chestSpawnChance = 0.2f;
+
+    List<Enemy> enemyList = new List<Enemy>();
+    
+    bool roomClear = false;
 
     void Start(){
         GameObject obj = gameObject;
@@ -24,6 +28,8 @@ public class GenerateFloorContent : MonoBehaviour
         Debug.Log("size: " + size);
         Debug.Log("pos: " + pos);
 
+        bridge.SetActive(false);
+
         // Generate enemies in random spawn points
         int numEnemies = (int) (room_size/4);
         for (int i = 0; i < numEnemies; i++){
@@ -32,9 +38,9 @@ public class GenerateFloorContent : MonoBehaviour
             spawnPoint.y = y;
             spawnPoint.z += z;
             if (Random.Range(0f, 1f) < enemySpawnChance){
-                Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPoint, Quaternion.identity);
+                enemyList.Add(Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPoint, Quaternion.identity));
             }
-            Debug.Log("spawnPoint: " + spawnPoint);
+            // Debug.Log("spawnPoint: " + spawnPoint);
         }
 
         // Generate misc objects in random spawn points
@@ -47,8 +53,17 @@ public class GenerateFloorContent : MonoBehaviour
             if (Random.Range(0f, 1f) < enemySpawnChance){
                 Instantiate(misc[Random.Range(0, misc.Length)], spawnPoint, Quaternion.identity);
             }
-            Debug.Log("spawnPoint: " + spawnPoint);
+            // Debug.Log("spawnPoint: " + spawnPoint);
         }
+    }
+
+    void Update() {
+        // Debug.Log("enemyList.Count: " + enemyList.Count);
+        enemyList.RemoveAll(item => item == null);
+        if (enemyList.Count == 0){
+            roomClear = true;
+        }
+        bridge.SetActive(roomClear);
     }
 
     // Vector3 GetRandomPosition(float size, float minDistance = 1)

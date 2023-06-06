@@ -93,6 +93,6 @@ public class GenerateFloorWithHoles : MonoBehaviour
             }
         }
         bridge.SetActive(roomClear);
-        Debug.Log("roomClear: " + roomClear);
+        // Debug.Log("roomClear: " + roomClear);
     }
 }
