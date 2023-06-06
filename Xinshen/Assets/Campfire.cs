@@ -19,10 +19,11 @@ public class Campfire : Interactable
         {
             if (Input.GetKey(KeyCode.E))
             {
-                if (channelTimer > 199)
+                if (channelTimer == 200)
                 {
                     isHealing = true;
                     flames.Play();
+                    RespawnManager.SetRespawn();
                 }
                 else if (channelTimer % 50 == 0)
                 {

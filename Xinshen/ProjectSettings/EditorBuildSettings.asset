@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstLevel.unity
     guid: c4556462cf5f5e04f81bd632d660ee56
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/MingTest.unity
     guid: c825049bf3d110a4b9882fdeca3e5936
   - enabled: 1
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dungeon/Find a key.unity
     guid: c22d3c42b93ef11499fc6d6d2c6bded4
+  - enabled: 1
+    path: Assets/Scenes/Test Scenes/Arena2Boss2.unity
+    guid: 316d62a3fd11b4045906b77a9f4fe488
   m_configObjects: {}

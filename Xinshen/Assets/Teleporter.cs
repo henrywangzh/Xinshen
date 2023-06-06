@@ -52,6 +52,7 @@ public class Teleporter : Interactable
 
             if (holdTimer == tpThreshold)
             {
+                RespawnManager.SetRespawn();
                 InvokeRepeating("FadeToBlack", 0, .05f);
                 holdTimer++;
             }

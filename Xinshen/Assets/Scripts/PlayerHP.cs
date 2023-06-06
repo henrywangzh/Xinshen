@@ -135,8 +135,9 @@ public class PlayerHP : MonoBehaviour
     }
 
     private static void Die(){
-        if (self.actuallyDie) { Destroy(self.gameObject); }
+        RespawnManager.Respawn();
         Debug.Log("bit the dust");
+        if (self.actuallyDie || true) { self.gameObject.SetActive(false); }
         self.StartCoroutine(self.FadeIn(GlobalVariableManager.DeathScreen));
         self.StartCoroutine(self.Respawn());
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 560084449}
-  m_IndirectSpecularColor: {r: 0.13274601, g: 0.48253477, b: 0.9821059, a: 1}
+  m_IndirectSpecularColor: {r: 0.13275422, g: 0.482531, b: 0.9821061, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11991,7 +11991,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 53
+  m_RootOrder: 56
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1452109473
 PrefabInstance:
@@ -19335,7 +19335,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7575392803559914480, guid: f65cea0fc989f41cb83afe1148778896, type: 3}
       propertyPath: Scene
-      value: UrEarthBendingKid
+      value: Arena2Boss2
       objectReference: {fileID: 0}
     - target: {fileID: 8283317460081149256, guid: f65cea0fc989f41cb83afe1148778896, type: 3}
       propertyPath: m_RootOrder

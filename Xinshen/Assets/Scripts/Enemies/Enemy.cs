@@ -19,7 +19,7 @@ public abstract class Enemy : MonoBehaviour
     protected UnityEvent onStun;
     protected UnityEvent onAtkInterrupt;
 
-    Transform trfm;
+    private Transform m_trfm;
     EnemyCamp enemyCamp;
     Rigidbody _rb;
 
@@ -31,7 +31,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
-        trfm = transform;
+        m_trfm = transform;
         _rb = GetComponent<Rigidbody>();
         hp = maxHP;
         onStun = new UnityEvent();
@@ -124,7 +124,7 @@ public abstract class Enemy : MonoBehaviour
     //source: where the knockback is coming from (flies away from source); power: how much to knockback
     public void TakeKnockback(Vector3 source, float power, int stunFrames = -1)
     {
-        _rb.velocity = (trfm.position - source).normalized * power;
+        _rb.velocity = (m_trfm.position - source).normalized * power;
         bool alreadyStunned = stunned > 0;
         if (stunFrames < 0)
         {
@@ -175,6 +175,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected bool playerInSight;
     void UpdateLineOfSight()
     {
-        playerInSight = !Physics.Linecast(trfm.position + trfm.forward * 1, PredictionManager.playerTrfm.position, terrainLayerMask);
+        playerInSight = !Physics.Linecast(m_trfm.position + m_trfm.forward * 1, PredictionManager.playerTrfm.position, terrainLayerMask);
     }
 }

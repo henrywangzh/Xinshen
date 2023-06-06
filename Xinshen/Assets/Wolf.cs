@@ -8,7 +8,7 @@ public class Wolf : Enemy
     [SerializeField] float speed;
     [SerializeField] int trackingRange, lungingRange, lungeCooldown;
     [SerializeField] EnemyAttack attackScript;
-    Transform trfm;
+    private Transform m_trfm;
     Rigidbody rb;
     Animator anim;
 
@@ -20,7 +20,7 @@ public class Wolf : Enemy
         base.Start();
 
         target = PredictionManager.playerTrfm;
-        trfm = transform;
+        m_trfm = transform;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
     }
@@ -28,11 +28,11 @@ public class Wolf : Enemy
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Vector3.SqrMagnitude(target.position - trfm.position) < trackingRange * trackingRange)
+        if (Vector3.SqrMagnitude(target.position - m_trfm.position) < trackingRange * trackingRange)
         {
-            vect3 = target.position - trfm.position;
+            vect3 = target.position - m_trfm.position;
             vect3.y = 0;
-            trfm.forward = vect3;
+            m_trfm.forward = vect3;
 
             if (lungeCooldown > 0)
             {
@@ -40,11 +40,11 @@ public class Wolf : Enemy
             }
             else
             {
-                rb.velocity += trfm.forward * speed;
+                rb.velocity += m_trfm.forward * speed;
 
-                if (Vector3.SqrMagnitude(target.position - trfm.position) < lungingRange * lungingRange)
+                if (Vector3.SqrMagnitude(target.position - m_trfm.position) < lungingRange * lungingRange)
                 {
-                    rb.velocity += Vector3.up * 6 + trfm.forward * 4;
+                    rb.velocity += Vector3.up * 6 + m_trfm.forward * 4;
                     attackScript.EnableHitbox(25);
                     anim.SetTrigger("Lunge");
                     lungeCooldown = 125 + Random.Range(0, 100);
